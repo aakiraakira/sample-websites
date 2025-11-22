@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sing Hwa Mover | Best House Mover Service Singapore</title>
+    <meta name="description" content="Reliable and Affordable Movers in Singapore. Residential, Commercial, Storage, and Disposal services.">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            red: '#D32F2F',     // Based on logo accent
+                            dark: '#1F2937',    // Dark text
+                            light: '#F3F4F6',   // Light background
+                            gold: '#F59E0B',    // Review stars
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom styles for things Tailwind handles awkwardly */
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1600518464441-9154a4dea21b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .service-card:hover .icon-wrapper {
+            transform: scale(1.1);
+            background-color: #D32F2F;
+            color: white;
+        }
+        
+        .mobile-menu {
+            transition: max-height 0.3s ease-in-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        
+        .mobile-menu.active {
+            max-height: 400px;
+        }
+    </style>
+</head>
+<body class="font-sans text-gray-700 antialiased bg-white">
+
+    <!-- Top Bar (Contact Info) -->
+    <div class="bg-gray-900 text-white py-2 text-sm hidden md:block">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="flex space-x-6">
+                <span><i class="fas fa-phone-alt text-brand-red mr-2"></i>+65 1234 5678</span>
+                <span><i class="fas fa-envelope text-brand-red mr-2"></i>enquiry@singhwamover.biz</span>
+            </div>
+            <div class="flex space-x-4">
+                <a href="#" class="hover:text-brand-red transition"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-brand-red transition"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-brand-red transition"><i class="fab fa-whatsapp"></i></a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-3">
+            <div class="flex justify-between items-center">
+                <!-- Logo -->
+                <a href="#" class="flex items-center">
+                    <img src="https://www.singhwamover.biz/wp-content/uploads/2021/03/logo.jpg" alt="Sing Hwa Mover Logo" class="h-12 w-auto object-contain">
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8 font-medium">
+                    <a href="#" class="text-gray-800 hover:text-brand-red transition">Home</a>
+                    <a href="#services" class="text-gray-800 hover:text-brand-red transition">Services</a>
+                    <a href="#reviews" class="text-gray-800 hover:text-brand-red transition">Reviews</a>
+                    <a href="#about" class="text-gray-800 hover:text-brand-red transition">About Us</a>
+                    <a href="#contact" class="bg-brand-red text-white px-5 py-2.5 rounded-md hover:bg-red-700 transition shadow-lg transform hover:-translate-y-0.5">Get A Quote</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-btn" class="md:hidden text-gray-800 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="mobile-menu bg-white border-t md:hidden">
+            <div class="flex flex-col p-4 space-y-3 font-medium">
+                <a href="#" class="text-gray-800 hover:text-brand-red">Home</a>
+                <a href="#services" class="text-gray-800 hover:text-brand-red">Services</a>
+                <a href="#reviews" class="text-gray-800 hover:text-brand-red">Reviews</a>
+                <a href="#about" class="text-gray-800 hover:text-brand-red">About Us</a>
+                <a href="#contact" class="text-brand-red font-bold">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg relative h-[600px] flex items-center">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row items-center">
+                <!-- Hero Text -->
+                <div class="w-full md:w-1/2 text-white mb-10 md:mb-0">
+                    <div class="bg-brand-red inline-block px-3 py-1 text-xs font-bold uppercase tracking-wider mb-4 rounded">#1 Trusted Mover</div>
+                    <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                        Stress-Free Moving <br> in <span class="text-brand-red">Singapore</span>
+                    </h1>
+                    <p class="text-lg text-gray-200 mb-8 max-w-lg">
+                        Professional, reliable, and affordable moving services. From residential homes to commercial offices, we handle your belongings with care.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#contact" class="bg-brand-red text-white px-8 py-4 rounded-lg font-bold text-center hover:bg-red-700 transition shadow-lg">
+                            Get Free Quote
+                        </a>
+                        <a href="https://wa.me/6512345678" class="bg-green-500 text-white px-8 py-4 rounded-lg font-bold text-center hover:bg-green-600 transition shadow-lg flex justify-center items-center">
+                            <i class="fab fa-whatsapp mr-2"></i> WhatsApp Us
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Lead Form (Floating) -->
+                <div class="w-full md:w-1/2 md:pl-12 hidden md:block">
+                    <div class="bg-white rounded-xl shadow-2xl p-8 max-w-md ml-auto border-t-4 border-brand-red">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Get an Instant Estimate</h3>
+                        <p class="text-gray-500 mb-6 text-sm">Fill out the form and we'll get back to you within 1 hour.</p>
+                        <form onsubmit="event.preventDefault(); alert('Thank you! We will contact you shortly.');">
+                            <div class="space-y-4">
+                                <input type="text" placeholder="Your Name" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red focus:border-transparent outline-none transition bg-gray-50">
+                                <input type="tel" placeholder="Phone Number" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red focus:border-transparent outline-none transition bg-gray-50">
+                                <select class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-brand-red focus:border-transparent outline-none transition bg-gray-50 text-gray-600">
+                                    <option>Service Type</option>
+                                    <option>Residential Moving</option>
+                                    <option>Commercial Moving</option>
+                                    <option>Storage</option>
+                                    <option>Disposal</option>
+                                </select>
+                                <button type="submit" class="w-full bg-gray-900 text-white font-bold py-3 rounded-lg hover:bg-gray-800 transition transform hover:scale-[1.02]">
+                                    Request Call Back
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trusted By / Stats Bar -->
+    <section class="bg-gray-50 py-10 border-b">
+        <div class="container mx-auto px-6">
+            <p class="text-center text-gray-500 text-sm font-semibold uppercase tracking-widest mb-6">Trusted Partners & Clients</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Simulated Logos based on screenshot -->
+                <div class="h-12 flex items-center font-bold text-2xl text-gray-700"><i class="fas fa-university mr-2"></i>NUS</div>
+                <div class="h-12 flex items-center font-bold text-2xl text-gray-700"><i class="fas fa-hospital mr-2"></i>NUH</div>
+                <div class="h-12 flex items-center font-bold text-2xl text-gray-700">iROO</div>
+                <div class="h-12 flex items-center font-bold text-2xl text-gray-700">Marina Bay</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">What We Offer</h2>
+                <p class="text-gray-500 max-w-xl mx-auto">We provide highest quality services tailored to your specific needs.</p>
+                <div class="w-20 h-1 bg-brand-red mx-auto mt-6 rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1 -->
+                <div class="service-card bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-2xl transition duration-300 group cursor-pointer">
+                    <div class="icon-wrapper w-16 h-16 bg-red-50 text-brand-red rounded-full flex items-center justify-center text-2xl mb-6 transition duration-300">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-red transition">Residential Relocation</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Safe and secure house moving services. We handle furniture, appliances, and fragile items with care.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-2xl transition duration-300 group cursor-pointer">
+                    <div class="icon-wrapper w-16 h-16 bg-red-50 text-brand-red rounded-full flex items-center justify-center text-2xl mb-6 transition duration-300">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-red transition">Commercial Relocation</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Office moving solutions to minimize downtime. Efficient packing and setup for your business.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-2xl transition duration-300 group cursor-pointer">
+                    <div class="icon-wrapper w-16 h-16 bg-red-50 text-brand-red rounded-full flex items-center justify-center text-2xl mb-6 transition duration-300">
+                        <i class="fas fa-box-open"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-red transition">Storage & Disposal</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Secure warehouse storage for short/long term needs and hassle-free disposal of unwanted items.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card bg-white rounded-xl shadow-lg border border-gray-100 p-6 hover:shadow-2xl transition duration-300 group cursor-pointer">
+                    <div class="icon-wrapper w-16 h-16 bg-red-50 text-brand-red rounded-full flex items-center justify-center text-2xl mb-6 transition duration-300">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3 group-hover:text-brand-red transition">Delivery & Handyman</h3>
+                    <p class="text-gray-500 text-sm leading-relaxed">Professional packing, unpacking, furniture assembly, and dismantling services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us / About -->
+    <section id="about" class="py-20 bg-gray-900 text-white relative overflow-hidden">
+        <!-- Decorative circle -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 rounded-full bg-brand-red opacity-10"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Reliable and Affordable Movers in Singapore</h2>
+                    <p class="text-gray-400 mb-6 leading-relaxed">
+                        Are you searching for professional movers in Singapore who offer top-notch services at reasonable rates? Look no further than Sing Hwa Mover! We specialize in providing trusted and secure domestic relocation/mover services that cater to your specific needs.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-brand-red mt-1 mr-4"></i>
+                            <div>
+                                <strong class="block text-white">Affordable Prices</strong>
+                                <span class="text-sm text-gray-400">No hidden costs. We offer clean, upfront pricing without compromising on quality.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-brand-red mt-1 mr-4"></i>
+                            <div>
+                                <strong class="block text-white">Professional Team</strong>
+                                <span class="text-sm text-gray-400">Our dedicated team is trained to handle your belongings with care and precision.</span>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check-circle text-brand-red mt-1 mr-4"></i>
+                            <div>
+                                <strong class="block text-white">Comprehensive Services</strong>
+                                <span class="text-sm text-gray-400">From residential to commercial, we cover it all.</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="lg:w-1/2 relative">
+                    <img src="https://images.unsplash.com/photo-1603796846097-bee99e4a601f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Movers working" class="rounded-lg shadow-2xl border-4 border-gray-700">
+                    <div class="absolute -bottom-6 -left-6 bg-brand-red p-6 rounded-lg shadow-xl hidden md:block">
+                        <p class="text-4xl font-bold text-white">10+</p>
+                        <p class="text-sm text-white uppercase tracking-wider">Years Experience</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="reviews" class="py-20 bg-red-50">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Reviews</h2>
+                <p class="text-gray-500">What our happy customers say about our service.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-brand-red relative">
+                    <div class="text-brand-gold text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Sing Hwa Mover made my house moving experience stress-free! The team was punctual, professional, and handled my fragile items with extreme care. Highly recommended!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold mr-3">J</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">James Tan</h4>
+                            <p class="text-xs text-gray-500">Residential Move</p>
+                        </div>
+                        <i class="fab fa-google text-gray-300 text-xl ml-auto"></i>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-brand-red relative">
+                    <div class="text-brand-gold text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Excellent service for our office relocation. They dismantled and reassembled our office furniture quickly. No downtime for our business. Great job team!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold mr-3">S</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Sarah Lim</h4>
+                            <p class="text-xs text-gray-500">Office Relocation</p>
+                        </div>
+                        <i class="fab fa-facebook text-gray-300 text-xl ml-auto"></i>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white p-8 rounded-xl shadow-md border-t-4 border-brand-red relative">
+                    <div class="text-brand-gold text-sm mb-4">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="text-gray-600 italic mb-6">"Very responsive and reasonable pricing. They helped me dispose of old furniture and moved the rest to my new place. Efficient and friendly workers."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center text-gray-500 font-bold mr-3">M</div>
+                        <div>
+                            <h4 class="font-bold text-gray-900 text-sm">Michael Lee</h4>
+                            <p class="text-xs text-gray-500">Disposal & Move</p>
+                        </div>
+                        <i class="fab fa-google text-gray-300 text-xl ml-auto"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="py-20">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-900">Frequently Asked Questions</h2>
+            
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center focus:outline-none">
+                        <span class="font-semibold text-gray-800">What types of move services does Sing Hwa Mover provide?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 bg-white text-gray-600 border-t border-gray-100">
+                        We offer a complete range of moving services including residential house moving, commercial office relocation, disposal services, storage solutions, and professional packing/unpacking.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center focus:outline-none">
+                        <span class="font-semibold text-gray-800">How do you determine the pricing?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 bg-white text-gray-600 border-t border-gray-100">
+                        Our pricing is transparent and based on volume of items, manpower required, and accessibility. We provide a free quote after a quick assessment or based on your inventory list.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="border border-gray-200 rounded-lg overflow-hidden">
+                    <button class="faq-btn w-full px-6 py-4 text-left bg-gray-50 hover:bg-gray-100 flex justify-between items-center focus:outline-none">
+                        <span class="font-semibold text-gray-800">Are your movers trained and professional?</span>
+                        <i class="fas fa-chevron-down text-gray-400 transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 py-4 bg-white text-gray-600 border-t border-gray-100">
+                        Absolutely. Our team comprises experienced professionals who are trained to handle furniture and fragile items with care. We prioritize the safety of your belongings.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact CTA Section -->
+    <section id="contact" class="bg-brand-red py-20">
+        <div class="container mx-auto px-6 text-center">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">Ready to Move?</h2>
+            <p class="text-red-100 mb-8 text-lg max-w-2xl mx-auto">Contact us today for a free, no-obligation quote. Experience a seamless moving journey with Sing Hwa Mover.</p>
+            
+            <div class="flex flex-col md:flex-row justify-center gap-6">
+                <a href="tel:+6512345678" class="bg-white text-brand-red px-8 py-4 rounded-lg font-bold hover:bg-gray-100 transition shadow-lg flex items-center justify-center">
+                    <i class="fas fa-phone-alt mr-2"></i> Call +65 1234 5678
+                </a>
+                <a href="https://wa.me/6512345678" class="bg-green-500 text-white px-8 py-4 rounded-lg font-bold hover:bg-green-600 transition shadow-lg flex items-center justify-center">
+                    <i class="fab fa-whatsapp mr-2"></i> WhatsApp Quote
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Brand -->
+                <div>
+                    <h3 class="text-white text-xl font-bold mb-4 flex items-center">
+                        <span class="bg-white text-gray-900 px-2 py-1 rounded mr-2 text-sm">SH</span> SING HWA
+                    </h3>
+                    <p class="text-sm text-gray-400 leading-relaxed">Your trusted partner for residential and commercial relocation in Singapore. Reliable, affordable, and professional.</p>
+                </div>
+
+                <!-- Links -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-brand-red transition">Home</a></li>
+                        <li><a href="#services" class="hover:text-brand-red transition">Services</a></li>
+                        <li><a href="#about" class="hover:text-brand-red transition">About Us</a></li>
+                        <li><a href="#contact" class="hover:text-brand-red transition">Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Services -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Services</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" class="hover:text-brand-red transition">House Moving</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Office Moving</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Disposal Services</a></li>
+                        <li><a href="#" class="hover:text-brand-red transition">Storage Space</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact -->
+                <div>
+                    <h4 class="text-white font-bold mb-4">Contact Us</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-start"><i class="fas fa-map-marker-alt mt-1 mr-2 text-brand-red"></i> 25 Kaki Bukit Road 4, #07-60, Singapore 417800</li>
+                        <li class="flex items-center"><i class="fas fa-envelope mr-2 text-brand-red"></i> enquiry@singhwamover.biz</li>
+                        <li class="flex items-center"><i class="fas fa-clock mr-2 text-brand-red"></i> Mon-Sun: 8am - 8pm</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
+                <p>&copy; 2023 Sing Hwa Mover Service Singapore. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+        });
+
+        // FAQ Accordion
+        const faqBtns = document.querySelectorAll('.faq-btn');
+        
+        faqBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('i');
+                
+                // Toggle current
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+                
+                // Close others
+                faqBtns.forEach(otherBtn => {
+                    if (otherBtn !== btn) {
+                        otherBtn.nextElementSibling.classList.add('hidden');
+                        otherBtn.querySelector('i').classList.remove('rotate-180');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
