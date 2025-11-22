@@ -366,79 +366,95 @@
         <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
         
         <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-20" data-aos="fade-up">
+            <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
                 <span class="text-luxury-gold font-bold uppercase tracking-widest text-xs mb-2 block">The Process</span>
                 <h2 class="text-3xl md:text-5xl font-serif text-white">Your Journey to Ownership</h2>
                 <div class="w-24 h-0.5 bg-luxury-gold mx-auto mt-6"></div>
             </div>
 
-            <div class="relative max-w-4xl mx-auto">
+            <div class="relative max-w-5xl mx-auto">
                 <!-- Vertical Line -->
-                <div class="timeline-line"></div>
+                <!-- Left aligned on mobile (32px center), Center on desktop -->
+                <div class="absolute left-8 md:left-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-transparent via-luxury-gold to-transparent transform -translate-x-1/2 md:-translate-x-1/2 z-0"></div>
 
                 <!-- Step 1 -->
-                <div class="mb-12 md:mb-0 flex flex-col md:flex-row items-center justify-between w-full relative group" data-aos="fade-up">
-                    <div class="order-1 md:w-5/12 mb-6 md:mb-0 text-left md:text-right">
-                        <h3 class="text-2xl font-serif text-luxury-gold">01. Financial Assessment</h3>
+                <div class="relative flex items-start md:items-center justify-between mb-16 md:mb-0 group" data-aos="fade-up">
+                    <!-- Desktop Left Text / Mobile Right Text -->
+                    <div class="order-2 md:order-1 flex-1 md:w-5/12 md:text-right pl-16 md:pl-0 md:pr-12">
+                        <h3 class="text-xl md:text-2xl font-serif text-luxury-gold">01. Financial Assessment</h3>
                         <p class="text-sm text-gray-400 mt-2 leading-relaxed">
-                            We begin with a comprehensive check on your MSR/TDSR eligibility and confirm your household status for EC purchase.
+                            Comprehensive check on MSR/TDSR eligibility and household status confirmation.
                         </p>
                     </div>
-                    <div class="order-1 md:w-2/12 flex justify-center relative z-10">
-                        <div class="w-12 h-12 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300">
+                    
+                    <!-- Icon (Center) -->
+                    <div class="absolute left-0 md:static md:order-2 w-16 md:w-2/12 flex justify-center z-10">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300 text-lg md:text-xl">
                             <i class="fas fa-calculator"></i>
                         </div>
                     </div>
-                    <div class="order-1 md:w-5/12 md:invisible"></div> <!-- Spacer for alignment on desktop -->
+                    
+                    <!-- Desktop Spacer -->
+                    <div class="hidden md:block order-3 md:w-5/12"></div>
                 </div>
 
                 <!-- Step 2 -->
-                <div class="mb-12 md:mb-0 flex flex-col md:flex-row items-center justify-between w-full relative group" data-aos="fade-up" data-aos-delay="100">
-                    <div class="order-1 md:w-5/12 md:invisible"></div> <!-- Spacer -->
-                    <div class="order-1 md:w-2/12 flex justify-center relative z-10">
-                        <div class="w-12 h-12 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300">
+                <div class="relative flex items-start md:items-center justify-between mb-16 md:mb-0 group" data-aos="fade-up" data-aos-delay="100">
+                    <!-- Desktop Spacer -->
+                    <div class="hidden md:block order-1 md:w-5/12"></div>
+                    
+                    <!-- Icon (Center) -->
+                    <div class="absolute left-0 md:static md:order-2 w-16 md:w-2/12 flex justify-center z-10">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300 text-lg md:text-xl">
                             <i class="fas fa-eye"></i>
                         </div>
                     </div>
-                    <div class="order-1 md:w-5/12 mb-6 md:mb-0 text-left md:pl-8">
-                        <h3 class="text-2xl font-serif text-luxury-gold">02. Exclusive Viewing</h3>
+
+                     <!-- Desktop Right Text / Mobile Right Text -->
+                    <div class="order-2 md:order-3 flex-1 md:w-5/12 md:text-left pl-16 md:pl-12">
+                        <h3 class="text-xl md:text-2xl font-serif text-luxury-gold">02. Exclusive Viewing</h3>
                         <p class="text-sm text-gray-400 mt-2 leading-relaxed">
-                            Private tour of the showflat or actual units. Experience the finishing and spatial layout firsthand.
+                            Private tour of showflat units to experience the premium finishing firsthand.
                         </p>
                     </div>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="mb-12 md:mb-0 flex flex-col md:flex-row items-center justify-between w-full relative group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="order-1 md:w-5/12 mb-6 md:mb-0 text-left md:text-right">
-                        <h3 class="text-2xl font-serif text-luxury-gold">03. Expression of Interest</h3>
+                 <div class="relative flex items-start md:items-center justify-between mb-16 md:mb-0 group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="order-2 md:order-1 flex-1 md:w-5/12 md:text-right pl-16 md:pl-0 md:pr-12">
+                        <h3 class="text-xl md:text-2xl font-serif text-luxury-gold">03. Expression of Interest</h3>
                         <p class="text-sm text-gray-400 mt-2 leading-relaxed">
-                            Submission of e-Application with necessary documents (IC, Income Proof, Marriage Cert) to qualify for balloting.
+                            Submission of e-Application and documents (IC, Income Proof) for balloting eligibility.
                         </p>
                     </div>
-                    <div class="order-1 md:w-2/12 flex justify-center relative z-10">
-                        <div class="w-12 h-12 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300">
+                    
+                    <div class="absolute left-0 md:static md:order-2 w-16 md:w-2/12 flex justify-center z-10">
+                         <div class="w-12 h-12 md:w-16 md:h-16 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300 text-lg md:text-xl">
                             <i class="fas fa-file-signature"></i>
                         </div>
                     </div>
-                    <div class="order-1 md:w-5/12 md:invisible"></div>
+                    
+                    <div class="hidden md:block order-3 md:w-5/12"></div>
                 </div>
 
                 <!-- Step 4 -->
-                <div class="mb-12 md:mb-0 flex flex-col md:flex-row items-center justify-between w-full relative group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="order-1 md:w-5/12 md:invisible"></div>
-                    <div class="order-1 md:w-2/12 flex justify-center relative z-10">
-                        <div class="w-12 h-12 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300">
+                <div class="relative flex items-start md:items-center justify-between group" data-aos="fade-up" data-aos-delay="300">
+                    <div class="hidden md:block order-1 md:w-5/12"></div>
+                    
+                    <div class="absolute left-0 md:static md:order-2 w-16 md:w-2/12 flex justify-center z-10">
+                        <div class="w-12 h-12 md:w-16 md:h-16 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300 text-lg md:text-xl">
                             <i class="fas fa-key"></i>
                         </div>
                     </div>
-                    <div class="order-1 md:w-5/12 mb-6 md:mb-0 text-left md:pl-8">
-                        <h3 class="text-2xl font-serif text-luxury-gold">04. Booking & Completion</h3>
+
+                    <div class="order-2 md:order-3 flex-1 md:w-5/12 md:text-left pl-16 md:pl-12">
+                        <h3 class="text-xl md:text-2xl font-serif text-luxury-gold">04. Booking & Completion</h3>
                         <p class="text-sm text-gray-400 mt-2 leading-relaxed">
-                            Select your preferred unit during balloting, sign the Option to Purchase, and proceed to S&P completion.
+                            Select unit, sign Option to Purchase (OTP), and proceed to Sales & Purchase completion.
                         </p>
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
