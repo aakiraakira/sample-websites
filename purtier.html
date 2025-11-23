@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purtier Placenta | The 6th Edition</title>
+    <meta name="description" content="Reverse aging and reclaim your health with Purtier Placenta 6th Edition.">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        purtier: {
+                            primary: '#7a2632', // Brand Red
+                            primaryDark: '#5a1a24',
+                            text: '#1a1a1a',
+                            muted: '#6b7280'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'hero-bright': 'radial-gradient(circle at top right, #fff0f2, #ffffff 60%)',
+                    },
+                    boxShadow: {
+                        'card-stack': '0 -5px 25px rgba(0,0,0,0.08)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #f8fafc;
+            color: #1a1a1a;
+            overflow-x: hidden;
+        }
+
+        /* --- STACKING CARD EFFECT --- */
+        /* Applies sticky positioning to main sections for the stacking effect */
+        .section-stack {
+            position: sticky;
+            top: 0;
+            /* Ensure sections are at least full viewport height for the effect to work */
+            min-height: 100vh; 
+            width: 100%;
+            /* Solid backgrounds are crucial for stacking overlap */
+            background-color: #ffffff; 
+            /* Shadow on top edge defines the "card" boundary */
+            box-shadow: 0 -2px 20px rgba(0,0,0,0.05);
+            /* Flex centering for content */
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        /* Ensure z-indexes increment so later sections stack on top */
+        #hero { z-index: 1; }
+        #technology { z-index: 2; }
+        #ingredients { z-index: 3; }
+        #benefits { z-index: 4; }
+        #contact { z-index: 5; }
+
+
+        /* Subtle Noise Texture */
+        .bg-noise {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 10;
+            opacity: 0.4;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+        }
+        
+        /* Red Text Gradient */
+        .text-gradient-red {
+            background: linear-gradient(to right, #7a2632, #a63d4d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Clean Grid Card */
+        .grid-card {
+            background: #ffffff;
+            border: 1px solid #f1f5f9;
+            transition: all 0.3s ease;
+        }
+
+        .grid-card:hover {
+            border-color: rgba(122, 38, 50, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(122, 38, 50, 0.1);
+        }
+
+        /* Primary Button: Red BG */
+        .btn-red {
+            background-color: #7a2632;
+            color: white;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px 0 rgba(122, 38, 50, 0.3);
+        }
+        
+        .btn-red:hover {
+            background-color: #5a1a24;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(122, 38, 50, 0.2);
+        }
+
+        /* Secondary Button: White BG */
+        .btn-white {
+            background-color: #ffffff;
+            color: #7a2632;
+            border: 1px solid rgba(122, 38, 50, 0.15);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 14px 0 rgba(0,0,0,0.05);
+        }
+
+        .btn-white:hover {
+            border-color: #7a2632;
+            background-color: #fffbfb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(122, 38, 50, 0.1);
+        }
+
+        .floating-slow {
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        /* Fixed Mobile Menu */
+        #mobile-menu {
+            position: fixed;
+            top: 80px; /* Height of navbar */
+            left: 0;
+            width: 100%;
+            background: white;
+            z-index: 40; /* Below nav (z-50) but above content */
+            border-bottom: 1px solid #eee;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+            transition: all 0.3s ease-in-out;
+        }
+
+        .menu-closed {
+            transform: translateY(-100%);
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .menu-open {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: auto;
+        }
+    </style>
+</head>
+<body class="font-sans antialiased selection:bg-purtier-primary selection:text-white bg-gray-100">
+
+    <nav class="fixed top-0 left-0 w-full z-[50] bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300 h-20" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
+            <div class="flex items-center justify-between h-full">
+                <div class="flex-shrink-0 cursor-pointer flex items-center gap-3">
+                    <img src="https://static.wixstatic.com/media/de7f19_995a665a3d56483cb45cecb10fb7f4f0~mv2.png" alt="Purtier Logo" class="h-8 md:h-10" style="filter: brightness(0) saturate(100%) invert(16%) sepia(34%) saturate(3062%) hue-rotate(330deg) brightness(96%) contrast(92%);">
+                </div>
+                
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-8">
+                        <a href="#benefits" class="text-sm font-medium text-gray-600 hover:text-purtier-primary transition-colors tracking-wide">BENEFITS</a>
+                        <a href="#ingredients" class="text-sm font-medium text-gray-600 hover:text-purtier-primary transition-colors tracking-wide">INGREDIENTS</a>
+                        <a href="#technology" class="text-sm font-medium text-gray-600 hover:text-purtier-primary transition-colors tracking-wide">TECHNOLOGY</a>
+                        <a href="#contact" class="btn-red font-bold px-6 py-2.5 rounded-full text-sm tracking-wide">ORDER NOW</a>
+                    </div>
+                </div>
+                
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button" id="mobile-menu-btn" class="inline-flex items-center justify-center p-2 rounded-md text-purtier-primary hover:bg-gray-100 focus:outline-none">
+                        <i class="ph ph-list text-3xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <div class="md:hidden menu-closed" id="mobile-menu">
+        <div class="px-4 pt-4 pb-6 space-y-2 bg-white">
+            <a href="#benefits" class="block px-3 py-3 rounded-md text-base font-medium text-gray-800 hover:bg-red-50 hover:text-purtier-primary transition-all" onclick="toggleMenu()">Benefits</a>
+            <a href="#ingredients" class="block px-3 py-3 rounded-md text-base font-medium text-gray-800 hover:bg-red-50 hover:text-purtier-primary transition-all" onclick="toggleMenu()">Ingredients</a>
+            <a href="#technology" class="block px-3 py-3 rounded-md text-base font-medium text-gray-800 hover:bg-red-50 hover:text-purtier-primary transition-all" onclick="toggleMenu()">Technology</a>
+            <a href="#contact" class="block mt-4 text-center btn-red font-bold px-3 py-3 rounded-full mx-3" onclick="toggleMenu()">Order Now</a>
+        </div>
+    </div>
+
+    <section id="hero" class="section-stack bg-hero-bright pt-20">
+        <div class="bg-noise"></div>
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute -top-[10%] -right-[10%] w-[50vw] h-[50vw] bg-purtier-primary opacity-5 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-[10%] -left-[10%] w-[60vw] h-[60vw] bg-purtier-primary opacity-5 rounded-full blur-[100px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-12">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-8">
+                
+                <div class="w-full md:w-1/2 text-center md:text-left hero-text-content order-2 md:order-1">
+                    <div class="inline-flex items-center gap-2 px-4 py-1 border border-purtier-primary/20 rounded-full bg-white shadow-sm mb-6 mx-auto md:mx-0">
+                        <span class="w-2 h-2 rounded-full bg-purtier-primary animate-pulse"></span>
+                        <span class="text-purtier-primary text-xs font-bold tracking-[0.2em] uppercase">6th Edition Formula</span>
+                    </div>
+                    
+                    <h1 class="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-medium leading-[1.1] mb-6 text-gray-900 tracking-tight">
+                        Reverse <i class="font-serif italic text-purtier-primary">Time</i>.<br>
+                        <span class="text-gradient-red font-bold">Reclaim Youth.</span>
+                    </h1>
+                    
+                    <p class="text-gray-600 text-base sm:text-lg md:text-xl mb-10 leading-relaxed max-w-lg mx-auto md:mx-0 font-light">
+                        The pinnacle of cellular therapy. Purtier Placenta harnesses the power of live stem cells to regenerate, restore, and revitalize your body from within.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start w-full sm:w-auto">
+                        <a href="#contact" class="btn-red font-bold text-base px-10 py-4 rounded-full text-center">
+                            Start Your Journey
+                        </a>
+                        <a href="#technology" class="btn-white text-gray-800 font-medium px-8 py-4 rounded-full flex items-center justify-center gap-3 group">
+                            <i class="ph-fill ph-play-circle text-2xl text-purtier-primary group-hover:scale-110 transition-transform"></i>
+                            <span>Watch Film</span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="w-full md:w-1/2 flex justify-center relative mt-8 md:mt-0 hero-image-container order-1 md:order-2">
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-gradient-to-tr from-purtier-primary to-transparent opacity-10 rounded-full blur-[60px]"></div>
+                    
+                    <img src="https://static.wixstatic.com/media/de7f19_1b22652ff1684919acfd2312130790c4~mv2.png/v1/fill/w_402,h_798,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/230524~RiwayDay12943_h800px-min.png" 
+                         alt="Purtier Placenta Bottle" 
+                         class="relative z-20 w-48 sm:w-60 md:w-80 h-auto drop-shadow-2xl floating-slow">
+                </div>
+            </div>
+            
+             <div class="mt-16 border-t border-gray-100 pt-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100">
+                    <div class="text-center px-2">
+                        <div class="text-3xl md:text-4xl font-serif text-purtier-primary font-bold">10M+</div>
+                        <div class="text-xs sm:text-sm text-gray-500 uppercase tracking-wider mt-1 font-medium">Bottles Distributed</div>
+                    </div>
+                    <div class="text-center px-2">
+                        <div class="text-3xl md:text-4xl font-serif text-purtier-primary font-bold">15</div>
+                        <div class="text-xs sm:text-sm text-gray-500 uppercase tracking-wider mt-1 font-medium">Years Excellence</div>
+                    </div>
+                    <div class="text-center px-2">
+                        <div class="text-3xl md:text-4xl font-serif text-purtier-primary font-bold">100:1</div>
+                        <div class="text-xs sm:text-sm text-gray-500 uppercase tracking-wider mt-1 font-medium">High Potency</div>
+                    </div>
+                    <div class="text-center px-2">
+                        <div class="text-3xl md:text-4xl font-serif text-purtier-primary font-bold">SG</div>
+                        <div class="text-xs sm:text-sm text-gray-500 uppercase tracking-wider mt-1 font-medium">Origin</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technology" class="section-stack bg-white">
+        <div class="bg-noise"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
+                
+                <div class="order-2 lg:order-1 relative group">
+                    <div class="absolute -inset-2 bg-gradient-to-r from-purtier-primary to-white rounded-2xl blur opacity-20 group-hover:opacity-40 transition duration-1000"></div>
+                    <div class="relative rounded-2xl overflow-hidden aspect-video shadow-xl bg-white">
+                        <img src="https://static.wixstatic.com/media/de7f19_b18080b0916542a2b6e647bfefddbc5a~mv2.jpg" 
+                             alt="Purtier Technology" 
+                             class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
+                         
+                         <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-transparent transition-all">
+                             <div class="w-20 h-20 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center border border-white/50 group-hover:scale-110 transition-transform cursor-pointer shadow-lg">
+                                 <i class="ph-fill ph-play text-white text-3xl"></i>
+                             </div>
+                         </div>
+                    </div>
+                </div>
+
+                <div class="order-1 lg:order-2">
+                    <span class="text-purtier-primary text-xs font-bold tracking-[0.2em] uppercase mb-2 block">The Science</span>
+                    <h2 class="font-serif text-3xl md:text-5xl font-medium mb-6 text-gray-900 leading-tight">
+                        Alive. Active. <br><span class="text-purtier-primary italic">Absorbable.</span>
+                    </h2>
+                    <p class="text-gray-600 text-lg leading-relaxed mb-8 font-light">
+                        Standard supplements lose potency during processing. Purtier uses advanced <strong>Freeze-Drying Technology</strong> to maintain stem cell bio-activity for 3-4 years.
+                    </p>
+                    
+                    <div class="space-y-6">
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-50 border border-red-100 flex items-center justify-center text-purtier-primary">
+                                <i class="ph-fill ph-snowflake text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-900 font-semibold text-lg">Freeze-Drying Tech</h4>
+                                <p class="text-sm text-gray-500 mt-1">Preserves bio-active benefits.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-50 border border-red-100 flex items-center justify-center text-purtier-primary">
+                                <i class="ph-fill ph-shield-check text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-900 font-semibold text-lg">Enteric Coating</h4>
+                                <p class="text-sm text-gray-500 mt-1">Bypasses stomach acid for absorption.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-50 border border-red-100 flex items-center justify-center text-purtier-primary">
+                                <i class="ph-fill ph-drop text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-gray-900 font-semibold text-lg">Nitrogen-Filled</h4>
+                                <p class="text-sm text-gray-500 mt-1">Zero oxygen encapsulation prevents oxidation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ingredients" class="section-stack bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 w-full">
+            <div class="text-center mb-16">
+                <span class="text-purtier-primary text-xs font-bold tracking-[0.2em] uppercase">The Formula</span>
+                <h2 class="font-serif text-3xl md:text-5xl font-medium text-gray-900 mt-4">12 Powerful Ingredients</h2>
+                <div class="w-24 h-1 bg-purtier-primary mt-6 mx-auto rounded-full"></div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                <div class="grid-card p-8 rounded-3xl group">
+                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                        <i class="ph-fill ph-dna text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Deer Placenta</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Bio-compatibility closely matching humans. Contains essential growth factors to promote regeneration.
+                    </p>
+                </div>
+
+                <div class="grid-card p-8 rounded-3xl group">
+                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                        <i class="ph-fill ph-flower-lotus text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Dendrobium</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        A revered Taoist herb used for centuries to combat fatigue, improve vision, and promote blood circulation.
+                    </p>
+                </div>
+
+                <div class="grid-card p-8 rounded-3xl group">
+                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                        <i class="ph-fill ph-drop text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Marine Collagen</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Peptides extracted from deep sea marine organisms. 10x absorption rate for youthful skin and joint elasticity.
+                    </p>
+                </div>
+
+                <div class="grid-card p-8 rounded-3xl group">
+                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                        <i class="ph-fill ph-shield text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Apple Polyphenol</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Extracted from 100 unripe apples. A nutritional powerhouse that acts as a potent antioxidant.
+                    </p>
+                </div>
+                
+                <div class="grid-card p-8 rounded-3xl group">
+                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                        <i class="ph-fill ph-heartbeat text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Fucoidan Extract</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed">
+                        Derived from brown seaweed. Supports the immune system and induces apoptosis in bad cells.
+                    </p>
+                </div>
+
+                <div class="grid-card p-8 rounded-3xl group bg-purtier-primary text-white shadow-xl relative overflow-hidden border-none">
+                     <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                     <div class="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-6 text-white border border-white/20 relative z-10">
+                         <i class="ph-fill ph-star text-3xl"></i>
+                     </div>
+                     <h3 class="text-xl font-serif text-white font-bold mb-3 relative z-10">NucleiClavem™</h3>
+                     <p class="text-white/80 text-sm leading-relaxed relative z-10">
+                         The proprietary ingredient exclusive to Purtier. Backs anti-inflammatory and metabolic functions.
+                     </p>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="section-stack bg-white relative">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/60 z-10"></div>
+            <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white z-10"></div>
+            <img src="https://d39-a.sdn.cz/d_39/c_img_oe_A/kBlLbSfl8C2TnDYFEjUwcG/1e9e/riway.jpeg?fl=cro,365,0,3349,1884%7Cres,1200,,1%7Cjpg,80,,1" 
+                 class="w-full h-full object-cover object-center opacity-50" 
+                 alt="Riway Event Background">
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-20 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-purtier-primary text-xs font-bold tracking-[0.2em] uppercase mb-4 block">The Result</span>
+                    <h2 class="font-serif text-4xl md:text-6xl font-medium mb-12 text-gray-900 leading-tight">
+                        Total Body <span class="text-purtier-primary italic">Rejuvenation</span>
+                    </h2>
+                    
+                    <div class="grid gap-6 text-left">
+                        <div class="group bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md hover:border-purtier-primary/30">
+                            <div class="flex items-center gap-6">
+                                <span class="text-4xl font-serif text-gray-200 group-hover:text-purtier-primary transition-colors">01</span>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-900 mb-1">Anti-Aging & Skin</h4>
+                                    <p class="text-gray-600 text-sm">Stimulates collagen production. Skin becomes firmer, hydrated, and radiant.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md hover:border-purtier-primary/30">
+                            <div class="flex items-center gap-6">
+                                <span class="text-4xl font-serif text-gray-200 group-hover:text-purtier-primary transition-colors">02</span>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-900 mb-1">Energy & Vitality</h4>
+                                    <p class="text-gray-600 text-sm">Reverses chronic fatigue. Significantly increased stamina and mental alertness.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="group bg-white/80 backdrop-blur-md p-6 rounded-2xl border border-gray-100 shadow-sm transition-all duration-300 hover:shadow-md hover:border-purtier-primary/30">
+                            <div class="flex items-center gap-6">
+                                <span class="text-4xl font-serif text-gray-200 group-hover:text-purtier-primary transition-colors">03</span>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-900 mb-1">Deep Sleep</h4>
+                                    <p class="text-gray-600 text-sm">Regulates the nervous system to promote deep, restorative sleep cycles.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                 <div class="flex justify-center lg:justify-end">
+                    <div class="relative">
+                         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gradient-to-tr from-purtier-primary to-transparent opacity-10 rounded-full blur-[60px]"></div>
+                        <img src="https://static.wixstatic.com/media/de7f19_1b22652ff1684919acfd2312130790c4~mv2.png/v1/fill/w_402,h_798,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/230524~RiwayDay12943_h800px-min.png" 
+                         alt="Purtier Placenta Bottle" 
+                         class="relative z-20 w-56 md:w-72 h-auto drop-shadow-2xl floating-slow">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-stack bg-[#7a2632] relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-[#5a1a24] to-transparent pointer-events-none"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 w-full">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
+                <div class="lg:w-1/2 text-center lg:text-left">
+                    <h2 class="font-serif text-4xl md:text-6xl font-medium text-white mb-6">
+                        Invest in your <br><span class="italic text-white opacity-80">Future Self</span>.
+                    </h2>
+                    <p class="text-red-100 text-lg mb-8 max-w-lg mx-auto lg:mx-0 font-light">
+                        Authentic RIWAY Stock. Experience the transformative power of the 6th Edition. Limited stock available.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <button class="bg-white text-[#7a2632] font-bold text-base px-10 py-4 rounded-full hover:bg-gray-100 transition-colors shadow-xl">
+                            Buy 1 Bottle (Trial)
+                        </button>
+                        <button class="bg-[#7a2632] border border-white/30 text-white font-bold text-base px-10 py-4 rounded-full hover:bg-[#8e313e] transition-colors shadow-xl">
+                            6 Month Therapy
+                        </button>
+                    </div>
+                    <p class="mt-6 text-xs text-red-200 opacity-80"><strong>Free shipping worldwide for the 6-month set.</strong></p>
+                </div>
+                
+                <div class="lg:w-5/12 w-full bg-white p-8 rounded-3xl border border-white/10 shadow-2xl">
+                    <h3 class="text-2xl font-serif text-[#7a2632] mb-6">Request Pricing</h3>
+                    <form class="space-y-4" onsubmit="event.preventDefault(); alert('Thank you. An agent will contact you shortly.');">
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-gray-500 text-xs uppercase tracking-wider mb-1">First Name</label>
+                                <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-[#7a2632] focus:bg-white transition-colors placeholder-gray-400" placeholder="John">
+                            </div>
+                             <div>
+                                <label class="block text-gray-500 text-xs uppercase tracking-wider mb-1">Last Name</label>
+                                <input type="text" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-[#7a2632] focus:bg-white transition-colors placeholder-gray-400" placeholder="Doe">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-gray-500 text-xs uppercase tracking-wider mb-1">Email Address</label>
+                            <input type="email" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-[#7a2632] focus:bg-white transition-colors placeholder-gray-400" placeholder="john@example.com">
+                        </div>
+                        <div>
+                            <label class="block text-gray-500 text-xs uppercase tracking-wider mb-1">Phone (WhatsApp)</label>
+                            <input type="tel" class="w-full bg-gray-50 border border-gray-200 rounded-lg px-4 py-3 text-gray-900 focus:outline-none focus:border-[#7a2632] focus:bg-white transition-colors placeholder-gray-400" placeholder="+1 (555) 000-0000">
+                        </div>
+                        <button type="submit" class="w-full btn-red font-bold py-4 rounded-full mt-4 text-sm tracking-widest uppercase shadow-lg">Get Info</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white py-12 border-t border-gray-200 relative z-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
+                <div class="text-center md:text-left">
+                     <img src="https://static.wixstatic.com/media/de7f19_995a665a3d56483cb45cecb10fb7f4f0~mv2.png" alt="Purtier Logo" class="h-6 mx-auto md:mx-0 mb-4 opacity-80" style="filter: brightness(0) saturate(100%) invert(16%) sepia(34%) saturate(3062%) hue-rotate(330deg) brightness(96%) contrast(92%);">
+                     <p class="text-gray-500 text-xs max-w-xs">
+                         Independent Distributor. This site is for educational purposes. 
+                     </p>
+                </div>
+                
+                <div class="flex gap-8 text-sm text-gray-500">
+                    <a href="#" class="hover:text-[#7a2632] transition-colors">Privacy Policy</a>
+                    <a href="#" class="hover:text-[#7a2632] transition-colors">Terms of Use</a>
+                    <a href="#" class="hover:text-[#7a2632] transition-colors">Contact</a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-100 text-center text-gray-400 text-[10px] uppercase tracking-widest">
+                &copy; 2025 Purtier Placenta. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <script>
+        // Toggle Mobile Menu
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const icon = menuBtn.querySelector('i');
+        let isMenuOpen = false;
+
+        function toggleMenu() {
+            isMenuOpen = !isMenuOpen;
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('menu-closed');
+                mobileMenu.classList.add('menu-open');
+                icon.classList.remove('ph-list');
+                icon.classList.add('ph-x');
+            } else {
+                mobileMenu.classList.remove('menu-open');
+                mobileMenu.classList.add('menu-closed');
+                icon.classList.remove('ph-x');
+                icon.classList.add('ph-list');
+            }
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        // GSAP Setup
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Hero Content Animation
+        gsap.from(".hero-text-content > *", {
+            y: 30,
+            opacity: 0,
+            duration: 1.2,
+            stagger: 0.1,
+            ease: "power3.out",
+            delay: 0.5
+        });
+
+        gsap.from(".hero-image-container", {
+            scale: 0.9,
+            opacity: 0,
+            duration: 1.5,
+            ease: "power3.out",
+            delay: 0.7
+        });
+
+        // Ingredients Grid Animation (Updated for Grid)
+        gsap.from("#ingredients .grid-card", {
+            scrollTrigger: {
+                trigger: "#ingredients",
+                start: "top 60%"
+            },
+            y: 50,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.1,
+            ease: "power2.out"
+        });
+
+        // Benefits Animation
+        gsap.from("#benefits .group", {
+            scrollTrigger: {
+                trigger: "#benefits",
+                start: "top 60%"
+            },
+            x: -30,
+            opacity: 0,
+            duration: 0.6,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+
+    </script>
+</body>
+</html>
