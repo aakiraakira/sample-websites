@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,7 +33,7 @@
                         'hero-bright': 'radial-gradient(circle at top right, #fff0f2, #ffffff 60%)',
                     },
                     boxShadow: {
-                        'card-stack': '0 -5px 25px rgba(0,0,0,0.08)',
+                        'card-top': '0 -10px 40px -5px rgba(0, 0, 0, 0.1)',
                     }
                 }
             }
@@ -41,28 +41,35 @@
     </script>
 
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
         body {
             background-color: #f8fafc;
             color: #1a1a1a;
             overflow-x: hidden;
         }
 
-        /* --- STACKING CARD EFFECT --- */
-        .section-stack {
+        /* --- STACKING CARD LOGIC --- */
+        .stack-card {
             position: sticky;
             top: 0;
-            min-height: 100vh; 
+            min-height: 100vh; /* Must cover full screen to stack properly */
             width: 100%;
-            background-color: #ffffff; 
-            /* Shadow on top to create the "card" look */
-            box-shadow: 0 -4px 30px rgba(0,0,0,0.08); 
+            background-color: #ffffff;
+            box-shadow: 0 -5px 30px rgba(0,0,0,0.08); /* Shadow on top to define the card edge */
             display: flex;
             align-items: center;
             overflow: hidden;
+            /* Border radius top for card look */
+            border-top-left-radius: 24px; 
+            border-top-right-radius: 24px;
+            margin-top: -24px; /* Slight overlap for seamless feel */
+            padding-top: 80px; /* Offset for navbar */
         }
         
-        /* Z-Index Hierarchy for Stacking */
-        #hero { z-index: 10; }
+        /* Z-Index Hierarchy ensures correct stacking order */
+        #hero { z-index: 10; margin-top: 0; border-radius: 0; }
         #technology { z-index: 20; }
         #ingredients { z-index: 30; }
         #benefits { z-index: 40; }
@@ -72,59 +79,70 @@
         #navbar {
             transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
         .nav-hidden {
             transform: translateY(-100%);
         }
 
-        /* Subtle Noise Texture */
-        .bg-noise {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            opacity: 0.4;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+        /* Horizontal Scroll Hide Scrollbar */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
         }
-        
-        .text-gradient-red {
-            background: linear-gradient(to right, #7a2632, #a63d4d);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
-        /* Clean Grid Card */
+        /* Side Navigation */
+        .side-nav-dot {
+            transition: all 0.3s ease;
+        }
+        .side-nav-text {
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+        }
+        .side-nav-item:hover .side-nav-text {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .side-nav-item.active .side-nav-dot {
+            background-color: #7a2632;
+            border-color: #7a2632;
+            transform: scale(1.2);
+        }
+        .side-nav-item.active .side-nav-text {
+            opacity: 1;
+            transform: translateX(0);
+            font-weight: 600;
+            color: #7a2632;
+        }
+
+        /* Card Styles */
         .grid-card {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             transition: all 0.3s ease;
             position: relative;
-            z-index: 10; /* Force z-index to ensure visibility */
+            z-index: 10;
         }
-
         .grid-card:hover {
             border-color: rgba(122, 38, 50, 0.3);
             transform: translateY(-5px);
             box-shadow: 0 15px 30px -5px rgba(122, 38, 50, 0.1);
         }
 
+        /* Buttons */
         .btn-red {
             background-color: #7a2632;
             color: white;
             transition: all 0.3s ease;
             box-shadow: 0 4px 14px 0 rgba(122, 38, 50, 0.3);
         }
-        
         .btn-red:hover {
             background-color: #5a1a24;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(122, 38, 50, 0.2);
         }
-
         .btn-white {
             background-color: #ffffff;
             color: #7a2632;
@@ -132,7 +150,6 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 14px 0 rgba(0,0,0,0.05);
         }
-
         .btn-white:hover {
             border-color: #7a2632;
             background-color: #fffbfb;
@@ -143,7 +160,6 @@
         .floating-slow {
             animation: float 6s ease-in-out infinite;
         }
-        
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-15px); }
@@ -161,17 +177,30 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             transition: all 0.3s ease-in-out;
         }
-
         .menu-closed {
             transform: translateY(-150%);
             opacity: 0;
             pointer-events: none;
         }
-        
         .menu-open {
             transform: translateY(0);
             opacity: 1;
             pointer-events: auto;
+        }
+        
+        /* Subtle Noise */
+        .bg-noise {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 5; opacity: 0.4;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+        }
+        
+        .text-gradient-red {
+            background: linear-gradient(to right, #7a2632, #a63d4d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
     </style>
 </head>
@@ -211,7 +240,30 @@
         </div>
     </div>
 
-    <section id="hero" class="section-stack bg-hero-bright pt-20">
+    <div class="fixed right-8 top-1/2 -translate-y-1/2 z-[80] hidden lg:flex flex-col gap-4 items-end">
+        <a href="#hero" class="side-nav-item flex items-center gap-3 group cursor-pointer" data-target="hero">
+            <span class="side-nav-text text-xs uppercase tracking-widest text-gray-500 font-medium">Home</span>
+            <div class="side-nav-dot w-3 h-3 rounded-full border-2 border-gray-300 bg-transparent group-hover:border-purtier-primary"></div>
+        </a>
+        <a href="#technology" class="side-nav-item flex items-center gap-3 group cursor-pointer" data-target="technology">
+            <span class="side-nav-text text-xs uppercase tracking-widest text-gray-500 font-medium">Technology</span>
+            <div class="side-nav-dot w-3 h-3 rounded-full border-2 border-gray-300 bg-transparent group-hover:border-purtier-primary"></div>
+        </a>
+        <a href="#ingredients" class="side-nav-item flex items-center gap-3 group cursor-pointer" data-target="ingredients">
+            <span class="side-nav-text text-xs uppercase tracking-widest text-gray-500 font-medium">Ingredients</span>
+            <div class="side-nav-dot w-3 h-3 rounded-full border-2 border-gray-300 bg-transparent group-hover:border-purtier-primary"></div>
+        </a>
+        <a href="#benefits" class="side-nav-item flex items-center gap-3 group cursor-pointer" data-target="benefits">
+            <span class="side-nav-text text-xs uppercase tracking-widest text-gray-500 font-medium">Benefits</span>
+            <div class="side-nav-dot w-3 h-3 rounded-full border-2 border-gray-300 bg-transparent group-hover:border-purtier-primary"></div>
+        </a>
+        <a href="#contact" class="side-nav-item flex items-center gap-3 group cursor-pointer" data-target="contact">
+            <span class="side-nav-text text-xs uppercase tracking-widest text-gray-500 font-medium">Order Now</span>
+            <div class="side-nav-dot w-3 h-3 rounded-full border-2 border-gray-300 bg-transparent group-hover:border-purtier-primary"></div>
+        </a>
+    </div>
+
+    <section id="hero" class="stack-card bg-hero-bright">
         <div class="bg-noise"></div>
         <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <div class="absolute -top-[10%] -right-[10%] w-[50vw] h-[50vw] bg-purtier-primary opacity-5 rounded-full blur-[100px]"></div>
@@ -249,14 +301,13 @@
 
                 <div class="w-full md:w-1/2 flex justify-center relative mt-8 md:mt-0 hero-image-container order-1 md:order-2">
                     <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-gradient-to-tr from-purtier-primary to-transparent opacity-10 rounded-full blur-[60px]"></div>
-                    
                     <img src="https://static.wixstatic.com/media/de7f19_1b22652ff1684919acfd2312130790c4~mv2.png/v1/fill/w_402,h_798,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/230524~RiwayDay12943_h800px-min.png" 
                          alt="Purtier Placenta Bottle" 
                          class="relative z-20 w-48 sm:w-60 md:w-80 h-auto drop-shadow-2xl floating-slow">
                 </div>
             </div>
             
-             <div class="mt-16 border-t border-gray-100 pt-8">
+            <div class="mt-16 border-t border-gray-100 pt-8">
                 <div class="grid grid-cols-2 md:grid-cols-4 divide-x divide-gray-100">
                     <div class="text-center px-2">
                         <div class="text-3xl md:text-4xl font-serif text-purtier-primary font-bold">10M+</div>
@@ -279,7 +330,7 @@
         </div>
     </section>
 
-    <section id="technology" class="section-stack bg-white">
+    <section id="technology" class="stack-card">
         <div class="bg-noise"></div>
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
@@ -290,7 +341,6 @@
                         <img src="https://static.wixstatic.com/media/de7f19_b18080b0916542a2b6e647bfefddbc5a~mv2.jpg" 
                              alt="Purtier Technology" 
                              class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700">
-                         
                          <div class="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-transparent transition-all">
                              <div class="w-20 h-20 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center border border-white/50 group-hover:scale-110 transition-transform cursor-pointer shadow-lg">
                                  <i class="ph-fill ph-play text-white text-3xl"></i>
@@ -307,7 +357,6 @@
                     <p class="text-gray-600 text-lg leading-relaxed mb-8 font-light">
                         Standard supplements lose potency during processing. Purtier uses advanced <strong>Freeze-Drying Technology</strong> to maintain stem cell bio-activity for 3-4 years.
                     </p>
-                    
                     <div class="space-y-6">
                         <div class="flex gap-4">
                             <div class="flex-shrink-0 w-12 h-12 rounded-full bg-red-50 border border-red-100 flex items-center justify-center text-purtier-primary">
@@ -342,80 +391,92 @@
         </div>
     </section>
 
-    <section id="ingredients" class="section-stack bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 w-full">
-            <div class="text-center mb-16">
-                <span class="text-purtier-primary text-xs font-bold tracking-[0.2em] uppercase">The Formula</span>
-                <h2 class="font-serif text-3xl md:text-5xl font-medium text-gray-900 mt-4">12 Powerful Ingredients</h2>
-                <div class="w-24 h-1 bg-purtier-primary mt-6 mx-auto rounded-full"></div>
+    <section id="ingredients" class="stack-card bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 w-full flex flex-col justify-center">
+            
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <span class="text-purtier-primary text-xs font-bold tracking-[0.2em] uppercase">The Formula</span>
+                    <h2 class="font-serif text-3xl md:text-5xl font-medium text-gray-900 mt-4">12 Powerful Ingredients</h2>
+                    <div class="w-24 h-1 bg-purtier-primary mt-6 rounded-full"></div>
+                </div>
+                <div class="hidden md:flex gap-2 text-gray-400 text-sm items-center">
+                    <span>Scroll</span>
+                    <i class="ph ph-arrow-right"></i>
+                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                <div class="grid-card p-8 rounded-3xl group">
-                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
-                        <i class="ph-fill ph-dna text-3xl"></i>
+            <div class="w-full relative">
+                <div class="flex overflow-x-auto hide-scroll gap-6 snap-x snap-mandatory pb-12 px-4 md:px-0">
+                    
+                    <div class="min-w-[85vw] md:min-w-[400px] snap-center grid-card p-8 rounded-3xl group">
+                        <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                            <i class="ph-fill ph-dna text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Deer Placenta</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Bio-compatibility closely matching humans. Contains essential growth factors to promote regeneration.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Deer Placenta</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Bio-compatibility closely matching humans. Contains essential growth factors to promote regeneration.
-                    </p>
-                </div>
 
-                <div class="grid-card p-8 rounded-3xl group">
-                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
-                        <i class="ph-fill ph-flower-lotus text-3xl"></i>
+                    <div class="min-w-[85vw] md:min-w-[400px] snap-center grid-card p-8 rounded-3xl group">
+                        <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                            <i class="ph-fill ph-flower-lotus text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Dendrobium</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            A revered Taoist herb used for centuries to combat fatigue, improve vision, and promote blood circulation.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Dendrobium</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        A revered Taoist herb used for centuries to combat fatigue, improve vision, and promote blood circulation.
-                    </p>
-                </div>
 
-                <div class="grid-card p-8 rounded-3xl group">
-                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
-                        <i class="ph-fill ph-drop text-3xl"></i>
+                    <div class="min-w-[85vw] md:min-w-[400px] snap-center grid-card p-8 rounded-3xl group">
+                        <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                            <i class="ph-fill ph-drop text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Marine Collagen</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Peptides extracted from deep sea marine organisms. 10x absorption rate for youthful skin and joint elasticity.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Marine Collagen</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Peptides extracted from deep sea marine organisms. 10x absorption rate for youthful skin and joint elasticity.
-                    </p>
-                </div>
 
-                <div class="grid-card p-8 rounded-3xl group">
-                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
-                        <i class="ph-fill ph-shield text-3xl"></i>
+                    <div class="min-w-[85vw] md:min-w-[400px] snap-center grid-card p-8 rounded-3xl group">
+                        <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                            <i class="ph-fill ph-shield text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Apple Polyphenol</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Extracted from 100 unripe apples. A nutritional powerhouse that acts as a potent antioxidant.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Apple Polyphenol</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Extracted from 100 unripe apples. A nutritional powerhouse that acts as a potent antioxidant.
-                    </p>
-                </div>
-                
-                <div class="grid-card p-8 rounded-3xl group">
-                    <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
-                        <i class="ph-fill ph-heartbeat text-3xl"></i>
+                    
+                    <div class="min-w-[85vw] md:min-w-[400px] snap-center grid-card p-8 rounded-3xl group">
+                        <div class="w-14 h-14 bg-[#7a2632]/5 rounded-xl flex items-center justify-center mb-6 text-purtier-primary">
+                            <i class="ph-fill ph-heartbeat text-3xl"></i>
+                        </div>
+                        <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Fucoidan Extract</h3>
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            Derived from brown seaweed. Supports the immune system and induces apoptosis in bad cells.
+                        </p>
                     </div>
-                    <h3 class="text-xl font-serif text-gray-900 font-bold mb-3">Fucoidan Extract</h3>
-                    <p class="text-gray-600 text-sm leading-relaxed">
-                        Derived from brown seaweed. Supports the immune system and induces apoptosis in bad cells.
-                    </p>
-                </div>
 
-                <div class="grid-card p-8 rounded-3xl group bg-purtier-primary text-white shadow-xl relative overflow-hidden border-none">
-                     <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
-                     <div class="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-6 text-white border border-white/20 relative z-10">
-                         <i class="ph-fill ph-star text-3xl"></i>
+                    <div class="min-w-[85vw] md:min-w-[400px] snap-center grid-card p-8 rounded-3xl group bg-purtier-primary text-white shadow-xl border-none relative overflow-hidden">
+                         <div class="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                         <div class="w-14 h-14 bg-white/10 rounded-xl flex items-center justify-center mb-6 text-white border border-white/20 relative z-10">
+                             <i class="ph-fill ph-star text-3xl"></i>
+                         </div>
+                         <h3 class="text-xl font-serif text-white font-bold mb-3 relative z-10">NucleiClavem™</h3>
+                         <p class="text-white/80 text-sm leading-relaxed relative z-10">
+                             The proprietary ingredient exclusive to Purtier. Backs anti-inflammatory and metabolic functions.
+                         </p>
                      </div>
-                     <h3 class="text-xl font-serif text-white font-bold mb-3 relative z-10">NucleiClavem™</h3>
-                     <p class="text-white/80 text-sm leading-relaxed relative z-10">
-                         The proprietary ingredient exclusive to Purtier. Backs anti-inflammatory and metabolic functions.
-                     </p>
-                 </div>
+                     
+                     <div class="min-w-[20px]"></div>
+                </div>
             </div>
         </div>
     </section>
 
-    <section id="benefits" class="section-stack bg-white relative">
+    <section id="benefits" class="stack-card bg-white relative">
         <div class="absolute inset-0 z-0 pointer-events-none">
             <div class="absolute inset-0 bg-gradient-to-r from-white via-white/90 to-white/60 z-10"></div>
             <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-white z-10"></div>
@@ -465,7 +526,7 @@
                     </div>
                 </div>
 
-                 <div class="flex justify-center lg:justify-end">
+                <div class="flex justify-center lg:justify-end">
                     <div class="relative">
                          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gradient-to-tr from-purtier-primary to-transparent opacity-10 rounded-full blur-[60px]"></div>
                         <img src="https://static.wixstatic.com/media/de7f19_1b22652ff1684919acfd2312130790c4~mv2.png/v1/fill/w_402,h_798,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/230524~RiwayDay12943_h800px-min.png" 
@@ -477,7 +538,7 @@
         </div>
     </section>
 
-    <section id="contact" class="section-stack bg-[#7a2632] relative overflow-hidden">
+    <section id="contact" class="stack-card bg-[#7a2632] relative overflow-hidden">
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-[#5a1a24] to-transparent pointer-events-none"></div>
 
@@ -538,7 +599,6 @@
                          Independent Distributor. This site is for educational purposes. 
                      </p>
                 </div>
-                
                 <div class="flex gap-8 text-sm text-gray-500">
                     <a href="#" class="hover:text-[#7a2632] transition-colors">Privacy Policy</a>
                     <a href="#" class="hover:text-[#7a2632] transition-colors">Terms of Use</a>
@@ -561,23 +621,17 @@
 
         window.addEventListener('scroll', () => {
             const currentScroll = window.pageYOffset;
-            
-            // Only hide if scrolled more than 100px
             if (currentScroll > 100) {
                 if (currentScroll > lastScroll) {
-                    // Scrolling Down -> Hide
                     navbar.classList.add('nav-hidden');
                 } else {
-                    // Scrolling Up -> Show
                     navbar.classList.remove('nav-hidden');
                 }
             } else {
-                // At the top -> Show
                 navbar.classList.remove('nav-hidden');
             }
             lastScroll = currentScroll;
         });
-
 
         // --- 2. Mobile Menu Toggle ---
         const menuBtn = document.getElementById('mobile-menu-btn');
@@ -599,46 +653,44 @@
                 icon.classList.add('ph-list');
             }
         }
-
         menuBtn.addEventListener('click', toggleMenu);
 
-        // --- 3. Animations ---
+        // --- 3. Active Side Nav Script ---
+        const sections = document.querySelectorAll('section');
+        const navItems = document.querySelectorAll('.side-nav-item');
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '-50% 0px -50% 0px', // Trigger when section is in middle of screen
+            threshold: 0
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.getAttribute('id');
+                    navItems.forEach(item => {
+                        item.classList.remove('active');
+                        if (item.getAttribute('data-target') === id) {
+                            item.classList.add('active');
+                        }
+                    });
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => observer.observe(section));
+
+        // --- 4. Smooth Animations ---
         gsap.registerPlugin(ScrollTrigger);
 
-        // Hero Content Animation
         gsap.from(".hero-text-content > *", {
-            y: 30,
-            opacity: 0,
-            duration: 1.2,
-            stagger: 0.1,
-            ease: "power3.out",
-            delay: 0.5
+            y: 30, opacity: 0, duration: 1.2, stagger: 0.1, ease: "power3.out", delay: 0.5
         });
 
         gsap.from(".hero-image-container", {
-            scale: 0.9,
-            opacity: 0,
-            duration: 1.5,
-            ease: "power3.out",
-            delay: 0.7
+            scale: 0.9, opacity: 0, duration: 1.5, ease: "power3.out", delay: 0.7
         });
-
-        // Benefits Animation
-        gsap.from("#benefits .group", {
-            scrollTrigger: {
-                trigger: "#benefits",
-                start: "top 60%"
-            },
-            x: -30,
-            opacity: 0,
-            duration: 0.6,
-            stagger: 0.2,
-            ease: "power2.out"
-        });
-        
-        // Note: I removed the GSAP animation for Ingredients cards to strictly fix the blank issue.
-        // They will now be visible by default via standard CSS.
-
     </script>
 </body>
 </html>
