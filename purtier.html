@@ -48,30 +48,34 @@
         }
 
         /* --- STACKING CARD EFFECT --- */
-        /* Applies sticky positioning to main sections for the stacking effect */
         .section-stack {
             position: sticky;
             top: 0;
-            /* Ensure sections are at least full viewport height for the effect to work */
             min-height: 100vh; 
             width: 100%;
-            /* Solid backgrounds are crucial for stacking overlap */
             background-color: #ffffff; 
-            /* Shadow on top edge defines the "card" boundary */
-            box-shadow: 0 -2px 20px rgba(0,0,0,0.05);
-            /* Flex centering for content */
+            /* Shadow on top to create the "card" look */
+            box-shadow: 0 -4px 30px rgba(0,0,0,0.08); 
             display: flex;
             align-items: center;
             overflow: hidden;
         }
         
-        /* Ensure z-indexes increment so later sections stack on top */
-        #hero { z-index: 1; }
-        #technology { z-index: 2; }
-        #ingredients { z-index: 3; }
-        #benefits { z-index: 4; }
-        #contact { z-index: 5; }
+        /* Z-Index Hierarchy for Stacking */
+        #hero { z-index: 10; }
+        #technology { z-index: 20; }
+        #ingredients { z-index: 30; }
+        #benefits { z-index: 40; }
+        #contact { z-index: 50; }
 
+        /* Navbar Transition */
+        #navbar {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav-hidden {
+            transform: translateY(-100%);
+        }
 
         /* Subtle Noise Texture */
         .bg-noise {
@@ -81,12 +85,11 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 10;
+            z-index: 5;
             opacity: 0.4;
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
         }
         
-        /* Red Text Gradient */
         .text-gradient-red {
             background: linear-gradient(to right, #7a2632, #a63d4d);
             -webkit-background-clip: text;
@@ -97,8 +100,10 @@
         /* Clean Grid Card */
         .grid-card {
             background: #ffffff;
-            border: 1px solid #f1f5f9;
+            border: 1px solid #e2e8f0;
             transition: all 0.3s ease;
+            position: relative;
+            z-index: 10; /* Force z-index to ensure visibility */
         }
 
         .grid-card:hover {
@@ -107,7 +112,6 @@
             box-shadow: 0 15px 30px -5px rgba(122, 38, 50, 0.1);
         }
 
-        /* Primary Button: Red BG */
         .btn-red {
             background-color: #7a2632;
             color: white;
@@ -121,7 +125,6 @@
             box-shadow: 0 6px 20px rgba(122, 38, 50, 0.2);
         }
 
-        /* Secondary Button: White BG */
         .btn-white {
             background-color: #ffffff;
             color: #7a2632;
@@ -146,21 +149,21 @@
             50% { transform: translateY(-15px); }
         }
 
-        /* Fixed Mobile Menu */
+        /* Mobile Menu */
         #mobile-menu {
             position: fixed;
-            top: 80px; /* Height of navbar */
+            top: 80px;
             left: 0;
             width: 100%;
             background: white;
-            z-index: 40; /* Below nav (z-50) but above content */
+            z-index: 90;
             border-bottom: 1px solid #eee;
             box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             transition: all 0.3s ease-in-out;
         }
 
         .menu-closed {
-            transform: translateY(-100%);
+            transform: translateY(-150%);
             opacity: 0;
             pointer-events: none;
         }
@@ -174,7 +177,7 @@
 </head>
 <body class="font-sans antialiased selection:bg-purtier-primary selection:text-white bg-gray-100">
 
-    <nav class="fixed top-0 left-0 w-full z-[50] bg-white/90 backdrop-blur-md border-b border-gray-200 transition-all duration-300 h-20" id="navbar">
+    <nav class="fixed top-0 left-0 w-full z-[100] bg-white/95 backdrop-blur-md border-b border-gray-100 h-20" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
             <div class="flex items-center justify-between h-full">
                 <div class="flex-shrink-0 cursor-pointer flex items-center gap-3">
@@ -210,7 +213,7 @@
 
     <section id="hero" class="section-stack bg-hero-bright pt-20">
         <div class="bg-noise"></div>
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
             <div class="absolute -top-[10%] -right-[10%] w-[50vw] h-[50vw] bg-purtier-primary opacity-5 rounded-full blur-[100px]"></div>
             <div class="absolute bottom-[10%] -left-[10%] w-[60vw] h-[60vw] bg-purtier-primary opacity-5 rounded-full blur-[100px]"></div>
         </div>
@@ -278,7 +281,7 @@
 
     <section id="technology" class="section-stack bg-white">
         <div class="bg-noise"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
                 
                 <div class="order-2 lg:order-1 relative group">
@@ -526,7 +529,7 @@
         </div>
     </section>
 
-    <footer class="bg-white py-12 border-t border-gray-200 relative z-20">
+    <footer class="bg-white py-12 border-t border-gray-200 relative z-[60]">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-start gap-8">
                 <div class="text-center md:text-left">
@@ -552,7 +555,31 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
     <script>
-        // Toggle Mobile Menu
+        // --- 1. Auto-Hide Header Script ---
+        let lastScroll = 0;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            
+            // Only hide if scrolled more than 100px
+            if (currentScroll > 100) {
+                if (currentScroll > lastScroll) {
+                    // Scrolling Down -> Hide
+                    navbar.classList.add('nav-hidden');
+                } else {
+                    // Scrolling Up -> Show
+                    navbar.classList.remove('nav-hidden');
+                }
+            } else {
+                // At the top -> Show
+                navbar.classList.remove('nav-hidden');
+            }
+            lastScroll = currentScroll;
+        });
+
+
+        // --- 2. Mobile Menu Toggle ---
         const menuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         const icon = menuBtn.querySelector('i');
@@ -575,7 +602,7 @@
 
         menuBtn.addEventListener('click', toggleMenu);
 
-        // GSAP Setup
+        // --- 3. Animations ---
         gsap.registerPlugin(ScrollTrigger);
 
         // Hero Content Animation
@@ -596,19 +623,6 @@
             delay: 0.7
         });
 
-        // Ingredients Grid Animation (Updated for Grid)
-        gsap.from("#ingredients .grid-card", {
-            scrollTrigger: {
-                trigger: "#ingredients",
-                start: "top 60%"
-            },
-            y: 50,
-            opacity: 0,
-            duration: 0.6,
-            stagger: 0.1,
-            ease: "power2.out"
-        });
-
         // Benefits Animation
         gsap.from("#benefits .group", {
             scrollTrigger: {
@@ -621,6 +635,9 @@
             stagger: 0.2,
             ease: "power2.out"
         });
+        
+        // Note: I removed the GSAP animation for Ingredients cards to strictly fix the blank issue.
+        // They will now be visible by default via standard CSS.
 
     </script>
 </body>
