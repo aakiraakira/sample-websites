@@ -50,30 +50,36 @@
             overflow-x: hidden;
         }
 
-        /* --- STACKING CARD LOGIC --- */
+        /* --- STACKING CARD LOGIC (Desktop Only) --- */
+        /* We disable sticky on mobile to allow full content scrolling */
         .stack-card {
-            position: sticky;
-            top: 0;
-            min-height: 100vh; /* Must cover full screen to stack properly */
             width: 100%;
             background-color: #ffffff;
-            box-shadow: 0 -5px 30px rgba(0,0,0,0.08); /* Shadow on top to define the card edge */
-            display: flex;
-            align-items: center;
-            overflow: hidden;
-            /* Border radius top for card look */
-            border-top-left-radius: 24px; 
-            border-top-right-radius: 24px;
-            margin-top: -24px; /* Slight overlap for seamless feel */
-            padding-top: 80px; /* Offset for navbar */
+            position: relative; /* Default for mobile */
+            z-index: 10;
         }
-        
-        /* Z-Index Hierarchy ensures correct stacking order */
-        #hero { z-index: 10; margin-top: 0; border-radius: 0; }
-        #technology { z-index: 20; }
-        #ingredients { z-index: 30; }
-        #benefits { z-index: 40; }
-        #contact { z-index: 50; }
+
+        @media (min-width: 1024px) {
+            .stack-card {
+                position: sticky;
+                top: 0;
+                min-height: 100vh;
+                box-shadow: 0 -5px 30px rgba(0,0,0,0.08);
+                display: flex;
+                align-items: center;
+                border-top-left-radius: 24px; 
+                border-top-right-radius: 24px;
+                margin-top: -24px;
+                padding-top: 80px; 
+            }
+            
+            /* Specific Z-Indices for Desktop Stacking */
+            #hero { z-index: 10; margin-top: 0; border-radius: 0; }
+            #technology { z-index: 20; }
+            #ingredients { z-index: 30; }
+            #benefits { z-index: 40; }
+            #contact { z-index: 50; }
+        }
 
         /* Navbar Transition */
         #navbar {
@@ -270,7 +276,7 @@
             <div class="absolute bottom-[10%] -left-[10%] w-[60vw] h-[60vw] bg-purtier-primary opacity-5 rounded-full blur-[100px]"></div>
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full py-16 lg:py-12">
             <div class="flex flex-col md:flex-row items-center justify-between gap-12 md:gap-8">
                 
                 <div class="w-full md:w-1/2 text-center md:text-left hero-text-content order-2 md:order-1">
@@ -332,7 +338,7 @@
 
     <section id="technology" class="stack-card">
         <div class="bg-noise"></div>
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-20 w-full">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-20 items-center">
                 
                 <div class="order-2 lg:order-1 relative group">
@@ -392,7 +398,7 @@
     </section>
 
     <section id="ingredients" class="stack-card bg-gray-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 w-full flex flex-col justify-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-20 w-full flex flex-col justify-center">
             
             <div class="flex justify-between items-end mb-12">
                 <div>
@@ -485,11 +491,11 @@
                  alt="Riway Event Background">
         </div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-20 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-12 lg:py-20 w-full">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
                 <div>
                     <span class="text-purtier-primary text-xs font-bold tracking-[0.2em] uppercase mb-4 block">The Result</span>
-                    <h2 class="font-serif text-4xl md:text-6xl font-medium mb-12 text-gray-900 leading-tight">
+                    <h2 class="font-serif text-4xl md:text-6xl font-medium mb-8 lg:mb-12 text-gray-900 leading-tight">
                         Total Body <span class="text-purtier-primary italic">Rejuvenation</span>
                     </h2>
                     
@@ -526,7 +532,7 @@
                     </div>
                 </div>
 
-                <div class="flex justify-center lg:justify-end">
+                <div class="flex justify-center lg:justify-end mt-4 lg:mt-0">
                     <div class="relative">
                          <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-gradient-to-tr from-purtier-primary to-transparent opacity-10 rounded-full blur-[60px]"></div>
                         <img src="https://static.wixstatic.com/media/de7f19_1b22652ff1684919acfd2312130790c4~mv2.png/v1/fill/w_402,h_798,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/230524~RiwayDay12943_h800px-min.png" 
@@ -542,7 +548,7 @@
         <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10 mix-blend-overlay pointer-events-none"></div>
         <div class="absolute inset-0 bg-gradient-to-r from-[#5a1a24] to-transparent pointer-events-none"></div>
 
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-20 w-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 py-16 lg:py-20 w-full">
             <div class="flex flex-col lg:flex-row items-center justify-between gap-12">
                 <div class="lg:w-1/2 text-center lg:text-left">
                     <h2 class="font-serif text-4xl md:text-6xl font-medium text-white mb-6">
