@@ -43,6 +43,9 @@
             -webkit-font-smoothing: antialiased;
         }
 
+        /* Global link reset to prevent underlines */
+        a { text-decoration: none !important; color: inherit; }
+
         /* Cinematic Grain Overlay */
         body::before {
             content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -64,7 +67,7 @@
 
         .container { max-width: 1150px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
 
-        /* --- BUTTONS (Fixed: Default Gold Circle) --- */
+        /* --- BUTTONS --- */
         .btn-premium {
             display: inline-flex; align-items: center; justify-content: space-between;
             padding: 0.6rem 0.6rem 0.6rem 2rem; 
@@ -75,6 +78,7 @@
             transition: var(--transition-smooth); cursor: pointer;
             backdrop-filter: blur(10px); gap: 1.5rem;
             text-transform: none; 
+            text-decoration: none !important; /* Force removal of underline */
         }
 
         .btn-circle {
@@ -106,10 +110,16 @@
             width: 100%;
             font-weight: 600;
         }
-        .btn-gold .btn-circle { background: #000; color: var(--gold); }
+        
+        /* FIXED: Added specific gold color code so the arrow is visible against black */
+        .btn-gold .btn-circle { 
+            background: #000; 
+            color: #d4af37; 
+        }
+
         .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
 
-        /* --- NAVIGATION (Fixed: No dots, No underlines) --- */
+        /* --- NAVIGATION --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 1rem 0; z-index: 1000;
             background: rgba(3, 3, 3, 0.6); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
@@ -192,15 +202,23 @@
         
         .about-text p { margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 1.05rem; font-weight: 300; }
 
-        /* --- COLLECTION --- */
+        /* --- COLLECTION (Fixed for Mobile Centering) --- */
         .collection { padding: 8rem 0; background: #050505; }
         .collection-header { text-align: center; margin-bottom: 5rem; }
         
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
+        .product-grid { 
+            display: grid; 
+            /* Changed to 280px to fit better on mobile screens */
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 2.5rem; 
+            justify-content: center; /* Centers the grid */
+        }
         
         .product-card {
             background: rgba(255,255,255,0.02); border-radius: var(--radius-card); padding: 3rem 2rem; text-align: center;
             transition: var(--transition-smooth); border: 1px solid rgba(255,255,255,0.05); position: relative;
+            /* Ensure centering */
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
         }
         
         .product-card:hover {
@@ -210,6 +228,7 @@
         .product-card img {
             height: 300px; object-fit: contain; margin-bottom: 2rem; mix-blend-mode: lighten;
             filter: grayscale(40%) opacity(0.9); transition: 0.6s;
+            display: block; margin-left: auto; margin-right: auto;
         }
         .product-card:hover img { filter: grayscale(0%) opacity(1); transform: scale(1.05); }
 
@@ -305,6 +324,21 @@
             .about-grid, .lifestyle { grid-template-columns: 1fr; gap: 4rem; }
             .nav-links { display: none; }
             .contact-form-wrapper { padding: 2rem; margin: 0 1rem; }
+            
+            /* Mobile Polish for Cards */
+            .product-grid { 
+                gap: 2rem; 
+                padding: 0 1rem;
+            }
+            .product-card {
+                padding: 2.5rem 1.5rem;
+                margin: 0 auto; /* Ensure card itself is centered in its column */
+                width: 100%;
+                max-width: 360px; /* Prevent it from getting too wide on tablets */
+            }
+            .product-card img {
+                height: 250px; /* Slightly smaller for mobile */
+            }
         }
     </style>
 </head>
