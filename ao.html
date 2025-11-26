@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>傲 ÀO | Premium Baijiu</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --bg-dark: #050505;
+            --text-primary: #f2f2f5;
+            --text-secondary: #9ca3af;
+            
+            /* Linear Gold Gradient */
+            --gold-gradient: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #B8860B 100%);
+            --gold-text-gradient: linear-gradient(to right, #e3c46e, #fdfbf7, #cfa640);
+            
+            --radius-card: 24px;
+            --radius-pill: 50px;
+            
+            /* Typography Map */
+            --font-heading: 'Playfair Display', serif;
+            --font-body: 'Inter', sans-serif;
+            
+            --transition-smooth: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-primary);
+            font-family: var(--font-body);
+            overflow-x: hidden;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Cinematic Noise Texture */
+        body::before {
+            content: "";
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 9999;
+        }
+
+        /* --- TYPOGRAPHY POLISH --- */
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.02em; }
+        .italic-accent { font-family: var(--font-heading); font-style: italic; font-weight: 400; color: #d4af37; }
+        
+        /* Gradient Text Utility */
+        .text-gradient {
+            background: var(--gold-text-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 1rem 2.5rem;
+            border-radius: var(--radius-pill);
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #fff; font-weight: 500; font-size: 0.9rem;
+            transition: var(--transition-smooth); cursor: pointer;
+            backdrop-filter: blur(10px);
+            position: relative; overflow: hidden;
+        }
+        
+        .btn::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: var(--gold-gradient); opacity: 0; transition: 0.5s; z-index: -1;
+        }
+
+        .btn:hover { border-color: transparent; transform: scale(1.02); color: #000; }
+        .btn:hover::before { opacity: 1; }
+
+        /* --- NAVIGATION (Polished) --- */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 1rem 0; z-index: 1000;
+            background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .nav-inner { display: flex; justify-content: space-between; align-items: center; }
+        
+        .logo img { height: 50px; width: auto; transition: 0.3s; }
+        
+        .nav-links { display: flex; gap: 3rem; }
+        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.5px; }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+
+        /* --- HERO --- */
+        .hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://images.unsplash.com/photo-1516669560411-e67c824c6579?q=80&w=2574&auto=format&fit=crop') no-repeat center center/cover;
+            /* Update: Not completely black, just muted */
+            filter: grayscale(80%) brightness(0.4); 
+            z-index: -2; transform: scale(1.1);
+        }
+        .hero-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(5,5,5,1) 100%); z-index: -1;
+        }
+        
+        .hero-content { z-index: 2; display: flex; flex-direction: column; align-items: center; }
+        .hero-bottle {
+            height: 58vh; margin: 1.5rem 0;
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8));
+        }
+
+        .hero h1 { font-size: 5rem; margin-bottom: 0px; }
+        .hero-tagline { font-family: var(--font-heading); font-style: italic; color: var(--text-secondary); margin-top: 1rem; letter-spacing: 1px;}
+
+        /* --- ABOUT --- */
+        .about { padding: 9rem 0; background: var(--bg-dark); }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        
+        /* Updated Image Filter Logic */
+        .hover-color-img {
+            width: 100%; height: 500px; object-fit: cover; border-radius: var(--radius-card);
+            /* Starts muted with some color, not B&W */
+            filter: grayscale(60%) contrast(1.05) brightness(0.8);
+            transition: 0.8s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+        .hover-color-img:hover {
+            /* Blooms into full color */
+            filter: grayscale(0%) contrast(1.1) brightness(1.0);
+            transform: scale(1.02);
+        }
+
+        .section-label {
+            font-size: 0.7rem; font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 1rem;
+            background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .section-title { font-size: 3rem; line-height: 1.1; margin-bottom: 2rem; position: relative; padding-bottom: 2rem; }
+        /* Decorative gold line under headers */
+        .section-title::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px;
+            background: var(--gold-gradient); border-radius: 2px;
+        }
+        .center-title::after { left: 50%; transform: translateX(-50%); }
+        
+        .about-text p { margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 1.05rem; }
+
+        /* --- COLLECTION --- */
+        .collection { padding: 8rem 0; background: #080808; }
+        .collection-header { text-align: center; margin-bottom: 5rem; display: flex; flex-direction: column; align-items: center; }
+        
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        
+        .product-card {
+            background: #111; border-radius: var(--radius-card); padding: 3rem 2rem; text-align: center;
+            transition: var(--transition-smooth); border: 1px solid rgba(255,255,255,0.05); position: relative;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px); background: #151515; border-color: rgba(212, 175, 55, 0.3);
+        }
+        
+        .product-card img {
+            height: 280px; object-fit: contain; margin-bottom: 2rem; mix-blend-mode: lighten;
+            filter: grayscale(40%) opacity(0.9); transition: 0.6s;
+        }
+        .product-card:hover img { filter: grayscale(0%) opacity(1); transform: scale(1.05); }
+
+        .product-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff; }
+        .product-card .specs {
+            display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
+            padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid #333; color: #888; margin-bottom: 1.5rem;
+        }
+
+        /* --- REVIEWS (Enhanced) --- */
+        .reviews-section { padding: 7rem 0; background: var(--bg-dark); overflow: hidden; position: relative; }
+        
+        /* Gradient Fades for Marquee */
+        .reviews-section::before, .reviews-section::after {
+            content: ""; position: absolute; top: 0; width: 200px; height: 100%; z-index: 2; pointer-events: none;
+        }
+        .reviews-section::before { left: 0; background: linear-gradient(to right, var(--bg-dark), transparent); }
+        .reviews-section::after { right: 0; background: linear-gradient(to left, var(--bg-dark), transparent); }
+
+        /* Review Counter Summary */
+        .review-summary {
+            text-align: center; margin-bottom: 4rem; position: relative; z-index: 3;
+        }
+        .summary-score { font-family: var(--font-heading); font-size: 3rem; font-weight: 700; line-height: 1; margin-bottom: 0.5rem; }
+        .summary-stars { color: #d4af37; margin-bottom: 0.5rem; letter-spacing: 2px; }
+        .summary-text { color: var(--text-secondary); font-size: 0.9rem; }
+
+        .marquee-wrapper { display: flex; width: fit-content; animation: scroll 50s linear infinite; }
+        .marquee-wrapper:hover { animation-play-state: paused; }
+
+        .review-card {
+            width: 420px; padding: 2.5rem; margin: 0 1rem;
+            background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-card); flex-shrink: 0; backdrop-filter: blur(10px);
+        }
+
+        .star-rating { color: #d4af37; font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
+        
+        .review-text {
+            font-family: var(--font-heading); font-style: italic; font-size: 1.1rem; color: #e5e5e5; margin-bottom: 1.5rem; line-height: 1.6;
+        }
+        
+        .reviewer-details h5 { font-size: 0.95rem; color: #fff; font-weight: 600; margin-bottom: 2px; font-family: var(--font-body); }
+        .reviewer-details span { font-size: 0.8rem; color: #666; font-family: var(--font-body); }
+
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- LIFESTYLE --- */
+        .lifestyle { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1rem; background: #000; }
+        .ls-item { height: 500px; position: relative; overflow: hidden; border-radius: var(--radius-card); }
+        .ls-item img {
+            width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease;
+            filter: grayscale(40%) brightness(0.7); /* Muted start */
+        }
+        .ls-item:hover img { transform: scale(1.05); filter: grayscale(0%) brightness(1); } /* Vivid hover */
+
+        .ls-content {
+            position: absolute; bottom: 0; left: 0; padding: 3rem; width: 100%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        }
+
+        /* --- CONTACT --- */
+        .contact-section {
+            padding: 8rem 0; position: relative; display: flex; align-items: center; justify-content: center;
+            background: url('https://images.unsplash.com/photo-1497215728101-856f4ea42174?q=80&w=2670&auto=format&fit=crop') no-repeat center center/cover;
+        }
+        .contact-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); }
+        
+        .contact-form-wrapper {
+            position: relative; z-index: 2; background: rgba(20,20,20,0.6); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-card); padding: 4rem; text-align: center;
+            max-width: 550px; width: 100%; box-shadow: 0 40px 80px rgba(0,0,0,0.6);
+        }
+
+        .form-input {
+            width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px; padding: 1rem; color: #fff; font-family: var(--font-body); margin-bottom: 1.5rem;
+            transition: 0.3s;
+        }
+        .form-input:focus { outline: none; border-color: #d4af37; background: rgba(255,255,255,0.08); }
+
+        /* --- FOOTER --- */
+        footer { background: #000; padding: 5rem 0 3rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
+        .footer-logo img { height: 60px; margin-bottom: 2rem; opacity: 0.8; }
+        
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 3.5rem; }
+            .hero-bottle { height: 45vh; }
+            .about-grid, .lifestyle { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .contact-form-wrapper { padding: 2rem; margin: 0 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container nav-inner">
+            <div class="logo">
+                <img src="https://renobrosinterior.com/wp-content/uploads/2025/11/reputifly-v1-1.png" alt="AO Logo">
+            </div>
+            <ul class="nav-links">
+                <li><a href="#about">Heritage</a></li>
+                <li><a href="#collection">Collection</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#contact">Private Access</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <img src="http://kishord40.sg-host.com/wp-content/uploads/2025/11/c94aa71f-1e7d-4d3c-a12a-baa97e11a4e9.jpeg" alt="AO Baijiu Bottle" class="hero-bottle reveal">
+            
+            <h1 class="text-gradient reveal">傲 · ÀO</h1>
+            <p class="reveal hero-tagline">Crafted with Honour. Raised with Pride.</p>
+            
+            <a href="#collection" class="btn reveal" style="margin-top: 3rem; transition-delay: 0.2s;">Discover the Spirit</a>
+        </div>
+    </section>
+
+    <section class="about" id="about">
+        <div class="container about-grid">
+            <div class="about-text reveal">
+                <span class="section-label">THE ORIGIN</span>
+                <h2 class="section-title">A Legacy <br> <span class="italic-accent">Reborn.</span></h2>
+                <p>
+                    Inspired by the resilience of the Scottish Highlands but rooted in the ancient traditions of the East, 傲 ÀO represents the new era of Baijiu. 
+                </p>
+                <p>
+                    For centuries, Baijiu has been the spirit of celebration. We have refined it through a lens of modern luxury, creating a liquid that is complex, floral, and undeniably bold. It is not just a drink; it is a statement of pride.
+                </p>
+                <div style="margin-top: 2rem; display: flex; gap: 2rem;">
+                    <div>
+                        <h4 style="font-size: 1.5rem; color: #fff;">1890</h4>
+                        <span style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Est. Heritage</span>
+                    </div>
+                    <div>
+                        <h4 style="font-size: 1.5rem; color: #fff;">52%</h4>
+                        <span style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Vol. Strength</span>
+                    </div>
+                </div>
+            </div>
+            <div class="reveal" style="transition-delay: 0.2s;">
+                <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?q=80&w=2670&auto=format&fit=crop" alt="Heritage Wood" class="hover-color-img">
+            </div>
+        </div>
+    </section>
+
+    <section class="collection" id="collection">
+        <div class="container">
+            <div class="collection-header reveal">
+                <h2 class="section-title center-title">The Collection</h2>
+                <p style="color: var(--text-secondary); max-width: 500px;">Rare expressions of mastery, distilled for the discerning palate.</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card reveal">
+                    <img src="http://kishord40.sg-host.com/wp-content/uploads/2025/11/c94aa71f-1e7d-4d3c-a12a-baa97e11a4e9.jpeg" alt="AO Signature">
+                    <div class="specs">52% VOL | 500ML</div>
+                    <h3>傲 ÀO Signature</h3>
+                    <p style="color: #777; font-size: 0.9rem; line-height: 1.6; margin-top: 1rem;">Strong Aroma. Complex notes of pineapple, star anise, and aged leather.</p>
+                </div>
+                <div class="product-card reveal" style="transition-delay: 0.2s;">
+                    <img src="http://kishord40.sg-host.com/wp-content/uploads/2025/11/c94aa71f-1e7d-4d3c-a12a-baa97e11a4e9.jpeg" alt="AO Reserve">
+                    <div class="specs">Limited Edition</div>
+                    <h3>傲 ÀO Reserve</h3>
+                    <p style="color: #777; font-size: 0.9rem; line-height: 1.6; margin-top: 1rem;">Aged in clay jars for 10 years. Exceptionally smooth with a umami finish.</p>
+                </div>
+                <div class="product-card reveal" style="transition-delay: 0.4s;">
+                    <img src="http://kishord40.sg-host.com/wp-content/uploads/2025/11/c94aa71f-1e7d-4d3c-a12a-baa97e11a4e9.jpeg" alt="AO Jade">
+                    <div class="specs">Light Aroma</div>
+                    <h3>傲 ÀO Jade</h3>
+                    <p style="color: #777; font-size: 0.9rem; line-height: 1.6; margin-top: 1rem;">Clean, crisp, with a delicate floral bouquet. Perfect for high-end cocktails.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-section" id="reviews">
+        <div class="container">
+            <div class="review-summary reveal">
+                <div class="summary-score text-gradient">4.9/5</div>
+                <div class="summary-stars">★★★★★</div>
+                <p class="summary-text">Rated Excellent by 340+ Private Collectors in Singapore</p>
+            </div>
+
+            <div class="marquee-wrapper">
+                <div class="review-card">
+                    <div class="star-rating">★★★★★</div>
+                    <p class="review-text">"Finally, a Baijiu that bridges the gap between tradition and the modern Singaporean palate. Exceptionally smooth."</p>
+                    <div class="reviewer-details">
+                        <h5>Tan Wei Ming</h5>
+                        <span>Private Client, Sentosa Cove</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="star-rating">★★★★★</div>
+                    <p class="review-text">"A staple at our executive dinners at Marina Bay Sands. It commands the room just like a fine scotch."</p>
+                    <div class="reviewer-details">
+                        <h5>Sarah Lim</h5>
+                        <span>Sommelier, Atlas Bar</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="star-rating">★★★★★</div>
+                    <p class="review-text">"The packaging is stunning. I gifted the Reserve edition for Chinese New Year and it was the talk of the evening."</p>
+                    <div class="reviewer-details">
+                        <h5>Jason Koh</h5>
+                        <span>Director, Fintech SG</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="star-rating">★★★★★</div>
+                    <p class="review-text">"Intense, aromatic, yet surprisingly delicate. A masterpiece of distillation."</p>
+                    <div class="reviewer-details">
+                        <h5>Emily Chen</h5>
+                        <span>Lifestyle Editor, Tatler Asia</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="star-rating">★★★★★</div>
+                    <p class="review-text">"Finally, a Baijiu that bridges the gap between tradition and the modern Singaporean palate. Exceptionally smooth."</p>
+                    <div class="reviewer-details">
+                        <h5>Tan Wei Ming</h5>
+                        <span>Private Client, Sentosa Cove</span>
+                    </div>
+                </div>
+                <div class="review-card">
+                    <div class="star-rating">★★★★★</div>
+                    <p class="review-text">"A staple at our executive dinners at Marina Bay Sands. It commands the room just like a fine scotch."</p>
+                    <div class="reviewer-details">
+                        <h5>Sarah Lim</h5>
+                        <span>Sommelier, Atlas Bar</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="lifestyle">
+        <div class="ls-item">
+            <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?q=80&w=2574&auto=format&fit=crop" alt="Bar Setting">
+            <div class="ls-content">
+                <h3 style="font-size: 2rem;">Experience the Night</h3>
+            </div>
+        </div>
+        <div class="ls-item">
+            <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=2574&auto=format&fit=crop" alt="Glass Pour">
+            <div class="ls-content">
+                <h3 style="font-size: 2rem;">Savor the Moment</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-section" id="contact">
+        <div class="contact-overlay"></div>
+        <div class="contact-form-wrapper reveal">
+            <h2 class="section-title center-title" style="font-size: 2.2rem; margin-bottom: 0.5rem;">Private Enquiries</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 2.5rem; font-size: 0.95rem;">For distributors, events, or private collection purchases.</p>
+            
+            <form>
+                <input type="text" class="form-input" placeholder="Full Name">
+                <input type="email" class="form-input" placeholder="Email Address">
+                <input type="text" class="form-input" placeholder="Interest (e.g., Distribution)">
+                
+                <button type="submit" class="btn" style="width: 100%;">Request Access</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-logo">
+                <img src="https://renobrosinterior.com/wp-content/uploads/2025/11/reputifly-v1-1.png" alt="AO Logo">
+            </div>
+            
+            <div style="color: #555; font-size: 0.8rem; margin-top: 2rem;">
+                <p>123 Heritage Lane, Singapore 069123</p>
+                <p style="margin-top: 0.5rem;">contact@aobaijiu.com</p>
+                <div style="margin-top: 2rem; opacity: 0.6;">
+                    &copy; 2025 傲 ÀO BAIJIU. Please Drink Responsibly.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealCallback = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('active');
+            });
+        };
+        const revealObserver = new IntersectionObserver(revealCallback, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Parallax
+        window.addEventListener('scroll', () => {
+            const bottle = document.querySelector('.hero-bottle');
+            const bg = document.querySelector('.hero-bg');
+            const scrollValue = window.scrollY;
+            
+            if(bottle) bottle.style.transform = `translateY(${scrollValue * 0.12}px)`;
+            if(bg) bg.style.transform = `scale(1.1) translateY(${scrollValue * 0.05}px)`;
+        });
+    </script>
+</body>
+</html>
