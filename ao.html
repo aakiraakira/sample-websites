@@ -3,234 +3,272 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>傲 ÀO | Premium Baijiu</title>
+    <title>傲 ÀO | The Pinnacle of Baijiu</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 
     <style>
         /* --- VARIABLES & RESET --- */
         :root {
-            --bg-dark: #050505;
-            --text-primary: #f2f2f5;
+            --bg-dark: #030303;
+            --text-primary: #ffffff;
             --text-secondary: #9ca3af;
+            --text-highlight: #ffffff;
             
-            /* Linear Gold Gradient */
-            --gold-gradient: linear-gradient(135deg, #F3E5AB 0%, #D4AF37 50%, #B8860B 100%);
-            --gold-text-gradient: linear-gradient(to right, #e3c46e, #fdfbf7, #cfa640);
+            /* Gold Gradients */
+            --gold-gradient: linear-gradient(135deg, #F0E1A6 0%, #D4AF37 50%, #B8860B 100%);
+            --gold-hover: linear-gradient(135deg, #fff3c4 0%, #eec23b 50%, #d4a017 100%);
+            --gold-text-gradient: linear-gradient(to right, #ebd197, #fdfbf7, #cfa640);
             
             --radius-card: 24px;
-            --radius-pill: 50px;
+            --radius-pill: 100px;
             
-            /* Typography Map */
             --font-heading: 'Playfair Display', serif;
             --font-body: 'Inter', sans-serif;
             
-            --transition-smooth: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            --transition-smooth: 0.5s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
             background-color: var(--bg-dark);
             color: var(--text-primary);
             font-family: var(--font-body);
             overflow-x: hidden;
-            line-height: 1.6;
+            line-height: 1.7;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Cinematic Noise Texture */
+        /* Cinematic Grain Overlay */
         body::before {
-            content: "";
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
+            content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
             pointer-events: none; z-index: 9999;
         }
 
-        /* --- TYPOGRAPHY POLISH --- */
-        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.02em; }
-        .italic-accent { font-family: var(--font-heading); font-style: italic; font-weight: 400; color: #d4af37; }
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3 { font-family: var(--font-heading); font-weight: 700; letter-spacing: -0.01em; }
         
-        /* Gradient Text Utility */
         .text-gradient {
             background: var(--gold-text-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
         }
+        
+        .highlight { color: var(--text-highlight); font-weight: 500; }
 
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; }
+        .container { max-width: 1150px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 2; }
 
-        /* --- BUTTONS --- */
-        .btn {
-            display: inline-flex; align-items: center; justify-content: center;
-            padding: 1rem 2.5rem;
+        /* --- BUTTONS (Fixed: Default Gold Circle) --- */
+        .btn-premium {
+            display: inline-flex; align-items: center; justify-content: space-between;
+            padding: 0.6rem 0.6rem 0.6rem 2rem; 
             border-radius: var(--radius-pill);
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            color: #fff; font-weight: 500; font-size: 0.9rem;
+            background: rgba(255,255,255,0.05); /* Dark Glass Background */
+            border: 1px solid rgba(255,255,255,0.15);
+            color: #fff; font-weight: 500; font-size: 0.95rem;
             transition: var(--transition-smooth); cursor: pointer;
-            backdrop-filter: blur(10px);
-            position: relative; overflow: hidden;
+            backdrop-filter: blur(10px); gap: 1.5rem;
+            text-transform: none; 
+        }
+
+        .btn-circle {
+            width: 42px; height: 42px;
+            /* GOLD BY DEFAULT */
+            background: var(--gold-gradient); 
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: #000; /* Black arrow for contrast */
+            transition: var(--transition-smooth);
+        }
+
+        .btn-premium:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.3);
         }
         
-        .btn::before {
-            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--gold-gradient); opacity: 0; transition: 0.5s; z-index: -1;
+        .btn-premium:hover .btn-circle {
+            background: var(--gold-hover); /* Lighter gold on hover */
+            transform: rotate(-45deg);
         }
+        
+        /* Gold CTA Button (Form specific) */
+        .btn-gold {
+            background: var(--gold-gradient);
+            border: none;
+            color: #000;
+            padding: 0.8rem 0.8rem 0.8rem 2rem;
+            width: 100%;
+            font-weight: 600;
+        }
+        .btn-gold .btn-circle { background: #000; color: var(--gold); }
+        .btn-gold:hover { background: var(--gold-hover); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3); }
 
-        .btn:hover { border-color: transparent; transform: scale(1.02); color: #000; }
-        .btn:hover::before { opacity: 1; }
-
-        /* --- NAVIGATION (Polished) --- */
+        /* --- NAVIGATION (Fixed: No dots, No underlines) --- */
         nav {
             position: fixed; top: 0; width: 100%; padding: 1rem 0; z-index: 1000;
-            background: rgba(5, 5, 5, 0.7); backdrop-filter: blur(24px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            background: rgba(3, 3, 3, 0.6); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
         }
         .nav-inner { display: flex; justify-content: space-between; align-items: center; }
         
-        .logo img { height: 50px; width: auto; transition: 0.3s; }
+        .logo img { height: 48px; width: auto; }
         
-        .nav-links { display: flex; gap: 3rem; }
-        .nav-links a { font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); letter-spacing: 0.5px; }
-        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.3); }
+        /* Force list-style none to remove dots */
+        .nav-links { 
+            display: flex; gap: 3rem; 
+            list-style: none !important; 
+            margin: 0; padding: 0; 
+        }
+        
+        .nav-links li {
+            list-style-type: none !important;
+        }
+
+        .nav-links a { 
+            font-size: 0.85rem; font-weight: 500; color: var(--text-secondary); 
+            letter-spacing: 0.5px; position: relative; 
+            text-decoration: none !important; /* No underline */
+        }
+        
+        .nav-links a:hover { color: #fff; }
+
+        /* --- ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.2, 0.8, 0.2, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         /* --- HERO --- */
-        .hero { height: 100vh; position: relative; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden; }
+        .hero {
+            min-height: 100vh; 
+            padding-top: 100px;
+            position: relative; display: flex; align-items: center; justify-content: center; text-align: center; overflow: hidden;
+        }
         .hero-bg {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
             background: url('https://images.unsplash.com/photo-1516669560411-e67c824c6579?q=80&w=2574&auto=format&fit=crop') no-repeat center center/cover;
-            /* Update: Not completely black, just muted */
-            filter: grayscale(80%) brightness(0.4); 
-            z-index: -2; transform: scale(1.1);
+            filter: grayscale(80%) brightness(0.4); z-index: -2; transform: scale(1.1);
         }
         .hero-overlay {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, rgba(0,0,0,0.1) 0%, rgba(5,5,5,1) 100%); z-index: -1;
+            background: radial-gradient(circle at center, rgba(3,3,3,0.2) 0%, rgba(3,3,3,1) 85%); z-index: -1;
         }
         
-        .hero-content { z-index: 2; display: flex; flex-direction: column; align-items: center; }
+        .hero-content { z-index: 2; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        
         .hero-bottle {
-            height: 58vh; margin: 1.5rem 0;
-            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            filter: drop-shadow(0 30px 60px rgba(0,0,0,0.8));
+            height: 55vh; 
+            max-height: 600px;
+            margin: 1rem 0;
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            filter: drop-shadow(0 40px 80px rgba(0,0,0,0.9));
         }
 
-        .hero h1 { font-size: 5rem; margin-bottom: 0px; }
-        .hero-tagline { font-family: var(--font-heading); font-style: italic; color: var(--text-secondary); margin-top: 1rem; letter-spacing: 1px;}
+        .hero h1 { font-size: 5rem; margin-bottom: 0px; line-height: 1; padding-bottom: 10px; }
+        .hero-tagline { font-family: var(--font-heading); font-style: italic; color: var(--text-secondary); margin-top: 0.5rem; letter-spacing: 1.5px; font-size: 1.1rem; }
 
         /* --- ABOUT --- */
         .about { padding: 9rem 0; background: var(--bg-dark); }
-        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 7rem; align-items: center; }
         
-        /* Updated Image Filter Logic */
         .hover-color-img {
-            width: 100%; height: 500px; object-fit: cover; border-radius: var(--radius-card);
-            /* Starts muted with some color, not B&W */
-            filter: grayscale(60%) contrast(1.05) brightness(0.8);
+            width: 100%; height: 550px; object-fit: cover; border-radius: var(--radius-card);
+            filter: grayscale(80%) contrast(1.1) brightness(0.9);
             transition: 0.8s ease;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
         }
-        .hover-color-img:hover {
-            /* Blooms into full color */
-            filter: grayscale(0%) contrast(1.1) brightness(1.0);
-            transform: scale(1.02);
-        }
+        .hover-color-img:hover { filter: grayscale(0%) contrast(1.05) brightness(1.0); transform: scale(1.01); }
 
         .section-label {
-            font-size: 0.7rem; font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 1rem;
+            font-size: 0.75rem; font-weight: 700; color: #d4af37; text-transform: uppercase; letter-spacing: 3px; display: block; margin-bottom: 1.2rem;
             background: var(--gold-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
         }
-        .section-title { font-size: 3rem; line-height: 1.1; margin-bottom: 2rem; position: relative; padding-bottom: 2rem; }
-        /* Decorative gold line under headers */
-        .section-title::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 60px; height: 3px;
-            background: var(--gold-gradient); border-radius: 2px;
-        }
-        .center-title::after { left: 50%; transform: translateX(-50%); }
+        .section-title { font-size: 3.2rem; line-height: 1.15; margin-bottom: 2rem; position: relative; }
         
-        .about-text p { margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 1.05rem; }
+        .about-text p { margin-bottom: 1.5rem; color: var(--text-secondary); font-size: 1.05rem; font-weight: 300; }
 
         /* --- COLLECTION --- */
-        .collection { padding: 8rem 0; background: #080808; }
-        .collection-header { text-align: center; margin-bottom: 5rem; display: flex; flex-direction: column; align-items: center; }
+        .collection { padding: 8rem 0; background: #050505; }
+        .collection-header { text-align: center; margin-bottom: 5rem; }
         
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
         
         .product-card {
-            background: #111; border-radius: var(--radius-card); padding: 3rem 2rem; text-align: center;
+            background: rgba(255,255,255,0.02); border-radius: var(--radius-card); padding: 3rem 2rem; text-align: center;
             transition: var(--transition-smooth); border: 1px solid rgba(255,255,255,0.05); position: relative;
         }
         
         .product-card:hover {
-            transform: translateY(-10px); background: #151515; border-color: rgba(212, 175, 55, 0.3);
+            transform: translateY(-10px); background: rgba(255,255,255,0.04); border-color: rgba(212, 175, 55, 0.4);
         }
         
         .product-card img {
-            height: 280px; object-fit: contain; margin-bottom: 2rem; mix-blend-mode: lighten;
+            height: 300px; object-fit: contain; margin-bottom: 2rem; mix-blend-mode: lighten;
             filter: grayscale(40%) opacity(0.9); transition: 0.6s;
         }
         .product-card:hover img { filter: grayscale(0%) opacity(1); transform: scale(1.05); }
 
-        .product-card h3 { font-size: 1.5rem; margin-bottom: 0.5rem; color: #fff; }
+        .product-card h3 { font-size: 1.6rem; margin-bottom: 0.5rem; color: #fff; }
         .product-card .specs {
             display: inline-block; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px;
-            padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid #333; color: #888; margin-bottom: 1.5rem;
+            padding: 0.4rem 1rem; border-radius: 20px; border: 1px solid rgba(255,255,255,0.1); color: #888; margin-bottom: 1.5rem;
         }
 
-        /* --- REVIEWS (Enhanced) --- */
+        /* --- REVIEWS --- */
         .reviews-section { padding: 7rem 0; background: var(--bg-dark); overflow: hidden; position: relative; }
-        
-        /* Gradient Fades for Marquee */
         .reviews-section::before, .reviews-section::after {
             content: ""; position: absolute; top: 0; width: 200px; height: 100%; z-index: 2; pointer-events: none;
         }
         .reviews-section::before { left: 0; background: linear-gradient(to right, var(--bg-dark), transparent); }
         .reviews-section::after { right: 0; background: linear-gradient(to left, var(--bg-dark), transparent); }
 
-        /* Review Counter Summary */
-        .review-summary {
-            text-align: center; margin-bottom: 4rem; position: relative; z-index: 3;
-        }
+        .review-summary { text-align: center; margin-bottom: 4rem; position: relative; z-index: 3; }
         .summary-score { font-family: var(--font-heading); font-size: 3rem; font-weight: 700; line-height: 1; margin-bottom: 0.5rem; }
         .summary-stars { color: #d4af37; margin-bottom: 0.5rem; letter-spacing: 2px; }
-        .summary-text { color: var(--text-secondary); font-size: 0.9rem; }
 
-        .marquee-wrapper { display: flex; width: fit-content; animation: scroll 50s linear infinite; }
-        .marquee-wrapper:hover { animation-play-state: paused; }
-
+        .marquee-wrapper { display: flex; width: fit-content; animation: scroll 60s linear infinite; }
         .review-card {
             width: 420px; padding: 2.5rem; margin: 0 1rem;
             background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08);
             border-radius: var(--radius-card); flex-shrink: 0; backdrop-filter: blur(10px);
         }
-
-        .star-rating { color: #d4af37; font-size: 0.9rem; margin-bottom: 1rem; letter-spacing: 2px; }
-        
-        .review-text {
-            font-family: var(--font-heading); font-style: italic; font-size: 1.1rem; color: #e5e5e5; margin-bottom: 1.5rem; line-height: 1.6;
-        }
-        
-        .reviewer-details h5 { font-size: 0.95rem; color: #fff; font-weight: 600; margin-bottom: 2px; font-family: var(--font-body); }
-        .reviewer-details span { font-size: 0.8rem; color: #666; font-family: var(--font-body); }
-
+        .review-text { font-family: var(--font-heading); font-style: italic; font-size: 1.1rem; color: #e5e5e5; margin-bottom: 1.5rem; line-height: 1.6; }
         @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* --- LIFESTYLE --- */
+        /* --- FAQ --- */
+        .faq-section { padding: 8rem 0; background: #080808; border-top: 1px solid rgba(255,255,255,0.05); }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 1rem; padding-bottom: 1rem; }
+        .faq-question {
+            display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding: 1.5rem 0;
+            font-size: 1.2rem; font-family: var(--font-heading); color: #fff; transition: 0.3s;
+        }
+        .faq-question:hover { color: #d4af37; }
+        .faq-icon { width: 24px; height: 24px; position: relative; transition: 0.4s ease; }
+        .faq-icon::before, .faq-icon::after { content: ''; position: absolute; background: #d4af37; top: 50%; left: 50%; transform: translate(-50%, -50%); }
+        .faq-icon::before { width: 100%; height: 2px; }
+        .faq-icon::after { width: 2px; height: 100%; transition: 0.4s ease; }
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+            color: var(--text-secondary); font-size: 1rem; line-height: 1.7; padding-right: 2rem;
+        }
+        .faq-item.active .faq-answer { max-height: 200px; padding-bottom: 1rem; }
+        .faq-item.active .faq-icon::after { transform: translate(-50%, -50%) rotate(90deg); opacity: 0; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+
+        /* --- LIFESTYLE (Restored) --- */
         .lifestyle { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; padding: 1rem; background: #000; }
         .ls-item { height: 500px; position: relative; overflow: hidden; border-radius: var(--radius-card); }
         .ls-item img {
             width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease;
-            filter: grayscale(40%) brightness(0.7); /* Muted start */
+            filter: grayscale(40%) brightness(0.7);
         }
-        .ls-item:hover img { transform: scale(1.05); filter: grayscale(0%) brightness(1); } /* Vivid hover */
-
+        .ls-item:hover img { transform: scale(1.05); filter: grayscale(0%) brightness(1); }
         .ls-content {
             position: absolute; bottom: 0; left: 0; padding: 3rem; width: 100%;
             background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
@@ -244,14 +282,14 @@
         .contact-overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(8px); }
         
         .contact-form-wrapper {
-            position: relative; z-index: 2; background: rgba(20,20,20,0.6); backdrop-filter: blur(20px);
+            position: relative; z-index: 2; background: rgba(20,20,20,0.7); backdrop-filter: blur(25px);
             border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius-card); padding: 4rem; text-align: center;
             max-width: 550px; width: 100%; box-shadow: 0 40px 80px rgba(0,0,0,0.6);
         }
 
         .form-input {
             width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px; padding: 1rem; color: #fff; font-family: var(--font-body); margin-bottom: 1.5rem;
+            border-radius: 12px; padding: 1.1rem; color: #fff; font-family: var(--font-body); margin-bottom: 1.5rem;
             transition: 0.3s;
         }
         .form-input:focus { outline: none; border-color: #d4af37; background: rgba(255,255,255,0.08); }
@@ -259,12 +297,12 @@
         /* --- FOOTER --- */
         footer { background: #000; padding: 5rem 0 3rem; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); }
         .footer-logo img { height: 60px; margin-bottom: 2rem; opacity: 0.8; }
-        
+
         /* --- RESPONSIVE --- */
         @media (max-width: 768px) {
             .hero h1 { font-size: 3.5rem; }
             .hero-bottle { height: 45vh; }
-            .about-grid, .lifestyle { grid-template-columns: 1fr; }
+            .about-grid, .lifestyle { grid-template-columns: 1fr; gap: 4rem; }
             .nav-links { display: none; }
             .contact-form-wrapper { padding: 2rem; margin: 0 1rem; }
         }
@@ -281,6 +319,7 @@
                 <li><a href="#about">Heritage</a></li>
                 <li><a href="#collection">Collection</a></li>
                 <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#faq">FAQ</a></li>
                 <li><a href="#contact">Private Access</a></li>
             </ul>
         </div>
@@ -295,31 +334,32 @@
             <h1 class="text-gradient reveal">傲 · ÀO</h1>
             <p class="reveal hero-tagline">Crafted with Honour. Raised with Pride.</p>
             
-            <a href="#collection" class="btn reveal" style="margin-top: 3rem; transition-delay: 0.2s;">Discover the Spirit</a>
+            <a href="#collection" class="btn-premium reveal" style="margin-top: 3rem; transition-delay: 0.2s;">
+                Discover the Spirit
+                <div class="btn-circle">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+                </div>
+            </a>
         </div>
     </section>
 
     <section class="about" id="about">
         <div class="container about-grid">
             <div class="about-text reveal">
-                <span class="section-label">THE ORIGIN</span>
+                <span class="section-label">The Origin</span>
                 <h2 class="section-title">A Legacy <br> <span class="italic-accent">Reborn.</span></h2>
                 <p>
-                    Inspired by the resilience of the Scottish Highlands but rooted in the ancient traditions of the East, 傲 ÀO represents the new era of Baijiu. 
+                    Inspired by the resilience of the Scottish Highlands but rooted in the ancient traditions of the East, <span class="highlight">傲 ÀO represents the new era of Baijiu.</span> 
                 </p>
                 <p>
-                    For centuries, Baijiu has been the spirit of celebration. We have refined it through a lens of modern luxury, creating a liquid that is complex, floral, and undeniably bold. It is not just a drink; it is a statement of pride.
+                    For centuries, Baijiu has been the spirit of celebration. We have refined it through a lens of modern luxury, creating a liquid that is <span class="highlight">complex, floral, and undeniably bold.</span> It is not just a drink; it is a statement of pride.
                 </p>
-                <div style="margin-top: 2rem; display: flex; gap: 2rem;">
-                    <div>
-                        <h4 style="font-size: 1.5rem; color: #fff;">1890</h4>
-                        <span style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Est. Heritage</span>
+                <a href="#collection" class="btn-premium" style="margin-top: 1rem;">
+                    Read Our Story
+                    <div class="btn-circle">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
                     </div>
-                    <div>
-                        <h4 style="font-size: 1.5rem; color: #fff;">52%</h4>
-                        <span style="font-size: 0.75rem; color: #666; text-transform: uppercase;">Vol. Strength</span>
-                    </div>
-                </div>
+                </a>
             </div>
             <div class="reveal" style="transition-delay: 0.2s;">
                 <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?q=80&w=2670&auto=format&fit=crop" alt="Heritage Wood" class="hover-color-img">
@@ -330,27 +370,27 @@
     <section class="collection" id="collection">
         <div class="container">
             <div class="collection-header reveal">
-                <h2 class="section-title center-title">The Collection</h2>
-                <p style="color: var(--text-secondary); max-width: 500px;">Rare expressions of mastery, distilled for the discerning palate.</p>
+                <h2 class="section-title">The Collection</h2>
+                <p style="color: var(--text-secondary); max-width: 500px; margin: 0 auto;">Rare expressions of mastery, distilled for the discerning palate.</p>
             </div>
             <div class="product-grid">
                 <div class="product-card reveal">
+                    <div class="specs">52% VOL</div>
                     <img src="http://kishord40.sg-host.com/wp-content/uploads/2025/11/c94aa71f-1e7d-4d3c-a12a-baa97e11a4e9.jpeg" alt="AO Signature">
-                    <div class="specs">52% VOL | 500ML</div>
                     <h3>傲 ÀO Signature</h3>
-                    <p style="color: #777; font-size: 0.9rem; line-height: 1.6; margin-top: 1rem;">Strong Aroma. Complex notes of pineapple, star anise, and aged leather.</p>
+                    <p style="color: #888; font-size: 0.9rem; line-height: 1.6; margin-top: 1rem;">Strong Aroma. <span class="highlight">Pineapple & Star Anise</span>.</p>
+                </div>
+                <div class="product-card reveal" style="transition-delay: 0.1s;">
+                    <div class="specs" style="border-color: #d4af37; color: #d4af37;">Reserve</div>
+                    <img src="http://kishord40.sg-host.com/wp-content/uploads/2025/11/c94aa71f-1e7d-4d3c-a12a-baa97e11a4e9.jpeg" alt="AO Reserve">
+                    <h3>傲 ÀO Reserve</h3>
+                    <p style="color: #888; font-size: 0.9rem; line-height: 1.6; margin-top: 1rem;">Aged 10 Years. <span class="highlight">Smooth Umami Finish</span>.</p>
                 </div>
                 <div class="product-card reveal" style="transition-delay: 0.2s;">
-                    <img src="http://kishord40.sg-host.com/wp-content/uploads/2025/11/c94aa71f-1e7d-4d3c-a12a-baa97e11a4e9.jpeg" alt="AO Reserve">
-                    <div class="specs">Limited Edition</div>
-                    <h3>傲 ÀO Reserve</h3>
-                    <p style="color: #777; font-size: 0.9rem; line-height: 1.6; margin-top: 1rem;">Aged in clay jars for 10 years. Exceptionally smooth with a umami finish.</p>
-                </div>
-                <div class="product-card reveal" style="transition-delay: 0.4s;">
-                    <img src="http://kishord40.sg-host.com/wp-content/uploads/2025/11/c94aa71f-1e7d-4d3c-a12a-baa97e11a4e9.jpeg" alt="AO Jade">
                     <div class="specs">Light Aroma</div>
+                    <img src="http://kishord40.sg-host.com/wp-content/uploads/2025/11/c94aa71f-1e7d-4d3c-a12a-baa97e11a4e9.jpeg" alt="AO Jade">
                     <h3>傲 ÀO Jade</h3>
-                    <p style="color: #777; font-size: 0.9rem; line-height: 1.6; margin-top: 1rem;">Clean, crisp, with a delicate floral bouquet. Perfect for high-end cocktails.</p>
+                    <p style="color: #888; font-size: 0.9rem; line-height: 1.6; margin-top: 1rem;">Clean & Crisp. <span class="highlight">Floral Bouquet</span>.</p>
                 </div>
             </div>
         </div>
@@ -361,57 +401,81 @@
             <div class="review-summary reveal">
                 <div class="summary-score text-gradient">4.9/5</div>
                 <div class="summary-stars">★★★★★</div>
-                <p class="summary-text">Rated Excellent by 340+ Private Collectors in Singapore</p>
+                <p style="color: #888; font-size: 0.9rem;">Rated Excellent by 340+ Private Collectors</p>
             </div>
 
             <div class="marquee-wrapper">
                 <div class="review-card">
-                    <div class="star-rating">★★★★★</div>
-                    <p class="review-text">"Finally, a Baijiu that bridges the gap between tradition and the modern Singaporean palate. Exceptionally smooth."</p>
-                    <div class="reviewer-details">
-                        <h5>Tan Wei Ming</h5>
-                        <span>Private Client, Sentosa Cove</span>
+                    <div style="color: #d4af37; margin-bottom: 1rem;">★★★★★</div>
+                    <p class="review-text">"Finally, a Baijiu that bridges the gap between tradition and the modern palate."</p>
+                    <div style="margin-top: 1rem;">
+                        <h5 style="color: #fff; font-size: 0.9rem;">Tan Wei Ming</h5>
+                        <span style="color: #666; font-size: 0.8rem;">Private Client, Sentosa</span>
                     </div>
                 </div>
                 <div class="review-card">
-                    <div class="star-rating">★★★★★</div>
-                    <p class="review-text">"A staple at our executive dinners at Marina Bay Sands. It commands the room just like a fine scotch."</p>
-                    <div class="reviewer-details">
-                        <h5>Sarah Lim</h5>
-                        <span>Sommelier, Atlas Bar</span>
+                    <div style="color: #d4af37; margin-bottom: 1rem;">★★★★★</div>
+                    <p class="review-text">"A staple at our executive dinners at Marina Bay Sands. It commands the room."</p>
+                    <div style="margin-top: 1rem;">
+                        <h5 style="color: #fff; font-size: 0.9rem;">Sarah Lim</h5>
+                        <span style="color: #666; font-size: 0.8rem;">Sommelier, Atlas Bar</span>
                     </div>
                 </div>
                 <div class="review-card">
-                    <div class="star-rating">★★★★★</div>
-                    <p class="review-text">"The packaging is stunning. I gifted the Reserve edition for Chinese New Year and it was the talk of the evening."</p>
-                    <div class="reviewer-details">
-                        <h5>Jason Koh</h5>
-                        <span>Director, Fintech SG</span>
-                    </div>
-                </div>
-                <div class="review-card">
-                    <div class="star-rating">★★★★★</div>
+                    <div style="color: #d4af37; margin-bottom: 1rem;">★★★★★</div>
                     <p class="review-text">"Intense, aromatic, yet surprisingly delicate. A masterpiece of distillation."</p>
-                    <div class="reviewer-details">
-                        <h5>Emily Chen</h5>
-                        <span>Lifestyle Editor, Tatler Asia</span>
+                    <div style="margin-top: 1rem;">
+                        <h5 style="color: #fff; font-size: 0.9rem;">Jason Koh</h5>
+                        <span style="color: #666; font-size: 0.8rem;">Director, Fintech SG</span>
                     </div>
                 </div>
+                <div class="review-card">
+                    <div style="color: #d4af37; margin-bottom: 1rem;">★★★★★</div>
+                    <p class="review-text">"Finally, a Baijiu that bridges the gap between tradition and the modern palate."</p>
+                    <div style="margin-top: 1rem;">
+                        <h5 style="color: #fff; font-size: 0.9rem;">Tan Wei Ming</h5>
+                        <span style="color: #666; font-size: 0.8rem;">Private Client, Sentosa</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="review-card">
-                    <div class="star-rating">★★★★★</div>
-                    <p class="review-text">"Finally, a Baijiu that bridges the gap between tradition and the modern Singaporean palate. Exceptionally smooth."</p>
-                    <div class="reviewer-details">
-                        <h5>Tan Wei Ming</h5>
-                        <span>Private Client, Sentosa Cove</span>
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="collection-header reveal">
+                <h2 class="section-title">Quality Assurance</h2>
+                <p style="color: #888;">Understanding the craft.</p>
+            </div>
+            
+            <div class="faq-container reveal">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What makes ÀO different from traditional Baijiu?
+                        <div class="faq-icon"></div>
+                    </div>
+                    <div class="faq-answer">
+                        ÀO is crafted using a unique blend of five organic grains and fermented in ancient clay pits, but it undergoes a proprietary filtration process that smooths out the "fire" often associated with Baijiu, resulting in a cleaner, more floral finish suited for the international palate.
                     </div>
                 </div>
-                <div class="review-card">
-                    <div class="star-rating">★★★★★</div>
-                    <p class="review-text">"A staple at our executive dinners at Marina Bay Sands. It commands the room just like a fine scotch."</p>
-                    <div class="reviewer-details">
-                        <h5>Sarah Lim</h5>
-                        <span>Sommelier, Atlas Bar</span>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How should I serve ÀO?
+                        <div class="faq-icon"></div>
+                    </div>
+                    <div class="faq-answer">
+                        We recommend serving ÀO neat at room temperature to fully appreciate its complex aroma. However, our Jade expression is excellent over a large block of ice or used as a base for high-end cocktails.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is this available in retail stores?
+                        <div class="faq-icon"></div>
+                    </div>
+                    <div class="faq-answer">
+                        Currently, 傲 ÀO is available exclusively through our private client list and select partner establishments (Michelin-starred restaurants and private members' clubs) in Singapore.
                     </div>
                 </div>
             </div>
@@ -436,7 +500,7 @@
     <section class="contact-section" id="contact">
         <div class="contact-overlay"></div>
         <div class="contact-form-wrapper reveal">
-            <h2 class="section-title center-title" style="font-size: 2.2rem; margin-bottom: 0.5rem;">Private Enquiries</h2>
+            <h2 class="section-title" style="font-size: 2.2rem; margin-bottom: 0.5rem;">Private Enquiries</h2>
             <p style="color: var(--text-secondary); margin-bottom: 2.5rem; font-size: 0.95rem;">For distributors, events, or private collection purchases.</p>
             
             <form>
@@ -444,7 +508,12 @@
                 <input type="email" class="form-input" placeholder="Email Address">
                 <input type="text" class="form-input" placeholder="Interest (e.g., Distribution)">
                 
-                <button type="submit" class="btn" style="width: 100%;">Request Access</button>
+                <button type="submit" class="btn-premium btn-gold">
+                    Request Access
+                    <div class="btn-circle">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                    </div>
+                </button>
             </form>
         </div>
     </section>
@@ -468,22 +537,34 @@
     <script>
         // Scroll Animation
         const revealElements = document.querySelectorAll('.reveal');
-        const revealCallback = (entries, observer) => {
+        const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
             });
-        };
-        const revealObserver = new IntersectionObserver(revealCallback, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
+        }, { threshold: 0.1 });
         revealElements.forEach(el => revealObserver.observe(el));
 
         // Parallax
         window.addEventListener('scroll', () => {
             const bottle = document.querySelector('.hero-bottle');
             const bg = document.querySelector('.hero-bg');
-            const scrollValue = window.scrollY;
-            
-            if(bottle) bottle.style.transform = `translateY(${scrollValue * 0.12}px)`;
-            if(bg) bg.style.transform = `scale(1.1) translateY(${scrollValue * 0.05}px)`;
+            if(bottle) bottle.style.transform = `translateY(${window.scrollY * 0.12}px)`;
+            if(bg) bg.style.transform = `scale(1.1) translateY(${window.scrollY * 0.05}px)`;
+        });
+
+        // Interactive FAQ
+        document.querySelectorAll('.faq-question').forEach(item => {
+            item.addEventListener('click', event => {
+                const parent = item.parentElement;
+                
+                // Close others
+                document.querySelectorAll('.faq-item').forEach(child => {
+                    if (child !== parent) child.classList.remove('active');
+                });
+
+                // Toggle current
+                parent.classList.toggle('active');
+            });
         });
     </script>
 </body>
