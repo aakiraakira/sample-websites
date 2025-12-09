@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Couple Sparkle | Rehabilitation & Physiotherapy</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            light: '#ffe4ea', // Very light pink for backgrounds
+                            DEFAULT: '#ff69b4', // Hot pink for accents
+                            dark: '#e04595', // Darker pink for hover states
+                            text: '#2d3748', // Dark grey for text
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                        inter: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Global Styles */
+        body { font-family: 'Poppins', sans-serif; }
+        
+        /* Hero Pattern */
+        .hero-pattern {
+            background-color: #ffffff;
+            background-image: radial-gradient(#ff69b4 0.5px, transparent 0.5px), radial-gradient(#ff69b4 0.5px, #ffffff 0.5px);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            opacity: 0.1;
+        }
+
+        /* Card Hovers */
+        .service-card { transition: all 0.3s ease; }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 20px 25px -5px rgba(255, 105, 180, 0.15), 0 10px 10px -5px rgba(255, 105, 180, 0.1); }
+
+        /* Animations */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* Testimonial Images */
+        .testimonial-img { object-fit: cover; width: 100%; height: 250px; transition: transform 0.5s ease; }
+        .testimonial-card:hover .testimonial-img { transform: scale(1.05); }
+
+        /* --- MARQUEE STYLES (Adapted from your sample) --- */
+        .reviews-scope {
+            --r-accent: #ff69b4;  /* Brand Pink */
+            --r-dark: #2d3748;    /* Brand Dark Grey */
+            --r-bg: #fff0f5;      /* Light Pink bg */
+            --r-card-bg: #ffffff;
+            --r-text: #4a5568;
+            --r-text-light: #718096;
+            font-family: 'Inter', sans-serif;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .marquee-wrapper {
+            width: 100%;
+            position: relative;
+            display: flex;
+            overflow: hidden;
+            -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+            mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 2rem;
+            width: max-content; 
+            animation: scroll-left 40s linear infinite;
+            padding: 2rem 0;
+        }
+
+        .marquee-wrapper:hover .marquee-track { animation-play-state: paused; }
+
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .review-card {
+            width: 350px;
+            background: var(--r-card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(255,105,180,0.1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-shrink: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.15);
+            border-color: var(--r-accent);
+        }
+
+        .stars { color: #FFD700; letter-spacing: 2px; }
+
+        /* Mobile tweaks for marquee */
+        @media (max-width: 768px) {
+            .review-card { width: 300px; padding: 1.25rem; }
+            .marquee-track { animation-duration: 30s; }
+        }
+
+        /* --- STICKY CALL BUTTON --- */
+        #sticky-call-btn {
+            transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 3.5rem; /* Initial width (w-14) */
+            overflow: hidden;
+        }
+        #sticky-call-btn.expanded {
+            width: 11rem; /* Expanded width */
+        }
+        .sticky-text {
+            opacity: 0;
+            transition: opacity 0.3s ease 0.1s;
+            white-space: nowrap;
+        }
+        #sticky-call-btn.expanded .sticky-text {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-700 antialiased selection:bg-brand selection:text-white">
+
+    <!-- Sticky Call Button -->
+    <div class="fixed bottom-6 right-6 z-[60] flex items-center justify-end">
+        <button id="sticky-call-btn" onclick="toggleCallBtn()" class="bg-brand hover:bg-brand-dark text-white rounded-full h-14 shadow-2xl flex items-center shadow-brand/40 ring-4 ring-white">
+            <div class="w-14 h-14 flex items-center justify-center flex-shrink-0">
+                <i class="fas fa-phone-alt text-xl animate-pulse-slow"></i>
+            </div>
+            <span class="sticky-text font-bold pr-6">9245 2298</span>
+        </button>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center gap-2">
+                    <div class="w-10 h-10 bg-brand rounded-full flex items-center justify-center text-white text-xl shadow-lg shadow-brand/20">
+                        <i class="fas fa-heart-pulse"></i>
+                    </div>
+                    <span class="font-bold text-2xl tracking-tight text-gray-900">Couple<span class="text-brand">Sparkle</span></span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-gray-600 hover:text-brand font-medium transition text-sm uppercase tracking-wide">Home</a>
+                    <a href="#services" class="text-gray-600 hover:text-brand font-medium transition text-sm uppercase tracking-wide">Services</a>
+                    <a href="#team" class="text-gray-600 hover:text-brand font-medium transition text-sm uppercase tracking-wide">Team</a>
+                    <a href="#testimonials" class="text-gray-600 hover:text-brand font-medium transition text-sm uppercase tracking-wide">Stories</a>
+                    <a href="#contact" class="px-6 py-2.5 bg-brand text-white rounded-full font-medium hover:bg-brand-dark transition shadow-lg shadow-brand/30 transform hover:-translate-y-0.5">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-gray-600 hover:text-brand focus:outline-none p-2">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 absolute w-full shadow-xl">
+            <div class="px-4 pt-2 pb-6 space-y-2">
+                <a href="#home" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-brand hover:bg-brand-light transition">Home</a>
+                <a href="#services" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-brand hover:bg-brand-light transition">Services</a>
+                <a href="#team" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-brand hover:bg-brand-light transition">Our Team</a>
+                <a href="#testimonials" class="block px-4 py-3 rounded-lg text-base font-medium text-gray-700 hover:text-brand hover:bg-brand-light transition">Success Stories</a>
+                <a href="#contact" class="block px-4 py-3 mt-4 text-center rounded-lg text-base font-bold bg-brand text-white hover:bg-brand-dark shadow-md">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-16 lg:pt-44 lg:pb-32 overflow-hidden">
+        <!-- Background Decor -->
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-brand-light opacity-50 blur-3xl animate-pulse"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 rounded-full bg-pink-100 opacity-50 blur-3xl"></div>
+        <div class="absolute inset-0 hero-pattern z-0"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+                <div class="reveal active text-center lg:text-left">
+                    <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-brand-light text-brand-dark text-xs font-bold uppercase tracking-wider mb-6 border border-brand/20">
+                        <span class="mr-2 text-lg">✨</span> Healing Through Physiotherapy
+                    </div>
+                    <h1 class="text-4xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
+                        Rehabilitation for <br><span class="text-brand">Couples</span> & Families
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        We help couples of all ages through physiotherapy, supporting mental wellness and healing through mind & body. Regain strength, mobility, and happiness together.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#contact" class="px-8 py-4 bg-brand text-white rounded-full font-bold hover:bg-brand-dark transition shadow-xl shadow-brand/20 text-center transform hover:-translate-y-1">
+                            Get Started Today
+                        </a>
+                        <a href="#services" class="px-8 py-4 bg-white text-brand-dark border-2 border-brand-light rounded-full font-bold hover:bg-brand-light transition text-center hover:border-brand">
+                            View Services
+                        </a>
+                    </div>
+                    
+                    <div class="mt-10 flex items-center justify-center lg:justify-start gap-4 text-sm text-gray-500 font-medium">
+                        <div class="flex -space-x-3">
+                            <div class="w-10 h-10 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-xs overflow-hidden"><img src="https://i.pravatar.cc/100?img=1" alt="User" class="w-full h-full object-cover"></div>
+                            <div class="w-10 h-10 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-xs overflow-hidden"><img src="https://i.pravatar.cc/100?img=5" alt="User" class="w-full h-full object-cover"></div>
+                            <div class="w-10 h-10 rounded-full bg-gray-400 border-2 border-white flex items-center justify-center text-xs overflow-hidden"><img src="https://i.pravatar.cc/100?img=8" alt="User" class="w-full h-full object-cover"></div>
+                        </div>
+                        <p>Trusted by <span class="text-brand font-bold">100+ families</span> in Singapore</p>
+                    </div>
+                </div>
+                
+                <div class="relative reveal delay-200 mx-auto w-full max-w-lg lg:max-w-none">
+                    <div class="relative rounded-3xl overflow-hidden shadow-2xl border-8 border-white/50 transform rotate-2 hover:rotate-0 transition duration-500 group">
+                        <!-- Hero Image -->
+                        <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Physiotherapy Session" class="w-full h-[500px] object-cover group-hover:scale-105 transition duration-700">
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent p-8">
+                            <p class="text-white font-medium text-lg italic">"Health is a journey best taken together."</p>
+                        </div>
+                    </div>
+                    <!-- Decorative floating element -->
+                    <div class="absolute -bottom-8 -left-8 bg-white p-5 rounded-2xl shadow-xl animate-bounce hidden md:block border border-gray-100">
+                        <div class="flex items-center gap-4">
+                            <div class="bg-green-100 w-12 h-12 rounded-full flex items-center justify-center text-green-600 text-xl">
+                                <i class="fas fa-check"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-semibold uppercase">Recovery Rate</p>
+                                <p class="font-bold text-gray-900 text-xl">98% Success</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee Reviews Section -->
+    <section class="reviews-scope py-16 border-y border-brand-light">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center mb-10 reveal">
+             <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">Patient Feedback</h2>
+             <h3 class="text-2xl md:text-3xl font-bold text-gray-900">What Our Patients Say</h3>
+        </div>
+
+        <div class="marquee-wrapper">
+            <!-- The Track moves left -->
+            <div class="marquee-track">
+                
+                <!-- Review 1 -->
+                <div class="review-card">
+                    <div class="card-top flex justify-between items-start mb-4">
+                        <div class="user-info">
+                            <span class="font-bold text-gray-800 text-lg">Mrs. Tan & Husband</span>
+                            <span class="text-xs text-brand font-bold uppercase tracking-wide mt-1 block">Frozen Shoulder</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="text-sm text-gray-600 italic leading-relaxed mb-6">"My husband's shoulder pain was unbearable. After just 3 sessions of manual therapy and the towel exercises prescribed, he can finally lift his arm again. The home-visit service is a blessing."</p>
+                    <div class="border-t border-gray-100 pt-4 flex justify-between items-center text-xs text-gray-400">
+                        <span>12 Dec 2024</span>
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-semibold">Home Therapy</span>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="review-card">
+                    <div class="card-top flex justify-between items-start mb-4">
+                        <div class="user-info">
+                            <span class="font-bold text-gray-800 text-lg">Halimah Bte Ali</span>
+                            <span class="text-xs text-brand font-bold uppercase tracking-wide mt-1 block">Stroke Rehab</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="text-sm text-gray-600 italic leading-relaxed mb-6">"Recovering from a stroke is hard, but Nisha and her team made it easier. They are so patient with my mother. Her mobility has improved significantly, and she is much more confident walking now."</p>
+                    <div class="border-t border-gray-100 pt-4 flex justify-between items-center text-xs text-gray-400">
+                        <span>05 Jan 2025</span>
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-semibold">Stroke Care</span>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="review-card">
+                    <div class="card-top flex justify-between items-start mb-4">
+                        <div class="user-info">
+                            <span class="font-bold text-gray-800 text-lg">John & Sarah</span>
+                            <span class="text-xs text-brand font-bold uppercase tracking-wide mt-1 block">Knee Injury</span>
+                        </div>
+                        <div class="stars">★★★★☆</div>
+                    </div>
+                    <p class="text-sm text-gray-600 italic leading-relaxed mb-6">"I injured my knee playing football. The step-up exercises and strengthening plan really helped. Professional, punctual, and very knowledgeable about sports injuries."</p>
+                    <div class="border-t border-gray-100 pt-4 flex justify-between items-center text-xs text-gray-400">
+                        <span>20 Nov 2024</span>
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-semibold">Sports Rehab</span>
+                    </div>
+                </div>
+
+                <!-- Review 4 -->
+                <div class="review-card">
+                    <div class="card-top flex justify-between items-start mb-4">
+                        <div class="user-info">
+                            <span class="font-bold text-gray-800 text-lg">Family of Mr. Lim</span>
+                            <span class="text-xs text-brand font-bold uppercase tracking-wide mt-1 block">Dementia Care</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="text-sm text-gray-600 italic leading-relaxed mb-6">"The cognitive exercises and balance training have helped my father so much. He falls less often and seems more engaged. Thank you Couple Sparkle for the genuine care."</p>
+                    <div class="border-t border-gray-100 pt-4 flex justify-between items-center text-xs text-gray-400">
+                        <span>15 Jan 2025</span>
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-semibold">Senior Care</span>
+                    </div>
+                </div>
+
+                <!-- DUPLICATES FOR SCROLL -->
+                 <div class="review-card">
+                    <div class="card-top flex justify-between items-start mb-4">
+                        <div class="user-info">
+                            <span class="font-bold text-gray-800 text-lg">Mrs. Tan & Husband</span>
+                            <span class="text-xs text-brand font-bold uppercase tracking-wide mt-1 block">Frozen Shoulder</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="text-sm text-gray-600 italic leading-relaxed mb-6">"My husband's shoulder pain was unbearable. After just 3 sessions of manual therapy and the towel exercises prescribed, he can finally lift his arm again. The home-visit service is a blessing."</p>
+                    <div class="border-t border-gray-100 pt-4 flex justify-between items-center text-xs text-gray-400">
+                        <span>12 Dec 2024</span>
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-semibold">Home Therapy</span>
+                    </div>
+                </div>
+
+                <div class="review-card">
+                    <div class="card-top flex justify-between items-start mb-4">
+                        <div class="user-info">
+                            <span class="font-bold text-gray-800 text-lg">Halimah Bte Ali</span>
+                            <span class="text-xs text-brand font-bold uppercase tracking-wide mt-1 block">Stroke Rehab</span>
+                        </div>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                    <p class="text-sm text-gray-600 italic leading-relaxed mb-6">"Recovering from a stroke is hard, but Nisha and her team made it easier. They are so patient with my mother. Her mobility has improved significantly, and she is much more confident walking now."</p>
+                    <div class="border-t border-gray-100 pt-4 flex justify-between items-center text-xs text-gray-400">
+                        <span>05 Jan 2025</span>
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-semibold">Stroke Care</span>
+                    </div>
+                </div>
+                 <div class="review-card">
+                    <div class="card-top flex justify-between items-start mb-4">
+                        <div class="user-info">
+                            <span class="font-bold text-gray-800 text-lg">John & Sarah</span>
+                            <span class="text-xs text-brand font-bold uppercase tracking-wide mt-1 block">Knee Injury</span>
+                        </div>
+                        <div class="stars">★★★★☆</div>
+                    </div>
+                    <p class="text-sm text-gray-600 italic leading-relaxed mb-6">"I injured my knee playing football. The step-up exercises and strengthening plan really helped. Professional, punctual, and very knowledgeable about sports injuries."</p>
+                    <div class="border-t border-gray-100 pt-4 flex justify-between items-center text-xs text-gray-400">
+                        <span>20 Nov 2024</span>
+                        <span class="bg-gray-100 text-gray-600 px-3 py-1 rounded-full font-semibold">Sports Rehab</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">Our Expertise</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Comprehensive Care Plans</h3>
+                <p class="mt-4 text-gray-600 max-w-2xl mx-auto">We provide specialized treatments tailored to your specific needs, focusing on holistic recovery.</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Service 1: Stroke Rehab -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg service-card border-b-4 border-brand reveal">
+                    <div class="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-brand text-3xl mb-6 shadow-sm">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Stroke Rehab</h4>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">We help patients with manual therapy as well as mind-related exercises.</p>
+                    <ul class="text-sm text-gray-500 space-y-3 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Hemorrhagic Stroke</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Ischemic Stroke</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Transient Ischemic</li>
+                    </ul>
+                </div>
+
+                <!-- Service 2: Frozen Shoulder -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg service-card border-b-4 border-brand reveal delay-100">
+                    <div class="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-brand text-3xl mb-6 shadow-sm">
+                        <i class="fas fa-bone"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Frozen Shoulder</h4>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">Therapy combined with home-based exercises to restore range of motion.</p>
+                    <ul class="text-sm text-gray-500 space-y-3 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Towel Stretch</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Arm Circles</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Cross-body Stretch</li>
+                    </ul>
+                </div>
+
+                <!-- Service 3: Dementia -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg service-card border-b-4 border-brand reveal delay-200">
+                    <div class="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-brand text-3xl mb-6 shadow-sm">
+                        <i class="fas fa-head-side-virus"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Dementia Care</h4>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">Resistance training, balance, flexibility & cognitive skills enhancement.</p>
+                    <ul class="text-sm text-gray-500 space-y-3 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Reduce Fall Risk</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Memory & Attention</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Problem Solving</li>
+                    </ul>
+                </div>
+
+                <!-- Service 4: Knee & Hand -->
+                <div class="bg-white rounded-2xl p-8 shadow-lg service-card border-b-4 border-brand reveal delay-300">
+                    <div class="w-16 h-16 bg-pink-50 rounded-2xl flex items-center justify-center text-brand text-3xl mb-6 shadow-sm">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-900 mb-3">Knee & Hand</h4>
+                    <p class="text-gray-600 text-sm mb-4 leading-relaxed">Regain strength, mobility, and flexibility after injury or surgery.</p>
+                    <ul class="text-sm text-gray-500 space-y-3 mb-4">
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Grip Strengthening</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Step-Ups & Extensions</li>
+                        <li class="flex items-center"><i class="fas fa-check-circle text-brand mr-3"></i>Sit to Stand</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="py-20 relative overflow-hidden bg-white">
+        <!-- Background Decor -->
+        <div class="absolute top-1/2 left-0 w-64 h-64 bg-brand-light rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob"></div>
+        <div class="absolute top-1/2 right-0 w-64 h-64 bg-pink-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30 animate-blob animation-delay-2000"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">The Professionals</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Meet Our Team</h3>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 max-w-5xl mx-auto">
+                <!-- Team Member 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl reveal group border border-gray-50">
+                    <div class="flex flex-col md:flex-row h-full">
+                        <div class="md:w-2/5 relative overflow-hidden">
+                             <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Nisha Maricar" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-8 md:w-3/5">
+                            <h4 class="text-2xl font-bold text-gray-900">Nisha Maricar</h4>
+                            <p class="text-brand font-semibold mb-4 text-sm uppercase tracking-wide">Founder & Therapist Asst</p>
+                            <div class="space-y-3 text-sm text-gray-600">
+                                <p class="flex items-start"><i class="fas fa-certificate text-brand mt-1 mr-3"></i><span>WSQ Cert in Healthcare (Therapy Support)</span></p>
+                                <div class="w-full h-px bg-gray-100 my-3"></div>
+                                <p class="font-bold text-gray-800">Experience:</p>
+                                <ul class="list-disc list-outside ml-4 space-y-1 marker:text-brand">
+                                    <li>St Andrews Senior Care (Gymtonic & manual therapy)</li>
+                                    <li>Experience with Stroke & Dementia patients</li>
+                                    <li>Pharmex Healthcare (Rehab aids advisor)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-xl reveal delay-100 group border border-gray-50">
+                    <div class="flex flex-col md:flex-row h-full">
+                        <div class="md:w-2/5 relative overflow-hidden">
+                            <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80" alt="Fhatima Sumaiya" class="w-full h-full object-cover transition duration-500 group-hover:scale-110">
+                        </div>
+                        <div class="p-8 md:w-3/5">
+                            <h4 class="text-2xl font-bold text-gray-900">Fhatima Sumaiya</h4>
+                            <p class="text-brand font-semibold mb-4 text-sm uppercase tracking-wide">Overseas Partner</p>
+                            <div class="space-y-3 text-sm text-gray-600">
+                                <p class="flex items-start"><i class="fas fa-university text-brand mt-1 mr-3"></i><span>Musculoskeletal Physiotherapy & Rehab (NUHS)</span></p>
+                                <div class="w-full h-px bg-gray-100 my-3"></div>
+                                <p class="font-bold text-gray-800">Experience:</p>
+                                <ul class="list-disc list-outside ml-4 space-y-1 marker:text-brand">
+                                    <li>Home Rehabilitation for Senior Care</li>
+                                    <li>Care plan development & manual therapy</li>
+                                    <li>Special Needs assistance</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Visual Gallery Section -->
+    <section id="testimonials" class="py-20 bg-brand-light/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-brand font-bold tracking-wide uppercase text-sm mb-2">Gallery</h2>
+                <h3 class="text-3xl md:text-4xl font-bold text-gray-900">Moments of Recovery</h3>
+                <p class="mt-4 text-gray-600">Witnessing progress and smiles is what drives us every day.</p>
+            </div>
+
+            <!-- Grid Layout for Images -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="testimonial-card rounded-xl overflow-hidden shadow-md bg-white reveal">
+                    <img src="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/news-image-1.jpeg" alt="Patient Success Story" class="testimonial-img" onerror="this.src='https://placehold.co/400x300/ff69b4/ffffff?text=Therapy+Session';">
+                </div>
+                <div class="testimonial-card rounded-xl overflow-hidden shadow-md bg-white reveal delay-100">
+                    <img src="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/news-image-2.jpeg" alt="Patient Success Story" class="testimonial-img" onerror="this.src='https://placehold.co/400x300/ff69b4/ffffff?text=Therapy+Session';">
+                </div>
+                <div class="testimonial-card rounded-xl overflow-hidden shadow-md bg-white reveal delay-200">
+                    <img src="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/news-image-3.jpeg" alt="Patient Success Story" class="testimonial-img" onerror="this.src='https://placehold.co/400x300/ff69b4/ffffff?text=Therapy+Session';">
+                </div>
+                <div class="testimonial-card rounded-xl overflow-hidden shadow-md bg-white reveal delay-300">
+                    <img src="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/news-image-4.jpeg" alt="Patient Success Story" class="testimonial-img" onerror="this.src='https://placehold.co/400x300/ff69b4/ffffff?text=Therapy+Session';">
+                </div>
+                 <div class="testimonial-card rounded-xl overflow-hidden shadow-md bg-white reveal">
+                    <img src="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/news-image-5.jpeg" alt="Patient Success Story" class="testimonial-img" onerror="this.src='https://placehold.co/400x300/ff69b4/ffffff?text=Therapy+Session';">
+                </div>
+                <div class="testimonial-card rounded-xl overflow-hidden shadow-md bg-white reveal delay-100">
+                    <img src="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/news-image-6.jpeg" alt="Patient Success Story" class="testimonial-img" onerror="this.src='https://placehold.co/400x300/ff69b4/ffffff?text=Therapy+Session';">
+                </div>
+                <div class="testimonial-card rounded-xl overflow-hidden shadow-md bg-white reveal delay-200 md:col-span-2 lg:col-span-2">
+                    <img src="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/news-image-7.jpeg" alt="Patient Success Story" class="testimonial-img" style="object-position: top;" onerror="this.src='https://placehold.co/800x300/ff69b4/ffffff?text=Therapy+Session';">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section with Form -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12">
+                
+                <!-- Contact Info Card -->
+                <div class="bg-brand rounded-3xl p-10 text-white shadow-2xl relative overflow-hidden reveal h-full flex flex-col justify-center">
+                    <div class="absolute top-0 right-0 -mr-10 -mt-10 w-40 h-40 rounded-full bg-white opacity-10"></div>
+                    <div class="absolute bottom-0 left-0 -ml-10 -mb-10 w-40 h-40 rounded-full bg-white opacity-10"></div>
+
+                    <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to start healing?</h2>
+                    <p class="text-lg text-pink-100 mb-10">Contact us today to schedule your consultation. We are here to support your journey to wellness.</p>
+                    
+                    <div class="space-y-6">
+                        <a href="tel:92452298" class="flex items-center gap-4 text-xl font-medium hover:text-pink-100 transition">
+                             <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center"><i class="fas fa-phone-alt"></i></div>
+                             9245 2298
+                        </a>
+                        <a href="https://wa.me/6592452298" class="flex items-center gap-4 text-xl font-medium hover:text-pink-100 transition">
+                            <div class="w-12 h-12 bg-green-500/80 rounded-full flex items-center justify-center"><i class="fab fa-whatsapp"></i></div>
+                            WhatsApp Us
+                       </a>
+                       <div class="flex items-center gap-4 text-xl font-medium">
+                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center"><i class="fas fa-globe"></i></div>
+                            www.couplesparkle.com.sg
+                       </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="bg-gray-50 rounded-3xl p-8 md:p-10 shadow-lg border border-gray-100 reveal delay-100">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-6">Send us a Message</h3>
+                    <form onsubmit="event.preventDefault(); alert('Thank you! We will contact you shortly.');" class="space-y-5">
+                        <div class="grid md:grid-cols-2 gap-5">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                                <input type="text" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition" placeholder="John Doe" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                                <input type="tel" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition" placeholder="9123 4567" required>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Service Required</label>
+                            <select class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition bg-white">
+                                <option>General Enquiry</option>
+                                <option>Stroke Rehabilitation</option>
+                                <option>Frozen Shoulder</option>
+                                <option>Dementia Care</option>
+                                <option>Knee/Hand Injury</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Message</label>
+                            <textarea rows="4" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-brand focus:ring-2 focus:ring-brand/20 outline-none transition" placeholder="How can we help you?"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-brand text-white font-bold py-4 rounded-xl shadow-lg hover:bg-brand-dark transition transform hover:-translate-y-1">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center text-center md:text-left">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center justify-center md:justify-start gap-2 mb-2">
+                        <i class="fas fa-heart-pulse text-brand text-xl"></i>
+                        <span class="font-bold text-xl">Couple<span class="text-brand">Sparkle</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-xs">Restoring movement, enhancing life. Professional physiotherapy for you and your loved ones.</p>
+                </div>
+                
+                <div class="flex space-x-6">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand transition"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand transition"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-brand transition"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 flex flex-col md:flex-row justify-between items-center text-gray-500 text-sm">
+                <p>&copy; 2025 Couple Sparkle. All rights reserved.</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-white transition">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Interactivity -->
+    <script>
+        // Toggle Sticky Call Button
+        function toggleCallBtn() {
+            const btn = document.getElementById('sticky-call-btn');
+            btn.classList.toggle('expanded');
+        }
+
+        // Mobile Menu Toggle
+        const btn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('mobile-menu');
+
+        btn.addEventListener('click', () => {
+            menu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.add('hidden');
+            });
+        });
+
+        // Intersection Observer for Scroll Animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.classList.replace('bg-white/95', 'bg-white/98');
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.classList.replace('bg-white/98', 'bg-white/95');
+            }
+        });
+    </script>
+</body>
+</html>
