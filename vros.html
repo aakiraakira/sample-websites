@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VROS Group | Energy Evolved</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Manrope:wght@400;600;800&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vros: {
+                            deep: '#020617',   /* Midnight */
+                            dark: '#0B1120',   /* Dark Slate */
+                            primary: '#0ea5e9', /* Sky Blue */
+                            accent: '#84cc16', /* Lime Green */
+                            silver: '#94a3b8',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                    },
+                    backgroundImage: {
+                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    },
+                    animation: {
+                        'scroll': 'scroll 40s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        scroll: {
+                            '0%': { transform: 'translateX(0)' },
+                            '100%': { transform: 'translateX(-50%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- CORE STYLES --- */
+        body { 
+            background-color: #020617; 
+            color: #f8fafc; 
+            overflow-x: hidden;
+        }
+
+        /* Hide Scrollbar but allow scroll */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020617; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0ea5e9; 
+        }
+
+        /* --- CHEVRON-STYLE PARALLAX WORDS --- */
+        .parallax-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .big-word {
+            position: absolute;
+            font-size: clamp(6rem, 20vw, 20rem);
+            font-weight: 900;
+            color: rgba(255, 255, 255, 0.03);
+            white-space: nowrap;
+            line-height: 0.8;
+            font-family: 'Inter', sans-serif;
+            transition: transform 0.1s linear;
+            will-change: transform;
+        }
+
+        /* --- SCROLL REVEAL ANIMATIONS --- */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- HERO TEXT SHINE --- */
+        .text-shine {
+            background: linear-gradient(to right, #94a3b8 20%, #ffffff 50%, #94a3b8 80%);
+            background-size: 200% auto;
+            color: #000;
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 5s linear infinite;
+        }
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+
+        /* --- CARD STACKING (Refined) --- */
+        .stack-section {
+            padding-bottom: 20vh;
+        }
+        
+        .stack-card {
+            position: sticky;
+            top: 15vh;
+            background: #0f172a;
+            border: 1px solid rgba(255,255,255,0.05);
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 10vh;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
+            transform-origin: center top;
+            transition: transform 0.1s linear, filter 0.1s linear;
+        }
+
+        /* Mobile fallback for stacking */
+        @media (max-width: 1024px) {
+            .stack-card {
+                position: relative;
+                top: 0 !important;
+                margin-bottom: 4rem;
+                display: flex;
+                flex-direction: column-reverse;
+                height: auto !important;
+            }
+            .stack-card .visual {
+                height: 300px;
+                width: 100%;
+            }
+        }
+
+        /* --- FAQ ACCORDION --- */
+        .faq-content {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 0.4s ease-out;
+        }
+        .faq-item.active .faq-content {
+            grid-template-rows: 1fr;
+        }
+        .faq-inner {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAV -->
+    <nav class="fixed w-full z-50 transition-all duration-300 bg-vros-deep/80 backdrop-blur-xl border-b border-white/5" id="navbar">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-10 h-10 bg-vros-primary relative rounded overflow-hidden group-hover:scale-105 transition-transform">
+                    <div class="absolute inset-0 bg-gradient-to-tr from-blue-600 to-cyan-400"></div>
+                    <div class="absolute bottom-0 left-0 w-full h-1/2 bg-white/20 skew-y-12 origin-bottom-left"></div>
+                </div>
+                <div>
+                    <span class="block text-xl font-black text-white leading-none tracking-tight">VROS</span>
+                    <span class="block text-[10px] font-bold text-vros-primary tracking-[0.3em] uppercase">Group</span>
+                </div>
+            </a>
+
+            <!-- Desktop Links -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#about" class="text-sm font-bold text-vros-silver hover:text-white uppercase tracking-wider transition-colors">About</a>
+                <a href="#services" class="text-sm font-bold text-vros-silver hover:text-white uppercase tracking-wider transition-colors">Services</a>
+                <a href="#stack" class="text-sm font-bold text-vros-silver hover:text-white uppercase tracking-wider transition-colors">Projects</a>
+                <a href="#cleanloop" class="text-sm font-bold text-vros-accent hover:text-green-400 uppercase tracking-wider flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-vros-accent animate-pulse"></span> CleanLoop™
+                </a>
+            </div>
+
+            <!-- CTA -->
+            <div class="hidden md:block">
+                <a href="#contact" class="px-6 py-2.5 bg-white text-vros-deep font-bold text-sm rounded-full hover:bg-vros-primary hover:text-white transition-all transform hover:scale-105">
+                    Partner With Us
+                </a>
+            </div>
+
+            <!-- Mobile Menu Btn -->
+            <button class="md:hidden text-2xl text-white" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+                <i class="fa-solid fa-bars-staggered"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-vros-deep border-b border-white/10 p-6 flex flex-col gap-4 shadow-2xl">
+            <a href="#about" class="text-lg font-bold text-white">About</a>
+            <a href="#services" class="text-lg font-bold text-white">Services</a>
+            <a href="#stack" class="text-lg font-bold text-white">Projects</a>
+            <a href="#cleanloop" class="text-lg font-bold text-vros-accent">CleanLoop™</a>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative h-screen min-h-[800px] flex items-center justify-center overflow-hidden">
+        
+        <!-- Background Video/Image Parallax -->
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-gradient-to-b from-vros-deep/30 via-vros-deep/60 to-vros-deep z-10"></div>
+            <!-- High quality industrial abstract image -->
+            <img id="hero-bg" src="https://images.unsplash.com/photo-1552055620-804c7d0e495f?q=80&w=2000&auto=format&fit=crop" 
+                 class="w-full h-full object-cover scale-110 opacity-60 transition-transform duration-[50ms] ease-out" alt="Offshore Rig">
+        </div>
+
+        <!-- Parallax Word -->
+        <div class="parallax-wrapper">
+            <div class="big-word top-1/4 -right-20 opacity-10" data-speed="0.2">FUTURE</div>
+            <div class="big-word bottom-20 -left-20 opacity-5" data-speed="-0.1">ENERGY</div>
+        </div>
+
+        <!-- Content -->
+        <div class="container mx-auto px-6 relative z-20 pt-20">
+            <div class="max-w-4xl mx-auto text-center">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-white/5 backdrop-blur-md mb-8 reveal-on-scroll">
+                    <span class="w-2 h-2 rounded-full bg-vros-primary"></span>
+                    <span class="text-xs font-bold text-vros-silver uppercase tracking-widest">Next-Gen Marine & Energy Solutions</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl lg:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-8 reveal-on-scroll transition-all delay-100">
+                    ENERGY <br>
+                    <span class="text-shine">EVOLVED</span>
+                </h1>
+                
+                <p class="text-lg md:text-xl text-vros-silver max-w-2xl mx-auto leading-relaxed mb-10 reveal-on-scroll transition-all delay-200">
+                    VROS Group bridges the gap between traditional energy demands and modern sustainability. From offshore logistics to our proprietary CleanLoop™ recovery systems.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal-on-scroll transition-all delay-300">
+                    <a href="#services" class="px-8 py-4 bg-vros-primary text-white font-bold rounded-full hover:bg-white hover:text-vros-deep transition-all transform hover:-translate-y-1 shadow-lg shadow-blue-500/20">
+                        Explore Services
+                    </a>
+                    <a href="#cleanloop" class="px-8 py-4 border border-white/20 text-white font-bold rounded-full hover:bg-white/10 transition-all backdrop-blur-sm flex items-center gap-2 group">
+                        <i class="fa-solid fa-play text-xs group-hover:text-vros-accent transition-colors"></i> View Technology
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50 animate-bounce">
+            <span class="text-[10px] uppercase tracking-widest">Scroll</span>
+            <i class="fa-solid fa-chevron-down"></i>
+        </div>
+    </header>
+
+    <!-- MARQUEE SECTION -->
+    <div class="bg-vros-primary py-4 relative z-20 transform -skew-y-1 origin-left overflow-hidden border-y-4 border-vros-deep">
+        <div class="flex animate-scroll whitespace-nowrap">
+            <div class="flex gap-16 px-8 text-vros-deep font-black text-xl uppercase tracking-wider items-center">
+                <span><i class="fa-solid fa-star text-white mr-2"></i> Trusted by Chevron</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> Partner of Shell</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> ExxonMobil</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> Petronas</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> BP Marine</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> Trusted by Chevron</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> Partner of Shell</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> ExxonMobil</span>
+            </div>
+            <div class="flex gap-16 px-8 text-vros-deep font-black text-xl uppercase tracking-wider items-center">
+                 <span><i class="fa-solid fa-star text-white mr-2"></i> Trusted by Chevron</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> Partner of Shell</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> ExxonMobil</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> Petronas</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> BP Marine</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> Trusted by Chevron</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> Partner of Shell</span>
+                <span><i class="fa-solid fa-star text-white mr-2"></i> ExxonMobil</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES GRID (Dark Theme) -->
+    <section id="services" class="py-32 relative">
+        <div class="parallax-wrapper">
+            <div class="big-word top-20 right-0 opacity-5" data-speed="0.15">CAPABILITY</div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+                <div class="max-w-2xl">
+                    <h2 class="text-4xl md:text-6xl font-black text-white mb-6 reveal-on-scroll">Engineered for <br><span class="text-vros-primary">Excellence</span></h2>
+                    <p class="text-vros-silver text-lg reveal-on-scroll delay-100">Our integrated approach combines marine logistics, upstream support, and waste management into a seamless operational flow.</p>
+                </div>
+                <a href="#contact" class="reveal-on-scroll delay-200 text-white border-b border-vros-primary pb-1 hover:text-vros-primary transition-colors">Download Capability Statement</a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="group bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-500 reveal-on-scroll">
+                    <div class="w-16 h-16 bg-blue-500/20 rounded-2xl flex items-center justify-center text-blue-400 text-3xl mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-anchor"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Marine Logistics</h3>
+                    <p class="text-vros-silver mb-8 leading-relaxed">Vessel chartering (AHTS, PSV), fleet management, and rig moves tailored for complex offshore environments.</p>
+                    <div class="w-full h-[1px] bg-white/10 mb-6 group-hover:bg-blue-500/50 transition-colors"></div>
+                    <span class="text-sm font-bold text-blue-400 uppercase tracking-wider group-hover:translate-x-2 transition-transform inline-block">Explore Marine <i class="fa-solid fa-arrow-right ml-2"></i></span>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="group bg-white/5 border border-white/10 p-8 rounded-3xl hover:bg-white/10 transition-all duration-500 reveal-on-scroll delay-100">
+                    <div class="w-16 h-16 bg-indigo-500/20 rounded-2xl flex items-center justify-center text-indigo-400 text-3xl mb-8 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-oil-well"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Upstream Support</h3>
+                    <p class="text-vros-silver mb-8 leading-relaxed">Drilling support, subsea engineering, and procurement services to ensure asset uptime and efficiency.</p>
+                    <div class="w-full h-[1px] bg-white/10 mb-6 group-hover:bg-indigo-500/50 transition-colors"></div>
+                    <span class="text-sm font-bold text-indigo-400 uppercase tracking-wider group-hover:translate-x-2 transition-transform inline-block">Explore Energy <i class="fa-solid fa-arrow-right ml-2"></i></span>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="group bg-gradient-to-br from-white/5 to-vros-accent/10 border border-vros-accent/20 p-8 rounded-3xl hover:bg-white/10 transition-all duration-500 reveal-on-scroll delay-200 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10">
+                        <i class="fa-solid fa-leaf text-9xl text-vros-accent"></i>
+                    </div>
+                    <div class="w-16 h-16 bg-vros-accent/20 rounded-2xl flex items-center justify-center text-vros-accent text-3xl mb-8 group-hover:scale-110 transition-transform relative z-10">
+                        <i class="fa-solid fa-recycle"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4 relative z-10">CleanLoop™ Recovery</h3>
+                    <p class="text-vros-silver mb-8 leading-relaxed relative z-10">Proprietary technology converting industrial sludge into reusable base oils and clean water.</p>
+                    <div class="w-full h-[1px] bg-white/10 mb-6 group-hover:bg-vros-accent/50 transition-colors relative z-10"></div>
+                    <span class="text-sm font-bold text-vros-accent uppercase tracking-wider group-hover:translate-x-2 transition-transform inline-block relative z-10">View Tech <i class="fa-solid fa-arrow-right ml-2"></i></span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CARD STACKING SECTION (Deep Dive) -->
+    <section id="stack" class="relative stack-section pt-20">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-24">
+                <h2 class="text-4xl md:text-5xl font-black text-white mb-4">Strategic Assets</h2>
+                <div class="h-1 w-20 bg-vros-primary mx-auto"></div>
+            </div>
+
+            <div class="max-w-6xl mx-auto">
+                
+                <!-- Card 1 -->
+                <div class="stack-card h-[600px] grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-8 md:p-16 flex flex-col justify-center order-2 lg:order-1">
+                        <span class="text-vros-primary font-bold tracking-widest uppercase mb-4">01 — Marine</span>
+                        <h3 class="text-4xl font-black text-white mb-6">Offshore Fleet</h3>
+                        <p class="text-vros-silver text-lg mb-8">Modern AHTS and PSV vessels equipped with dynamic positioning systems for precision operations in deep water environments.</p>
+                        <ul class="space-y-4 mb-8">
+                            <li class="flex items-center text-white"><i class="fa-solid fa-check text-vros-primary mr-3"></i> DP2 Capable Vessels</li>
+                            <li class="flex items-center text-white"><i class="fa-solid fa-check text-vros-primary mr-3"></i> Heavy Lift Capabilities</li>
+                        </ul>
+                    </div>
+                    <div class="visual order-1 lg:order-2 h-full">
+                        <img src="https://images.unsplash.com/photo-1569263979104-565b63418962?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Ship">
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="stack-card h-[600px] grid grid-cols-1 lg:grid-cols-2">
+                    <div class="p-8 md:p-16 flex flex-col justify-center order-2 lg:order-1">
+                        <span class="text-indigo-400 font-bold tracking-widest uppercase mb-4">02 — Infrastructure</span>
+                        <h3 class="text-4xl font-black text-white mb-6">Subsea Engineering</h3>
+                        <p class="text-vros-silver text-lg mb-8">End-to-end maintenance for pipelines and risers. We utilize advanced ROVs to inspect and repair assets without interrupting production.</p>
+                        <div class="flex gap-4">
+                            <span class="px-4 py-2 bg-indigo-500/20 text-indigo-300 rounded text-sm font-bold">ROV Ops</span>
+                            <span class="px-4 py-2 bg-indigo-500/20 text-indigo-300 rounded text-sm font-bold">Pipeline</span>
+                        </div>
+                    </div>
+                    <div class="visual order-1 lg:order-2 h-full">
+                        <img src="https://images.unsplash.com/photo-1621255536136-1c521364d1f5?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Subsea">
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="stack-card h-[600px] grid grid-cols-1 lg:grid-cols-2 border-t-4 border-vros-accent">
+                    <div class="p-8 md:p-16 flex flex-col justify-center order-2 lg:order-1 relative">
+                        <div class="absolute top-0 right-0 p-10 opacity-10 pointer-events-none">
+                            <i class="fa-solid fa-recycle text-9xl text-vros-accent"></i>
+                        </div>
+                        <span class="text-vros-accent font-bold tracking-widest uppercase mb-4">03 — CleanLoop™</span>
+                        <h3 class="text-4xl font-black text-white mb-6">Resource Recovery</h3>
+                        <p class="text-vros-silver text-lg mb-8">The jewel of our sustainability crown. CleanLoop™ systems treat hazardous sludge onsite, recovering 99% of hydrocarbons for reuse.</p>
+                        <a href="#cleanloop" class="inline-flex items-center gap-2 text-vros-accent font-bold text-lg hover:gap-4 transition-all">
+                            View Process Diagram <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="visual order-1 lg:order-2 h-full relative group">
+                        <div class="absolute inset-0 bg-vros-accent/20 mix-blend-overlay group-hover:bg-transparent transition-all"></div>
+                        <img src="https://images.unsplash.com/photo-1532601224476-15c79f2f7a51?q=80&w=1000&auto=format&fit=crop" class="w-full h-full object-cover" alt="Clean Tech">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- CLEANLOOP DIAGRAM (Light Section Break) -->
+    <section id="cleanloop" class="py-32 bg-white text-vros-deep relative overflow-hidden">
+        <div class="container mx-auto px-6 relative z-10">
+            <div class="text-center mb-20">
+                <span class="text-vros-accent font-black text-xl uppercase tracking-widest mb-2 block">Zero Waste</span>
+                <h2 class="text-4xl md:text-6xl font-black text-vros-deep mb-8">The CleanLoop™ Ecosystem</h2>
+                <p class="text-gray-500 max-w-2xl mx-auto text-lg">Turning liabilities into assets through our closed-loop filtration system.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+                <!-- Step 1 -->
+                <div class="bg-gray-50 p-10 rounded-3xl border border-gray-200 text-center hover:shadow-xl transition-shadow">
+                    <div class="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-500 text-3xl">
+                        <i class="fa-solid fa-dumpster"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">1. Input</h3>
+                    <p class="text-gray-500">Hazardous tank sludge and oily bilge water.</p>
+                </div>
+
+                <!-- Step 2 (Middle) -->
+                <div class="bg-vros-deep text-white p-12 rounded-[3rem] text-center shadow-2xl relative transform scale-105 z-10">
+                    <div class="absolute -top-6 left-1/2 -translate-x-1/2 bg-vros-accent text-vros-deep px-6 py-2 rounded-full font-bold uppercase text-sm tracking-wider shadow-lg ring-4 ring-white">
+                        Proprietary Tech
+                    </div>
+                    <i class="fa-solid fa-arrows-spin text-6xl text-vros-accent mb-6 animate-spin-slow"></i>
+                    <h3 class="text-2xl font-black mb-2">Recovery Module</h3>
+                    <p class="text-white/60">Multi-stage filtration & separation.</p>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-green-50 p-10 rounded-3xl border border-green-100 text-center hover:shadow-xl transition-shadow">
+                    <div class="w-20 h-20 bg-green-200 rounded-full flex items-center justify-center mx-auto mb-6 text-green-600 text-3xl">
+                        <i class="fa-solid fa-droplet"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">3. Output</h3>
+                    <p class="text-gray-500">Clean base oil and discharged water.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS & FAQ -->
+    <section class="py-32 relative bg-vros-dark overflow-hidden">
+        <!-- Parallax Word -->
+        <div class="parallax-wrapper">
+            <div class="big-word bottom-20 left-0 opacity-5" data-speed="0.1">TRUST</div>
+        </div>
+
+        <div class="container mx-auto px-6 relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-20">
+            
+            <!-- Review Marquee (Vertical on desktop, horizontal on mobile) -->
+            <div>
+                <h3 class="text-3xl font-black text-white mb-10">Client Success</h3>
+                <div class="relative h-[500px] overflow-hidden mask-gradient-y">
+                    <div class="flex flex-col gap-6 animate-[float_20s_linear_infinite]">
+                        <!-- R1 -->
+                        <div class="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-md">
+                            <div class="text-vros-accent text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-vros-silver italic mb-4">"VROS Group's quick response during our rig move saved us millions in potential downtime. Absolute professionals."</p>
+                            <div class="font-bold text-white">James C. <span class="text-gray-500 text-sm font-normal block">Ops Director, Shell</span></div>
+                        </div>
+                        <!-- R2 -->
+                        <div class="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-md">
+                            <div class="text-vros-accent text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-vros-silver italic mb-4">"The CleanLoop system is a game changer for our ESG reporting. Zero waste achieved."</p>
+                            <div class="font-bold text-white">Sarah L. <span class="text-gray-500 text-sm font-normal block">Sustainability Lead, BP</span></div>
+                        </div>
+                        <!-- R3 -->
+                        <div class="bg-white/5 p-8 rounded-2xl border border-white/10 backdrop-blur-md">
+                            <div class="text-vros-accent text-sm mb-4"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                            <p class="text-vros-silver italic mb-4">"Top tier engineering support for our subsea assets."</p>
+                            <div class="font-bold text-white">Michael Wong <span class="text-gray-500 text-sm font-normal block">Project Mgr, Keppel</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Accordion -->
+            <div>
+                <h3 class="text-3xl font-black text-white mb-10">FAQ</h3>
+                <div class="space-y-4">
+                    <!-- Q1 -->
+                    <div class="faq-item group bg-white/5 rounded-2xl border border-white/5 overflow-hidden transition-all hover:bg-white/10">
+                        <button class="w-full flex justify-between items-center p-6 text-left" onclick="toggleFaq(this)">
+                            <span class="font-bold text-lg text-white">What is the capacity of CleanLoop?</span>
+                            <i class="fa-solid fa-plus text-vros-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-inner px-6 pb-6 text-vros-silver">
+                                Our CL-RM units can process up to 20,000 liters of sludge per day, depending on viscosity and contamination levels.
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Q2 -->
+                    <div class="faq-item group bg-white/5 rounded-2xl border border-white/5 overflow-hidden transition-all hover:bg-white/10">
+                        <button class="w-full flex justify-between items-center p-6 text-left" onclick="toggleFaq(this)">
+                            <span class="font-bold text-lg text-white">Do you operate globally?</span>
+                            <i class="fa-solid fa-plus text-vros-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-inner px-6 pb-6 text-vros-silver">
+                                Yes. While headquartered in Singapore, we have operational hubs in the Middle East and strategic partnerships in the North Sea.
+                            </div>
+                        </div>
+                    </div>
+                     <!-- Q3 -->
+                     <div class="faq-item group bg-white/5 rounded-2xl border border-white/5 overflow-hidden transition-all hover:bg-white/10">
+                        <button class="w-full flex justify-between items-center p-6 text-left" onclick="toggleFaq(this)">
+                            <span class="font-bold text-lg text-white">How fast can you mobilize a vessel?</span>
+                            <i class="fa-solid fa-plus text-vros-primary transition-transform duration-300"></i>
+                        </button>
+                        <div class="faq-content">
+                            <div class="faq-inner px-6 pb-6 text-vros-silver">
+                                For spot charters in Southeast Asia, we can mobilize within 24-48 hours.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact" class="bg-[#000] text-white pt-24 pb-12 border-t border-white/10">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
+                <div class="col-span-1 lg:col-span-2">
+                    <a href="#" class="text-3xl font-black tracking-tight mb-6 block text-white">VROS GROUP</a>
+                    <p class="text-gray-400 max-w-sm mb-8 text-lg leading-relaxed">
+                        Engineering a sustainable future for the marine and energy sectors.
+                    </p>
+                    <div class="flex gap-4">
+                        <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-vros-primary hover:text-white transition-all"><i class="fa-brands fa-linkedin-in text-xl"></i></a>
+                        <a href="#" class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-vros-primary hover:text-white transition-all"><i class="fa-brands fa-twitter text-xl"></i></a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-8">Navigation</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li><a href="#" class="hover:text-vros-primary transition-colors">About Us</a></li>
+                        <li><a href="#" class="hover:text-vros-primary transition-colors">Our Services</a></li>
+                        <li><a href="#" class="hover:text-vros-primary transition-colors">CleanLoop™ Tech</a></li>
+                        <li><a href="#" class="hover:text-vros-primary transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-bold text-white mb-8">Contact</h4>
+                    <ul class="space-y-4 text-gray-400">
+                        <li class="flex items-start gap-4">
+                            <i class="fa-solid fa-location-dot mt-1 text-vros-primary"></i>
+                            <span>123 Energy Blvd, Suite 400<br>Singapore, 00000</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fa-solid fa-envelope text-vros-primary"></i>
+                            <span>contact@vrosgroup.com</span>
+                        </li>
+                        <li class="flex items-center gap-4">
+                            <i class="fa-solid fa-phone text-vros-primary"></i>
+                            <span>+65 6789 0000</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-gray-500">
+                <div>&copy; 2025 VROS Group. All Rights Reserved.</div>
+                <div class="flex gap-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-white">Privacy</a>
+                    <a href="#" class="hover:text-white">Terms</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE SCRIPTS -->
+    <script>
+        // 1. FAQ Logic
+        function toggleFaq(button) {
+            const item = button.parentElement;
+            const icon = button.querySelector('i');
+            
+            // Close others
+            document.querySelectorAll('.faq-item').forEach(other => {
+                if(other !== item) {
+                    other.classList.remove('active');
+                    other.querySelector('i').classList.remove('rotate-45');
+                }
+            });
+
+            // Toggle current
+            item.classList.toggle('active');
+            icon.classList.toggle('rotate-45');
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            // 2. Parallax Effect & Scroll Reveal
+            const parallaxWords = document.querySelectorAll('.big-word');
+            const bgImage = document.getElementById('hero-bg');
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');
+            const stackCards = document.querySelectorAll('.stack-card');
+            
+            let ticking = false;
+
+            const updateScroll = () => {
+                const scrolled = window.scrollY;
+                const viewHeight = window.innerHeight;
+
+                // Parallax Words
+                parallaxWords.forEach(word => {
+                    const speed = parseFloat(word.getAttribute('data-speed'));
+                    word.style.transform = `translateY(${scrolled * speed}px)`;
+                });
+
+                // Hero Image
+                if (scrolled < viewHeight) {
+                    bgImage.style.transform = `scale(1.1) translateY(${scrolled * 0.3}px)`;
+                }
+
+                // Scroll Reveal
+                revealElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    if (rect.top < viewHeight * 0.85) {
+                        el.classList.add('is-visible');
+                    }
+                });
+
+                // Card Stacking Logic (Desktop Only)
+                if (window.innerWidth > 1024) {
+                    stackCards.forEach((card, index) => {
+                        const nextCard = stackCards[index + 1];
+                        if (nextCard) {
+                            const rect = card.getBoundingClientRect();
+                            const nextRect = nextCard.getBoundingClientRect();
+                            
+                            // Check overlap
+                            if (nextRect.top <= window.innerHeight) {
+                                const progress = Math.max(0, Math.min(1, 1 - (nextRect.top / window.innerHeight)));
+                                const scale = 1 - (progress * 0.05);
+                                const brightness = 1 - (progress * 0.5); // Darken heavily for depth
+                                
+                                card.style.transform = `scale(${scale})`;
+                                card.style.filter = `brightness(${brightness})`;
+                            } else {
+                                card.style.transform = `scale(1)`;
+                                card.style.filter = `brightness(1)`;
+                            }
+                        }
+                    });
+                }
+            };
+
+            window.addEventListener('scroll', () => {
+                if (!ticking) {
+                    window.requestAnimationFrame(() => {
+                        updateScroll();
+                        ticking = false;
+                    });
+                    ticking = true;
+                }
+            });
+
+            // Initial Trigger
+            updateScroll();
+        });
+    </script>
+</body>
+</html>
