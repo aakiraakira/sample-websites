@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CleanLoop™ Ecosystem | VROS Energy</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vros: {
+                            dark: '#0f172a',
+                            primary: '#0284c7',
+                            accent: '#65a30d', 
+                            oil: '#f59e0b',
+                            water: '#06b6d4',
+                            surface: '#ffffff',
+                            subtle: '#f8fafc'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Manrope', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'flow-h': 'flowHorizontal 3s linear infinite',
+                        'flow-v': 'flowVertical 3s linear infinite',
+                    },
+                    keyframes: {
+                        flowHorizontal: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(100%)' },
+                        },
+                        flowVertical: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' },
+                        }
+                    },
+                    boxShadow: {
+                        'glow': '0 0 20px rgba(2, 132, 199, 0.15)',
+                        'glow-oil': '0 0 20px rgba(245, 158, 11, 0.15)',
+                        'glow-water': '0 0 20px rgba(6, 182, 212, 0.15)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- PIPE ANIMATIONS --- */
+        .pipe-track {
+            position: absolute;
+            background: #e2e8f0;
+            overflow: hidden;
+            z-index: 0;
+            border-radius: 9999px;
+        }
+
+        .pipe-fluid {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, var(--flow-color, #94a3b8), transparent);
+            transform: translateX(-100%);
+            animation: flowHorizontal 2.5s infinite linear;
+            opacity: 0.7;
+        }
+        
+        .pipe-track.vertical .pipe-fluid {
+            background: linear-gradient(180deg, transparent, var(--flow-color, #94a3b8), transparent);
+            transform: translateY(-100%);
+            animation: flowVertical 2.5s infinite linear;
+        }
+
+        /* --- CARD HOVER EFFECTS --- */
+        .tech-card {
+            transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        /* --- MOBILE TIMELINE --- */
+        .timeline-line {
+            position: absolute;
+            left: 27px; /* Align with icon center */
+            top: 40px;
+            bottom: 40px;
+            width: 2px;
+            background: #e2e8f0;
+            z-index: 0;
+        }
+        .timeline-line::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 30%;
+            background: linear-gradient(180deg, transparent, #0284c7, transparent);
+            animation: flowVertical 3s infinite linear;
+        }
+    </style>
+</head>
+<body class="bg-vros-subtle text-slate-900 font-sans antialiased overflow-x-hidden">
+
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-xl border-b border-slate-100 shadow-sm">
+        <div class="container mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="flex items-center gap-3 group cursor-pointer">
+                <div class="w-10 h-10 bg-vros-primary rounded-lg flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-blue-500/20 group-hover:scale-105 transition-transform">V</div>
+                <div>
+                    <span class="block text-lg font-black text-slate-900 leading-none">VROS</span>
+                    <span class="block text-[10px] font-bold text-vros-primary tracking-[0.25em] uppercase">Energy</span>
+                </div>
+            </div>
+            <a href="#" class="hidden md:inline-flex items-center gap-2 px-6 py-2.5 bg-slate-900 text-white text-sm font-bold rounded-full hover:bg-vros-primary transition-all hover:shadow-lg hover:shadow-blue-500/20">
+                Contact Sales <i class="fa-solid fa-arrow-right text-xs"></i>
+            </a>
+        </div>
+    </nav>
+
+    <header class="pt-32 pb-16 bg-white relative overflow-hidden">
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 text-green-700 text-xs font-bold uppercase tracking-widest mb-6 border border-green-100 shadow-sm animate-fade-in-up">
+                <i class="fa-solid fa-leaf"></i> Zero Waste Technology
+            </div>
+            <h1 class="text-4xl md:text-6xl font-black text-slate-900 mb-6 tracking-tight">The CleanLoop™ Ecosystem</h1>
+            <p class="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+                Transforming hazardous maritime waste into value. Our proprietary closed-loop system recovers fuel and purifies water with zero discharge.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-16 md:py-24 bg-vros-subtle relative overflow-hidden">
+        <div class="container mx-auto px-4 md:px-6 relative z-10">
+
+            <div class="block lg:hidden relative pl-2 space-y-16 pb-20">
+                <div class="timeline-line"></div>
+
+                <div class="relative">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 shadow-sm z-10 relative">
+                            <i class="fa-solid fa-arrow-right-to-bracket text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">1. Waste Inputs</h3>
+                    </div>
+                    
+                    <div class="pl-16 space-y-3">
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-oil-can"></i></div>
+                            <div>
+                                <div class="font-bold text-slate-800 text-sm">Tank Bottom Sludge</div>
+                                <div class="text-xs text-slate-500">High viscosity residue</div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-cyan-50 text-cyan-600 flex items-center justify-center shrink-0"><i class="fa-solid fa-water"></i></div>
+                            <div>
+                                <div class="font-bold text-slate-800 text-sm">Oily Bilge & Slop</div>
+                                <div class="text-xs text-slate-500">Marine wastewater</div>
+                            </div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-red-50 text-red-500 flex items-center justify-center shrink-0"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                            <div>
+                                <div class="font-bold text-slate-800 text-sm">Contaminated Diesel</div>
+                                <div class="text-xs text-slate-500">Degraded fuel</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-slate-900 border-4 border-white rounded-full flex items-center justify-center text-vros-primary shadow-xl z-10 relative animate-pulse-slow">
+                            <i class="fa-solid fa-arrows-spin fa-spin-pulse"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">2. Processing</h3>
+                    </div>
+
+                    <div class="ml-10 md:ml-16 bg-gradient-to-br from-slate-900 to-slate-800 text-white p-6 rounded-2xl shadow-2xl relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-32 h-32 bg-vros-primary/20 rounded-full blur-3xl -mr-10 -mt-10"></div>
+                        
+                        <div class="relative z-10">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="px-3 py-1 bg-white/10 rounded-full text-[10px] font-bold uppercase tracking-wider text-vros-primary">Core Tech</span>
+                                <i class="fa-solid fa-microchip text-slate-600"></i>
+                            </div>
+                            <h4 class="text-2xl font-black mb-2">Recovery Module</h4>
+                            <div class="text-vros-primary font-bold text-xs uppercase tracking-widest mb-4">CleanLoop™ (CL-RM)</div>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-6 border-l-2 border-vros-primary/50 pl-3">
+                                Proprietary multi-stage separation technology. Breaks emulsions and isolates contaminants from water and oil.
+                            </p>
+                            <div class="flex gap-2">
+                                <span class="px-2 py-1 bg-slate-700 rounded text-xs text-slate-300 font-medium">High Efficiency</span>
+                                <span class="px-2 py-1 bg-slate-700 rounded text-xs text-slate-300 font-medium">Automated</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-14 h-14 bg-white border border-slate-200 rounded-full flex items-center justify-center text-slate-400 shadow-sm z-10 relative">
+                            <i class="fa-solid fa-share-nodes text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900">3. Output & Refining</h3>
+                    </div>
+
+                    <div class="ml-10 md:ml-16 space-y-6">
+                        <div class="bg-white p-6 rounded-2xl border-l-4 border-vros-oil shadow-sm relative overflow-hidden">
+                            <div class="absolute right-0 top-0 w-24 h-24 bg-amber-50 rounded-full blur-2xl -mr-12 -mt-12 opacity-50"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <i class="fa-solid fa-fire text-vros-oil text-xl"></i>
+                                    <div>
+                                        <h4 class="font-bold text-slate-900">CleanOil™ Upgrader</h4>
+                                        <div class="text-[10px] font-bold text-slate-400 uppercase">COU-100 Series</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center p-2 bg-slate-50 rounded border border-slate-100">
+                                        <span class="text-xs font-bold text-slate-600">Base Oil (RFO)</span>
+                                        <i class="fa-solid fa-check-circle text-green-500 text-xs"></i>
+                                    </div>
+                                    <div class="flex justify-between items-center p-2 bg-amber-50/50 rounded border border-amber-100">
+                                        <span class="text-xs font-bold text-amber-800">GoldTech™ Oil</span>
+                                        <i class="fa-solid fa-star text-amber-500 text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-6 rounded-2xl border-l-4 border-vros-water shadow-sm relative overflow-hidden">
+                            <div class="absolute right-0 top-0 w-24 h-24 bg-cyan-50 rounded-full blur-2xl -mr-12 -mt-12 opacity-50"></div>
+                            <div class="relative z-10">
+                                <div class="flex items-center gap-3 mb-4">
+                                    <i class="fa-solid fa-droplet text-vros-water text-xl"></i>
+                                    <div>
+                                        <h4 class="font-bold text-slate-900">AquaLoop™ System</h4>
+                                        <div class="text-[10px] font-bold text-slate-400 uppercase">AL-1 Series</div>
+                                    </div>
+                                </div>
+                                <div class="space-y-2">
+                                    <div class="flex justify-between items-center p-2 bg-cyan-50/50 rounded border border-cyan-100">
+                                        <span class="text-xs font-bold text-cyan-800">PureFlow™ Water</span>
+                                        <i class="fa-solid fa-check-circle text-cyan-500 text-xs"></i>
+                                    </div>
+                                    <div class="flex justify-between items-center p-2 bg-slate-50 rounded border border-slate-100">
+                                        <span class="text-xs font-bold text-slate-600">ESG Data Reports</span>
+                                        <i class="fa-solid fa-chart-line text-slate-400 text-xs"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="hidden lg:grid grid-cols-12 gap-6 relative h-[650px] items-center">
+
+                <div class="pipe-track h-2 w-[12%] top-1/2 left-[12%] -translate-y-1/2 rounded-l-none">
+                    <div class="pipe-fluid" style="--flow-color: #94a3b8;"></div>
+                </div>
+
+                <div class="pipe-track h-2 w-[5%] left-[45%] top-1/2 -translate-y-1/2">
+                    <div class="pipe-fluid" style="--flow-color: #94a3b8;"></div>
+                </div>
+
+                <div class="pipe-track vertical w-2 h-[50%] left-[51.5%] top-[25%] rounded-none">
+                    <div class="pipe-fluid" style="--flow-color: #cbd5e1;"></div>
+                </div>
+
+                <div class="pipe-track h-2 w-[5%] left-[51.5%] top-[25%]">
+                    <div class="pipe-fluid" style="--flow-color: #f59e0b;"></div> </div>
+
+                <div class="pipe-track h-2 w-[5%] left-[51.5%] top-[75%]">
+                    <div class="pipe-fluid" style="--flow-color: #06b6d4;"></div> </div>
+
+                <div class="pipe-track h-2 w-[5%] left-[75%] top-[25%]">
+                    <div class="pipe-fluid" style="--flow-color: #f59e0b;"></div>
+                </div>
+
+                <div class="pipe-track h-2 w-[5%] left-[75%] top-[75%]">
+                    <div class="pipe-fluid" style="--flow-color: #06b6d4;"></div>
+                </div>
+
+
+                <div class="col-span-2 flex flex-col justify-center gap-5 z-10 h-full py-12">
+                    <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest text-center mb-2">Sources</div>
+                    
+                    <div class="tech-card bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3 group cursor-default hover:border-slate-300">
+                        <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300"><i class="fa-solid fa-oil-can"></i></div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-800 leading-tight">Tank Bottom<br>Sludge</div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3 group cursor-default hover:border-slate-300">
+                        <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300"><i class="fa-solid fa-water"></i></div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-800 leading-tight">Oily Bilge<br>& Slop</div>
+                        </div>
+                    </div>
+
+                    <div class="tech-card bg-white p-4 rounded-xl border border-slate-200 shadow-sm flex items-center gap-3 group cursor-default hover:border-slate-300">
+                        <div class="w-10 h-10 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400 group-hover:bg-slate-900 group-hover:text-white transition-colors duration-300"><i class="fa-solid fa-triangle-exclamation"></i></div>
+                        <div>
+                            <div class="text-xs font-bold text-slate-800 leading-tight">Contaminated<br>Diesel</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-4 z-10 flex items-center justify-center h-full pl-6">
+                    <div class="tech-card w-full bg-slate-900 text-white p-10 rounded-[2rem] shadow-2xl shadow-slate-900/20 relative overflow-hidden group border border-slate-800">
+                        <div class="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950 z-0"></div>
+                        <div class="absolute top-0 right-0 w-48 h-48 bg-vros-primary/20 rounded-full blur-3xl -mr-16 -mt-16 group-hover:bg-vros-primary/30 transition-all duration-700"></div>
+                        
+                        <div class="relative z-10 text-center">
+                            <div class="w-24 h-24 mx-auto bg-slate-800/80 backdrop-blur rounded-full flex items-center justify-center text-4xl text-vros-primary mb-8 shadow-inner border border-slate-700/50 group-hover:scale-110 transition-transform duration-500">
+                                <i class="fa-solid fa-arrows-spin fa-spin-pulse"></i>
+                            </div>
+                            <h3 class="text-2xl font-black mb-2 tracking-tight">Recovery Module</h3>
+                            <div class="text-vros-primary font-bold text-xs uppercase tracking-[0.2em] mb-6">CleanLoop™ (CL-RM)</div>
+                            <p class="text-slate-400 text-sm leading-relaxed mb-8 px-2 font-medium">
+                                Proprietary multi-stage separation technology. Breaks emulsions and isolates contaminants from water and oil.
+                            </p>
+                            <div class="inline-flex items-center gap-2 px-5 py-2.5 bg-vros-primary/10 rounded-full text-xs font-bold text-vros-primary border border-vros-primary/20 hover:bg-vros-primary hover:text-white transition-colors">
+                                <i class="fa-solid fa-bolt"></i> High Efficiency
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-span-3 z-10 flex flex-col justify-between h-[75%] py-8 pl-8">
+                    
+                    <div class="tech-card bg-white p-6 rounded-2xl border-l-[6px] border-vros-oil shadow-lg hover:shadow-glow-oil h-[45%] flex flex-col justify-center relative group">
+                        <div class="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full border-4 border-vros-oil"></div>
+                        
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center text-vros-oil text-xl"><i class="fa-solid fa-fire"></i></div>
+                            <h4 class="font-bold text-slate-900 text-lg leading-none">CleanOil™<br>Upgrader</h4>
+                        </div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase mb-3 tracking-wider">COU-100 Series</div>
+                        <p class="text-sm text-slate-600">Polishes recovered oil for industrial reuse or blending.</p>
+                    </div>
+
+                    <div class="tech-card bg-white p-6 rounded-2xl border-l-[6px] border-vros-water shadow-lg hover:shadow-glow-water h-[45%] flex flex-col justify-center relative group">
+                        <div class="absolute -left-[9px] top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full border-4 border-vros-water"></div>
+                        
+                        <div class="flex items-center gap-3 mb-3">
+                            <div class="w-10 h-10 bg-cyan-50 rounded-lg flex items-center justify-center text-vros-water text-xl"><i class="fa-solid fa-droplet"></i></div>
+                            <h4 class="font-bold text-slate-900 text-lg leading-none">AquaLoop™<br>System</h4>
+                        </div>
+                        <div class="text-[10px] font-bold text-slate-400 uppercase mb-3 tracking-wider">AL-1 Series</div>
+                        <p class="text-sm text-slate-600">Filtration & UV purification to meet strict discharge standards.</p>
+                    </div>
+                </div>
+
+                <div class="col-span-3 z-10 flex flex-col justify-between h-[75%] py-8">
+                     
+                     <div class="h-[45%] flex flex-col justify-center gap-4 pl-4 border-l border-dashed border-slate-300">
+                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Energy Recovered</div>
+                        
+                        <div class="tech-card bg-white p-3 rounded-xl border border-slate-200 flex items-center gap-3 hover:border-amber-300 hover:bg-amber-50/30 transition-colors">
+                            <div class="w-8 h-8 rounded bg-amber-100 text-amber-600 flex items-center justify-center shadow-sm text-xs"><i class="fa-solid fa-bottle-droplet"></i></div>
+                            <div>
+                                <div class="text-[10px] text-amber-600 font-bold uppercase">Base Oil</div>
+                                <div class="text-sm font-bold text-slate-900">RFO / Industrial</div>
+                            </div>
+                        </div>
+                        <div class="tech-card bg-gradient-to-r from-amber-50 to-white p-3 rounded-xl border border-amber-200 flex items-center gap-3 hover:shadow-md transition-shadow">
+                            <div class="w-8 h-8 rounded bg-amber-500 text-white flex items-center justify-center shadow-sm text-xs"><i class="fa-solid fa-star"></i></div>
+                            <div>
+                                <div class="text-[10px] text-amber-800 font-bold uppercase">Premium Product</div>
+                                <div class="text-sm font-bold text-slate-900">GoldTech™ Oil</div>
+                            </div>
+                        </div>
+                     </div>
+
+                     <div class="h-[45%] flex flex-col justify-center gap-4 pl-4 border-l border-dashed border-slate-300">
+                        <div class="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Environment Restored</div>
+                        
+                        <div class="tech-card bg-white p-3 rounded-xl border border-slate-200 flex items-center gap-3 hover:border-cyan-300 hover:bg-cyan-50/30 transition-colors">
+                            <div class="w-8 h-8 rounded bg-cyan-100 text-cyan-600 flex items-center justify-center shadow-sm text-xs"><i class="fa-solid fa-glass-water"></i></div>
+                            <div>
+                                <div class="text-[10px] text-cyan-700 font-bold uppercase">Clean Discharge</div>
+                                <div class="text-sm font-bold text-slate-900">PureFlow™ Water</div>
+                            </div>
+                        </div>
+                        <div class="tech-card bg-white p-3 rounded-xl border border-slate-200 flex items-center gap-3 hover:border-green-300 hover:bg-green-50/30 transition-colors">
+                            <div class="w-8 h-8 rounded bg-green-100 text-green-600 flex items-center justify-center shadow-sm text-xs"><i class="fa-solid fa-file-contract"></i></div>
+                            <div>
+                                <div class="text-[10px] text-green-700 font-bold uppercase">Reporting</div>
+                                <div class="text-sm font-bold text-slate-900">Carbon/ESG Data</div>
+                            </div>
+                        </div>
+                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-white border-t border-slate-200 py-12">
+        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-2 opacity-50 grayscale hover:grayscale-0 transition-all">
+                <span class="font-bold text-slate-900">VROS Group</span>
+            </div>
+            <div class="text-xs text-slate-400 font-medium">
+                &copy; 2025 VROS Group. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
