@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Achieve with Clarity | Leadership & Development</title>
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            --bg-cream: #FDFBF7;
+            --bg-white: #FFFFFF;
+            --bg-beige: #F2EFE9;
+            --bg-dark-beige: #E6DCD0;
+            --text-charcoal: #1a1a1a;
+            --text-body: #555555;
+            --accent-gold: #A68A56;
+            --accent-gold-dark: #8C7345;
+            
+            --font-heading: 'Satoshi', sans-serif;
+            --font-ui: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+
+            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        /* --- RESET & BASICS --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            background-color: var(--bg-cream);
+            color: var(--text-charcoal);
+            font-family: var(--font-body);
+            line-height: 1.6;
+            overflow-x: hidden; /* Prevent horizontal scroll on mobile */
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+        
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 { font-family: var(--font-heading); color: var(--text-charcoal); font-weight: 700; line-height: 1.15; }
+        h1 { font-size: 3.5rem; letter-spacing: -0.02em; }
+        h2 { font-size: 2.5rem; letter-spacing: -0.01em; margin-bottom: 20px; }
+        h3 { font-size: 1.35rem; margin-bottom: 10px; }
+        p { font-size: 1.05rem; color: var(--text-body); margin-bottom: 20px; }
+
+        /* Mobile Typography Adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.4rem; }
+            h2 { font-size: 2rem; }
+            p { font-size: 1rem; }
+        }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+        .section-padding { padding: 100px 0; }
+        .text-center { text-align: center; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .max-w-600 { max-width: 600px; }
+
+        @media (max-width: 768px) {
+            .section-padding { padding: 60px 0; }
+        }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-family: var(--font-ui);
+            font-weight: 500;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .btn-primary { background-color: var(--text-charcoal); color: white; border: 1px solid var(--text-charcoal); }
+        .btn-primary:hover { background-color: var(--accent-gold); border-color: var(--accent-gold); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+        
+        .btn-outline { background: transparent; color: var(--text-charcoal); border: 1px solid #ccc; }
+        .btn-outline:hover { border-color: var(--text-charcoal); background: var(--text-charcoal); color: white; }
+
+        /* --- HEADER & MOBILE NAV --- */
+        header {
+            background-color: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 18px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #eee;
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo { font-size: 1.4rem; font-weight: 800; font-family: var(--font-heading); color: var(--text-charcoal); }
+        .logo span { color: var(--accent-gold); }
+
+        .nav-links { display: flex; gap: 35px; align-items: center; }
+        .nav-links a { font-family: var(--font-ui); font-size: 0.9rem; font-weight: 500; }
+        .nav-links a:hover { color: var(--accent-gold); }
+
+        /* Hamburger Menu */
+        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; color: var(--text-charcoal); }
+
+        /* Mobile Menu Container */
+        .mobile-menu {
+            position: fixed;
+            top: 70px;
+            left: 0;
+            width: 100%;
+            background: var(--bg-cream);
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            transform: translateY(-150%);
+            transition: transform 0.4s ease;
+            z-index: 999;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .mobile-menu.active { transform: translateY(0); }
+        .mobile-menu a { display: block; padding: 15px 0; font-size: 1.1rem; font-family: var(--font-heading); font-weight: 600; border-bottom: 1px solid #eee; }
+        .mobile-menu .btn { margin-top: 20px; width: 100%; }
+
+        @media (max-width: 900px) {
+            .nav-links { display: none; }
+            .hamburger { display: block; }
+        }
+
+        /* --- HERO --- */
+        .hero { padding-top: 150px; padding-bottom: 80px; overflow: hidden; }
+        .hero-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+
+        .hero-image-wrapper { position: relative; }
+        .hero-image { width: 100%; height: 500px; object-fit: cover; border-radius: 12px; }
+        
+        .stat-float {
+            position: absolute;
+            bottom: -20px;
+            left: -20px;
+            background: white;
+            padding: 20px 25px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 260px;
+        }
+        
+        .stat-float i { font-size: 20px; color: var(--accent-gold); }
+        .stat-float h4 { font-size: 1.2rem; margin-bottom: 0; }
+        .stat-float p { font-size: 0.8rem; margin: 0; color: #777; }
+
+        @media (max-width: 900px) {
+            .hero { padding-top: 100px; }
+            .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero-content { order: 1; text-align: center; } /* Text first on mobile */
+            .hero-image-wrapper { order: 2; margin: 0 auto; width: 100%; max-width: 500px; }
+            .hero-image { height: 350px; }
+            .stat-float { left: 50%; transform: translateX(-50%); bottom: -25px; width: 90%; }
+            .hero-btns { justify-content: center; display: flex; gap: 10px; flex-wrap: wrap; }
+        }
+
+        /* --- MARQUEE --- */
+        .marquee-section { background: var(--bg-beige); padding: 50px 0; }
+        .marquee-container { display: flex; overflow: hidden; width: 100%; }
+        .marquee-track { display: flex; gap: 30px; animation: scroll 40s linear infinite; }
+        
+        .review-card {
+            background: white;
+            min-width: 320px;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: var(--shadow-sm);
+        }
+
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+
+        /* --- REVAMPED SERVICES --- */
+        .services { background-color: var(--bg-white); }
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .service-card {
+            background: var(--bg-cream);
+            border: 1px solid #eee;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--bg-dark-beige);
+        }
+
+        .service-img { height: 220px; width: 100%; object-fit: cover; }
+        
+        .service-body { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .service-list { margin-top: 15px; margin-bottom: 25px; flex-grow: 1; }
+        .service-list li {
+            position: relative;
+            padding-left: 24px;
+            margin-bottom: 10px;
+            font-size: 0.95rem;
+            color: var(--text-body);
+        }
+        .service-list li::before {
+            content: "\f00c"; /* FontAwesome check */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: var(--accent-gold);
+            position: absolute;
+            left: 0; top: 2px; font-size: 0.8rem;
+        }
+
+        .service-link {
+            font-family: var(--font-ui);
+            font-weight: 600;
+            color: var(--text-charcoal);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        .service-link i { transition: 0.3s; }
+        .service-card:hover .service-link i { transform: translateX(5px); color: var(--accent-gold); }
+
+        @media (max-width: 1024px) {
+            .services-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 650px) {
+            .services-grid { grid-template-columns: 1fr; }
+            .service-img { height: 200px; }
+        }
+
+        /* --- FAQ --- */
+        .faq-section { background-color: var(--bg-cream); }
+        .accordion { max-width: 800px; margin: 40px auto 0; }
+        
+        .accordion-item { background: white; border-radius: 8px; margin-bottom: 15px; border: 1px solid #eee; overflow: hidden; }
+        
+        .accordion-header {
+            width: 100%; padding: 20px 25px; display: flex; justify-content: space-between; align-items: center;
+            background: none; border: none; cursor: pointer; text-align: left;
+        }
+        .accordion-header h4 { margin: 0; font-size: 1.1rem; font-weight: 600; }
+        
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: #fff; }
+        .accordion-content p { padding: 0 25px 25px; margin: 0; font-size: 0.95rem; }
+        
+        .active .accordion-icon { transform: rotate(45deg); }
+        .active .accordion-content { max-height: 300px; }
+
+        /* --- CONTACT --- */
+        .contact-section { position: relative; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; }
+
+        .contact-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid #eee;
+        }
+
+        .info-item { display: flex; gap: 15px; margin-bottom: 25px; align-items: center; }
+        .info-icon { width: 45px; height: 45px; background: var(--bg-beige); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--accent-gold); }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; color: var(--text-charcoal); }
+        .form-control {
+            width: 100%; padding: 14px; border: 1px solid #ddd; border-radius: 6px; font-family: var(--font-body); font-size: 1rem;
+            -webkit-appearance: none; /* Mobile fix */
+        }
+        .form-control:focus { outline: none; border-color: var(--accent-gold); }
+
+        @media (max-width: 900px) {
+            .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+            .contact-card { padding: 25px; }
+        }
+
+        /* --- FOOTER --- */
+        footer { background: #1a1a1a; color: #bbb; padding: 60px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 40px; padding-bottom: 40px; border-bottom: 1px solid #333; }
+        
+        .footer-logo { color: white; font-family: var(--font-heading); font-size: 1.5rem; display: block; margin-bottom: 15px; }
+        .footer-col h5 { color: white; margin-bottom: 20px; font-family: var(--font-ui); }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col a:hover { color: var(--accent-gold); }
+        
+        .footer-bottom { padding-top: 30px; text-align: center; font-size: 0.85rem; }
+
+        @media (max-width: 768px) {
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">Achieve with <span>Clarity</span></div>
+                
+                <ul class="nav-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#reviews">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact" class="btn btn-primary" style="padding: 10px 24px; font-size: 0.9rem;">Request Quote</a></li>
+                </ul>
+
+                <div class="hamburger" onclick="toggleMenu()">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+        
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="#services" onclick="toggleMenu()">Services</a>
+            <a href="#reviews" onclick="toggleMenu()">Testimonials</a>
+            <a href="#faq" onclick="toggleMenu()">FAQ</a>
+            <a href="#contact" onclick="toggleMenu()" class="btn btn-primary">Request Quote</a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <h1>Refining leaders for a <br>complex world.</h1>
+                    <p>We combine behavioral science with practical strategy to help 140,000+ leaders and teams across Singapore gain clarity, adaptivity, and impact.</p>
+                    <div class="hero-btns">
+                        <a href="#contact" class="btn btn-primary">Schedule Strategy Call</a>
+                        <a href="#services" class="btn btn-outline">Explore Courses</a>
+                    </div>
+                </div>
+                <div class="hero-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2574&auto=format&fit=crop" alt="Corporate Workshop" class="hero-image">
+                    <div class="stat-float">
+                        <i class="fa-solid fa-star"></i>
+                        <div>
+                            <h4>4.4 / 5.0</h4>
+                            <p>Based on 10,000+ Reviews</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="marquee-section">
+        <div class="marquee-container">
+            <div class="marquee-track">
+                <div class="review-card">
+                    <div style="color:#FFC107; margin-bottom:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="font-size: 0.9rem; font-style: italic;">"Transformative experience for our management team."</p>
+                    <small><b>Sarah T.</b> - Director, FinTech</small>
+                </div>
+                <div class="review-card">
+                    <div style="color:#FFC107; margin-bottom:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="font-size: 0.9rem; font-style: italic;">"The REACH profile analysis is a game changer."</p>
+                    <small><b>James L.</b> - HR Manager</small>
+                </div>
+                <div class="review-card">
+                    <div style="color:#FFC107; margin-bottom:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="font-size: 0.9rem; font-style: italic;">"Finally, training that actually sticks."</p>
+                    <small><b>Amanda C.</b> - Operations Lead</small>
+                </div>
+                <div class="review-card">
+                    <div style="color:#FFC107; margin-bottom:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="font-size: 0.9rem; font-style: italic;">"Best investment we made this year."</p>
+                    <small><b>Rajiv P.</b> - Consultant</small>
+                </div>
+                <div class="review-card">
+                    <div style="color:#FFC107; margin-bottom:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="font-size: 0.9rem; font-style: italic;">"Transformative experience for our management team."</p>
+                    <small><b>Sarah T.</b> - Director, FinTech</small>
+                </div>
+                <div class="review-card">
+                    <div style="color:#FFC107; margin-bottom:5px;"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    <p style="font-size: 0.9rem; font-style: italic;">"The REACH profile analysis is a game changer."</p>
+                    <small><b>James L.</b> - HR Manager</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding services">
+        <div class="container">
+            <div class="text-center max-w-600 mx-auto">
+                <h2>Tailored Development Solutions</h2>
+                <p>From individual growth to large-scale system rollouts, we provide the framework for success.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop" alt="Leadership" class="service-img">
+                    <div class="service-body">
+                        <h3>Leadership Development</h3>
+                        <p style="font-size: 0.9rem;">For executives & managers ready to lead.</p>
+                        <ul class="service-list">
+                            <li>Executive Coaching</li>
+                            <li>Situational Awareness</li>
+                            <li>Elite PA & EA Development</li>
+                        </ul>
+                        <a href="#contact" class="service-link">View Program <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop" alt="Team Synergy" class="service-img">
+                    <div class="service-body">
+                        <h3>Team Synergy</h3>
+                        <p style="font-size: 0.9rem;">Building high-performance collaboration.</p>
+                        <ul class="service-list">
+                            <li>Conflict Resolution</li>
+                            <li>Communication Skills</li>
+                            <li>Customer Service Mastery</li>
+                        </ul>
+                        <a href="#contact" class="service-link">View Program <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="service-card">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=2070&auto=format&fit=crop" alt="Consulting" class="service-img">
+                    <div class="service-body">
+                        <h3>Custom Consulting</h3>
+                        <p style="font-size: 0.9rem;">Solving specific organizational challenges.</p>
+                        <ul class="service-list">
+                            <li>Instructional Design</li>
+                            <li>System Rollouts</li>
+                            <li>Change Management</li>
+                        </ul>
+                        <a href="#contact" class="service-link">View Solutions <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section-padding faq-section">
+        <div class="container">
+            <div class="text-center">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h4>Do you offer a Money Back Guarantee?</h4>
+                        <i class="fa-solid fa-plus accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Yes. We are confident in our training quality. If you are not satisfied with the outcomes of the course, we offer a money-back guarantee.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h4>What happens if a participant misses a session?</h4>
+                        <i class="fa-solid fa-plus accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>We believe in "No One Left Behind." We provide AI transcriptions, summaries, and a 1/2 price re-run promise for anyone who misses a session due to illness or emergency.</p>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <button class="accordion-header">
+                        <h4>What is the REACH Dashboard?</h4>
+                        <i class="fa-solid fa-plus accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+                        <p>Every participant gets 12 months of access to the REACH Future Proofing Personal Development Dashboard to track growth and communication styles.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section-padding contact-section">
+        <div class="container">
+            <div class="contact-grid">
+                
+                <div class="contact-info">
+                    <h2>Let's Start the Conversation</h2>
+                    <p>Ready to improve performance? Fill out the form to request a quotation or schedule a no-obligation discovery call.</p>
+                    
+                    <div style="margin-top: 30px;">
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-phone"></i></div>
+                            <div>
+                                <h5>Call Us</h5>
+                                <p style="margin:0; font-size: 0.9rem;">+65 3158 3955</p>
+                            </div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-icon"><i class="fa-solid fa-envelope"></i></div>
+                            <div>
+                                <h5>Email Us</h5>
+                                <p style="margin:0; font-size: 0.9rem;">hello@achievewithclarity.sg</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 30px; display: flex; gap: 15px;">
+                        <a href="#" class="btn btn-outline" style="border:1px solid #25D366; color: #25D366;"><i class="fa-brands fa-whatsapp"></i> WhatsApp</a>
+                        <a href="#" class="btn btn-outline" style="border:1px solid #0077B5; color: #0077B5;"><i class="fa-brands fa-linkedin-in"></i> LinkedIn</a>
+                    </div>
+                </div>
+
+                <div class="contact-card">
+                    <form onsubmit="event.preventDefault(); alert('Thank you! We will be in touch shortly.');">
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-control" placeholder="John Doe">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-control" placeholder="john@company.com">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">I am interested in</label>
+                            <select class="form-control">
+                                <option>Requesting a Quotation</option>
+                                <option>Leadership Training</option>
+                                <option>Team Building</option>
+                                <option>General Inquiry</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Message</label>
+                            <textarea class="form-control" rows="4" placeholder="How can we help?"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Send Request</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <span class="footer-logo">Achieve with Clarity</span>
+                    <p style="font-size: 0.9rem; max-width: 300px;">
+                        Supporting leaders and teams around the globe. Celebrating 15 years of growth, innovation, and success.
+                    </p>
+                </div>
+                <div class="footer-col">
+                    <h5>Programs</h5>
+                    <ul>
+                        <li><a href="#">Leadership Development</a></li>
+                        <li><a href="#">Team Synergy</a></li>
+                        <li><a href="#">Public Speaking</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h5>Company</h5>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2025 Achieve with Clarity. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // FAQ Accordion
+        const headers = document.querySelectorAll('.accordion-header');
+        headers.forEach(header => {
+            header.addEventListener('click', () => {
+                const parent = header.parentElement;
+                
+                // Close others
+                document.querySelectorAll('.accordion-item').forEach(item => {
+                    if (item !== parent) {
+                        item.classList.remove('active');
+                        item.querySelector('.accordion-icon').classList.remove('fa-minus');
+                        item.querySelector('.accordion-icon').classList.add('fa-plus');
+                    }
+                });
+
+                // Toggle Current
+                parent.classList.toggle('active');
+                
+                // Icon Logic
+                const icon = header.querySelector('.accordion-icon');
+                if(parent.classList.contains('active')){
+                    icon.classList.remove('fa-plus');
+                    icon.classList.add('fa-minus');
+                } else {
+                    icon.classList.remove('fa-minus');
+                    icon.classList.add('fa-plus');
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
