@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Service Brand | Master Template v4.8</title>
+    <title>Service Brand | Master Template v4.9</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -47,7 +47,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; -webkit-font-smoothing: antialiased; }
         
         html, body {
-            overflow-x: hidden; /* Prevent horizontal scroll globally */
+            overflow-x: hidden; 
             width: 100%;
         }
 
@@ -137,12 +137,13 @@
             transform: translateY(-3px);
         }
 
-        /* --- HEADER --- */
+        /* --- HEADER (SMART SCROLL) --- */
         header {
             position: fixed;
             top: 20px;
             left: 50%;
-            transform: translateX(-50%);
+            /* Default position: Centered X, 0 offset Y */
+            transform: translateX(-50%) translateY(0);
             width: 92%;
             max-width: 1280px;
             background: rgba(255, 255, 255, 0.92);
@@ -156,7 +157,12 @@
             align-items: center;
             z-index: 1000;
             box-shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), background 0.3s;
+        }
+        
+        /* Class added via JS to hide header */
+        header.header-hidden {
+            transform: translateX(-50%) translateY(-150%); /* Moves up out of view */
         }
         
         .logo { font-family: 'Satoshi', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--text-main); letter-spacing: -0.02em; }
@@ -194,7 +200,7 @@
 
         .hero-text h1 {
             font-size: clamp(3rem, 5.5vw, 4.8rem);
-            margin-bottom: 24px;
+            margin-bottom: 32px; /* Increased Spacing */
             color: #0F172A;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -203,7 +209,7 @@
         .hero-text p {
             font-size: 1.25rem;
             color: var(--text-muted);
-            margin-bottom: 40px;
+            margin-bottom: 48px; /* Increased Spacing */
             max-width: 90%;
             line-height: 1.7;
         }
@@ -266,8 +272,8 @@
             justify-content: space-between;
         }
 
-        .service-content h3 { font-size: 1.5rem; margin-bottom: 12px; font-weight: 700; }
-        .service-content p { font-size: 1rem; color: var(--text-muted); margin-bottom: 32px; line-height: 1.6; }
+        .service-content h3 { font-size: 1.5rem; margin-bottom: 16px; font-weight: 700; } /* Spacing fixed */
+        .service-content p { font-size: 1rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6; } /* Spacing fixed */
 
         .service-btn {
             margin-top: auto;
@@ -325,10 +331,11 @@
         .case-img img { width: 100%; height: 100%; object-fit: cover; }
         
         .case-content { padding: 32px; display: flex; flex-direction: column; height: 220px; justify-content: space-between; }
-        .case-stat { font-size: 2rem; font-weight: 800; color: var(--secondary); margin-bottom: 4px; letter-spacing: -0.02em; }
+        .case-stat { font-size: 2rem; font-weight: 800; color: var(--secondary); margin-bottom: 8px; letter-spacing: -0.02em; }
+        .case-content h4 { margin-bottom: 12px; }
         
         .case-cta {
-            margin-top: 16px;
+            margin-top: 20px;
             font-size: 0.95rem; 
             font-weight: 700; 
             color: var(--primary); 
@@ -358,6 +365,8 @@
         /* --- CONTACT --- */
         .contact-section { display: flex; gap: 60px; align-items: flex-start; }
         .contact-info, .contact-form-wrap { flex: 1; }
+        .contact-info h2 { margin-bottom: 24px; } /* More space */
+        .contact-info p { margin-bottom: 32px; line-height: 1.6; color: var(--text-muted); }
         
         .map-container {
             width: 100%; height: 350px; border-radius: 24px; overflow: hidden;
@@ -491,32 +500,16 @@
             .cta-header-desktop { display: none !important; }
             .cta-header-mobile-li { display: block !important; }
 
-            /* Nav Slide Down - Attached & Centered */
+            /* Nav Slide Down */
             .nav-links {
-                position: absolute; /* Changed to absolute relative to header logic if needed, but fixed usually safer */
-                position: fixed; 
-                top: 80px; 
-                left: 50%; 
-                transform: translateX(-50%); 
-                width: 92%; 
-                height: 0;
-                background: white; 
-                flex-direction: column; 
-                align-items: center; 
-                justify-content: center;
-                padding: 0 24px; gap: 0; 
-                overflow: hidden; 
-                transition: all 0.4s ease; 
-                border-radius: 20px; 
-                border: none; 
-                box-shadow: none;
-                z-index: 999;
+                position: fixed; top: 80px; left: 50%; transform: translateX(-50%); width: 92%; height: 0;
+                background: white; flex-direction: column; align-items: center; justify-content: center;
+                padding: 0 24px; gap: 0; overflow: hidden; transition: all 0.4s ease; border-radius: 20px; 
+                border: none; box-shadow: none; z-index: 999;
             }
             .nav-links.active { 
-                height: auto; 
-                padding: 30px 24px; 
-                border: 1px solid rgba(0,0,0,0.05); 
-                box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
+                height: auto; padding: 30px 24px; 
+                border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 20px 40px -10px rgba(0,0,0,0.1);
             }
             .nav-links li { width: 100%; border-bottom: 1px solid #f0f0f0; text-align: center; }
             .nav-links a { display: block; padding: 16px 0; font-size: 1.1rem; width: 100%; }
@@ -527,7 +520,7 @@
             .hero-buttons { justify-content: center; width: 100%; } 
             
             /* Horizontal Scroll Fixes */
-            .review-card { width: 85vw; max-width: 350px; } /* Percentage based width */
+            .review-card { width: 85vw; max-width: 350px; } 
             
             /* Elements */
             .service-img-wrap { height: 220px; }
@@ -538,7 +531,8 @@
             .footer-links-wrapper { flex-direction: column; gap: 40px; }
             .footer-col.socials-col { display: flex; flex-direction: row; flex-wrap: wrap; gap: 20px; align-items: center; }
             .footer-col.socials-col h4 { width: 100%; margin-bottom: 10px; } /* Force header to own line */
-            .footer-col.socials-col a { margin-bottom: 0; margin-right: 10px; }
+            .footer-col.socials-col a { margin-bottom: 0; margin-right: 10px; display: inline-block; }
+            .footer-col.socials-col a:hover { transform: translateY(-3px); }
             
             .footer-bottom { flex-direction: column; gap: 16px; text-align: left; align-items: flex-start; }
             
@@ -549,8 +543,8 @@
                 bottom: 90px; 
                 right: 20px; 
                 left: 20px; 
-                width: auto; 
-                max-width: none;
+                width: auto; /* Allow auto width */
+                max-width: 85vw; /* Constrain width */
                 transform-origin: bottom center; 
                 z-index: 10000; 
             }
@@ -601,9 +595,9 @@
 
     <section id="services" class="section-padding" style="background-color: var(--bg-white);">
         <div class="container">
-            <div class="text-center" style="max-width: 600px; margin: 0 auto;">
-                <h2>Core Expertise</h2>
-                <p style="color: var(--text-muted); margin-top: 10px;">We focus on three main pillars to deliver exceptional results.</p>
+            <div class="text-center" style="max-width: 600px; margin: 0 auto 60px;">
+                <h2>Our Services</h2>
+                <p style="color: var(--text-muted); margin-top: 16px;">We focus on three main pillars to deliver exceptional results.</p>
             </div>
 
             <div class="services-grid">
@@ -650,7 +644,7 @@
     </section>
 
     <section id="reviews" class="marquee-section">
-        <div class="container text-center" style="margin-bottom: 30px;">
+        <div class="container text-center" style="margin-bottom: 40px;">
             <p style="font-weight: 600; color: var(--primary); letter-spacing: 1px; text-transform: uppercase; font-size: 0.8rem;">Client Feedback</p>
         </div>
         <div class="marquee-track">
@@ -691,9 +685,9 @@
 
     <section id="work" class="section-padding" style="background: var(--bg-alt);">
         <div class="container">
-            <div class="text-center">
+            <div class="text-center" style="margin-bottom: 60px;">
                 <h2>Our Recent Results</h2>
-                <p style="color: var(--text-muted); margin-top: 10px;">Click on a case study to see the full details.</p>
+                <p style="color: var(--text-muted); margin-top: 16px;">Click on a case study to see the full details.</p>
             </div>
             <div class="case-studies">
                 <div class="case-card" onclick="openModal('TechStart Rebrand', 'Complete visual identity overhaul resulting in a 240% increase in brand recognition.')">
@@ -737,7 +731,7 @@
 
     <section id="faq" class="section-padding" style="background: var(--bg-white);">
         <div class="container" style="max-width: 800px;">
-            <h2 class="text-center" style="margin-bottom: 40px;">Frequently Asked Questions</h2>
+            <h2 class="text-center" style="margin-bottom: 60px;">Frequently Asked Questions</h2>
             
             <div class="faq-item">
                 <div class="faq-question">
@@ -911,16 +905,31 @@
             nav.classList.toggle('active');
         }
 
-        // Header Scroll
+        // Smart Header Logic
+        let lastScrollTop = 0;
+        const header = document.getElementById('navbar');
+
         window.addEventListener('scroll', () => {
-            const header = document.getElementById('navbar');
-            if (window.scrollY > 50) {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            
+            // Add shadow on scroll
+            if (scrollTop > 50) {
                 header.style.background = "rgba(255, 255, 255, 0.95)";
                 header.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
             } else {
                 header.style.background = "rgba(255, 255, 255, 0.92)";
                 header.style.boxShadow = "0 10px 40px -10px rgba(0,0,0,0.08)";
             }
+
+            // Scroll Direction Logic
+            if (scrollTop > lastScrollTop && scrollTop > 100) {
+                // Scrolling DOWN & past 100px
+                header.classList.add('header-hidden');
+            } else {
+                // Scrolling UP
+                header.classList.remove('header-hidden');
+            }
+            lastScrollTop = scrollTop;
         });
 
         // FAQ Toggle
