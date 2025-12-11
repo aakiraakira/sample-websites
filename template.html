@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Service Brand | Master Template v5.1</title>
+    <title>Service Brand | Master Template v5.0</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -69,9 +69,9 @@
             color: #0F172A;
         }
 
-        /* Bold Text Logic */
+        /* Bold Text Logic - Black and Bold */
         strong, b {
-            color: black;
+            color: #000000;
             font-weight: 700;
         }
 
@@ -283,7 +283,7 @@
             margin-top: auto;
             width: 100%;
             padding: 14px 0;
-            border-radius: var(--radius-pill); /* Pill Shape */
+            border-radius: var(--radius-pill); /* Pill Shape restored */
             background: #0F172A; 
             color: white;
             font-weight: 600;
@@ -301,11 +301,35 @@
         /* --- MARQUEE --- */
         .marquee-section {
             background: var(--bg-alt);
-            padding: 60px 0;
+            padding: 100px 0; /* Increased top/bottom padding for section */
             overflow: hidden;
             border-top: var(--border-light);
             border-bottom: var(--border-light);
         }
+        
+        .marquee-header {
+            margin-bottom: 60px; /* Increased spacing from heading to cards */
+        }
+        
+        /* Google Multicolor Logic */
+        .google-g { color: #4285F4; }
+        .google-o1 { color: #EA4335; }
+        .google-o2 { color: #FBBC05; }
+        .google-g2 { color: #4285F4; }
+        .google-l { color: #34A853; }
+        .google-e { color: #EA4335; }
+
+        /* Counter Stats */
+        .review-stats {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+            font-size: 1rem;
+            color: var(--text-muted);
+        }
+        
         .marquee-track { display: flex; gap: 40px; width: max-content; animation: scroll 50s linear infinite; }
         .review-card {
             width: 380px;
@@ -533,7 +557,7 @@
             /* Elements */
             .service-img-wrap { height: 220px; }
             
-            /* CONTACT FIX v5.1 - FORCE FULL WIDTH ON MOBILE */
+            /* CONTACT FIX v5.1 */
             .contact-section { flex-direction: column; }
             .contact-info, .contact-form-wrap { width: 100%; min-width: 100%; }
             .contact-form { padding: 32px; width: 100%; }
@@ -655,10 +679,16 @@
     </section>
 
     <section id="reviews" class="marquee-section">
-        <div class="container text-center" style="margin-bottom: 40px;">
-            <h2 style="font-size: 1.8rem;">Our Positive Reviews on 
-                <span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span>
+        <div class="container text-center marquee-header">
+            <h2 style="font-size: 2rem;">Our Positive Reviews on 
+                <span class="google-g">G</span><span class="google-o1">o</span><span class="google-o2">o</span><span class="google-g2">g</span><span class="google-l">l</span><span class="google-e">e</span>
             </h2>
+            <div class="review-stats">
+                <span style="color: #F59E0B">★★★★★</span>
+                <strong>4.9/5 Rating</strong>
+                <span>•</span>
+                <span id="review-counter">0</span>+ Reviews
+            </div>
         </div>
         <div class="marquee-track">
             <div class="review-card">
@@ -940,6 +970,26 @@
             }
             lastScrollTop = scrollTop;
         });
+
+        // Review Counter Logic
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = document.getElementById('review-counter');
+                    let count = 0;
+                    const interval = setInterval(() => {
+                        count += 10;
+                        counter.innerText = count;
+                        if (count >= 500) {
+                            clearInterval(interval);
+                            counter.innerText = "500";
+                        }
+                    }, 30);
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+        observer.observe(document.querySelector('.marquee-section'));
 
         // FAQ Toggle
         document.querySelectorAll('.faq-question').forEach(item => {
