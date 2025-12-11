@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Service Brand | Master Template v4.4</title>
+    <title>Service Brand | Master Template v4.5</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -280,8 +280,6 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
         
-        /* Arrow removed here */
-
         /* --- MARQUEE --- */
         .marquee-section {
             background: white;
@@ -490,7 +488,7 @@
             .cta-header-desktop { display: none !important; }
             .cta-header-mobile-li { display: block !important; }
 
-            /* Nav Slide Down - Adjusted for Pill Header & Fixed White Line Issue */
+            /* Nav Slide Down - WHITE LINE FIXED HERE */
             .nav-links {
                 position: fixed; 
                 top: 80px; 
@@ -500,23 +498,26 @@
                 height: 0;
                 background: white; 
                 flex-direction: column; 
-                align-items: flex-start;
+                align-items: center; /* Centralized Items */
                 padding: 0 24px; gap: 0; 
                 overflow: hidden; 
                 transition: all 0.4s ease;
-                box-shadow: none; /* No shadow when closed */
                 border-radius: 20px;
-                border: none; /* No border when closed */
+                
+                /* CRITICAL FIX: No border/shadow when hidden */
+                border: none;
+                box-shadow: none;
             }
-            /* Only apply border and shadow when active */
+            
             .nav-links.active { 
                 height: auto; 
                 padding: 24px; 
                 padding-bottom: 40px; 
-                border: 1px solid rgba(0,0,0,0.05);
+                border: 1px solid rgba(0,0,0,0.05); /* Border appears only when open */
                 box-shadow: 0 10px 20px rgba(0,0,0,0.05);
             }
-            .nav-links li { width: 100%; border-bottom: 1px solid #f0f0f0; }
+            
+            .nav-links li { width: 100%; border-bottom: 1px solid #f0f0f0; text-align: center; }
             .nav-links a { display: block; padding: 16px 0; font-size: 1.1rem; width: 100%; }
             
             /* Hero Mobile Fixes */
@@ -605,9 +606,7 @@
                             <h3>Strategic Consulting</h3>
                             <p>We analyze your current market position, identify bottlenecks, and create a comprehensive roadmap tailored to your specific business goals.</p>
                         </div>
-                        <a href="#contact" class="service-btn">
-                            Get Strategy
-                        </a>
+                        <a href="#contact" class="service-btn">Get Strategy</a>
                     </div>
                 </div>
 
@@ -620,9 +619,7 @@
                             <h3>Creative Design</h3>
                             <p>Our team builds high-performance websites and visual identities that capture attention. We combine aesthetic excellence with technical robustness.</p>
                         </div>
-                        <a href="#contact" class="service-btn">
-                            View Portfolio
-                        </a>
+                        <a href="#contact" class="service-btn">View Portfolio</a>
                     </div>
                 </div>
 
@@ -635,9 +632,7 @@
                             <h3>Growth Marketing</h3>
                             <p>Data-driven campaigns across social media, search engines, and email. We focus on ROI, ensuring every dollar spent brings in qualified leads.</p>
                         </div>
-                        <a href="#contact" class="service-btn">
-                            Start Growing
-                        </a>
+                        <a href="#contact" class="service-btn">Start Growing</a>
                     </div>
                 </div>
             </div>
