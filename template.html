@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Service Brand | Master Template v5.0</title>
+    <title>Service Brand | Master Template v5.2</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -72,7 +72,7 @@
         /* Bold Text Logic - Black and Bold */
         strong, b {
             color: #000000;
-            font-weight: 700;
+            font-weight: 800; /* Extra bold */
         }
 
         .font-poppins { font-family: 'Poppins', sans-serif; }
@@ -212,13 +212,21 @@
 
         .hero-text p {
             font-size: 1.25rem;
-            color: var(--text-muted);
+            color: #334155; 
+            font-weight: 500;
             margin-bottom: 48px;
             max-width: 90%;
             line-height: 1.7;
         }
 
-        .hero-buttons { display: flex; gap: 16px; margin-bottom: 40px; flex-wrap: wrap; }
+        /* Hero Button - Single Big CTA */
+        .hero-buttons { display: flex; justify-content: flex-start; margin-bottom: 40px; }
+        .hero-btn-lg {
+            padding: 18px 48px;
+            font-size: 1.1rem;
+            min-width: 220px;
+            justify-content: space-between;
+        }
 
         .hero-img-box {
             position: relative;
@@ -499,7 +507,10 @@
         }
         .wa-chat-box.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
         
+        /* FIX: Ensure Business Name is White in Header, overriding global bold logic */
         .wa-header { background: #075E54; padding: 20px; color: white; display: flex; align-items: center; gap: 14px; }
+        .wa-header strong { color: white !important; } /* Force white for business name */
+        
         .wa-body { background: #E5DDD5; height: 240px; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; }
         .wa-msg { background: white; padding: 12px 16px; border-radius: 8px 8px 8px 0; font-size: 0.95rem; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
         .wa-input-area { padding: 16px; background: #f0f0f0; display: flex; gap: 10px; }
@@ -550,14 +561,13 @@
             .hero { padding-top: 140px; padding-bottom: 80px; }
             .hero-text h1 { font-size: 2.8rem; }
             .hero-buttons { justify-content: center; width: 100%; } 
+            .hero-btn-lg { width: 100%; } /* Justified on mobile */
             
             /* Horizontal Scroll Fixes */
             .review-card { width: 85vw; max-width: 350px; } 
             
             /* Elements */
             .service-img-wrap { height: 220px; }
-            
-            /* CONTACT FIX v5.1 */
             .contact-section { flex-direction: column; }
             .contact-info, .contact-form-wrap { width: 100%; min-width: 100%; }
             .contact-form { padding: 32px; width: 100%; }
@@ -567,20 +577,19 @@
             .footer-col.socials-col { display: flex; flex-direction: row; flex-wrap: wrap; gap: 20px; align-items: center; }
             .footer-col.socials-col h4 { width: 100%; margin-bottom: 10px; } 
             .footer-col.socials-col a { margin-bottom: 0; margin-right: 10px; display: inline-block; }
-            .footer-col.socials-col a:hover { transform: translateY(-3px); }
             
             .footer-bottom { flex-direction: column; gap: 16px; text-align: left; align-items: flex-start; }
             
-            /* WA Mobile Fix */
+            /* WA Mobile Fix - IMPROVED SPACING */
             .wa-widget { bottom: 20px; right: 20px; }
             .wa-chat-box { 
                 position: fixed; 
-                bottom: 90px; 
-                right: 20px; 
-                left: 20px; 
-                width: auto; 
-                max-width: 85vw; 
-                transform-origin: bottom center; 
+                bottom: 100px; /* Increased from 90px for better spacing */
+                right: 20px; /* Safe Margin */
+                left: 20px; /* Safe Margin */
+                width: auto; /* Stretch to fill */
+                max-width: none; /* No restrict */
+                transform-origin: bottom right; 
                 z-index: 10000; 
             }
         }
@@ -617,8 +626,9 @@
                 <p>We provide the <strong>strategic framework</strong> and <strong>creative execution</strong> you need to dominate your market.</p>
                 
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Start Your Project</a>
-                    <a href="#work" class="btn btn-secondary">See Our Work</a>
+                    <a href="#contact" class="btn btn-primary hero-btn-lg">
+                        Start Your Project <i data-lucide="arrow-right"></i>
+                    </a>
                 </div>
             </div>
 
