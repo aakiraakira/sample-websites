@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Service Brand | Master Template v4.9</title>
+    <title>Service Brand | Master Template v5.1</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
     
     <script src="https://unpkg.com/lucide@latest"></script>
@@ -67,6 +67,12 @@
             line-height: 1.1;
             letter-spacing: -0.02em;
             color: #0F172A;
+        }
+
+        /* Bold Text Logic */
+        strong, b {
+            color: black;
+            font-weight: 700;
         }
 
         .font-poppins { font-family: 'Poppins', sans-serif; }
@@ -142,7 +148,6 @@
             position: fixed;
             top: 20px;
             left: 50%;
-            /* Default position: Centered X, 0 offset Y */
             transform: translateX(-50%) translateY(0);
             width: 92%;
             max-width: 1280px;
@@ -160,9 +165,8 @@
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), background 0.3s;
         }
         
-        /* Class added via JS to hide header */
         header.header-hidden {
-            transform: translateX(-50%) translateY(-150%); /* Moves up out of view */
+            transform: translateX(-50%) translateY(-150%); 
         }
         
         .logo { font-family: 'Satoshi', sans-serif; font-weight: 900; font-size: 1.5rem; color: var(--text-main); letter-spacing: -0.02em; }
@@ -200,7 +204,7 @@
 
         .hero-text h1 {
             font-size: clamp(3rem, 5.5vw, 4.8rem);
-            margin-bottom: 32px; /* Increased Spacing */
+            margin-bottom: 32px;
             color: #0F172A;
             letter-spacing: -0.03em;
             line-height: 1.1;
@@ -209,7 +213,7 @@
         .hero-text p {
             font-size: 1.25rem;
             color: var(--text-muted);
-            margin-bottom: 48px; /* Increased Spacing */
+            margin-bottom: 48px;
             max-width: 90%;
             line-height: 1.7;
         }
@@ -272,14 +276,14 @@
             justify-content: space-between;
         }
 
-        .service-content h3 { font-size: 1.5rem; margin-bottom: 16px; font-weight: 700; } /* Spacing fixed */
-        .service-content p { font-size: 1rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6; } /* Spacing fixed */
+        .service-content h3 { font-size: 1.5rem; margin-bottom: 16px; font-weight: 700; }
+        .service-content p { font-size: 1rem; color: var(--text-muted); margin-bottom: 36px; line-height: 1.6; }
 
         .service-btn {
             margin-top: auto;
             width: 100%;
             padding: 14px 0;
-            border-radius: 12px;
+            border-radius: var(--radius-pill); /* Pill Shape */
             background: #0F172A; 
             color: white;
             font-weight: 600;
@@ -287,6 +291,10 @@
             text-align: center;
             border: 1px solid #0F172A;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
         .service-btn:hover { background: var(--primary); border-color: var(--primary); }
 
@@ -365,7 +373,7 @@
         /* --- CONTACT --- */
         .contact-section { display: flex; gap: 60px; align-items: flex-start; }
         .contact-info, .contact-form-wrap { flex: 1; }
-        .contact-info h2 { margin-bottom: 24px; } /* More space */
+        .contact-info h2 { margin-bottom: 24px; } 
         .contact-info p { margin-bottom: 32px; line-height: 1.6; color: var(--text-muted); }
         
         .map-container {
@@ -524,13 +532,16 @@
             
             /* Elements */
             .service-img-wrap { height: 220px; }
+            
+            /* CONTACT FIX v5.1 - FORCE FULL WIDTH ON MOBILE */
             .contact-section { flex-direction: column; }
-            .contact-form { padding: 32px; }
+            .contact-info, .contact-form-wrap { width: 100%; min-width: 100%; }
+            .contact-form { padding: 32px; width: 100%; }
             
             /* Footer Mobile - Socials Horizontal */
             .footer-links-wrapper { flex-direction: column; gap: 40px; }
             .footer-col.socials-col { display: flex; flex-direction: row; flex-wrap: wrap; gap: 20px; align-items: center; }
-            .footer-col.socials-col h4 { width: 100%; margin-bottom: 10px; } /* Force header to own line */
+            .footer-col.socials-col h4 { width: 100%; margin-bottom: 10px; } 
             .footer-col.socials-col a { margin-bottom: 0; margin-right: 10px; display: inline-block; }
             .footer-col.socials-col a:hover { transform: translateY(-3px); }
             
@@ -543,8 +554,8 @@
                 bottom: 90px; 
                 right: 20px; 
                 left: 20px; 
-                width: auto; /* Allow auto width */
-                max-width: 85vw; /* Constrain width */
+                width: auto; 
+                max-width: 85vw; 
                 transform-origin: bottom center; 
                 z-index: 10000; 
             }
@@ -579,7 +590,7 @@
             <div class="hero-text">
                 <div class="pill-badge">✨ Accepting New Projects</div>
                 <h1>Scale Your Business With Expert Services</h1>
-                <p>We provide the strategic framework and creative execution you need to dominate your market.</p>
+                <p>We provide the <strong>strategic framework</strong> and <strong>creative execution</strong> you need to dominate your market.</p>
                 
                 <div class="hero-buttons">
                     <a href="#contact" class="btn btn-primary">Start Your Project</a>
@@ -608,9 +619,9 @@
                     <div class="service-content">
                         <div>
                             <h3>Strategic Consulting</h3>
-                            <p>We analyze your market position and create a comprehensive roadmap tailored to your specific business goals.</p>
+                            <p>We analyze your market position and create a <strong>comprehensive roadmap</strong> tailored to your specific business goals.</p>
                         </div>
-                        <a href="#contact" class="service-btn">Get Strategy</a>
+                        <a href="#contact" class="service-btn">Get Strategy <i data-lucide="arrow-right" size="16"></i></a>
                     </div>
                 </div>
 
@@ -621,9 +632,9 @@
                     <div class="service-content">
                         <div>
                             <h3>Creative Design</h3>
-                            <p>Our team builds high-performance websites and visual identities that capture attention and build trust instantly.</p>
+                            <p>Our team builds <strong>high-performance websites</strong> and visual identities that capture attention and build trust instantly.</p>
                         </div>
-                        <a href="#contact" class="service-btn">View Portfolio</a>
+                        <a href="#contact" class="service-btn">View Portfolio <i data-lucide="arrow-right" size="16"></i></a>
                     </div>
                 </div>
 
@@ -634,9 +645,9 @@
                     <div class="service-content">
                         <div>
                             <h3>Growth Marketing</h3>
-                            <p>Data-driven campaigns across social media and search. We focus on ROI, ensuring every dollar spent brings in leads.</p>
+                            <p>Data-driven campaigns across social media and search. We focus on <strong>ROI and qualified leads</strong> ensuring every dollar spent works.</p>
                         </div>
-                        <a href="#contact" class="service-btn">Start Growing</a>
+                        <a href="#contact" class="service-btn">Start Growing <i data-lucide="arrow-right" size="16"></i></a>
                     </div>
                 </div>
             </div>
@@ -645,7 +656,9 @@
 
     <section id="reviews" class="marquee-section">
         <div class="container text-center" style="margin-bottom: 40px;">
-            <p style="font-weight: 600; color: var(--primary); letter-spacing: 1px; text-transform: uppercase; font-size: 0.8rem;">Client Feedback</p>
+            <h2 style="font-size: 1.8rem;">Our Positive Reviews on 
+                <span style="color:#4285F4">G</span><span style="color:#EA4335">o</span><span style="color:#FBBC05">o</span><span style="color:#4285F4">g</span><span style="color:#34A853">l</span><span style="color:#EA4335">e</span>
+            </h2>
         </div>
         <div class="marquee-track">
             <div class="review-card">
@@ -912,7 +925,6 @@
         window.addEventListener('scroll', () => {
             let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
             
-            // Add shadow on scroll
             if (scrollTop > 50) {
                 header.style.background = "rgba(255, 255, 255, 0.95)";
                 header.style.boxShadow = "0 4px 20px rgba(0,0,0,0.08)";
@@ -921,12 +933,9 @@
                 header.style.boxShadow = "0 10px 40px -10px rgba(0,0,0,0.08)";
             }
 
-            // Scroll Direction Logic
             if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling DOWN & past 100px
                 header.classList.add('header-hidden');
             } else {
-                // Scrolling UP
                 header.classList.remove('header-hidden');
             }
             lastScrollTop = scrollTop;
