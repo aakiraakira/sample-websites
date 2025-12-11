@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Service Brand | Master Template v5.2</title>
+    <title>Service Brand | Master Template v5.1</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -225,7 +225,8 @@
             padding: 18px 48px;
             font-size: 1.1rem;
             min-width: 220px;
-            justify-content: space-between;
+            justify-content: center; /* Centered for all */
+            gap: 12px;
         }
 
         .hero-img-box {
@@ -507,9 +508,9 @@
         }
         .wa-chat-box.open { opacity: 1; transform: translateY(0) scale(1); pointer-events: auto; }
         
-        /* FIX: Ensure Business Name is White in Header, overriding global bold logic */
+        /* Ensure Business Name is White in Header */
         .wa-header { background: #075E54; padding: 20px; color: white; display: flex; align-items: center; gap: 14px; }
-        .wa-header strong { color: white !important; } /* Force white for business name */
+        .wa-header strong { color: white !important; }
         
         .wa-body { background: #E5DDD5; height: 240px; padding: 20px; display: flex; flex-direction: column; justify-content: flex-end; }
         .wa-msg { background: white; padding: 12px 16px; border-radius: 8px 8px 8px 0; font-size: 0.95rem; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
@@ -584,11 +585,11 @@
             .wa-widget { bottom: 20px; right: 20px; }
             .wa-chat-box { 
                 position: fixed; 
-                bottom: 100px; /* Increased from 90px for better spacing */
-                right: 20px; /* Safe Margin */
-                left: 20px; /* Safe Margin */
-                width: auto; /* Stretch to fill */
-                max-width: none; /* No restrict */
+                bottom: 100px; 
+                right: 20px; 
+                left: 20px; 
+                width: auto; 
+                max-width: none; 
                 transform-origin: bottom right; 
                 z-index: 10000; 
             }
@@ -791,7 +792,7 @@
                     What is your typical onboarding process? 
                     <i data-lucide="chevron-down" class="faq-icon"></i>
                 </div>
-                <div class="faq-answer">Discovery call, then a kickoff within 3 days to gather assets. We use Slack and Trello for seamless communication.</div>
+                <div class="faq-answer">We start with a <strong>discovery call</strong> to understand your needs. Once the proposal is signed, we set up a kickoff meeting within 3 business days to gather assets and begin the strategic planning phase. We use Slack and Trello for seamless communication.</div>
             </div>
             
             <div class="faq-item">
@@ -799,7 +800,7 @@
                     Do you offer custom packages? 
                     <i data-lucide="chevron-down" class="faq-icon"></i>
                 </div>
-                <div class="faq-answer">Yes. We tailor specific scopes of work to fit your budget and timeline requirements perfectly.</div>
+                <div class="faq-answer">Yes. We <strong>tailor specific scopes</strong> of work to fit your budget and timeline requirements perfectly.</div>
             </div>
 
             <div class="faq-item">
@@ -807,7 +808,7 @@
                     What happens if I'm not satisfied? 
                     <i data-lucide="chevron-down" class="faq-icon"></i>
                 </div>
-                <div class="faq-answer">We work on milestones. Approval required at every stage (Wireframe, Design, Dev) to minimize risk.</div>
+                <div class="faq-answer">We work on a <strong>milestone basis</strong>. We require approval at every stage (Wireframe, Design, Development) before moving forward. This ensures the final result is exactly what you envisioned, minimizing any risk on your end.</div>
             </div>
 
             <div class="faq-item">
@@ -815,7 +816,7 @@
                     Do you provide ongoing maintenance? 
                     <i data-lucide="chevron-down" class="faq-icon"></i>
                 </div>
-                <div class="faq-answer">Yes, monthly retainers for SEO, updates, and ad management are available.</div>
+                <div class="faq-answer">Yes, we offer <strong>monthly retainer packages</strong> for website maintenance, SEO monitoring, and ad campaign management to ensure your digital assets continue to perform at a high level after launch.</div>
             </div>
         </div>
     </section>
