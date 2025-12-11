@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Service Brand | Master Template v4.5</title>
+    <title>Service Brand | Master Template v4.6</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -403,19 +403,30 @@
         .form-control { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid #E5E7EB; background: #FAFAFA; font-family: inherit; font-size: 0.95rem; outline: none; transition: 0.3s;}
         .form-control:focus { border-color: var(--text-main); background: white; }
 
-        /* --- FOOTER --- */
-        footer { background: #0f1115; color: white; padding: 80px 0 0px; } 
-        .footer-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 40px; margin-bottom: 60px; }
+        /* --- FOOTER (RE-DESIGNED v4.6) --- */
+        footer { background: #0f1115; color: white; padding: 80px 0 0px; text-align: left; }
         
+        .footer-top { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: flex-start; 
+            margin-bottom: 60px; 
+            flex-wrap: wrap; 
+            gap: 40px;
+        }
+        
+        .footer-brand-section { max-width: 350px; }
+        
+        .footer-links-wrapper { 
+            display: flex; 
+            gap: 80px; /* Space between links and socials */
+        }
+
         .footer-col h3 { font-size: 1.5rem; margin-bottom: 20px; }
         .footer-col h4 { font-size: 1.1rem; margin-bottom: 20px; color: white; }
         .footer-col a { display: block; color: #9CA3AF; margin-bottom: 12px; font-size: 0.95rem; transition: 0.3s; }
         .footer-col a:hover { color: white; transform: translateX(5px); }
         .footer-col p { color: #9CA3AF; font-size: 0.95rem; line-height: 1.6; }
-
-        .newsletter-form { display: flex; gap: 10px; margin-top: 15px; }
-        .newsletter-input { padding: 10px; border-radius: 8px; border: 1px solid #333; background: #1F2937; color: white; width: 100%; }
-        .newsletter-btn { padding: 10px 16px; border-radius: 8px; background: white; color: black; font-weight: 600; border: none; cursor: pointer; }
 
         .footer-bottom { border-top: 1px solid #1F2937; padding: 30px 0; display: flex; justify-content: space-between; align-items: center; color: #6B7280; font-size: 0.85rem; }
         
@@ -464,7 +475,11 @@
             .hero-text p { margin-left: auto; margin-right: auto; }
             .hero-img-box { transform: none; width: 100%; max-width: 600px; margin: 0 auto; }
             .services-grid { grid-template-columns: 1fr; } 
-            .footer-top { grid-template-columns: 1fr 1fr; gap: 30px; }
+            
+            /* Footer Tablet/Mobile */
+            .footer-top { flex-direction: column; gap: 40px; }
+            .footer-brand-section { max-width: 100%; }
+            .footer-links-wrapper { width: 100%; justify-content: space-between; gap: 40px; }
         }
 
         @media (max-width: 768px) {
@@ -533,9 +548,7 @@
             .contact-form { padding: 24px; }
             
             /* Footer */
-            .footer-top { grid-template-columns: 1fr; text-align: center; }
             .footer-bottom { flex-direction: column; gap: 10px; }
-            .newsletter-form { flex-direction: column; }
             
             /* WhatsApp Mobile Fix */
             .wa-widget { bottom: 20px; right: 20px; }
@@ -575,10 +588,10 @@
             <div class="hero-text">
                 <div class="pill-badge">✨ Accepting New Projects</div>
                 <h1>Scale Your Business With Expert Services</h1>
-                <p>We provide the strategic framework and creative execution you need to dominate your market. Fast, reliable, and results-driven.</p>
+                <p>We provide the strategic framework and creative execution you need to dominate your market.</p>
                 
                 <div class="hero-buttons">
-                    <a href="#contact" class="btn btn-primary">Start Your Project <i data-lucide="arrow-right" size="18"></i></a>
+                    <a href="#contact" class="btn btn-primary">Start Your Project</a>
                     <a href="#work" class="btn btn-secondary">See Our Work</a>
                 </div>
             </div>
@@ -604,7 +617,7 @@
                     <div class="service-content">
                         <div>
                             <h3>Strategic Consulting</h3>
-                            <p>We analyze your current market position, identify bottlenecks, and create a comprehensive roadmap tailored to your specific business goals.</p>
+                            <p>We analyze your market position and create a roadmap tailored to your specific business goals.</p>
                         </div>
                         <a href="#contact" class="service-btn">Get Strategy</a>
                     </div>
@@ -617,7 +630,7 @@
                     <div class="service-content">
                         <div>
                             <h3>Creative Design</h3>
-                            <p>Our team builds high-performance websites and visual identities that capture attention. We combine aesthetic excellence with technical robustness.</p>
+                            <p>Our team builds high-performance websites and visual identities that capture attention instantly.</p>
                         </div>
                         <a href="#contact" class="service-btn">View Portfolio</a>
                     </div>
@@ -630,7 +643,7 @@
                     <div class="service-content">
                         <div>
                             <h3>Growth Marketing</h3>
-                            <p>Data-driven campaigns across social media, search engines, and email. We focus on ROI, ensuring every dollar spent brings in qualified leads.</p>
+                            <p>Data-driven campaigns across social media and search. We focus on ROI and qualified leads.</p>
                         </div>
                         <a href="#contact" class="service-btn">Start Growing</a>
                     </div>
@@ -734,7 +747,7 @@
                     What is your typical onboarding process? 
                     <i data-lucide="chevron-down" class="faq-icon"></i>
                 </div>
-                <div class="faq-answer">We start with a discovery call to understand your needs. Once the proposal is signed, we set up a kickoff meeting within 3 business days to gather assets and begin the strategic planning phase. We use Slack and Trello for seamless communication.</div>
+                <div class="faq-answer">Discovery call, then a kickoff within 3 days to gather assets. We use Slack and Trello for seamless communication.</div>
             </div>
             
             <div class="faq-item">
@@ -742,7 +755,7 @@
                     Do you offer custom packages? 
                     <i data-lucide="chevron-down" class="faq-icon"></i>
                 </div>
-                <div class="faq-answer">Absolutely. While we have standard core services, we understand every business is unique. We can tailor a scope of work that fits your specific budget and timeline requirements perfectly.</div>
+                <div class="faq-answer">Yes. We tailor specific scopes of work to fit your budget and timeline requirements perfectly.</div>
             </div>
 
             <div class="faq-item">
@@ -750,7 +763,7 @@
                     What happens if I'm not satisfied? 
                     <i data-lucide="chevron-down" class="faq-icon"></i>
                 </div>
-                <div class="faq-answer">We work on a milestone basis. We require approval at every stage (Wireframe, Design, Development) before moving forward. This ensures the final result is exactly what you envisioned, minimizing any risk on your end.</div>
+                <div class="faq-answer">We work on milestones. Approval required at every stage (Wireframe, Design, Dev) to minimize risk.</div>
             </div>
 
             <div class="faq-item">
@@ -758,7 +771,7 @@
                     Do you provide ongoing maintenance? 
                     <i data-lucide="chevron-down" class="faq-icon"></i>
                 </div>
-                <div class="faq-answer">Yes, we offer monthly retainer packages for website maintenance, SEO monitoring, and ad campaign management to ensure your digital assets continue to perform at a high level after launch.</div>
+                <div class="faq-answer">Yes, monthly retainers for SEO, updates, and ad management are available.</div>
             </div>
         </div>
     </section>
@@ -768,7 +781,7 @@
             <div class="contact-section">
                 <div class="contact-info">
                     <h2>Ready to scale?</h2>
-                    <p style="color: var(--text-muted); margin-bottom: 24px;">Let's discuss how we can help your business grow. Visit our HQ or send us a message.</p>
+                    <p style="color: var(--text-muted); margin-bottom: 24px;">Let's discuss your growth. Visit our HQ or send a message.</p>
                     
                     <div class="map-container">
                         <iframe 
@@ -812,30 +825,25 @@
     <footer>
         <div class="container">
             <div class="footer-top">
-                <div class="footer-col">
+                <div class="footer-col footer-brand-section">
                     <h3>BrandName.</h3>
                     <p>Empowering service businesses with digital excellence. We build systems that scale.</p>
                 </div>
-                <div class="footer-col">
-                    <h4>Quick Links</h4>
-                    <a href="#services">Services</a>
-                    <a href="#work">Case Studies</a>
-                    <a href="#reviews">Reviews</a>
-                    <a href="#contact">Contact</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Socials</h4>
-                    <a href="#">LinkedIn</a>
-                    <a href="#">Twitter (X)</a>
-                    <a href="#">Instagram</a>
-                    <a href="#">Facebook</a>
-                </div>
-                <div class="footer-col">
-                    <h4>Newsletter</h4>
-                    <p style="margin-bottom: 10px;">Subscribe to get the latest growth tips.</p>
-                    <div class="newsletter-form">
-                        <input type="email" placeholder="Email address" class="newsletter-input">
-                        <button class="newsletter-btn">Go</button>
+                
+                <div class="footer-links-wrapper">
+                    <div class="footer-col">
+                        <h4>Quick Links</h4>
+                        <a href="#services">Services</a>
+                        <a href="#work">Case Studies</a>
+                        <a href="#reviews">Reviews</a>
+                        <a href="#contact">Contact</a>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Socials</h4>
+                        <a href="#">LinkedIn</a>
+                        <a href="#">Twitter (X)</a>
+                        <a href="#">Instagram</a>
+                        <a href="#">Facebook</a>
                     </div>
                 </div>
             </div>
