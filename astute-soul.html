@@ -184,18 +184,47 @@
             width: 100%;
         }
 
-        /* --- 3. HERO --- */
+        /* --- 3. HERO (UPDATED) --- */
         #hero {
             height: 100vh;
             min-height: 700px;
             display: flex;
             align-items: center;
             justify-content: center;
-            /* High quality, peaceful image with a soft overlay */
-            background: linear-gradient(rgba(42, 61, 57, 0.3), rgba(42, 61, 57, 0.4)), url('https://images.unsplash.com/photo-1602168434603-81950389e458?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D') no-repeat center center/cover;
             text-align: center;
             color: var(--white);
-            padding-top: 80px; /* Account for fixed header */
+            padding-top: 80px; /* Initial padding for desktop */
+            position: relative;
+            background-color: #1a2624; /* Deep dark green base color */
+            overflow: hidden;
+        }
+
+        /* Pseudo-element for the low opacity image */
+        #hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://static.vecteezy.com/system/resources/thumbnails/057/780/649/small/serene-green-valley-landscape-viewed-through-majestic-tree-branches-photo.jpeg') no-repeat center center/cover;
+            opacity: 0.25; /* LOW OPACITY SETTING */
+            z-index: 1;
+            filter: saturate(0.8); /* Slight desaturation for a calmer vibe */
+        }
+
+        /* Additional subtle gradient overlay for better text readability */
+        #hero::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to bottom, rgba(26, 38, 36, 0.5) 0%, rgba(26, 38, 36, 0.2) 100%);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3; /* Ensures text sits above background layers */
         }
 
         .hero-content h1 {
@@ -203,7 +232,7 @@
             margin-bottom: 25px;
             font-weight: 400;
             color: var(--white);
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 15px rgba(0,0,0,0.3);
             line-height: 1.1;
         }
 
@@ -603,10 +632,11 @@
         @media (max-width: 768px) {
             :root { --section-padding: 70px 0; }
             
-            /* Hero Mobile */
+            /* Hero Mobile - UPDATED FOR CLASH FIX */
             #hero {
-                background-position: center;
-                align-items: center; /* Center vertically */
+                /* Increased padding top significantly to push text below the fixed header area */
+                padding-top: 160px; 
+                align-items: center;
             }
             .hero-content h1 { font-size: 3rem; line-height: 1.1; }
             .hero-content p { font-size: 1.1rem; max-width: 90%; }
