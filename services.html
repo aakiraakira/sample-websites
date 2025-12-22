@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products Catalog | Besthetic</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & RESET --- */
+        :root {
+            --primary: #E91E63;
+            --primary-dark: #C2185B;
+            --accent: #FCE4EC;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --white: #FFFFFF;
+            --off-white: #F9FAFB;
+            --font-heading: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--off-white);
+            line-height: 1.6;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; }
+
+        /* --- HEADER (Consistent with Home) --- */
+        header {
+            background: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo img { height: 55px; width: auto; }
+
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-family: var(--font-heading); font-weight: 500; color: var(--text-dark); }
+        .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://theskinstory.in/cdn/shop/articles/banner_2_1.png?v=1647406622');
+            background-size: cover;
+            background-position: center;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            margin-top: 80px;
+        }
+
+        .page-header h1 {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        /* --- CATALOG LAYOUT --- */
+        .catalog-container {
+            max-width: 1300px;
+            margin: 60px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 40px;
+        }
+
+        /* Sidebar Filters */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .search-box {
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border: 1px solid #eee;
+            border-radius: 6px;
+            font-family: var(--font-body);
+            outline: none;
+        }
+
+        .search-box input:focus { border-color: var(--primary); }
+        .search-box i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #aaa;
+        }
+
+        .filter-group h3 {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+
+        .filter-btn {
+            display: block;
+            width: 100%;
+            text-align: left;
+            padding: 10px 15px;
+            margin-bottom: 5px;
+            background: none;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            color: var(--text-dark);
+            font-family: var(--font-body);
+            font-weight: 500;
+            transition: 0.2s;
+        }
+
+        .filter-btn:hover { background: var(--accent); color: var(--primary); }
+        .filter-btn.active { background: var(--primary); color: var(--white); }
+
+        /* Product Grid */
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: 1px solid #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+
+        .card-img {
+            height: 250px;
+            padding: 20px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid #f5f5f5;
+        }
+
+        .card-img img {
+            max-height: 100%;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .card-body {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-cat {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            color: var(--text-light);
+            letter-spacing: 1px;
+            margin-bottom: 5px;
+        }
+
+        .card-title {
+            font-family: var(--font-heading);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+        }
+
+        .card-desc {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+
+        .view-btn {
+            margin-top: auto;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* --- PRODUCT MODAL --- */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.open { display: flex; opacity: 1; }
+
+        .modal-content {
+            background: var(--white);
+            width: 100%;
+            max-width: 900px;
+            max-height: 90vh;
+            border-radius: 15px;
+            overflow-y: auto;
+            position: relative;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            animation: slideUp 0.3s ease;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-light);
+            z-index: 10;
+        }
+
+        .modal-img-container {
+            background: #f8f9fa;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-img-container img {
+            max-height: 400px;
+            object-fit: contain;
+        }
+
+        .modal-details {
+            padding: 40px;
+        }
+
+        .modal-cat {
+            color: var(--primary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        .modal-title {
+            font-family: var(--font-heading);
+            font-size: 2rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .modal-section-title {
+            font-weight: 700;
+            margin-top: 20px;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-family: var(--font-heading);
+        }
+
+        .modal-text {
+            color: var(--text-light);
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+        }
+
+        .ingredient-box {
+            background: var(--off-white);
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            border-left: 3px solid var(--primary);
+        }
+
+        .inquire-btn {
+            display: inline-block;
+            margin-top: 30px;
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-family: var(--font-heading);
+            font-weight: 600;
+        }
+
+        .inquire-btn:hover { background: var(--primary-dark); }
+
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        /* --- FOOTER (Same as Home) --- */
+        footer {
+            background: #111;
+            color: #fff;
+            padding-top: 70px;
+            margin-top: 60px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px 50px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            border-bottom: 1px solid #222;
+        }
+
+        .footer-col h4 { font-family: var(--font-heading); color: var(--primary); margin-bottom: 25px; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: #aaa; font-size: 0.9rem; }
+        .footer-links a:hover { color: var(--white); }
+        .footer-bottom { text-align: center; padding: 25px 0; color: #666; font-size: 0.9rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .catalog-container { grid-template-columns: 1fr; }
+            .sidebar { position: static; margin-bottom: 30px; }
+            .modal-content { grid-template-columns: 1fr; max-height: 95vh; overflow-y: scroll; }
+            .modal-img-container { padding: 20px; height: 250px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="https://www.dropbox.com/scl/fi/njakrk7z691fqnrc79g5v/Besthetic-Logo.png?rlkey=s4fgrhieusfdv1o9xg44v2xa4&raw=1" alt="Besthetic Logo">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="#" class="active">Products</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="mobile-toggle"><i class="fas fa-bars"></i></div>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div>
+            <h1>Product Catalog</h1>
+            <p>Professional Grade Aesthetic Solutions for B2B Partners</p>
+        </div>
+    </section>
+
+    <section class="catalog-container">
+        
+        <aside class="sidebar">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search products...">
+            </div>
+
+            <div class="filter-group">
+                <h3>Categories</h3>
+                <button class="filter-btn active" data-filter="all">All Products</button>
+                <button class="filter-btn" data-filter="cleanser">Cleansers</button>
+                <button class="filter-btn" data-filter="serum">Serums & Ampoules</button>
+                <button class="filter-btn" data-filter="cream">Creams & Moisturizers</button>
+                <button class="filter-btn" data-filter="mask">Masks</button>
+                <button class="filter-btn" data-filter="acne">Acne Solutions</button>
+                <button class="filter-btn" data-filter="exosome">Exosome / Anti-Aging</button>
+                <button class="filter-btn" data-filter="body">Body & Professional</button>
+            </div>
+        </aside>
+
+        <div class="product-grid" id="productGrid">
+            </div>
+
+    </section>
+
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-close" id="closeModal">&times;</div>
+            <div class="modal-img-container">
+                <img src="" id="modalImg" alt="Product Image">
+            </div>
+            <div class="modal-details">
+                <div class="modal-cat" id="modalCat">Category</div>
+                <h2 class="modal-title" id="modalTitle">Product Name</h2>
+                
+                <div class="modal-text" id="modalDesc">Description goes here.</div>
+                
+                <div id="modalIngredientsWrapper">
+                    <div class="modal-section-title">Key Ingredients</div>
+                    <div class="ingredient-box" id="modalIngredients">List of ingredients.</div>
+                </div>
+
+                <a href="index.html#contact" class="inquire-btn">Request Wholesale Quote</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Besthetic</h4>
+                <p>Your trusted partner for professional-grade skincare.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                    <li><a href="#">Products</a></li>
+                    <li><a href="index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Categories</h4>
+                <ul class="footer-links">
+                    <li><a href="#">Cleansers</a></li>
+                    <li><a href="#">Serums</a></li>
+                    <li><a href="#">Masks</a></li>
+                    <li><a href="#">Professional Kits</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Besthetic. All rights reserved.</p>
+            <p>Website Design by <a href="https://reputifly.com" rel="dofollow" style="color:#aaa; font-weight:600;">Reputifly</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DATA SOURCE ---
+        const products = [
+            {
+                id: 1,
+                name: "AHA 1.0% Cleanser",
+                category: "cleanser",
+                image: "https://ribeskin.com/wp-content/uploads/2024/01/3472534574133480264_20240128163006860.png",
+                desc: "Essential preparation step before various dermatological procedures. AHA 1.0% and skin-protecting agents like panthenol and oat extract provide deep cleansing without irritation, enhancing absorption of subsequent treatments.",
+                ingredients: "AHA 1.0%, Panthenol, Mimosa extract, Oat extract"
+            },
+            {
+                id: 2,
+                name: "EP+ After Care Booster Gel & Mask",
+                category: "mask",
+                image: "https://ribeskin.com/wp-content/uploads/2024/05/Website-Body-Images-4-1.png",
+                desc: "Faster recovery of irritated skin after aesthetic procedures. Provides skin rejuvenation, hydration, and calming effects. Gel texture allows light application without greasiness.",
+                ingredients: "Post-procedure calming agents, Hydration complex"
+            },
+            {
+                id: 3,
+                name: "ACTAN Plus Ectoin 2% Serum",
+                category: "serum",
+                image: "https://ribeskin.com/wp-content/uploads/2025/06/Website-Body-Square.png",
+                desc: "Enriched with 2% Ectoin to repair damaged skin barriers caused by dermatological procedures or environmental stress. Speeds up the recovery process of damaged skin.",
+                ingredients: "Ectoin 2%, Skin repair active ingredients"
+            },
+            {
+                id: 4,
+                name: "ACTAN Plus Ectoin 2% Cream",
+                category: "cream",
+                image: "https://ribeskin.com/wp-content/uploads/2024/06/Website-Body-Square-1.png",
+                desc: "Daily moisturizer with RonaCare® Ectoin 2% and Spirodela Polyrrhiza extract. Helps repair damaged barriers while providing essential nutrients and deep hydration.",
+                ingredients: "RonaCare® Ectoin 2% (Germany), Spirodela Polyrrhiza extract"
+            },
+            {
+                id: 5,
+                name: "RIBESKIN UV Shield Sunscreen",
+                category: "body",
+                image: "https://ribeskin.com/wp-content/uploads/2024/03/%EB%94%A5%EC%8A%9B-%EB%A7%88%EC%8A%A4%ED%81%AC-%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg",
+                desc: "Mineral sunscreen designed for skin irritated by procedures. Formulated with Zinc Oxide for protection and EGF/Ectoin for regeneration.",
+                ingredients: "Zinc Oxide, EGF, Ectoin"
+            },
+            {
+                id: 6,
+                name: "DEEP SHOOT AFTER COVER Mask",
+                category: "mask",
+                image: "https://ribeskin.com/wp-content/uploads/2024/03/%EB%94%A5%EC%8A%9B-%EB%A7%88%EC%8A%A4%ED%81%AC-%EC%8D%B8%EB%84%A4%EC%9D%BC.jpg",
+                desc: "Special after-care product that immediately soothes and helps normalization of skin treated with DEEP SHOOT needling procedures.",
+                ingredients: "Soothing complex, Recovery agents"
+            },
+            {
+                id: 7,
+                name: "Reform Age Mild Cleanser",
+                category: "cleanser",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2024/12/mild-cleanser.png",
+                desc: "Mild Cleanser with Fermentotherapy for Anti-Aging. Effectively removes impurities while maintaining pH balance.",
+                ingredients: "Glycerin, Betaine, Allantoin, Centella Asiatica, Ceramide NP, Peptides (sh-Oligopeptide-1, etc.)"
+            },
+            {
+                id: 8,
+                name: "Reform Age Collagen Tonic",
+                category: "cleanser",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/250ml-ReformAgeCollagenTonic.png",
+                desc: "Rejuvenating tonic with MOIST-HA5. Enriches epidermis with nutrients, tones skin, and restores water balance.",
+                ingredients: "Centella Asiatica, Niacinamide, Hyaluronic Acid, Hydrolyzed Collagen, Copper Tripeptide-1"
+            },
+            {
+                id: 9,
+                name: "Reform Age O2 Boto Fluid",
+                category: "serum",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2024/12/botofluid.jpg",
+                desc: "Unique oxygen fluid with rejuvenating botox-like effect. Smooths and tightens the skin.",
+                ingredients: "Niacinamide, Adenosine, Arginine, Acetyl Hexapeptide-8, Copper Tripeptide-1"
+            },
+            {
+                id: 10,
+                name: "Reform Age Intensive Cream",
+                category: "exosome",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/Intensive-cream-3D.png",
+                desc: "Intensive anti-aging cream enhancing skin density and restoring youthful looks without surgery. Stimulates collagen production.",
+                ingredients: "Urea, Amino Acids, Shea Butter, Peptides (Oligopeptide-29, Oligopeptide-32), Niacinamide"
+            },
+            {
+                id: 11,
+                name: "Reform Age DNA Cream",
+                category: "cream",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/DNA-CREAM-3D.png",
+                desc: "Powerful repair cream featuring Sodium DNA ('molecule of life'). Stimulates collagen synthesis and protects from UV damage.",
+                ingredients: "Sodium DNA, Fruit Extracts, Acetyl-hexapeptide-8, Copper Tripeptide-1, Shea Butter"
+            },
+            {
+                id: 12,
+                name: "AcnoCell Mild Cleanser",
+                category: "acne",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/250ml_Acnocell-mild-cleanser.png",
+                desc: "Soft deep cleansing gel for oily and problem skin. The first step in acne treatment.",
+                ingredients: "Propolis, Salicylic Acid, White Willow Bark, Acnotide™, Copper-1 Tripeptide"
+            },
+            {
+                id: 13,
+                name: "AcnoCell Treatment Toner",
+                category: "acne",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/ACNOCELL-TONER-100ml.png",
+                desc: "Anti-inflammatory toner with high concentration of peptide Acnotide™. Helps treat rashes, irritation, and redness.",
+                ingredients: "Acnotide™, Triple M Complex™, Copper Tripeptide, Zinc Sulfate, Salicylic Acid"
+            },
+            {
+                id: 14,
+                name: "AcnoCell Multi-Acid Pad",
+                category: "acne",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/06/acnocell-pad.jpg",
+                desc: "Multi-Acid Peeling Pad for Acne Treatment. Increases effectiveness of subsequent products.",
+                ingredients: "Tranexamic Acid, Mandelic Acid, Glycolic Acid, Citric Acid, Salicylic Acid"
+            },
+            {
+                id: 15,
+                name: "Rejusome Exo Boost Serum",
+                category: "exosome",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2024/03/serum3-847x1024.jpg",
+                desc: "Premium Exosome Booster Serum (10,000 ppm Pure Exosomes). Uses patented nanoencapsulation for stability and strong anti-aging.",
+                ingredients: "Exosome Extract, Probiotic-Lysate, Peptides"
+            },
+            {
+                id: 16,
+                name: "Rejusome Exo Boost Cream",
+                category: "exosome",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/06/rejusome-cream.jpg",
+                desc: "Premium Exosome Booster Cream with 10,000 ppm Pure Exosomes for deep repair.",
+                ingredients: "Exosome Extract, Prebiotics, Peptides, Herb Extracts"
+            },
+            {
+                id: 17,
+                name: "Rejusome Exo Boost Mask",
+                category: "mask",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2024/11/mask-1-scaled.jpg",
+                desc: "Premium Exosome Booster Mask. Promotes active regeneration and express hydration.",
+                ingredients: "Exosome Extract (1,000 ppm), Probiotic-Lysate, Vitamins"
+            },
+            {
+                id: 18,
+                name: "Adaptive Skin Probio Toner",
+                category: "cleanser",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/ADAPTIVE-SKIN-PROBIO-TONER.png",
+                desc: "Super Enriched Ultra-Beta-Glucan Toner. Functions like a liquid serum stimulating regeneration and immunity.",
+                ingredients: "Beta-Glucan (200 ppm), Probiotics (300 ppm)"
+            },
+            {
+                id: 19,
+                name: "My Ato Mild Clean Gel",
+                category: "cleanser",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/250ml-MYATO-CLEAN-GEL.png",
+                desc: "Gentle cleansing gel for sensitive skin. Perfect solution for skin that reacts poorly to conventional cleansers.",
+                ingredients: "Sweet Almond Oil, Panthenol, Purslane, Centella Asiatica"
+            },
+            {
+                id: 20,
+                name: "My Ato Intensive Cream",
+                category: "cream",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2023/05/MYATO-CREAM-50ml.png",
+                desc: "Intensive healing cream for dry and sensitive skin (atopic dermatitis, psoriasis).",
+                ingredients: "Triple M Complex, Copper Tripeptide-1, Beta-glucan, Ceramides"
+            },
+            {
+                id: 21,
+                name: "Sebo Xtractor",
+                category: "body",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/250ml_sebo-xtractor.png",
+                desc: "Special gel purifies pores by fully dissolving excess sebum, softening, and removing blackheads and impurities.",
+                ingredients: "Pore purifying agents"
+            },
+            {
+                id: 22,
+                name: "Repair Mask Post-Procedure",
+                category: "mask",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/250ml-REPAIR-MASK-POST-PROCEDURE.png",
+                desc: "Revitalizing post-procedure mask. Instantly alleviates skin irritation and burning sensations.",
+                ingredients: "Peptide (550 ppm), Soothing complex"
+            },
+            {
+                id: 23,
+                name: "Carboxy Therapy Mask",
+                category: "mask",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/250-CARBOXY-MASK.png",
+                desc: "Improves blood circulation, restores protective properties, and calms irritated skin.",
+                ingredients: "Copper Tripeptide-1, Sodium Bicarbonate, Vitamin C, Licorice Root"
+            },
+            {
+                id: 24,
+                name: "Demela Molecular Peel",
+                category: "serum",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/150ML-DEMELA-MOLECULAR-PEEL-1.png",
+                desc: "Molecular Peeling Gel enhances skin quality and brightens complexion. Combines highly active acids and peptides.",
+                ingredients: "Acids (pH 3.0-4.0), Peptides, Phyto components"
+            },
+            {
+                id: 25,
+                name: "Mela-Bright Concentrate",
+                category: "serum",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2023/05/Mela-bright.png",
+                desc: "Brightening and Anti-Pigmentation Serum. Features Glutathione to address hyperpigmentation.",
+                ingredients: "Melanostatin, Glutathione, Niacinamide, Tranexamic Acid, Argireline"
+            },
+            {
+                id: 26,
+                name: "Vita Force Bakuchiol Cream",
+                category: "exosome",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2025/08/BAKUCHIOL-3D.png",
+                desc: "Revitalizing cream with 0.5% Bakuchiol. Restores vitality and promotes renewal.",
+                ingredients: "Bakuchiol 0.5%, Lecithin, Shea Butter, Copper Tripeptide-1"
+            },
+            {
+                id: 27,
+                name: "Hair-Growth Concentrate",
+                category: "body",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2023/05/Hair-growth.png",
+                desc: "Hair Serum for Growth Stimulation. Includes biological peptide growth stimulants and 16 plant extracts.",
+                ingredients: "Copper Tetrapeptide-52, Copper Tripeptide-1, Ectoin"
+            },
+            {
+                id: 28,
+                name: "Sun Protector SPF 50+",
+                category: "body",
+                image: "https://jeuderm.co.kr/wp-content/uploads/2024/12/sun.png",
+                desc: "Comprehensive protection against harmful urban environment effects and UV rays.",
+                ingredients: "Shea Butter, Low-Density Ceramides, Hydrogenated Lecithin, Beta-Glucan"
+            }
+        ];
+
+        // --- RENDER LOGIC ---
+        const grid = document.getElementById('productGrid');
+        const searchInput = document.getElementById('searchInput');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+
+        // Modal Elements
+        const modal = document.getElementById('productModal');
+        const closeModal = document.getElementById('closeModal');
+        const modalImg = document.getElementById('modalImg');
+        const modalCat = document.getElementById('modalCat');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+        const modalIngredients = document.getElementById('modalIngredients');
+
+        function renderProducts(filter = 'all', searchTerm = '') {
+            grid.innerHTML = '';
+            
+            const filtered = products.filter(p => {
+                const matchCat = filter === 'all' || p.category === filter;
+                const matchSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                                    p.desc.toLowerCase().includes(searchTerm.toLowerCase());
+                return matchCat && matchSearch;
+            });
+
+            if(filtered.length === 0) {
+                grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #888;">No products found.</p>';
+                return;
+            }
+
+            filtered.forEach(p => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <div class="card-img">
+                        <img src="${p.image}" alt="${p.name}" loading="lazy">
+                    </div>
+                    <div class="card-body">
+                        <div class="card-cat">${getCategoryName(p.category)}</div>
+                        <h3 class="card-title">${p.name}</h3>
+                        <p class="card-desc">${p.desc}</p>
+                        <span class="view-btn">Quick View <i class="fas fa-arrow-right"></i></span>
+                    </div>
+                `;
+                // Add click event for modal
+                card.addEventListener('click', () => openModal(p));
+                grid.appendChild(card);
+            });
+        }
+
+        // Helper for pretty category names
+        function getCategoryName(slug) {
+            const map = {
+                'cleanser': 'Cleanser & Toner',
+                'serum': 'Serum & Ampoule',
+                'cream': 'Cream & Moisturizer',
+                'mask': 'Mask & Peel',
+                'acne': 'Acne Solution',
+                'exosome': 'Anti-Aging / Exosome',
+                'body': 'Body & Professional'
+            };
+            return map[slug] || slug;
+        }
+
+        // --- FILTER & SEARCH EVENTS ---
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Remove active class
+                filterBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const filter = btn.getAttribute('data-filter');
+                renderProducts(filter, searchInput.value);
+            });
+        });
+
+        searchInput.addEventListener('input', (e) => {
+            const activeBtn = document.querySelector('.filter-btn.active');
+            renderProducts(activeBtn.getAttribute('data-filter'), e.target.value);
+        });
+
+        // --- MODAL LOGIC ---
+        function openModal(product) {
+            modalImg.src = product.image;
+            modalCat.innerText = getCategoryName(product.category);
+            modalTitle.innerText = product.name;
+            modalDesc.innerText = product.desc;
+            
+            if(product.ingredients) {
+                document.getElementById('modalIngredientsWrapper').style.display = 'block';
+                modalIngredients.innerText = product.ingredients;
+            } else {
+                document.getElementById('modalIngredientsWrapper').style.display = 'none';
+            }
+
+            modal.classList.add('open');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        }
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('open');
+            document.body.style.overflow = 'auto';
+        });
+
+        // Close on outside click
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.classList.remove('open');
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        // --- INITIAL RENDER ---
+        renderProducts();
+
+    </script>
+</body>
+</html>
