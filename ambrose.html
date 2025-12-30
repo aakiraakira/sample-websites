@@ -3,7 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Care Mobility Pte Ltd | Premium Wheelchair & Charter Transport</title>
+    
+    <title>Care Mobility Pte Ltd | Premium Wheelchair & Charter Transport Singapore</title>
+    <meta name="description" content="Safe and reliable wheelchair transport, medical appointment escort, and chartered limousine services in Singapore. 24/7 availability with trained chauffeurs.">
+    <meta name="keywords" content="wheelchair transport singapore, medical transport, dialysis transport, limousine service, private charter">
+    
+    <link rel="icon" href="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-30-at-3.11.52-PM.jpeg" type="image/jpeg">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -81,6 +86,7 @@
             letter-spacing: 0.5px;
             font-family: 'Poppins', sans-serif;
             border: none;
+            white-space: nowrap;
         }
 
         .btn-primary {
@@ -115,7 +121,8 @@
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding: 15px 0;
+            padding: 12px 0;
+            transition: all 0.3s ease;
         }
 
         nav {
@@ -133,7 +140,7 @@
         .nav-links a { color: var(--text-dark); font-weight: 500; font-size: 0.95rem; }
         .nav-links a:hover { color: var(--primary); }
 
-        .cta-group { display: flex; gap: 15px; }
+        .cta-group { display: flex; gap: 15px; align-items: center;}
 
         /* HERO SECTION */
         .hero {
@@ -142,17 +149,16 @@
             min-height: 600px;
             display: flex;
             align-items: center;
-            /* Desktop Image */
             background-image: url('https://assets.architecturaldigest.in/photos/68c7adc8a066a2ff558e15bf/16:9/w_2560%2Cc_limit/cover%2520image%2520template%25203%2520(2).jpg');
             background-size: cover;
             background-position: center;
-            margin-top: 80px; /* Offset fixed header */
+            margin-top: 74px; /* Offset fixed header */
         }
 
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to right, rgba(27, 54, 100, 0.85) 0%, rgba(27, 54, 100, 0.4) 100%);
+            background: linear-gradient(to right, rgba(27, 54, 100, 0.9) 0%, rgba(27, 54, 100, 0.4) 100%);
         }
 
         .hero-content {
@@ -286,7 +292,7 @@
             color: var(--secondary);
             font-size: 1.25rem;
             margin-top: -50px; /* Pull up into image area */
-            margin-bottom: 15px;
+            margin-bottom: 10px;
             position: relative;
             z-index: 10;
             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -294,7 +300,34 @@
         }
 
         .service-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
-        .service-cn { font-size: 0.95rem; color: var(--text-gray); font-weight: 500; font-family: "Noto Sans SC", sans-serif; }
+        .service-cn { font-size: 0.95rem; color: var(--text-gray); font-weight: 500; font-family: "Noto Sans SC", sans-serif; margin-bottom: 15px; }
+        
+        /* Service CTA */
+        .service-cta-btn {
+            margin-top: auto;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--primary);
+            background: transparent;
+            border: 1px solid #e5e7eb;
+            border-radius: 30px;
+            width: 100%;
+            max-width: 200px;
+            transition: 0.3s;
+        }
+        .service-cta-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        /* Show More Button (Hidden on Desktop) */
+        .show-more-container {
+            display: none;
+            text-align: center;
+            margin-top: 40px;
+        }
 
         /* MARQUEE REVIEWS */
         .marquee-container {
@@ -366,17 +399,17 @@
             border-top: 6px solid var(--secondary);
         }
         
-        .form-group { margin-bottom: 24px; } /* Increased margin */
+        .form-group { margin-bottom: 24px; }
         .form-label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 0.95rem; color: var(--text-dark); }
         
         .form-input {
             width: 100%;
-            padding: 16px; /* Increased padding for easier tapping */
-            border: 1px solid #d1d5db; /* Softer border color */
-            border-radius: 10px; /* Slightly rounder */
+            padding: 16px;
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
             font-family: 'Inter', sans-serif;
             transition: 0.2s;
-            font-size: 16px; /* Prevents zoom on iOS */
+            font-size: 16px;
             background-color: #f9fafb;
         }
         .form-input:focus {
@@ -385,7 +418,6 @@
             background-color: #fff;
             box-shadow: 0 0 0 4px rgba(27, 54, 100, 0.1);
         }
-        /* Style the select dropdown */
         select.form-input {
             appearance: none;
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
@@ -446,44 +478,66 @@
             .hero h1 { font-size: 3rem; }
             .grid-3 { grid-template-columns: repeat(2, 1fr); }
             .grid-4 { grid-template-columns: repeat(2, 1fr); }
-            .nav-links { display: none; } /* Hiding nav links on tablet/mobile for simplicity */
+            .nav-links { display: none; }
         }
 
         @media (max-width: 768px) {
             .section-padding { padding: 50px 0; }
             
+            /* Compact Header Mobile */
+            header { padding: 8px 0; }
+            nav { justify-content: space-between; padding: 0; }
+            .logo img { height: 40px; }
+            .cta-group { margin-left: auto; } /* Push button to right */
+            .btn { padding: 10px 20px; font-size: 0.9rem; } /* Smaller buttons on mobile */
+            
             /* Mobile Hero Specifics */
             .hero { 
-                margin-top: 70px; 
-                height: 85vh; /* Taller on mobile for the vertical image */
+                margin-top: 60px; 
+                height: 85vh; 
                 padding: 100px 0;
-                /* Updated Mobile Image */
                 background-image: url('https://www.enterprisesg.gov.sg/-/media/esg/images/partner-with-sg/infrastructure/jewel-notable-projects-430x650.jpg?h=650&iar=0&w=430&hash=E291FB0BAB3798F64653146897542160');
-                background-position: center bottom; /* Anchor to bottom for Jewel */
+                background-position: center bottom;
             }
             .hero-overlay {
-                /* Darker overlay on mobile to make text readable over complex background */
-                background: linear-gradient(to top, rgba(27, 54, 100, 0.9) 10%, rgba(27, 54, 100, 0.4) 100%);
+                background: linear-gradient(to top, rgba(27, 54, 100, 0.95) 15%, rgba(27, 54, 100, 0.4) 100%);
             }
             
             .hero h1 { font-size: 2.2rem; }
             .hero p { font-size: 1.1rem; }
             
+            /* Stacked Hero Buttons */
+            .hero .cta-group {
+                flex-direction: column;
+                width: 100%;
+                gap: 12px;
+            }
+            .hero .cta-group .btn {
+                width: 100%;
+            }
+            /* Contrast Fix for Book Now Button */
+            .hero .cta-group .btn-primary {
+                background-color: var(--primary);
+                border: 2px solid white; 
+                box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            }
+            
+            /* Grid Resets */
             .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 30px; }
+            
+            /* Services "Show More" Logic */
+            .service-card-new.mobile-hidden {
+                display: none;
+            }
+            .show-more-container {
+                display: block; /* Show the button on mobile */
+            }
             
             .about-content h2, .section-header h2 { font-size: 2rem; }
             .about-img-wrapper { min-height: 250px; }
-            
             .contact-form { padding: 25px; }
-            
             .footer-grid { grid-template-columns: 1fr; gap: 30px; }
-            
-            /* Adjust marquee card size for mobile */
             .review-card { width: 280px; padding: 20px; }
-            
-            /* Stack nav items on mobile */
-            nav { flex-direction: column; gap: 15px; padding: 10px 0; }
-            .logo img { height: 40px; }
         }
     </style>
 </head>
@@ -495,12 +549,14 @@
                 <a href="#" class="logo">
                     <img src="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-30-at-3.11.52-PM.jpeg" alt="Care Mobility Logo">
                 </a>
+                
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#services">Services</a></li>
                     <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
+
                 <div class="cta-group">
                     <a href="#contact" class="btn btn-secondary btn-font">Book a Ride</a>
                 </div>
@@ -562,7 +618,7 @@
                 <p>Comprehensive transport solutions tailored to your medical and personal needs.</p>
             </div>
 
-            <div class="grid-4">
+            <div class="grid-4" id="services-grid">
                 <div class="service-card-new">
                     <div class="service-img-container">
                         <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Travel">
@@ -571,28 +627,31 @@
                         <div class="service-icon-float"><i class="fas fa-plane-departure"></i></div>
                         <div class="service-title">Travel</div>
                         <div class="service-cn">旅游</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
                 <div class="service-card-new">
                     <div class="service-img-container">
-                        <img src="https://plus.unsplash.com/premium_photo-1661281397737-9b5d759c2f56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dialysis">
+                        <img src="https://www.anera.org/wp-content/uploads/2018/10/dsc_9733_44882985711_o-edit.jpg" alt="Dialysis">
                     </div>
                     <div class="service-body">
                         <div class="service-icon-float"><i class="fas fa-procedures"></i></div>
                         <div class="service-title">Dialysis</div>
                         <div class="service-cn">洗肾</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
                 <div class="service-card-new">
                     <div class="service-img-container">
-                        <img src="https://images.unsplash.com/photo-1576091160550-2187d80a1b95?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Physiotherapy">
+                        <img src="https://rakhospital.com/wp-content/uploads/2024/06/rehabilitation-and-physiotherapy.jpg" alt="Physiotherapy">
                     </div>
                     <div class="service-body">
                         <div class="service-icon-float"><i class="fas fa-running"></i></div>
                         <div class="service-title">Physiotherapy</div>
                         <div class="service-cn">物理治疗</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
@@ -604,10 +663,11 @@
                         <div class="service-icon-float"><i class="fas fa-hospital-user"></i></div>
                         <div class="service-title">Hospital Discharge</div>
                         <div class="service-cn">出院</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
-                <div class="service-card-new">
+                <div class="service-card-new mobile-hidden">
                     <div class="service-img-container">
                         <img src="https://images.unsplash.com/photo-1632053001859-99411d7eb637?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Medical Appointment">
                     </div>
@@ -615,10 +675,11 @@
                         <div class="service-icon-float"><i class="fas fa-calendar-check"></i></div>
                         <div class="service-title">Medical Appointment</div>
                         <div class="service-cn">医疗预约</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
-                <div class="service-card-new">
+                <div class="service-card-new mobile-hidden">
                     <div class="service-img-container">
                         <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Limousine">
                     </div>
@@ -626,10 +687,11 @@
                         <div class="service-icon-float"><i class="fas fa-car-side"></i></div>
                         <div class="service-title">Limousine Service</div>
                         <div class="service-cn">豪华轿车</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
-                <div class="service-card-new">
+                <div class="service-card-new mobile-hidden">
                     <div class="service-img-container">
                         <img src="https://images.unsplash.com/photo-1506197061617-7f5c0b093236?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hourly">
                     </div>
@@ -637,10 +699,11 @@
                         <div class="service-icon-float"><i class="fas fa-hourglass-half"></i></div>
                         <div class="service-title">Hourly Booking</div>
                         <div class="service-cn">小时预定</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
-                <div class="service-card-new">
+                <div class="service-card-new mobile-hidden">
                     <div class="service-img-container">
                         <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hotel Transfer">
                     </div>
@@ -648,10 +711,11 @@
                         <div class="service-icon-float"><i class="fas fa-shuttle-van"></i></div>
                         <div class="service-title">Airport / Hotel</div>
                         <div class="service-cn">机场/酒店接送</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
-                <div class="service-card-new">
+                <div class="service-card-new mobile-hidden">
                     <div class="service-img-container">
                         <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corporate">
                     </div>
@@ -659,10 +723,11 @@
                         <div class="service-icon-float"><i class="fas fa-briefcase"></i></div>
                         <div class="service-title">Corporate Booking</div>
                         <div class="service-cn">商业预订</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
-                <div class="service-card-new">
+                <div class="service-card-new mobile-hidden">
                     <div class="service-img-container">
                         <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Contract">
                     </div>
@@ -670,10 +735,11 @@
                         <div class="service-icon-float"><i class="fas fa-file-contract"></i></div>
                         <div class="service-title">Contract Job</div>
                         <div class="service-cn">合约工作</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
                 
-                <div class="service-card-new">
+                <div class="service-card-new mobile-hidden">
                     <div class="service-img-container">
                          <img src="https://assets.grab.com/wp-content/uploads/sites/4/2021/01/29170837/Day3-2-Taxis-021.jpg" alt="Wheelchair">
                     </div>
@@ -681,10 +747,11 @@
                         <div class="service-icon-float" style="color: var(--secondary);"><i class="fas fa-wheelchair"></i></div>
                         <div class="service-title">Wheelchair Accessible</div>
                         <div class="service-cn">无障碍轮椅设施</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
-                <div class="service-card-new">
+                <div class="service-card-new mobile-hidden">
                     <div class="service-img-container">
                          <img src="https://chanbus.com.sg/wp-content/uploads/2024/07/Chan-Bus-Chartered-Bus-Rental-1-1-e1720084601746-870x577.jpg" alt="Charter">
                     </div>
@@ -692,9 +759,14 @@
                         <div class="service-icon-float"><i class="fas fa-bus"></i></div>
                         <div class="service-title">Chartered Bus</div>
                         <div class="service-cn">包车服务</div>
+                        <a href="#contact" class="service-cta-btn">Book This</a>
                     </div>
                 </div>
 
+            </div>
+
+            <div class="show-more-container">
+                <button class="btn btn-primary" onclick="showAllServices()" id="showMoreBtn">View All Services <i class="fas fa-chevron-down" style="margin-left: 8px;"></i></button>
             </div>
         </div>
     </section>
@@ -844,6 +916,16 @@
             });
             // Toggle clicked FAQ
             element.classList.toggle('active');
+        }
+
+        // Script to show all services on mobile
+        function showAllServices() {
+            const hiddenItems = document.querySelectorAll('.mobile-hidden');
+            hiddenItems.forEach(item => {
+                item.style.display = 'flex'; // reveal items
+            });
+            // Hide the button after clicking
+            document.getElementById('showMoreBtn').style.display = 'none';
         }
     </script>
 </body>
