@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Care Mobility Pte Ltd | Premium Wheelchair & Charter Transport</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            /* Brand Colors based on Logo */
+            --primary: #1B3664; /* Deep Royal Blue */
+            --secondary: #3CAE54; /* Logo Green */
+            --accent: #eff6ff; /* Light Blue BG */
+            --text-dark: #111827;
+            --text-gray: #4B5563;
+            --white: #ffffff;
+            
+            /* Spacing & UI */
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 40px -10px rgba(27, 54, 100, 0.15);
+        }
+
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background-color: #FAFAFA;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Outfit', sans-serif;
+            color: var(--primary);
+            line-height: 1.2;
+        }
+
+        .btn-font { font-family: 'Poppins', sans-serif; }
+
+        a { text-decoration: none; transition: all 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* UTILITIES */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .section-padding { padding: 80px 0; }
+        
+        .text-center { text-align: center; }
+        
+        .flex-center { display: flex; align-items: center; justify-content: center; }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        
+        /* BUTTONS */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(27, 54, 100, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #152a4d;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: var(--white);
+            box-shadow: 0 4px 14px rgba(60, 174, 84, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background-color: #339647;
+            transform: translateY(-2px);
+        }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 15px 0;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px; /* Adjust based on logo needs */
+            width: auto;
+        }
+
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: var(--text-dark); font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--primary); }
+
+        .cta-group { display: flex; gap: 15px; }
+
+        /* HERO SECTION */
+        .hero {
+            position: relative;
+            height: 90vh;
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            background-image: url('https://assets.architecturaldigest.in/photos/68c7adc8a066a2ff558e15bf/16:9/w_2560%2Cc_limit/cover%2520image%2520template%25203%2520(2).jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            /* Gradient overlay to make text pop but keep image visible */
+            background: linear-gradient(90deg, rgba(27, 54, 100, 0.9) 0%, rgba(27, 54, 100, 0.6) 60%, rgba(255,255,255,0.1) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            color: white;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+
+        /* TRUST BADGES STRIP */
+        .trust-strip {
+            background: var(--primary);
+            color: white;
+            padding: 20px 0;
+            margin-top: -5px;
+        }
+        .trust-grid {
+            display: flex;
+            justify-content: space-evenly;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .trust-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+        }
+        .trust-item i { color: var(--secondary); font-size: 1.2rem; }
+
+        /* ABOUT SECTION */
+        .about-img-wrapper {
+            position: relative;
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+        .about-content h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .about-content p { color: var(--text-gray); margin-bottom: 20px; font-size: 1.05rem; }
+        
+        .feature-check {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        .feature-check i {
+            color: var(--secondary);
+            background: rgba(60, 174, 84, 0.1);
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        /* SERVICES SECTION */
+        #services { background-color: var(--accent); }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .section-header p { color: var(--text-gray); }
+
+        .service-card {
+            background: white;
+            padding: 30px 24px;
+            border-radius: var(--radius-md);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--secondary);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(27, 54, 100, 0.05);
+            color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        .service-card:hover .service-icon {
+            background: var(--primary);
+            color: white;
+        }
+
+        .service-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+        .service-cn { font-size: 0.95rem; color: var(--secondary); font-weight: 500; }
+
+        /* MARQUEE REVIEWS */
+        .marquee-container {
+            overflow: hidden;
+            background: var(--primary);
+            padding: 40px 0;
+            position: relative;
+        }
+        
+        .marquee-content {
+            display: flex;
+            gap: 30px;
+            animation: scroll 30s linear infinite;
+            width: max-content;
+        }
+
+        .review-card {
+            background: white;
+            width: 350px;
+            padding: 25px;
+            border-radius: var(--radius-md);
+            flex-shrink: 0;
+        }
+
+        .stars { color: #F59E0B; margin-bottom: 10px; }
+        .review-text { font-style: italic; color: var(--text-gray); font-size: 0.95rem; margin-bottom: 15px; }
+        .reviewer { font-weight: 700; color: var(--primary); }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* FAQ & CONTACT SPLIT */
+        .faq-item {
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            padding: 20px;
+            cursor: pointer;
+        }
+        .faq-question {
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+        }
+        .faq-answer {
+            margin-top: 10px;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            display: none; /* JS will toggle */
+        }
+        .faq-item.active .faq-answer { display: block; }
+
+        /* CONTACT FORM */
+        .contact-form {
+            background: white;
+            padding: 40px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            border-top: 5px solid var(--secondary);
+        }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; }
+        .form-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            transition: 0.3s;
+        }
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(27, 54, 100, 0.1);
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 60px 0 20px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        .footer-logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; display: block; color: white;}
+        .footer-links h4 { color: var(--secondary); margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-links ul li { margin-bottom: 10px; }
+        .footer-links a { color: rgba(255,255,255,0.8); }
+        .footer-links a:hover { color: white; padding-left: 5px; }
+        .copyright {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            padding-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.6);
+        }
+
+        /* MOBILE FLOATING CTA */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+            z-index: 999;
+        }
+        .floating-whatsapp:hover { transform: scale(1.1); }
+
+        /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .hero h1 { font-size: 2.8rem; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .nav-links { display: none; } /* Simplified for demo */
+            .hero-content { padding-top: 60px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <img src="https://yewdigitallock.com.sg/wp-content/uploads/2025/12/WhatsApp-Image-2025-12-30-at-3.11.52-PM.jpeg" alt="Care Mobility Logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#about">About</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                </ul>
+                <div class="cta-group">
+                    <a href="#contact" class="btn btn-secondary btn-font">Book a Ride</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="hero">
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <h1>Transport with Heart, <br><span style="color: var(--secondary)">Mobility with Care.</span></h1>
+                <p>Singapore's trusted partner for wheelchair transport, medical appointments, and chartered limousine services. Safe, reliable, and professional.</p>
+                <div class="cta-group">
+                    <a href="#contact" class="btn btn-primary btn-font">Book Now</a>
+                    <a href="https://wa.me/6512345678" class="btn btn-secondary btn-font"><i class="fab fa-whatsapp" style="margin-right: 8px;"></i> WhatsApp Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="trust-strip">
+        <div class="container">
+            <div class="trust-grid">
+                <div class="trust-item"><i class="fas fa-clock"></i> 24/7 Availability</div>
+                <div class="trust-item"><i class="fas fa-user-nurse"></i> Trained Chauffeurs</div>
+                <div class="trust-item"><i class="fas fa-wheelchair"></i> Wheelchair Accessible</div>
+                <div class="trust-item"><i class="fas fa-shield-alt"></i> Safety First</div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section-padding" id="about">
+        <div class="container">
+            <div class="grid-2">
+                <div class="about-img-wrapper">
+                    <img src="https://assets.grab.com/wp-content/uploads/sites/4/2021/01/29170837/Day3-2-Taxis-021.jpg" alt="Wheelchair Transport" style="height: 100%; object-fit: cover;">
+                </div>
+                <div class="about-content">
+                    <h5 style="color: var(--secondary); font-weight: 600; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">Who We Are</h5>
+                    <h2>Compassionate Travel Solutions for Everyone</h2>
+                    <p>At Care Mobility Pte Ltd (慈运), we believe that mobility should never be a barrier to a full life. Whether it is a routine dialysis appointment, a hospital discharge, or a family holiday, our fleet provides the highest standard of safety and comfort.</p>
+                    
+                    <div class="feature-check"><i class="fas fa-check"></i> <span>Professional & Patient Drivers</span></div>
+                    <div class="feature-check"><i class="fas fa-check"></i> <span>Fully Equipped Vehicles</span></div>
+                    <div class="feature-check"><i class="fas fa-check"></i> <span>Punctual & Reliable Service</span></div>
+
+                    <a href="#services" style="color: var(--primary); font-weight: 700; margin-top: 20px; display: inline-block; border-bottom: 2px solid var(--secondary);">Explore Our Fleet &rarr;</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="services">
+        <div class="container">
+            <div class="section-header">
+                <h5 style="color: var(--secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">What We Do</h5>
+                <h2>Our Services</h2>
+                <p>Comprehensive transport solutions tailored to your medical and personal needs.</p>
+            </div>
+
+            <div class="grid-3">
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-plane-departure"></i></div>
+                    <div class="service-title">Travel</div>
+                    <div class="service-cn">旅游</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-procedures"></i></div>
+                    <div class="service-title">Dialysis</div>
+                    <div class="service-cn">洗肾</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-running"></i></div>
+                    <div class="service-title">Physiotherapy</div>
+                    <div class="service-cn">物理治疗</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hospital-user"></i></div>
+                    <div class="service-title">Hospital Discharge</div>
+                    <div class="service-cn">出院</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="service-title">Medical Appointment</div>
+                    <div class="service-cn">医疗预约</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-car-side"></i></div>
+                    <div class="service-title">Limousine Service</div>
+                    <div class="service-cn">豪华轿车</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="service-title">Hourly Booking</div>
+                    <div class="service-cn">小时预定</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-shuttle-van"></i></div>
+                    <div class="service-title">Airport / Hotel Transfer</div>
+                    <div class="service-cn">机场/酒店接送</div>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-briefcase"></i></div>
+                    <div class="service-title">Corporate Booking</div>
+                    <div class="service-cn">商业预订</div>
+                </div>
+                 <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+                    <div class="service-title">Contract Job</div>
+                    <div class="service-cn">合约工作</div>
+                </div>
+                <div class="service-card" style="grid-column: span 1; border-color: var(--secondary);">
+                    <div class="service-icon" style="background: var(--secondary); color: white;"><i class="fas fa-wheelchair"></i></div>
+                    <div class="service-title">Wheelchair Accessible</div>
+                    <div class="service-cn">无障碍轮椅设施</div>
+                </div>
+                <div class="service-card" style="padding: 0;">
+                    <img src="https://chanbus.com.sg/wp-content/uploads/2024/07/Chan-Bus-Chartered-Bus-Rental-1-1-e1720084601746-870x577.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Charter">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews">
+        <div class="marquee-container">
+            <div class="container text-center" style="margin-bottom: 30px;">
+                <h2 style="color: white;">Trusted by Families in Singapore</h2>
+            </div>
+            <div class="marquee-content">
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Care Mobility made my father's dialysis trips so much easier. The driver was incredibly patient and helpful with the wheelchair."</p>
+                    <p class="reviewer">- Sarah Tan</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Clean vehicles and very professional service for our airport transfer. Highly recommended for corporate bookings."</p>
+                    <p class="reviewer">- Michael Lim</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Reliable and punctual. It gives me peace of mind knowing my mother is in safe hands during her checkups."</p>
+                    <p class="reviewer">- Jennifer Koh</p>
+                </div>
+                 <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Great service for wheelchair transport. Very accommodating to our schedule."</p>
+                    <p class="reviewer">- Wei Ming</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Care Mobility made my father's dialysis trips so much easier. The driver was incredibly patient."</p>
+                    <p class="reviewer">- Sarah Tan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" id="contact">
+        <div class="container">
+            <div class="grid-2">
+                <div>
+                    <h5 style="color: var(--secondary); font-weight: 600; text-transform: uppercase;">Common Questions</h5>
+                    <h2 style="margin-bottom: 30px;">Frequently Asked Questions</h2>
+                    
+                    <div class="faq-item active" onclick="toggleFaq(this)">
+                        <div class="faq-question">How do I book a ride? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">You can book by filling out the form on this page, or by clicking the WhatsApp button to chat with our team directly.</div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">Are your vehicles wheelchair accessible? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Yes, we specialize in wheelchair accessible transport with ramp and hydraulic lift options available.</div>
+                    </div>
+                    <div class="faq-item" onclick="toggleFaq(this)">
+                        <div class="faq-question">Do you offer hourly chartering? <i class="fas fa-chevron-down"></i></div>
+                        <div class="faq-answer">Yes, we offer hourly bookings for personal errands, corporate events, or city tours.</div>
+                    </div>
+                    
+                    <div style="margin-top: 40px; border-radius: 12px; overflow: hidden;">
+                        <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/ad/c5/de.jpg" alt="Airport Transfer Singapore">
+                    </div>
+                </div>
+
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 20px;">Book Your Ride</h3>
+                    <p style="margin-bottom: 20px; color: var(--text-gray);">Fill in the details below and we will confirm your booking shortly.</p>
+                    
+                    <form>
+                        <div class="form-group">
+                            <label class="form-label">Full Name</label>
+                            <input type="text" class="form-input" placeholder="Enter your name">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" placeholder="+65 9123 4567">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Service Type</label>
+                            <select class="form-input">
+                                <option>Wheelchair Transport</option>
+                                <option>Airport Transfer</option>
+                                <option>Medical Appointment</option>
+                                <option>Hourly Charter</option>
+                                <option>Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Date & Time</label>
+                            <input type="datetime-local" class="form-input">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Pickup Location</label>
+                            <input type="text" class="form-input" placeholder="Enter address">
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-font" style="width: 100%; justify-content: center;">Submit Booking Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <a href="#" class="footer-logo">Care Mobility Pte Ltd</a>
+                    <p style="opacity: 0.8; max-width: 300px;">Providing safe, reliable, and heart-centered transport services across Singapore. We are here to move you with care.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact Us</h4>
+                    <ul>
+                        <li><i class="fas fa-phone-alt" style="margin-right: 8px;"></i> +65 1234 5678</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 8px;"></i> booking@caremobility.sg</li>
+                        <li><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Singapore</li>
+                    </ul>
+                    <div style="margin-top: 20px; display: flex; gap: 15px;">
+                        <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Care Mobility Pte Ltd. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6512345678" class="floating-whatsapp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        function toggleFaq(element) {
+            // Close all other FAQs
+            const items = document.querySelectorAll('.faq-item');
+            items.forEach(item => {
+                if (item !== element) {
+                    item.classList.remove('active');
+                }
+            });
+            // Toggle clicked FAQ
+            element.classList.toggle('active');
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
