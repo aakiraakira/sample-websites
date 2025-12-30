@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direct Aircon Engineering | Singapore</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@500,700,900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- CSS VARIABLES & THEME --- */
+        :root {
+            --primary: #0066CC;       /* Direct Blue */
+            --primary-dark: #004C99;  
+            --secondary: #0B2545;     /* Navy Text */
+            --accent: #E0F2FE;        
+            --white: #ffffff;
+            --gray-light: #F1F5F9;
+            --shadow: 0 10px 30px rgba(0, 102, 204, 0.15);
+            
+            --font-head: 'Poppins', sans-serif;
+            --font-sub: 'Satoshi', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* --- GLOBAL RESET --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--secondary); background-color: #F8FAFC; line-height: 1.6; overflow-x: hidden; }
+        
+        h1, h2, h3 { font-family: var(--font-head); color: var(--secondary); }
+        h4, h5, h6 { font-family: var(--font-sub); }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        input, select, textarea { font-family: var(--font-body); }
+
+        /* --- UTILITIES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        .section-padding { padding: 80px 0; }
+        .text-center { text-align: center; }
+        .text-blue { color: var(--primary); font-weight: 700; }
+        .bg-white { background: var(--white); }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block; padding: 14px 32px; border-radius: 50px;
+            font-family: var(--font-sub); font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.5px; transition: all 0.3s ease; cursor: pointer; border: none;
+        }
+        .btn-primary { background-color: var(--primary); color: var(--white); box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3); }
+        .btn-primary:hover { background-color: var(--primary-dark); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 2px solid var(--white); color: var(--white); }
+        .btn-outline:hover { background: var(--white); color: var(--primary); }
+
+        /* --- ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed; top: 0; width: 100%; z-index: 1000;
+            background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        nav { display: flex; justify-content: space-between; align-items: center; height: 80px; }
+        .logo { font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; color: var(--primary); display: flex; align-items: center; gap: 10px; }
+        .nav-links { display: flex; gap: 30px; }
+        .nav-links a { font-family: var(--font-sub); font-weight: 600; font-size: 0.95rem; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; }
+
+        /* --- HERO SECTION (Fixed Contrast) --- */
+        .hero {
+            position: relative; height: 90vh; display: flex; align-items: center;
+            /* Stronger overlay for better text contrast */
+            background: linear-gradient(rgba(2, 18, 38, 0.75), rgba(0, 76, 153, 0.6)), url('https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+            color: var(--white); margin-bottom: 20px;
+        }
+        .hero-content { max-width: 700px; z-index: 2; }
+        .hero h1 { 
+            font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; font-weight: 700; color: var(--white); 
+            text-shadow: 0 4px 15px rgba(0,0,0,0.3); /* Added shadow for legibility */
+        }
+        .hero p { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.95; font-weight: 400; }
+        .badge {
+            background: rgba(255,255,255,0.15); padding: 6px 16px; border-radius: 20px;
+            font-family: var(--font-sub); font-size: 0.8rem; text-transform: uppercase;
+            letter-spacing: 1px; border: 1px solid rgba(255,255,255,0.4); display: inline-block; margin-bottom: 20px;
+        }
+
+        /* --- WHY CHOOSE US --- */
+        .why-us-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; margin-top: 40px; }
+        .feature-box {
+            padding: 30px; background: var(--white); border-radius: 16px; border: 1px solid #eee;
+            transition: 0.3s;
+        }
+        .feature-box:hover { box-shadow: var(--shadow); transform: translateY(-5px); border-color: var(--primary); }
+        .icon-circle {
+            width: 60px; height: 60px; background: var(--accent); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+            color: var(--primary); font-size: 1.5rem;
+        }
+
+        /* --- SERVICES SECTION --- */
+        .section-header { text-align: center; margin-bottom: 60px; max-width: 600px; margin-inline: auto; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .service-card {
+            background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: 0.3s; border: 1px solid #eee; display: flex; flex-direction: column;
+        }
+        .service-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0, 102, 204, 0.15); border-color: var(--primary); }
+        .service-img { height: 220px; width: 100%; object-fit: cover; }
+        .service-body { padding: 25px; flex: 1; display: flex; flex-direction: column; }
+        .service-body h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--secondary); }
+        .service-body p { font-size: 0.95rem; color: #555; margin-bottom: 20px; flex: 1; }
+        .service-link { font-family: var(--font-sub); font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+
+        /* --- AMC SECTION --- */
+        .amc-section {
+            background-color: var(--secondary); color: var(--white); border-radius: 20px;
+            padding: 60px; margin-top: 80px; position: relative; overflow: hidden;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 40px;
+        }
+        .amc-section::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png'); opacity: 0.1;
+        }
+        .amc-content { flex: 1; min-width: 300px; z-index: 1; }
+        .amc-image { flex: 1; min-width: 300px; z-index: 1; }
+        .amc-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 1.1rem; }
+        .amc-list i { color: #4ADE80; }
+        .amc-image img { width: 100%; border-radius: 12px; box-shadow: -20px 20px 0 rgba(255,255,255,0.1); }
+
+        /* --- MARQUEE REVIEWS --- */
+        .marquee-container { overflow: hidden; background: var(--primary); padding: 60px 0; margin-top: 80px; }
+        .marquee-wrapper { display: flex; gap: 30px; animation: scroll 40s linear infinite; width: max-content; }
+        .review-card {
+            background: var(--white); padding: 25px; border-radius: 12px; width: 350px;
+            flex-shrink: 0; box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .stars { color: #FFD700; margin-bottom: 10px; }
+        .review-text { font-size: 0.95rem; font-style: italic; color: #444; margin-bottom: 15px; }
+        .reviewer { font-weight: 700; color: var(--secondary); font-family: var(--font-sub); }
+        
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* --- FAQ SECTION --- */
+        .faq-grid { max-width: 800px; margin: 0 auto; }
+        .faq-item { background: var(--white); border-radius: 10px; margin-bottom: 15px; border: 1px solid #eee; overflow: hidden; }
+        .faq-question {
+            padding: 20px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+            font-weight: 600; font-family: var(--font-sub);
+        }
+        .faq-question i { transition: 0.3s; color: var(--primary); }
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; padding: 0 20px; background: #fafafa;
+        }
+        .faq-answer p { padding-bottom: 20px; color: #666; font-size: 0.95rem; }
+        .faq-item.active .faq-answer { max-height: 200px; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
+
+        /* --- BOOKING FORM --- */
+        .booking-section { background: linear-gradient(135deg, #f8fafc 0%, #eef2ff 100%); }
+        .booking-container {
+            background: var(--white); border-radius: 20px; box-shadow: var(--shadow);
+            display: flex; overflow: hidden; flex-wrap: wrap;
+        }
+        .booking-info {
+            flex: 1; padding: 60px; background: var(--primary); color: var(--white);
+            min-width: 300px; display: flex; flex-direction: column; justify-content: center;
+        }
+        .booking-form { flex: 1.5; padding: 60px; min-width: 300px; }
+        
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; }
+        .form-control {
+            width: 100%; padding: 12px 15px; border: 1px solid #ddd; border-radius: 8px;
+            font-size: 1rem; transition: 0.3s; outline: none; background: #fdfdfd;
+        }
+        .form-control:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1); }
+        .form-row { display: flex; gap: 20px; }
+        .form-row .form-group { flex: 1; }
+
+        /* --- FOOTER --- */
+        footer { background: #021226; color: #8fa6c2; padding: 80px 0 30px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; margin-bottom: 60px; }
+        .footer-col h3 { color: var(--white); margin-bottom: 25px; font-size: 1.2rem; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a:hover { color: var(--white); }
+        .contact-info li { display: flex; gap: 15px; margin-bottom: 20px; }
+        .copyright { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; text-align: center; font-size: 0.9rem; }
+
+        /* --- FLOATING WHATSAPP --- */
+        .whatsapp-float {
+            position: fixed; bottom: 30px; right: 30px; background-color: #25D366; color: white;
+            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 30px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); z-index: 100; transition: all 0.3s;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        /* --- MOBILE MEDIA QUERIES --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .form-row { flex-direction: column; gap: 0; }
+            .booking-container { flex-direction: column; }
+            .booking-info, .booking-form { padding: 30px; }
+            
+            .nav-links {
+                position: absolute; top: 80px; left: 0; width: 100%; background: var(--white);
+                flex-direction: column; align-items: center; padding: 30px 0; gap: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05); clip-path: circle(0% at 100% 0);
+                transition: all 0.5s ease-in-out;
+            }
+            .nav-links.active { clip-path: circle(150% at 100% 0); }
+            .hamburger { display: block; color: var(--secondary); }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fa-solid fa-wind"></i> DIRECT AIRCON
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#maintenance">AMC</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#reviews">Reviews</a></li>
+                    <li><a href="#booking" class="btn btn-primary" style="padding: 10px 25px; font-size: 0.9rem;">Book Now</a></li>
+                </ul>
+                <div class="hamburger">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content reveal">
+                <span class="badge">Direct Aircon Engineering</span>
+                <h1>Professional Cooling Solutions for Your Home.</h1>
+                <p>Singapore's premier aircon specialists. From chemical washes to complex installations, we ensure your air stays fresh and cool.</p>
+                <div style="margin-top: 20px;">
+                    <a href="#booking" class="btn btn-primary">Book Appointment</a>
+                    <a href="#services" class="btn btn-outline" style="margin-left: 10px;">Our Services</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <h5 class="text-blue">Why Us</h5>
+                <h2>The Direct Difference</h2>
+            </div>
+            <div class="why-us-grid reveal">
+                <div class="feature-box text-center">
+                    <div class="icon-circle" style="margin: 0 auto 20px;"><i class="fa-solid fa-user-shield"></i></div>
+                    <h3>Certified Technicians</h3>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Our team is highly trained, insured, and experienced in all major brands.</p>
+                </div>
+                <div class="feature-box text-center">
+                    <div class="icon-circle" style="margin: 0 auto 20px;"><i class="fa-solid fa-tags"></i></div>
+                    <h3>Transparent Pricing</h3>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">No hidden costs. We provide a clear breakdown before we start any work.</p>
+                </div>
+                <div class="feature-box text-center">
+                    <div class="icon-circle" style="margin: 0 auto 20px;"><i class="fa-solid fa-award"></i></div>
+                    <h3>90-Day Warranty</h3>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Peace of mind included. We cover our workmanship for 90 days.</p>
+                </div>
+                <div class="feature-box text-center">
+                    <div class="icon-circle" style="margin: 0 auto 20px;"><i class="fa-regular fa-clock"></i></div>
+                    <h3>Fast Response</h3>
+                    <p style="margin-top: 10px; color: #666; font-size: 0.9rem;">Urgent issue? We offer same-day or next-day slots for emergencies.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding" style="background: #F1F5F9;">
+        <div class="container">
+            <div class="section-header reveal">
+                <h5 class="text-blue">Our Expertise</h5>
+                <h2>Comprehensive Services</h2>
+                <p>We don't just fix aircons; we optimize your indoor climate.</p>
+            </div>
+
+            <div class="services-grid">
+                
+                <div class="service-card reveal">
+                    <img src="https://images.unsplash.com/photo-1621905251918-48416bd8575a?q=80&w=800&auto=format&fit=crop" alt="General Service" class="service-img">
+                    <div class="service-body">
+                        <h3>Normal Service</h3>
+                        <p>Routine cleaning of filters and covers to ensure your unit runs efficiently and air remains dust-free.</p>
+                        <a href="#booking" class="service-link">Book Service <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <img src="https://www.socool.sg/wp-content/uploads/2021/05/chemical-wash-1024x576.png" alt="Chemical Wash" class="service-img">
+                    <div class="service-body">
+                        <h3>Chemical Wash</h3>
+                        <p>Deep cleaning using specialized chemical solutions to eliminate mold, bacteria, jelly, and stubborn grime.</p>
+                        <a href="#booking" class="service-link">Learn More <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <img src="https://airple-production-bucket.s3.ap-southeast-1.amazonaws.com/blogs/thumbnails/what-you-should-know-about-chemical-washes-for-air-conditioners-800x545.jpg" alt="Aircon Overhaul" class="service-img">
+                    <div class="service-body">
+                        <h3>Aircon Overhaul</h3>
+                        <p>Complete dismantling of the unit for a thorough check and cleaning of every component. Like a factory reset.</p>
+                        <a href="#booking" class="service-link">Restore Unit <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <img src="https://images.unsplash.com/photo-1504384308090-c54be3855833?q=80&w=800&auto=format&fit=crop" alt="Installation" class="service-img">
+                    <div class="service-body">
+                        <h3>Installation / Relocation</h3>
+                        <p>Professional installation of new units or safe relocation of existing systems with proper piping.</p>
+                        <a href="#booking" class="service-link">Get Quote <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?q=80&w=800&auto=format&fit=crop" alt="Gas Top Up" class="service-img">
+                    <div class="service-body">
+                        <h3>Gas Top-Up</h3>
+                        <p>Restoring refrigerant levels (R410A/R32) to ensure your aircon blows ice-cold air efficiently.</p>
+                        <a href="#booking" class="service-link">Check Levels <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <div class="service-card reveal">
+                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=800&auto=format&fit=crop" alt="Troubleshooting" class="service-img">
+                    <div class="service-body">
+                        <h3>Troubleshooting</h3>
+                        <p>Leaking water? Blinking lights? Noisy fan? Our diagnostic experts will find and fix the root cause.</p>
+                        <a href="#booking" class="service-link">Fix It Now <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="maintenance" class="container">
+        <div class="amc-section reveal">
+            <div class="amc-content">
+                <span style="color: #4ADE80; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Best Value</span>
+                <h2>Yearly Maintenance Contract</h2>
+                <p style="color: #cbd5e1; margin-bottom: 30px;">Forget the hassle of booking individual appointments. Join our yearly contract for priority service and consistent cooling performance all year round.</p>
+                <ul class="amc-list">
+                    <li><i class="fa-solid fa-check-circle"></i> Quarterly scheduled servicing</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Priority booking slots</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Discounted spare parts</li>
+                    <li><i class="fa-solid fa-check-circle"></i> Free gas top-up inspection</li>
+                </ul>
+                <a href="#booking" class="btn btn-primary" style="margin-top: 30px; background: #fff; color: var(--primary);">Sign Up Now</a>
+            </div>
+            <div class="amc-image">
+                <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?q=80&w=800&auto=format&fit=crop" alt="Maintenance Contract">
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="marquee-container">
+        <h2 class="text-center" style="color: white; margin-bottom: 40px;">Trusted by Singaporean Homes</h2>
+        <div class="marquee-wrapper">
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"Technicians were punctual and very polite. They cleaned up the mess after the chemical wash. Highly recommended!"</p>
+                <p class="reviewer">- Jason Tan</p>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"My aircon was leaking badly. Direct Aircon fixed it within 30 minutes. Price was very reasonable."</p>
+                <p class="reviewer">- Sarah Lim</p>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"Signed up for the yearly package. It's so much easier not having to remember when to service."</p>
+                <p class="reviewer">- Michael Teo</p>
+            </div>
+             <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"Professional and honest. They advised me not to top up gas as it wasn't necessary. Honest business."</p>
+                <p class="reviewer">- Amanda Lee</p>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"Technicians were punctual and very polite. They cleaned up the mess after the chemical wash. Highly recommended!"</p>
+                <p class="reviewer">- Jason Tan</p>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"My aircon was leaking badly. Direct Aircon fixed it within 30 minutes. Price was very reasonable."</p>
+                <p class="reviewer">- Sarah Lim</p>
+            </div>
+            <div class="review-card">
+                <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="review-text">"Signed up for the yearly package. It's so much easier not having to remember when to service."</p>
+                <p class="reviewer">- Michael Teo</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section-padding">
+        <div class="container">
+            <div class="section-header reveal">
+                <h5 class="text-blue">Common Questions</h5>
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-grid reveal">
+                <div class="faq-item">
+                    <div class="faq-question">How often should I service my aircon? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">
+                        <p>For residential usage, we recommend a general service every 3 months. If you use it every night, quarterly servicing ensures the air remains clean and the unit efficient.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What is the difference between Chemical Wash and Overhaul? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">
+                        <p>A Chemical Wash is done with the unit on the wall using a bag to catch water. An Overhaul involves dismantling the entire fan coil unit to wash individual parts thoroughly. Overhaul is recommended for very old or heavily choked units.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Do you provide a warranty? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">
+                        <p>Yes, we provide a 90-day workmanship warranty on our servicing and repairs. Parts replacement warranties vary by manufacturer.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Why is my aircon leaking water? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">
+                        <p>Leaking is usually caused by a choked drainage pipe, dirty filters, or insufficient gas causing ice formation. Our troubleshooting service can identify the exact cause.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="booking" class="section-padding booking-section">
+        <div class="container">
+            <div class="section-header reveal">
+                <h5 class="text-blue">Ready to Cool Down?</h5>
+                <h2>Book An Appointment</h2>
+            </div>
+            
+            <div class="booking-container reveal">
+                <div class="booking-info">
+                    <h3 style="color:white; margin-bottom:15px;">Contact Information</h3>
+                    <p style="opacity:0.9; margin-bottom: 30px;">Prefer to speak to us directly? Give us a call or WhatsApp.</p>
+                    
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+65 6789 1234</span>
+                        </li>
+                        <li>
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <span>+65 8888 9999</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>booking@directaircon.sg</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="booking-form">
+                    <form onsubmit="event.preventDefault(); alert('Thank you! We have received your request and will contact you shortly.');">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="Your Name" required>
+                            </div>
+                            <div class="form-group">
+                                <label>Phone Number</label>
+                                <input type="tel" class="form-control" placeholder="8123 4567" required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Service Required</label>
+                            <select class="form-control">
+                                <option>Normal Servicing</option>
+                                <option>Chemical Wash</option>
+                                <option>Aircon Overhaul</option>
+                                <option>Troubleshooting</option>
+                                <option>Installation Quote</option>
+                                <option>Yearly Contract</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" class="form-control" placeholder="Postal Code / Unit No" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Message / Preferred Date</label>
+                            <textarea class="form-control" rows="4" placeholder="e.g. Next Tuesday afternoon preferred"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Request</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>Direct Aircon Engineering</h3>
+                    <p>Your partner in climate control. We bring engineering precision to home cooling.</p>
+                    <div style="margin-top: 20px;">
+                        <a href="#" style="margin-right: 15px;"><i class="fa-brands fa-facebook fa-lg"></i></a>
+                        <a href="#" style="margin-right: 15px;"><i class="fa-brands fa-instagram fa-lg"></i></a>
+                        <a href="#"><i class="fa-brands fa-whatsapp fa-lg"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#services">Chemical Wash</a></li>
+                        <li><a href="#services">Aircon Overhaul</a></li>
+                        <li><a href="#maintenance">Maintenance Contract</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3>Office</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fa-solid fa-location-dot" style="margin-top: 5px;"></i>
+                            <span>101 Cooling Industrial Park,<br>Singapore 560101</span>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-clock"></i>
+                            <span>Mon - Sat: 9am - 6pm</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2024 Direct Aircon Engineering. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6512345678" class="whatsapp-float" target="_blank">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // FAQ Toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Scroll Animation
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                var elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        reveal(); // Trigger once on load
+    </script>
+</body>
+</html>
