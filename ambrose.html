@@ -66,11 +66,13 @@
         
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
         
         /* BUTTONS */
         .btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             padding: 14px 32px;
             border-radius: 50px;
             font-weight: 600;
@@ -78,6 +80,7 @@
             cursor: pointer;
             letter-spacing: 0.5px;
             font-family: 'Poppins', sans-serif;
+            border: none;
         }
 
         .btn-primary {
@@ -139,6 +142,7 @@
             min-height: 600px;
             display: flex;
             align-items: center;
+            /* Desktop Image */
             background-image: url('https://assets.architecturaldigest.in/photos/68c7adc8a066a2ff558e15bf/16:9/w_2560%2Cc_limit/cover%2520image%2520template%25203%2520(2).jpg');
             background-size: cover;
             background-position: center;
@@ -148,8 +152,7 @@
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* FIX: Smoother, less "funky" gradient over image */
-            background: linear-gradient(to right, rgba(27, 54, 100, 0.8) 0%, rgba(27, 54, 100, 0.5) 100%);
+            background: linear-gradient(to right, rgba(27, 54, 100, 0.85) 0%, rgba(27, 54, 100, 0.4) 100%);
         }
 
         .hero-content {
@@ -221,55 +224,77 @@
             border-radius: 50%;
         }
 
-        /* SERVICES SECTION */
+        /* SERVICES SECTION - IMPROVED */
         #services { background-color: var(--accent); }
         .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
         .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
         .section-header p { color: var(--text-gray); }
 
-        .service-card {
+        /* New Card Style */
+        .service-card-new {
             background: white;
-            padding: 30px 20px;
             border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
             transition: all 0.3s ease;
-            border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
+            border: 1px solid rgba(0,0,0,0.03);
             height: 100%;
         }
 
-        .service-card:hover {
+        .service-card-new:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--secondary);
+            box-shadow: 0 15px 30px rgba(27, 54, 100, 0.12);
         }
 
-        .service-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(27, 54, 100, 0.05);
-            color: var(--primary);
+        .service-img-container {
+            height: 180px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .service-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .service-card-new:hover .service-img-container img {
+            transform: scale(1.05);
+        }
+
+        .service-body {
+            padding: 24px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .service-icon-float {
+            width: 50px;
+            height: 50px;
+            background: var(--white);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            transition: 0.3s;
+            color: var(--secondary);
+            font-size: 1.25rem;
+            margin-top: -50px; /* Pull up into image area */
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 2px solid white;
         }
 
-        .service-card:hover .service-icon {
-            background: var(--primary);
-            color: white;
-        }
-
-        .service-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
-        .service-cn { font-size: 0.9rem; color: var(--secondary); font-weight: 500; }
+        .service-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 4px; }
+        .service-cn { font-size: 0.95rem; color: var(--text-gray); font-weight: 500; font-family: "Noto Sans SC", sans-serif; }
 
         /* MARQUEE REVIEWS */
         .marquee-container {
@@ -332,7 +357,7 @@
         .faq-item.active .faq-answer { display: block; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-        /* CONTACT FORM */
+        /* CONTACT FORM - IMPROVED */
         .contact-form {
             background: white;
             padding: 40px;
@@ -341,21 +366,32 @@
             border-top: 6px solid var(--secondary);
         }
         
-        .form-group { margin-bottom: 20px; }
-        .form-label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; }
+        .form-group { margin-bottom: 24px; } /* Increased margin */
+        .form-label { display: block; margin-bottom: 10px; font-weight: 600; font-size: 0.95rem; color: var(--text-dark); }
+        
         .form-input {
             width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
+            padding: 16px; /* Increased padding for easier tapping */
+            border: 1px solid #d1d5db; /* Softer border color */
+            border-radius: 10px; /* Slightly rounder */
             font-family: 'Inter', sans-serif;
-            transition: 0.3s;
-            font-size: 1rem;
+            transition: 0.2s;
+            font-size: 16px; /* Prevents zoom on iOS */
+            background-color: #f9fafb;
         }
         .form-input:focus {
             outline: none;
             border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(27, 54, 100, 0.1);
+            background-color: #fff;
+            box-shadow: 0 0 0 4px rgba(27, 54, 100, 0.1);
+        }
+        /* Style the select dropdown */
+        select.form-input {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 1rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
         }
 
         /* FOOTER */
@@ -409,19 +445,34 @@
         @media (max-width: 992px) {
             .hero h1 { font-size: 3rem; }
             .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
             .nav-links { display: none; } /* Hiding nav links on tablet/mobile for simplicity */
         }
 
         @media (max-width: 768px) {
             .section-padding { padding: 50px 0; }
-            .hero { margin-top: 70px; height: auto; padding: 100px 0; }
+            
+            /* Mobile Hero Specifics */
+            .hero { 
+                margin-top: 70px; 
+                height: 85vh; /* Taller on mobile for the vertical image */
+                padding: 100px 0;
+                /* Updated Mobile Image */
+                background-image: url('https://www.enterprisesg.gov.sg/-/media/esg/images/partner-with-sg/infrastructure/jewel-notable-projects-430x650.jpg?h=650&iar=0&w=430&hash=E291FB0BAB3798F64653146897542160');
+                background-position: center bottom; /* Anchor to bottom for Jewel */
+            }
+            .hero-overlay {
+                /* Darker overlay on mobile to make text readable over complex background */
+                background: linear-gradient(to top, rgba(27, 54, 100, 0.9) 10%, rgba(27, 54, 100, 0.4) 100%);
+            }
+            
             .hero h1 { font-size: 2.2rem; }
             .hero p { font-size: 1.1rem; }
             
-            .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 30px; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 30px; }
             
             .about-content h2, .section-header h2 { font-size: 2rem; }
-            .about-img-wrapper { min-height: 300px; }
+            .about-img-wrapper { min-height: 250px; }
             
             .contact-form { padding: 25px; }
             
@@ -511,65 +562,139 @@
                 <p>Comprehensive transport solutions tailored to your medical and personal needs.</p>
             </div>
 
-            <div class="grid-3">
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-plane-departure"></i></div>
-                    <div class="service-title">Travel</div>
-                    <div class="service-cn">旅游</div>
+            <div class="grid-4">
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Travel">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-plane-departure"></i></div>
+                        <div class="service-title">Travel</div>
+                        <div class="service-cn">旅游</div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-procedures"></i></div>
-                    <div class="service-title">Dialysis</div>
-                    <div class="service-cn">洗肾</div>
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://plus.unsplash.com/premium_photo-1661281397737-9b5d759c2f56?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Dialysis">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-procedures"></i></div>
+                        <div class="service-title">Dialysis</div>
+                        <div class="service-cn">洗肾</div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-running"></i></div>
-                    <div class="service-title">Physiotherapy</div>
-                    <div class="service-cn">物理治疗</div>
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1576091160550-2187d80a1b95?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Physiotherapy">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-running"></i></div>
+                        <div class="service-title">Physiotherapy</div>
+                        <div class="service-cn">物理治疗</div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-hospital-user"></i></div>
-                    <div class="service-title">Hospital Discharge</div>
-                    <div class="service-cn">出院</div>
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hospital Discharge">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-hospital-user"></i></div>
+                        <div class="service-title">Hospital Discharge</div>
+                        <div class="service-cn">出院</div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-calendar-check"></i></div>
-                    <div class="service-title">Medical Appointment</div>
-                    <div class="service-cn">医疗预约</div>
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1632053001859-99411d7eb637?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Medical Appointment">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-calendar-check"></i></div>
+                        <div class="service-title">Medical Appointment</div>
+                        <div class="service-cn">医疗预约</div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-car-side"></i></div>
-                    <div class="service-title">Limousine Service</div>
-                    <div class="service-cn">豪华轿车</div>
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Limousine">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-car-side"></i></div>
+                        <div class="service-title">Limousine Service</div>
+                        <div class="service-cn">豪华轿车</div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-hourglass-half"></i></div>
-                    <div class="service-title">Hourly Booking</div>
-                    <div class="service-cn">小时预定</div>
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1506197061617-7f5c0b093236?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hourly">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-hourglass-half"></i></div>
+                        <div class="service-title">Hourly Booking</div>
+                        <div class="service-cn">小时预定</div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-shuttle-van"></i></div>
-                    <div class="service-title">Airport / Hotel Transfer</div>
-                    <div class="service-cn">机场/酒店接送</div>
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Hotel Transfer">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-shuttle-van"></i></div>
+                        <div class="service-title">Airport / Hotel</div>
+                        <div class="service-cn">机场/酒店接送</div>
+                    </div>
                 </div>
-                <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-briefcase"></i></div>
-                    <div class="service-title">Corporate Booking</div>
-                    <div class="service-cn">商业预订</div>
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Corporate">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-briefcase"></i></div>
+                        <div class="service-title">Corporate Booking</div>
+                        <div class="service-cn">商业预订</div>
+                    </div>
                 </div>
-                 <div class="service-card">
-                    <div class="service-icon"><i class="fas fa-file-contract"></i></div>
-                    <div class="service-title">Contract Job</div>
-                    <div class="service-cn">合约工作</div>
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Contract">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-file-contract"></i></div>
+                        <div class="service-title">Contract Job</div>
+                        <div class="service-cn">合约工作</div>
+                    </div>
                 </div>
-                <div class="service-card" style="border-color: var(--secondary);">
-                    <div class="service-icon" style="background: var(--secondary); color: white;"><i class="fas fa-wheelchair"></i></div>
-                    <div class="service-title">Wheelchair Accessible</div>
-                    <div class="service-cn">无障碍轮椅设施</div>
+                
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                         <img src="https://assets.grab.com/wp-content/uploads/sites/4/2021/01/29170837/Day3-2-Taxis-021.jpg" alt="Wheelchair">
+                    </div>
+                    <div class="service-body">
+                        <div class="service-icon-float" style="color: var(--secondary);"><i class="fas fa-wheelchair"></i></div>
+                        <div class="service-title">Wheelchair Accessible</div>
+                        <div class="service-cn">无障碍轮椅设施</div>
+                    </div>
                 </div>
-                <div class="service-card" style="padding: 0;">
-                    <img src="https://chanbus.com.sg/wp-content/uploads/2024/07/Chan-Bus-Chartered-Bus-Rental-1-1-e1720084601746-870x577.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Charter">
+
+                <div class="service-card-new">
+                    <div class="service-img-container">
+                         <img src="https://chanbus.com.sg/wp-content/uploads/2024/07/Chan-Bus-Chartered-Bus-Rental-1-1-e1720084601746-870x577.jpg" alt="Charter">
+                    </div>
+                     <div class="service-body">
+                        <div class="service-icon-float"><i class="fas fa-bus"></i></div>
+                        <div class="service-title">Chartered Bus</div>
+                        <div class="service-cn">包车服务</div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -600,11 +725,6 @@
                     <p class="review-text">"Great service for wheelchair transport. Very accommodating to our schedule. Will definitely book again."</p>
                     <p class="reviewer">- Wei Ming</p>
                 </div>
-                <div class="review-card">
-                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="review-text">"Care Mobility made my father's dialysis trips so much easier. The driver was incredibly patient and helpful with the wheelchair."</p>
-                    <p class="reviewer">- Sarah Tan</p>
-                </div>
             </div>
         </div>
     </section>
@@ -630,13 +750,13 @@
                     </div>
                     
                     <div style="margin-top: 40px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow);">
-                        <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/ad/c5/de.jpg" alt="Airport Transfer Singapore">
+                        <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/ad/c5/de.jpg" alt="Airport Transfer Singapore" style="width: 100%;">
                     </div>
                 </div>
 
                 <div class="contact-form">
-                    <h3 style="margin-bottom: 20px;">Book Your Ride</h3>
-                    <p style="margin-bottom: 25px; color: var(--text-gray);">Fill in the details below and we will confirm your booking shortly.</p>
+                    <h3 style="margin-bottom: 10px;">Book Your Ride</h3>
+                    <p style="margin-bottom: 30px; color: var(--text-gray);">Fill in the details below and we will confirm your booking shortly.</p>
                     
                     <form>
                         <div class="form-group">
@@ -663,9 +783,13 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Pickup Location</label>
-                            <input type="text" class="form-input" placeholder="Enter address" required>
+                            <input type="text" class="form-input" placeholder="Enter pickup address" required>
                         </div>
-                        <button type="submit" class="btn btn-primary btn-font" style="width: 100%; justify-content: center;">Submit Booking Request</button>
+                         <div class="form-group">
+                            <label class="form-label">Drop-off Location</label>
+                            <input type="text" class="form-input" placeholder="Enter drop-off address" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-font" style="width: 100%; justify-content: center; margin-top: 10px;">Submit Booking Request</button>
                     </form>
                 </div>
             </div>
