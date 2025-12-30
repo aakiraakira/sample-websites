@@ -31,6 +31,8 @@
         /* RESET & BASE */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
+        html { scroll-behavior: smooth; }
+
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-dark);
@@ -61,8 +63,6 @@
         .section-padding { padding: 80px 0; }
         
         .text-center { text-align: center; }
-        
-        .flex-center { display: flex; align-items: center; justify-content: center; }
         
         .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
@@ -108,7 +108,7 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(0,0,0,0.05);
@@ -122,7 +122,7 @@
         }
 
         .logo img {
-            height: 60px; /* Adjust based on logo needs */
+            height: 50px;
             width: auto;
         }
 
@@ -142,33 +142,35 @@
             background-image: url('https://assets.architecturaldigest.in/photos/68c7adc8a066a2ff558e15bf/16:9/w_2560%2Cc_limit/cover%2520image%2520template%25203%2520(2).jpg');
             background-size: cover;
             background-position: center;
+            margin-top: 80px; /* Offset fixed header */
         }
 
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Gradient overlay to make text pop but keep image visible */
-            background: linear-gradient(90deg, rgba(27, 54, 100, 0.9) 0%, rgba(27, 54, 100, 0.6) 60%, rgba(255,255,255,0.1) 100%);
+            /* FIX: Smoother, less "funky" gradient over image */
+            background: linear-gradient(to right, rgba(27, 54, 100, 0.8) 0%, rgba(27, 54, 100, 0.5) 100%);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             color: white;
-            max-width: 600px;
+            max-width: 650px;
         }
 
         .hero h1 {
             color: white;
             font-size: 3.5rem;
             margin-bottom: 20px;
-            font-weight: 700;
+            font-weight: 800;
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             margin-bottom: 40px;
-            opacity: 0.9;
+            opacity: 0.95;
+            font-weight: 400;
         }
 
         /* TRUST BADGES STRIP */
@@ -176,7 +178,6 @@
             background: var(--primary);
             color: white;
             padding: 20px 0;
-            margin-top: -5px;
         }
         .trust-grid {
             display: flex;
@@ -189,8 +190,9 @@
             align-items: center;
             gap: 10px;
             font-weight: 600;
+            font-size: 0.9rem;
         }
-        .trust-item i { color: var(--secondary); font-size: 1.2rem; }
+        .trust-item i { color: var(--secondary); font-size: 1.1rem; }
 
         /* ABOUT SECTION */
         .about-img-wrapper {
@@ -198,6 +200,8 @@
             border-radius: var(--radius-lg);
             overflow: hidden;
             box-shadow: var(--shadow);
+            height: 100%;
+            min-height: 400px;
         }
         .about-content h2 { font-size: 2.5rem; margin-bottom: 20px; }
         .about-content p { color: var(--text-gray); margin-bottom: 20px; font-size: 1.05rem; }
@@ -225,7 +229,7 @@
 
         .service-card {
             background: white;
-            padding: 30px 24px;
+            padding: 30px 20px;
             border-radius: var(--radius-md);
             transition: all 0.3s ease;
             border: 1px solid rgba(0,0,0,0.05);
@@ -236,6 +240,7 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            height: 100%;
         }
 
         .service-card:hover {
@@ -263,34 +268,34 @@
             color: white;
         }
 
-        .service-title { font-size: 1.2rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
-        .service-cn { font-size: 0.95rem; color: var(--secondary); font-weight: 500; }
+        .service-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+        .service-cn { font-size: 0.9rem; color: var(--secondary); font-weight: 500; }
 
         /* MARQUEE REVIEWS */
         .marquee-container {
             overflow: hidden;
             background: var(--primary);
-            padding: 40px 0;
+            padding: 60px 0;
             position: relative;
         }
         
         .marquee-content {
             display: flex;
             gap: 30px;
-            animation: scroll 30s linear infinite;
+            animation: scroll 40s linear infinite;
             width: max-content;
         }
 
         .review-card {
             background: white;
             width: 350px;
-            padding: 25px;
+            padding: 30px;
             border-radius: var(--radius-md);
             flex-shrink: 0;
         }
 
-        .stars { color: #F59E0B; margin-bottom: 10px; }
-        .review-text { font-style: italic; color: var(--text-gray); font-size: 0.95rem; margin-bottom: 15px; }
+        .stars { color: #F59E0B; margin-bottom: 15px; }
+        .review-text { font-style: italic; color: var(--text-gray); font-size: 1rem; margin-bottom: 20px; line-height: 1.5; }
         .reviewer { font-weight: 700; color: var(--primary); }
 
         @keyframes scroll {
@@ -306,20 +311,26 @@
             margin-bottom: 15px;
             padding: 20px;
             cursor: pointer;
+            transition: all 0.3s ease;
         }
+        .faq-item:hover { border-color: var(--secondary); }
         .faq-question {
             font-weight: 600;
             color: var(--primary);
             display: flex;
             justify-content: space-between;
+            align-items: center;
         }
         .faq-answer {
-            margin-top: 10px;
+            margin-top: 15px;
             color: var(--text-gray);
             font-size: 0.95rem;
-            display: none; /* JS will toggle */
+            display: none;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
         }
         .faq-item.active .faq-answer { display: block; }
+        .faq-item.active .faq-question i { transform: rotate(180deg); }
 
         /* CONTACT FORM */
         .contact-form {
@@ -327,7 +338,7 @@
             padding: 40px;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow);
-            border-top: 5px solid var(--secondary);
+            border-top: 6px solid var(--secondary);
         }
         
         .form-group { margin-bottom: 20px; }
@@ -339,6 +350,7 @@
             border-radius: 8px;
             font-family: 'Inter', sans-serif;
             transition: 0.3s;
+            font-size: 1rem;
         }
         .form-input:focus {
             outline: none;
@@ -350,26 +362,28 @@
         footer {
             background: var(--primary);
             color: white;
-            padding: 60px 0 20px;
+            padding: 80px 0 30px;
         }
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-            margin-bottom: 40px;
+            gap: 50px;
+            margin-bottom: 50px;
         }
         .footer-logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; display: block; color: white;}
-        .footer-links h4 { color: var(--secondary); margin-bottom: 20px; font-size: 1.1rem; }
-        .footer-links ul li { margin-bottom: 10px; }
-        .footer-links a { color: rgba(255,255,255,0.8); }
+        .footer-links h4 { color: var(--secondary); margin-bottom: 25px; font-size: 1.1rem; }
+        .footer-links ul li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
         .footer-links a:hover { color: white; padding-left: 5px; }
         .copyright {
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
-            padding-top: 20px;
+            padding-top: 30px;
             font-size: 0.9rem;
             color: rgba(255,255,255,0.6);
         }
+        .copyright a { color: rgba(255,255,255,0.6); font-weight: 500; }
+        .copyright a:hover { color: var(--secondary); }
 
         /* MOBILE FLOATING CTA */
         .floating-whatsapp {
@@ -387,16 +401,38 @@
             font-size: 30px;
             box-shadow: 0 4px 14px rgba(0,0,0,0.2);
             z-index: 999;
+            transition: 0.3s;
         }
         .floating-whatsapp:hover { transform: scale(1.1); }
 
-        /* RESPONSIVE */
-        @media (max-width: 968px) {
-            .hero h1 { font-size: 2.8rem; }
-            .grid-2, .grid-3 { grid-template-columns: 1fr; }
-            .nav-links { display: none; } /* Simplified for demo */
-            .hero-content { padding-top: 60px; }
-            .footer-grid { grid-template-columns: 1fr; }
+        /* RESPONSIVE / MOBILE OPTIMIZATION */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .nav-links { display: none; } /* Hiding nav links on tablet/mobile for simplicity */
+        }
+
+        @media (max-width: 768px) {
+            .section-padding { padding: 50px 0; }
+            .hero { margin-top: 70px; height: auto; padding: 100px 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
+            
+            .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 30px; }
+            
+            .about-content h2, .section-header h2 { font-size: 2rem; }
+            .about-img-wrapper { min-height: 300px; }
+            
+            .contact-form { padding: 25px; }
+            
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
+            
+            /* Adjust marquee card size for mobile */
+            .review-card { width: 280px; padding: 20px; }
+            
+            /* Stack nav items on mobile */
+            nav { flex-direction: column; gap: 15px; padding: 10px 0; }
+            .logo img { height: 40px; }
         }
     </style>
 </head>
@@ -450,7 +486,7 @@
         <div class="container">
             <div class="grid-2">
                 <div class="about-img-wrapper">
-                    <img src="https://assets.grab.com/wp-content/uploads/sites/4/2021/01/29170837/Day3-2-Taxis-021.jpg" alt="Wheelchair Transport" style="height: 100%; object-fit: cover;">
+                    <img src="https://assets.grab.com/wp-content/uploads/sites/4/2021/01/29170837/Day3-2-Taxis-021.jpg" alt="Wheelchair Transport" style="height: 100%; width: 100%; object-fit: cover;">
                 </div>
                 <div class="about-content">
                     <h5 style="color: var(--secondary); font-weight: 600; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">Who We Are</h5>
@@ -526,7 +562,7 @@
                     <div class="service-title">Contract Job</div>
                     <div class="service-cn">合约工作</div>
                 </div>
-                <div class="service-card" style="grid-column: span 1; border-color: var(--secondary);">
+                <div class="service-card" style="border-color: var(--secondary);">
                     <div class="service-icon" style="background: var(--secondary); color: white;"><i class="fas fa-wheelchair"></i></div>
                     <div class="service-title">Wheelchair Accessible</div>
                     <div class="service-cn">无障碍轮椅设施</div>
@@ -540,7 +576,7 @@
 
     <section id="reviews">
         <div class="marquee-container">
-            <div class="container text-center" style="margin-bottom: 30px;">
+            <div class="container text-center" style="margin-bottom: 40px;">
                 <h2 style="color: white;">Trusted by Families in Singapore</h2>
             </div>
             <div class="marquee-content">
@@ -561,12 +597,12 @@
                 </div>
                  <div class="review-card">
                     <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="review-text">"Great service for wheelchair transport. Very accommodating to our schedule."</p>
+                    <p class="review-text">"Great service for wheelchair transport. Very accommodating to our schedule. Will definitely book again."</p>
                     <p class="reviewer">- Wei Ming</p>
                 </div>
                 <div class="review-card">
                     <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="review-text">"Care Mobility made my father's dialysis trips so much easier. The driver was incredibly patient."</p>
+                    <p class="review-text">"Care Mobility made my father's dialysis trips so much easier. The driver was incredibly patient and helpful with the wheelchair."</p>
                     <p class="reviewer">- Sarah Tan</p>
                 </div>
             </div>
@@ -582,34 +618,34 @@
                     
                     <div class="faq-item active" onclick="toggleFaq(this)">
                         <div class="faq-question">How do I book a ride? <i class="fas fa-chevron-down"></i></div>
-                        <div class="faq-answer">You can book by filling out the form on this page, or by clicking the WhatsApp button to chat with our team directly.</div>
+                        <div class="faq-answer">You can book by filling out the form on this page, or by clicking the WhatsApp button to chat with our team directly for immediate assistance.</div>
                     </div>
                     <div class="faq-item" onclick="toggleFaq(this)">
                         <div class="faq-question">Are your vehicles wheelchair accessible? <i class="fas fa-chevron-down"></i></div>
-                        <div class="faq-answer">Yes, we specialize in wheelchair accessible transport with ramp and hydraulic lift options available.</div>
+                        <div class="faq-answer">Yes, absolutely. Our fleet is specially designed for wheelchair access, featuring hydraulic lifts and secure restraint systems for safety.</div>
                     </div>
                     <div class="faq-item" onclick="toggleFaq(this)">
                         <div class="faq-question">Do you offer hourly chartering? <i class="fas fa-chevron-down"></i></div>
-                        <div class="faq-answer">Yes, we offer hourly bookings for personal errands, corporate events, or city tours.</div>
+                        <div class="faq-answer">Yes, we offer flexible hourly chartering services suitable for personal errands, medical appointments with waiting time, or corporate requirements.</div>
                     </div>
                     
-                    <div style="margin-top: 40px; border-radius: 12px; overflow: hidden;">
+                    <div style="margin-top: 40px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow);">
                         <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/ad/c5/de.jpg" alt="Airport Transfer Singapore">
                     </div>
                 </div>
 
                 <div class="contact-form">
                     <h3 style="margin-bottom: 20px;">Book Your Ride</h3>
-                    <p style="margin-bottom: 20px; color: var(--text-gray);">Fill in the details below and we will confirm your booking shortly.</p>
+                    <p style="margin-bottom: 25px; color: var(--text-gray);">Fill in the details below and we will confirm your booking shortly.</p>
                     
                     <form>
                         <div class="form-group">
                             <label class="form-label">Full Name</label>
-                            <input type="text" class="form-input" placeholder="Enter your name">
+                            <input type="text" class="form-input" placeholder="Enter your name" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Phone Number</label>
-                            <input type="tel" class="form-input" placeholder="+65 9123 4567">
+                            <input type="tel" class="form-input" placeholder="+65 9123 4567" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Service Type</label>
@@ -623,11 +659,11 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Date & Time</label>
-                            <input type="datetime-local" class="form-input">
+                            <input type="datetime-local" class="form-input" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Pickup Location</label>
-                            <input type="text" class="form-input" placeholder="Enter address">
+                            <input type="text" class="form-input" placeholder="Enter address" required>
                         </div>
                         <button type="submit" class="btn btn-primary btn-font" style="width: 100%; justify-content: center;">Submit Booking Request</button>
                     </form>
@@ -649,29 +685,27 @@
                         <li><a href="#about">About Us</a></li>
                         <li><a href="#services">Our Services</a></li>
                         <li><a href="#contact">Contact</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
                     <h4>Contact Us</h4>
                     <ul>
-                        <li><i class="fas fa-phone-alt" style="margin-right: 8px;"></i> +65 1234 5678</li>
-                        <li><i class="fas fa-envelope" style="margin-right: 8px;"></i> booking@caremobility.sg</li>
-                        <li><i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i> Singapore</li>
+                        <li><i class="fas fa-phone-alt" style="margin-right: 8px; color: var(--secondary);"></i> +65 1234 5678</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 8px; color: var(--secondary);"></i> booking@caremobility.sg</li>
                     </ul>
-                    <div style="margin-top: 20px; display: flex; gap: 15px;">
+                    <div style="margin-top: 25px; display: flex; gap: 15px;">
                         <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
                         <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
                     </div>
                 </div>
             </div>
             <div class="copyright">
-                &copy; 2025 Care Mobility Pte Ltd. All Rights Reserved.
+                &copy; 2025 Care Mobility Pte Ltd. All Rights Reserved. | Website Design by <a href="https://reputifly.com/web-development" target="_blank">Reputifly</a>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/6512345678" class="floating-whatsapp">
+    <a href="https://wa.me/6512345678" class="floating-whatsapp" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -687,16 +721,6 @@
             // Toggle clicked FAQ
             element.classList.toggle('active');
         }
-
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
     </script>
 </body>
 </html>
