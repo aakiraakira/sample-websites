@@ -15,8 +15,8 @@
         :root {
             /* Brand Colors based on Logo */
             --primary: #1B3664; /* Deep Royal Blue */
-            --secondary: #3CAE54; /* Vitality Green */
-            --accent-bg: #F3F6FA; /* Very light blue-grey for sections */
+            --secondary: #3CAE54; /* Logo Green */
+            --accent: #eff6ff; /* Light Blue BG */
             --text-dark: #111827;
             --text-gray: #4B5563;
             --white: #ffffff;
@@ -24,9 +24,8 @@
             /* Spacing & UI */
             --radius-md: 12px;
             --radius-lg: 20px;
-            --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            --shadow-card: 0 10px 30px -5px rgba(27, 54, 100, 0.08);
-            --shadow-hover: 0 20px 40px -5px rgba(27, 54, 100, 0.15);
+            --shadow: 0 10px 40px -10px rgba(0,0,0,0.08);
+            --shadow-hover: 0 20px 40px -10px rgba(27, 54, 100, 0.15);
         }
 
         /* RESET & BASE */
@@ -38,9 +37,8 @@
             font-family: 'Inter', sans-serif;
             color: var(--text-dark);
             line-height: 1.6;
-            background-color: #FFFFFF;
+            background-color: #FAFAFA;
             overflow-x: hidden;
-            -webkit-font-smoothing: antialiased;
         }
 
         h1, h2, h3, h4, h5 {
@@ -62,51 +60,46 @@
             padding: 0 24px;
         }
         
-        .section-padding { padding: 90px 0; }
+        .section-padding { padding: 80px 0; }
         
         .text-center { text-align: center; }
         
-        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
         .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-
+        
         /* BUTTONS */
         .btn {
             display: inline-flex;
             align-items: center;
-            justify-content: center;
-            padding: 16px 36px;
+            padding: 14px 32px;
             border-radius: 50px;
             font-weight: 600;
             font-size: 1rem;
             cursor: pointer;
-            letter-spacing: 0.3px;
-            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
             font-family: 'Poppins', sans-serif;
         }
 
         .btn-primary {
             background-color: var(--primary);
             color: var(--white);
-            box-shadow: 0 4px 15px rgba(27, 54, 100, 0.25);
+            box-shadow: 0 4px 14px rgba(27, 54, 100, 0.3);
         }
 
         .btn-primary:hover {
-            background-color: #14284b;
+            background-color: #152a4d;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(27, 54, 100, 0.35);
         }
 
         .btn-secondary {
             background-color: var(--secondary);
             color: var(--white);
-            box-shadow: 0 4px 15px rgba(60, 174, 84, 0.25);
+            box-shadow: 0 4px 14px rgba(60, 174, 84, 0.3);
         }
 
         .btn-secondary:hover {
             background-color: #339647;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(60, 174, 84, 0.35);
         }
 
         /* HEADER */
@@ -115,12 +108,11 @@
             top: 0;
             left: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
             z-index: 1000;
             border-bottom: 1px solid rgba(0,0,0,0.05);
-            padding: 12px 0;
-            transition: all 0.3s ease;
+            padding: 15px 0;
         }
 
         nav {
@@ -130,305 +122,240 @@
         }
 
         .logo img {
-            height: 55px;
+            height: 50px;
             width: auto;
         }
 
         .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a { 
-            color: var(--text-dark); 
-            font-weight: 500; 
-            font-size: 0.95rem; 
-            position: relative;
-        }
+        .nav-links a { color: var(--text-dark); font-weight: 500; font-size: 0.95rem; }
         .nav-links a:hover { color: var(--primary); }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: var(--secondary);
-            transition: width 0.3s;
-        }
-        .nav-links a:hover::after { width: 100%; }
+
+        .cta-group { display: flex; gap: 15px; }
 
         /* HERO SECTION */
         .hero {
             position: relative;
-            height: 90vh; /* Full viewport height */
+            height: 90vh;
             min-height: 600px;
             display: flex;
             align-items: center;
-            background-image: url('https://assets.architecturaldigest.in/photos/68c7adc8a066a2ff558e15bf/16:9/w_2560%2Cc_limit/cover%2520image%2520template%25203%2520(2).jpg'); /* */
+            background-image: url('https://assets.architecturaldigest.in/photos/68c7adc8a066a2ff558e15bf/16:9/w_2560%2Cc_limit/cover%2520image%2520template%25203%2520(2).jpg');
             background-size: cover;
             background-position: center;
-            margin-top: 0;
+            margin-top: 80px; /* Offset fixed header */
         }
 
         .hero-overlay {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            /* Professional Dark Blue Gradient Overlay */
-            background: linear-gradient(135deg, rgba(27, 54, 100, 0.92) 0%, rgba(27, 54, 100, 0.6) 100%);
+            /* FIX: Smoother, less "funky" gradient over image */
+            background: linear-gradient(to right, rgba(27, 54, 100, 0.8) 0%, rgba(27, 54, 100, 0.5) 100%);
         }
 
         .hero-content {
             position: relative;
             z-index: 2;
             color: white;
-            max-width: 700px;
-            padding-top: 60px;
+            max-width: 650px;
         }
 
         .hero h1 {
             color: white;
-            font-size: 4rem;
-            margin-bottom: 24px;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
             font-weight: 800;
-            letter-spacing: -1px;
-            line-height: 1.1;
         }
 
         .hero p {
             font-size: 1.25rem;
             margin-bottom: 40px;
             opacity: 0.95;
-            font-weight: 300;
-            line-height: 1.6;
+            font-weight: 400;
         }
 
-        .cta-group { display: flex; gap: 20px; flex-wrap: wrap; }
-
-        /* TRUST STRIP */
+        /* TRUST BADGES STRIP */
         .trust-strip {
             background: var(--primary);
             color: white;
-            padding: 25px 0;
-            border-bottom: 4px solid var(--secondary);
+            padding: 20px 0;
         }
         .trust-grid {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: space-evenly;
             flex-wrap: wrap;
             gap: 20px;
         }
         .trust-item {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
-        .trust-item i { 
-            color: var(--secondary); 
-            font-size: 1.3rem; 
-            background: rgba(255,255,255,0.1);
-            padding: 8px;
-            border-radius: 50%;
-        }
+        .trust-item i { color: var(--secondary); font-size: 1.1rem; }
 
         /* ABOUT SECTION */
         .about-img-wrapper {
             position: relative;
             border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow);
             height: 100%;
-            min-height: 450px;
+            min-height: 400px;
         }
-        .about-content { padding: 20px 0; }
-        .about-content h2 { font-size: 2.8rem; margin-bottom: 20px; }
-        .about-content p { color: var(--text-gray); margin-bottom: 25px; font-size: 1.1rem; }
+        .about-content h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .about-content p { color: var(--text-gray); margin-bottom: 20px; font-size: 1.05rem; }
         
-        .feature-list { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 30px; }
         .feature-check {
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
             font-weight: 500;
             color: var(--primary);
-            font-size: 1.05rem;
         }
         .feature-check i {
-            color: white;
-            background: var(--secondary);
-            padding: 4px;
+            color: var(--secondary);
+            background: rgba(60, 174, 84, 0.1);
+            padding: 5px;
             border-radius: 50%;
-            font-size: 0.8rem;
-            width: 24px;
-            height: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
-        /* SERVICES SECTION - REDESIGNED */
-        #services { background-color: var(--accent-bg); }
-        .section-header { text-align: center; max-width: 700px; margin: 0 auto 70px; }
-        .section-header h5 { color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; font-size: 0.9rem; }
-        .section-header h2 { font-size: 3rem; margin-bottom: 15px; }
-        
-        /* Modern Card Design */
+        /* SERVICES SECTION */
+        #services { background-color: var(--accent); }
+        .section-header { text-align: center; max-width: 700px; margin: 0 auto 60px; }
+        .section-header h2 { font-size: 2.5rem; margin-bottom: 15px; }
+        .section-header p { color: var(--text-gray); }
+
         .service-card {
             background: white;
-            padding: 35px 25px;
+            padding: 30px 20px;
             border-radius: var(--radius-md);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0,0,0,0.05);
             display: flex;
             flex-direction: column;
+            justify-content: center;
             align-items: center;
             text-align: center;
             position: relative;
-            border: 1px solid rgba(0,0,0,0.03);
-            box-shadow: var(--shadow-sm);
-            height: 100%;
             overflow: hidden;
+            height: 100%;
         }
-        
-        /* Colored Bottom Border for visual interest */
-        .service-card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--primary);
-            transform: scaleX(0);
-            transition: transform 0.3s ease;
-        }
-        
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .service-card:hover::after { transform: scaleX(1); }
-        .service-card:nth-child(even)::after { background: var(--secondary); }
 
-        .service-icon-box {
-            width: 70px;
-            height: 70px;
-            background: rgba(27, 54, 100, 0.04);
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--secondary);
+        }
+
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(27, 54, 100, 0.05);
             color: var(--primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 25px;
-            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            transition: 0.3s;
         }
 
-        .service-card:hover .service-icon-box {
+        .service-card:hover .service-icon {
             background: var(--primary);
             color: white;
-            transform: rotateY(180deg);
-        }
-        
-        /* Alternate Green hover for even cards */
-        .service-card:nth-child(even):hover .service-icon-box {
-            background: var(--secondary);
         }
 
-        .service-title { font-size: 1.25rem; font-weight: 700; color: var(--primary); margin-bottom: 8px; font-family: 'Outfit', sans-serif; }
-        .service-cn { font-size: 1rem; color: var(--text-gray); font-weight: 400; font-family: "Noto Sans SC", sans-serif; opacity: 0.8; }
+        .service-title { font-size: 1.1rem; font-weight: 700; color: var(--primary); margin-bottom: 5px; }
+        .service-cn { font-size: 0.9rem; color: var(--secondary); font-weight: 500; }
 
-        /* REVIEWS */
+        /* MARQUEE REVIEWS */
         .marquee-container {
             overflow: hidden;
             background: var(--primary);
-            padding: 80px 0;
+            padding: 60px 0;
+            position: relative;
         }
+        
         .marquee-content {
             display: flex;
             gap: 30px;
             animation: scroll 40s linear infinite;
             width: max-content;
         }
+
         .review-card {
             background: white;
-            width: 400px;
-            padding: 35px;
+            width: 350px;
+            padding: 30px;
             border-radius: var(--radius-md);
             flex-shrink: 0;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
-        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        
-        .stars { color: #F59E0B; margin-bottom: 15px; font-size: 1.1rem; }
-        .review-text { font-style: italic; color: var(--text-gray); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.6; }
-        .reviewer { font-weight: 700; color: var(--primary); font-family: 'Outfit', sans-serif; }
 
-        /* CONTACT & FAQ */
-        .contact-section { position: relative; }
-        
+        .stars { color: #F59E0B; margin-bottom: 15px; }
+        .review-text { font-style: italic; color: var(--text-gray); font-size: 1rem; margin-bottom: 20px; line-height: 1.5; }
+        .reviewer { font-weight: 700; color: var(--primary); }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* FAQ & CONTACT SPLIT */
         .faq-item {
             background: white;
             border: 1px solid #e5e7eb;
             border-radius: 12px;
             margin-bottom: 15px;
-            padding: 25px;
+            padding: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .faq-item:hover { border-color: var(--primary); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
-        .faq-question { font-weight: 700; color: var(--primary); font-size: 1.1rem; display: flex; justify-content: space-between; align-items: center; }
-        .faq-answer { margin-top: 15px; color: var(--text-gray); font-size: 1rem; display: none; padding-top: 15px; border-top: 1px solid #eee; line-height: 1.6; }
+        .faq-item:hover { border-color: var(--secondary); }
+        .faq-question {
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .faq-answer {
+            margin-top: 15px;
+            color: var(--text-gray);
+            font-size: 0.95rem;
+            display: none;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
         .faq-item.active .faq-answer { display: block; }
         .faq-item.active .faq-question i { transform: rotate(180deg); }
 
-        /* CONTACT FORM - FIXED FOR MOBILE */
-        .contact-form-wrapper {
+        /* CONTACT FORM */
+        .contact-form {
             background: white;
-            padding: 45px;
+            padding: 40px;
             border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-card);
+            box-shadow: var(--shadow);
             border-top: 6px solid var(--secondary);
-            height: 100%;
         }
         
-        .form-group { margin-bottom: 25px; }
-        .form-label { 
-            display: block; 
-            margin-bottom: 10px; 
-            font-weight: 600; 
-            font-size: 0.95rem; 
-            color: var(--primary);
-        }
-        
-        /* High-End Input Styling */
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.9rem; }
         .form-input {
             width: 100%;
-            height: 52px; /* Taller for easier tapping */
-            padding: 12px 18px;
-            border: 1px solid #d1d5db; /* Clean border */
+            padding: 12px 15px;
+            border: 1px solid #e5e7eb;
             border-radius: 8px;
             font-family: 'Inter', sans-serif;
-            font-size: 1rem; /* Prevents zoom on iOS */
-            background-color: #ffffff; /* White bg */
-            color: var(--text-dark);
-            transition: all 0.3s ease;
-            appearance: none; /* Remove default browser styling */
+            transition: 0.3s;
+            font-size: 1rem;
         }
-        
-        .form-input::placeholder { color: #9ca3af; }
-        
         .form-input:focus {
             outline: none;
-            border-color: var(--secondary);
-            box-shadow: 0 0 0 4px rgba(60, 174, 84, 0.1); /* Subtle green glow */
-        }
-        
-        select.form-input {
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%236B7280'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 15px center;
-            background-size: 18px;
-            padding-right: 40px;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(27, 54, 100, 0.1);
         }
 
         /* FOOTER */
@@ -436,87 +363,76 @@
             background: var(--primary);
             color: white;
             padding: 80px 0 30px;
-            font-size: 0.95rem;
         }
-        .footer-logo { font-size: 1.8rem; font-weight: 700; margin-bottom: 20px; display: block; color: white; font-family: 'Outfit', sans-serif; }
-        .footer-links h4 { color: var(--secondary); margin-bottom: 25px; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; }
-        .footer-links ul li { margin-bottom: 15px; }
-        .footer-links a { color: rgba(255,255,255,0.7); transition: 0.3s; }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        .footer-logo { font-size: 1.5rem; font-weight: 700; margin-bottom: 20px; display: block; color: white;}
+        .footer-links h4 { color: var(--secondary); margin-bottom: 25px; font-size: 1.1rem; }
+        .footer-links ul li { margin-bottom: 12px; }
+        .footer-links a { color: rgba(255,255,255,0.8); font-size: 0.95rem; }
         .footer-links a:hover { color: white; padding-left: 5px; }
-        
         .copyright {
             border-top: 1px solid rgba(255,255,255,0.1);
             text-align: center;
             padding-top: 30px;
-            margin-top: 60px;
             font-size: 0.9rem;
-            color: rgba(255,255,255,0.5);
+            color: rgba(255,255,255,0.6);
         }
-        .copyright a { color: rgba(255,255,255,0.8); font-weight: 500; }
-        .copyright a:hover { color: var(--secondary); text-decoration: underline; }
+        .copyright a { color: rgba(255,255,255,0.6); font-weight: 500; }
+        .copyright a:hover { color: var(--secondary); }
 
-        /* FLOATING WHATSAPP */
+        /* MOBILE FLOATING CTA */
         .floating-whatsapp {
             position: fixed;
             bottom: 30px;
             right: 30px;
             background: #25D366;
             color: white;
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 32px;
-            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+            font-size: 30px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.2);
             z-index: 999;
-            transition: all 0.3s ease;
+            transition: 0.3s;
         }
-        .floating-whatsapp:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.6); }
+        .floating-whatsapp:hover { transform: scale(1.1); }
 
-        /* MEDIA QUERIES & MOBILE OPTIMIZATION */
-        @media (max-width: 1024px) {
-            .hero h1 { font-size: 3.5rem; }
-            .grid-3, .grid-4 { grid-template-columns: repeat(2, 1fr); }
-            .review-card { width: 320px; }
+        /* RESPONSIVE / MOBILE OPTIMIZATION */
+        @media (max-width: 992px) {
+            .hero h1 { font-size: 3rem; }
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .nav-links { display: none; } /* Hiding nav links on tablet/mobile for simplicity */
         }
 
         @media (max-width: 768px) {
-            .section-padding { padding: 60px 0; }
+            .section-padding { padding: 50px 0; }
+            .hero { margin-top: 70px; height: auto; padding: 100px 0; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.1rem; }
             
-            /* Header */
-            .nav-links { display: none; } /* Simplified for mobile view */
-            .logo img { height: 45px; }
+            .grid-2, .grid-3 { grid-template-columns: 1fr; gap: 30px; }
             
-            /* Hero */
-            .hero { height: auto; padding: 120px 0 80px; text-align: center; }
-            .hero h1 { font-size: 2.8rem; }
-            .hero-content { margin: 0 auto; }
-            .cta-group { justify-content: center; }
+            .about-content h2, .section-header h2 { font-size: 2rem; }
+            .about-img-wrapper { min-height: 300px; }
             
-            /* Trust Strip */
-            .trust-grid { justify-content: center; gap: 25px; }
+            .contact-form { padding: 25px; }
             
-            /* General Layout */
-            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 40px; }
+            .footer-grid { grid-template-columns: 1fr; gap: 30px; }
             
-            /* About */
-            .about-img-wrapper { min-height: 300px; order: -1; } /* Image on top */
-            .about-content h2 { font-size: 2.2rem; }
+            /* Adjust marquee card size for mobile */
+            .review-card { width: 280px; padding: 20px; }
             
-            /* Contact Form Mobile Fixes */
-            .contact-form-wrapper { 
-                padding: 30px 20px 80px 20px; /* Added bottom padding to clear floating button */
-                border-radius: 16px;
-            }
-            .form-input { height: 50px; font-size: 16px; /* Prevents zoom */ }
-            
-            /* Footer */
-            .footer-grid { display: grid; gap: 40px; }
-            
-            /* Services */
-            .service-card { padding: 30px 20px; }
+            /* Stack nav items on mobile */
+            nav { flex-direction: column; gap: 15px; padding: 10px 0; }
+            .logo img { height: 40px; }
         }
     </style>
 </head>
@@ -534,8 +450,8 @@
                     <li><a href="#reviews">Reviews</a></li>
                     <li><a href="#faq">FAQ</a></li>
                 </ul>
-                <div class="cta-group-nav">
-                    <a href="#contact" class="btn btn-secondary btn-font" style="padding: 10px 24px; font-size: 0.9rem;">Book a Ride</a>
+                <div class="cta-group">
+                    <a href="#contact" class="btn btn-secondary btn-font">Book a Ride</a>
                 </div>
             </nav>
         </div>
@@ -549,7 +465,7 @@
                 <p>Singapore's trusted partner for wheelchair transport, medical appointments, and chartered limousine services. Safe, reliable, and professional.</p>
                 <div class="cta-group">
                     <a href="#contact" class="btn btn-primary btn-font">Book Now</a>
-                    <a href="https://wa.me/6512345678" class="btn btn-secondary btn-font"><i class="fab fa-whatsapp" style="margin-right: 10px; font-size: 1.2rem;"></i> WhatsApp Us</a>
+                    <a href="https://wa.me/6512345678" class="btn btn-secondary btn-font"><i class="fab fa-whatsapp" style="margin-right: 8px;"></i> WhatsApp Us</a>
                 </div>
             </div>
         </div>
@@ -570,20 +486,18 @@
         <div class="container">
             <div class="grid-2">
                 <div class="about-img-wrapper">
-                    <img src="https://assets.grab.com/wp-content/uploads/sites/4/2021/01/29170837/Day3-2-Taxis-021.jpg" alt="Wheelchair Transport Service" style="height: 100%; width: 100%; object-fit: cover;">
+                    <img src="https://assets.grab.com/wp-content/uploads/sites/4/2021/01/29170837/Day3-2-Taxis-021.jpg" alt="Wheelchair Transport" style="height: 100%; width: 100%; object-fit: cover;">
                 </div>
                 <div class="about-content">
-                    <h5 style="color: var(--secondary); font-weight: 700; text-transform: uppercase; margin-bottom: 15px; letter-spacing: 1px;">Who We Are</h5>
+                    <h5 style="color: var(--secondary); font-weight: 600; text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px;">Who We Are</h5>
                     <h2>Compassionate Travel Solutions for Everyone</h2>
-                    <p>At <strong>Care Mobility Pte Ltd (慈运)</strong>, we believe that mobility should never be a barrier to a full life. Whether it is a routine dialysis appointment, a hospital discharge, or a family holiday, our fleet provides the highest standard of safety and comfort.</p>
+                    <p>At Care Mobility Pte Ltd (慈运), we believe that mobility should never be a barrier to a full life. Whether it is a routine dialysis appointment, a hospital discharge, or a family holiday, our fleet provides the highest standard of safety and comfort.</p>
                     
-                    <div class="feature-list">
-                        <div class="feature-check"><i class="fas fa-check"></i> <span>Professional & Patient Drivers</span></div>
-                        <div class="feature-check"><i class="fas fa-check"></i> <span>Fully Equipped Vehicles (Hydraulic Lifts)</span></div>
-                        <div class="feature-check"><i class="fas fa-check"></i> <span>Punctual & Reliable Service</span></div>
-                    </div>
+                    <div class="feature-check"><i class="fas fa-check"></i> <span>Professional & Patient Drivers</span></div>
+                    <div class="feature-check"><i class="fas fa-check"></i> <span>Fully Equipped Vehicles</span></div>
+                    <div class="feature-check"><i class="fas fa-check"></i> <span>Punctual & Reliable Service</span></div>
 
-                    <a href="#services" style="color: var(--primary); font-weight: 700; font-size: 1.1rem; display: inline-flex; align-items: center; border-bottom: 2px solid var(--secondary);">Explore Our Fleet <i class="fas fa-arrow-right" style="margin-left: 8px;"></i></a>
+                    <a href="#services" style="color: var(--primary); font-weight: 700; margin-top: 20px; display: inline-block; border-bottom: 2px solid var(--secondary);">Explore Our Fleet &rarr;</a>
                 </div>
             </div>
         </div>
@@ -592,68 +506,69 @@
     <section class="section-padding" id="services">
         <div class="container">
             <div class="section-header">
-                <h5>What We Do</h5>
+                <h5 style="color: var(--secondary); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">What We Do</h5>
                 <h2>Our Services</h2>
                 <p>Comprehensive transport solutions tailored to your medical and personal needs.</p>
             </div>
 
-            <div class="grid-4" style="gap: 30px;">
+            <div class="grid-3">
                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-plane-departure"></i></div>
+                    <div class="service-icon"><i class="fas fa-plane-departure"></i></div>
                     <div class="service-title">Travel</div>
                     <div class="service-cn">旅游</div>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-procedures"></i></div>
+                    <div class="service-icon"><i class="fas fa-procedures"></i></div>
                     <div class="service-title">Dialysis</div>
                     <div class="service-cn">洗肾</div>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-running"></i></div>
+                    <div class="service-icon"><i class="fas fa-running"></i></div>
                     <div class="service-title">Physiotherapy</div>
                     <div class="service-cn">物理治疗</div>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-hospital-user"></i></div>
+                    <div class="service-icon"><i class="fas fa-hospital-user"></i></div>
                     <div class="service-title">Hospital Discharge</div>
                     <div class="service-cn">出院</div>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-calendar-check"></i></div>
-                    <div class="service-title">Medical Appt</div>
+                    <div class="service-icon"><i class="fas fa-calendar-check"></i></div>
+                    <div class="service-title">Medical Appointment</div>
                     <div class="service-cn">医疗预约</div>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-car-side"></i></div>
+                    <div class="service-icon"><i class="fas fa-car-side"></i></div>
                     <div class="service-title">Limousine Service</div>
                     <div class="service-cn">豪华轿车</div>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-hourglass-half"></i></div>
+                    <div class="service-icon"><i class="fas fa-hourglass-half"></i></div>
                     <div class="service-title">Hourly Booking</div>
                     <div class="service-cn">小时预定</div>
                 </div>
                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-shuttle-van"></i></div>
-                    <div class="service-title">Airport Transfer</div>
+                    <div class="service-icon"><i class="fas fa-shuttle-van"></i></div>
+                    <div class="service-title">Airport / Hotel Transfer</div>
                     <div class="service-cn">机场/酒店接送</div>
                 </div>
-                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-file-contract"></i></div>
-                    <div class="service-title">Contract Job</div>
-                    <div class="service-cn">合约工作</div>
-                </div>
                 <div class="service-card">
-                    <div class="service-icon-box"><i class="fas fa-briefcase"></i></div>
+                    <div class="service-icon"><i class="fas fa-briefcase"></i></div>
                     <div class="service-title">Corporate Booking</div>
                     <div class="service-cn">商业预订</div>
                 </div>
-                
-                <div class="service-card" style="grid-column: span 2; background: #fdfdfd; border-color: var(--secondary);">
-                    <div class="service-icon-box" style="background: var(--secondary); color: white; width: 60px; height: 60px;"><i class="fas fa-wheelchair"></i></div>
-                    <div class="service-title" style="font-size: 1.4rem;">Wheelchair Accessible Transport</div>
-                    <div class="service-cn" style="font-size: 1.1rem;">无障碍轮椅设施</div>
-                    <p style="margin-top: 10px; font-size: 0.9rem; color: var(--text-gray);">Specially designed vehicles with hydraulic lifts for safe and easy boarding.</p>
+                 <div class="service-card">
+                    <div class="service-icon"><i class="fas fa-file-contract"></i></div>
+                    <div class="service-title">Contract Job</div>
+                    <div class="service-cn">合约工作</div>
+                </div>
+                <div class="service-card" style="border-color: var(--secondary);">
+                    <div class="service-icon" style="background: var(--secondary); color: white;"><i class="fas fa-wheelchair"></i></div>
+                    <div class="service-title">Wheelchair Accessible</div>
+                    <div class="service-cn">无障碍轮椅设施</div>
+                </div>
+                <div class="service-card" style="padding: 0;">
+                    <img src="https://chanbus.com.sg/wp-content/uploads/2024/07/Chan-Bus-Chartered-Bus-Rental-1-1-e1720084601746-870x577.jpg" style="height: 100%; width: 100%; object-fit: cover;" alt="Charter">
                 </div>
             </div>
         </div>
@@ -661,9 +576,8 @@
 
     <section id="reviews">
         <div class="marquee-container">
-            <div class="container text-center" style="margin-bottom: 50px;">
-                <h2 style="color: white; font-size: 2.5rem;">Trusted by Families in Singapore</h2>
-                <p style="color: rgba(255,255,255,0.8);">Real stories from our valued clients.</p>
+            <div class="container text-center" style="margin-bottom: 40px;">
+                <h2 style="color: white;">Trusted by Families in Singapore</h2>
             </div>
             <div class="marquee-content">
                 <div class="review-card">
@@ -681,14 +595,14 @@
                     <p class="review-text">"Reliable and punctual. It gives me peace of mind knowing my mother is in safe hands during her checkups."</p>
                     <p class="reviewer">- Jennifer Koh</p>
                 </div>
-                <div class="review-card">
+                 <div class="review-card">
                     <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
                     <p class="review-text">"Great service for wheelchair transport. Very accommodating to our schedule. Will definitely book again."</p>
                     <p class="reviewer">- Wei Ming</p>
                 </div>
-                 <div class="review-card">
+                <div class="review-card">
                     <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                    <p class="review-text">"Care Mobility made my father's dialysis trips so much easier. The driver was incredibly patient."</p>
+                    <p class="review-text">"Care Mobility made my father's dialysis trips so much easier. The driver was incredibly patient and helpful with the wheelchair."</p>
                     <p class="reviewer">- Sarah Tan</p>
                 </div>
             </div>
@@ -699,8 +613,8 @@
         <div class="container">
             <div class="grid-2">
                 <div>
-                    <h5 style="color: var(--secondary); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;">Common Questions</h5>
-                    <h2 style="margin-bottom: 30px; font-size: 2.5rem;">Frequently Asked Questions</h2>
+                    <h5 style="color: var(--secondary); font-weight: 600; text-transform: uppercase;">Common Questions</h5>
+                    <h2 style="margin-bottom: 30px;">Frequently Asked Questions</h2>
                     
                     <div class="faq-item active" onclick="toggleFaq(this)">
                         <div class="faq-question">How do I book a ride? <i class="fas fa-chevron-down"></i></div>
@@ -715,19 +629,19 @@
                         <div class="faq-answer">Yes, we offer flexible hourly chartering services suitable for personal errands, medical appointments with waiting time, or corporate requirements.</div>
                     </div>
                     
-                    <div style="margin-top: 40px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow-card);">
-                        <img src="https://chanbus.com.sg/wp-content/uploads/2024/07/Chan-Bus-Chartered-Bus-Rental-1-1-e1720084601746-870x577.jpg" alt="Charter Transport Singapore">
+                    <div style="margin-top: 40px; border-radius: var(--radius-md); overflow: hidden; box-shadow: var(--shadow);">
+                        <img src="https://media.tacdn.com/media/attractions-splice-spp-674x446/07/ad/c5/de.jpg" alt="Airport Transfer Singapore">
                     </div>
                 </div>
 
-                <div class="contact-form-wrapper">
-                    <h3 style="margin-bottom: 15px; font-size: 1.8rem;">Book Your Ride</h3>
-                    <p style="margin-bottom: 30px; color: var(--text-gray);">Fill in the details below and we will confirm your booking shortly.</p>
+                <div class="contact-form">
+                    <h3 style="margin-bottom: 20px;">Book Your Ride</h3>
+                    <p style="margin-bottom: 25px; color: var(--text-gray);">Fill in the details below and we will confirm your booking shortly.</p>
                     
                     <form>
                         <div class="form-group">
                             <label class="form-label">Full Name</label>
-                            <input type="text" class="form-input" placeholder="Enter your full name" required>
+                            <input type="text" class="form-input" placeholder="Enter your name" required>
                         </div>
                         <div class="form-group">
                             <label class="form-label">Phone Number</label>
@@ -749,10 +663,9 @@
                         </div>
                         <div class="form-group">
                             <label class="form-label">Pickup Location</label>
-                            <input type="text" class="form-input" placeholder="Enter pickup address" required>
+                            <input type="text" class="form-input" placeholder="Enter address" required>
                         </div>
-                        
-                        <button type="submit" class="btn btn-primary btn-font" style="width: 100%; margin-top: 10px; font-size: 1.1rem; padding: 18px;">Submit Booking Request</button>
+                        <button type="submit" class="btn btn-primary btn-font" style="width: 100%; justify-content: center;">Submit Booking Request</button>
                     </form>
                 </div>
             </div>
@@ -761,10 +674,10 @@
 
     <footer>
         <div class="container">
-            <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px;">
+            <div class="footer-grid">
                 <div>
                     <a href="#" class="footer-logo">Care Mobility Pte Ltd</a>
-                    <p style="opacity: 0.8; line-height: 1.8;">Providing safe, reliable, and heart-centered transport services across Singapore. We are here to move you with care.</p>
+                    <p style="opacity: 0.8; max-width: 300px;">Providing safe, reliable, and heart-centered transport services across Singapore. We are here to move you with care.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Quick Links</h4>
@@ -777,13 +690,12 @@
                 <div class="footer-links">
                     <h4>Contact Us</h4>
                     <ul>
-                        <li><i class="fas fa-phone-alt" style="margin-right: 10px; color: var(--secondary);"></i> +65 1234 5678</li>
-                        <li><i class="fas fa-envelope" style="margin-right: 10px; color: var(--secondary);"></i> booking@caremobility.sg</li>
-                        <li><i class="fas fa-map-marker-alt" style="margin-right: 10px; color: var(--secondary);"></i> Singapore</li>
+                        <li><i class="fas fa-phone-alt" style="margin-right: 8px; color: var(--secondary);"></i> +65 1234 5678</li>
+                        <li><i class="fas fa-envelope" style="margin-right: 8px; color: var(--secondary);"></i> booking@caremobility.sg</li>
                     </ul>
                     <div style="margin-top: 25px; display: flex; gap: 15px;">
-                        <a href="#"><i class="fab fa-facebook fa-2x" style="color: white;"></i></a>
-                        <a href="#"><i class="fab fa-instagram fa-2x" style="color: white;"></i></a>
+                        <a href="#"><i class="fab fa-facebook fa-lg"></i></a>
+                        <a href="#"><i class="fab fa-instagram fa-lg"></i></a>
                     </div>
                 </div>
             </div>
@@ -799,34 +711,16 @@
 
     <script>
         function toggleFaq(element) {
+            // Close all other FAQs
             const items = document.querySelectorAll('.faq-item');
             items.forEach(item => {
                 if (item !== element) {
                     item.classList.remove('active');
                 }
             });
+            // Toggle clicked FAQ
             element.classList.toggle('active');
         }
-        
-        // Smooth scroll adjustment for fixed header
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetSection = document.querySelector(targetId);
-                
-                if (targetSection) {
-                    const headerOffset = 80;
-                    const elementPosition = targetSection.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
-            });
-        });
     </script>
 </body>
 </html>
