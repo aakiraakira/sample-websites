@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A.S.K Debt Recovery | The Gold Standard</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.263.1/umd/lucide.min.js"></script>
+
+    <style>
+        /* --- 1. THEME VARIABLES --- */
+        :root {
+            /* Palette */
+            --navy-dark: #0F172A;     /* Deep Royal Navy */
+            --navy-light: #1E293B;    /* Card Backgrounds */
+            --gold: #D4AF37;          /* Metallic Gold */
+            --gold-dark: #B59226;     /* Gold Hover */
+            --white: #FFFFFF;
+            --bg-light: #F1F5F9;      /* Light Grey Background */
+            --text-main: #334155;     /* Dark Grey Text */
+            --text-light: #64748B;    /* Muted Text */
+            
+            /* Spacing & Layout */
+            --container-width: 1200px;
+            --header-height: 80px;
+            
+            /* Fonts */
+            --font-head: 'Outfit', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        /* --- 2. GLOBAL RESET & BASE STYLES --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        html { 
+            scroll-behavior: smooth; 
+            scroll-padding-top: var(--header-height); /* Fixes anchor jump */
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: var(--font-head); color: var(--navy-dark); font-weight: 700; }
+        a { text-decoration: none; transition: all 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; object-fit: cover; }
+
+        /* --- 3. UTILITY CLASSES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-padding { padding: 80px 0; }
+        
+        /* Typography */
+        .text-center { text-align: center; }
+        .section-header { max-width: 700px; margin: 0 auto 50px; text-align: center; }
+        
+        .tag {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--gold-dark);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 6px 14px;
+            border-radius: 50px;
+            margin-bottom: 15px;
+        }
+        
+        h2.title { font-size: 2.5rem; line-height: 1.2; margin-bottom: 15px; }
+        p.subtitle { font-size: 1.1rem; color: var(--text-light); }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 14px 28px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s;
+        }
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%);
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+            border: none;
+        }
+        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4); }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+        .btn-outline:hover { background: var(--white); color: var(--navy-dark); }
+
+        /* --- 4. HEADER & NAV --- */
+        header {
+            height: var(--header-height);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex; align-items: center;
+        }
+        
+        .nav-wrap { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        
+        .logo { 
+            font-family: var(--font-head); font-size: 1.5rem; font-weight: 800; 
+            color: var(--navy-dark); display: flex; align-items: center; gap: 8px; 
+        }
+        .logo span { color: var(--gold); }
+        
+        .nav-links { display: flex; gap: 30px; align-items: center; }
+        .nav-links a { color: var(--navy-dark); font-weight: 500; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--gold-dark); }
+        
+        /* Mobile Menu Toggle */
+        .mobile-toggle { display: none; cursor: pointer; color: var(--navy-dark); }
+
+        /* --- 5. HERO SECTION --- */
+        .hero {
+            background-color: var(--navy-dark);
+            color: var(--white);
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Background Pattern */
+        .hero::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(circle at 100% 0%, #1E293B 10%, transparent 60%);
+            opacity: 0.5;
+        }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            gap: 50px;
+            align-items: center;
+            position: relative; z-index: 2;
+        }
+        .hero-content h1 { font-size: 3.5rem; line-height: 1.1; margin-bottom: 25px; color: var(--white); }
+        .hero-content h1 span { color: var(--gold); }
+        .hero-content p { font-size: 1.2rem; color: #CBD5E1; margin-bottom: 35px; max-width: 90%; }
+        .hero-btns { display: flex; gap: 15px; }
+        
+        .hero-image { position: relative; }
+        .hero-image img { 
+            border-radius: 12px; 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1); 
+        }
+
+        /* --- 6. TRUST STRIP (Marquee + Counters) --- */
+        .trust-strip { background: var(--white); border-bottom: 1px solid #E2E8F0; }
+        
+        /* Marquee */
+        .marquee-container {
+            background: var(--navy-dark);
+            padding: 12px 0;
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content { display: inline-flex; animation: scroll 25s linear infinite; }
+        .review-pill {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin: 0 20px;
+            font-size: 0.9rem;
+        }
+        .stars { color: var(--gold); }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* Counters */
+        .counter-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            padding: 40px 0;
+            text-align: center;
+        }
+        .counter-item h3 { font-size: 2.5rem; color: var(--gold-dark); margin-bottom: 5px; }
+        .counter-item p { font-size: 0.9rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- 7. SERVICES (Cards) --- */
+        .services { background: var(--bg-light); }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .service-card {
+            background: var(--white);
+            padding: 40px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border-top: 4px solid transparent;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            border-top: 4px solid var(--gold);
+        }
+        .icon-circle {
+            width: 60px; height: 60px;
+            background: var(--navy-dark);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            color: var(--gold);
+            margin-bottom: 25px;
+        }
+        .service-card h3 { font-size: 1.35rem; margin-bottom: 12px; }
+        .service-card p { color: var(--text-light); font-size: 0.95rem; line-height: 1.6; }
+
+        /* --- 8. WHY CHOOSE US (Containerized) --- */
+        .why-us { background: var(--white); }
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+        .benefit-card {
+            background: var(--white);
+            padding: 35px 25px;
+            border-radius: 12px;
+            border: 1px solid #E2E8F0;
+            text-align: center;
+            transition: 0.3s;
+        }
+        .benefit-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .benefit-card i { color: var(--gold-dark); margin-bottom: 20px; }
+        .benefit-card h4 { font-size: 1.25rem; margin-bottom: 10px; }
+        .benefit-card p { color: var(--text-light); font-size: 0.95rem; }
+
+        /* --- 9. PROCESS (Timeline) --- */
+        .process { background: var(--navy-dark); color: var(--white); }
+        .process h2 { color: var(--white); }
+        .process p.subtitle { color: #94A3B8; }
+        
+        .process-steps {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 40px; margin-top: 60px; text-align: center; position: relative;
+        }
+        /* Connecting Line */
+        .process-steps::before {
+            content: ''; position: absolute; top: 25px; left: 15%; width: 70%; height: 2px;
+            background: rgba(255,255,255,0.1); z-index: 0;
+        }
+        .step-card { position: relative; z-index: 1; }
+        .step-num {
+            width: 50px; height: 50px;
+            background: var(--gold); color: var(--navy-dark);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 1.2rem;
+            margin: 0 auto 25px;
+            box-shadow: 0 0 0 8px var(--navy-dark); /* Fake spacing for line */
+        }
+        .step-card h4 { color: var(--white); font-size: 1.25rem; margin-bottom: 10px; }
+        .step-card p { color: #CBD5E1; font-size: 0.95rem; }
+
+        /* --- 10. CASE STUDIES (Popup) --- */
+        .cases { background: var(--bg-light); }
+        .cases-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
+        .case-card {
+            background: var(--white); border-radius: 12px; overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); cursor: pointer; transition: 0.3s;
+        }
+        .case-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .case-img { height: 220px; overflow: hidden; }
+        .case-img img { width: 100%; height: 100%; transition: 0.5s; }
+        .case-card:hover .case-img img { transform: scale(1.05); }
+        
+        .case-info { padding: 25px; }
+        .case-info h4 { font-size: 1.25rem; margin-bottom: 8px; }
+        .case-info .result { color: var(--gold-dark); font-weight: 700; font-size: 0.9rem; text-transform: uppercase; }
+
+        /* Modal */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(15, 23, 42, 0.9); z-index: 2000;
+            align-items: center; justify-content: center; padding: 20px;
+        }
+        .modal-box {
+            background: var(--white); padding: 40px; border-radius: 12px;
+            max-width: 600px; width: 100%; position: relative; animation: slideUp 0.3s ease;
+        }
+        .close-btn { position: absolute; top: 20px; right: 20px; cursor: pointer; color: var(--text-light); }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        /* --- 11. FAQ --- */
+        .faq { background: var(--white); }
+        .faq-container { max-width: 800px; margin: 0 auto; }
+        .faq-item { border: 1px solid #E2E8F0; border-radius: 8px; margin-bottom: 15px; overflow: hidden; }
+        .faq-head {
+            padding: 20px 25px; cursor: pointer; background: var(--white);
+            display: flex; justify-content: space-between; align-items: center;
+            font-weight: 600; color: var(--navy-dark); transition: 0.2s;
+        }
+        .faq-head:hover { background: #F8FAFC; }
+        .faq-body { max-height: 0; overflow: hidden; transition: 0.3s ease; padding: 0 25px; color: var(--text-light); }
+        .faq-item.active .faq-body { padding-bottom: 25px; max-height: 200px; }
+        .faq-item.active .faq-head { color: var(--gold-dark); }
+
+        /* --- 12. CONTACT FORM --- */
+        .contact { background: var(--navy-dark); color: var(--white); }
+        .contact h2 { color: var(--white); }
+        .contact p.subtitle { color: #94A3B8; }
+        
+        .contact-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+        
+        .contact-info-item { display: flex; gap: 15px; margin-bottom: 30px; }
+        .contact-info-item i { color: var(--gold); margin-top: 5px; }
+        
+        .contact-form {
+            background: #1E293B; padding: 40px; border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .form-group { margin-bottom: 20px; }
+        .form-group label { display: block; margin-bottom: 8px; font-size: 0.9rem; color: #CBD5E1; }
+        .form-control {
+            width: 100%; padding: 12px; background: #0F172A; border: 1px solid #334155;
+            color: var(--white); border-radius: 6px; font-family: var(--font-body);
+        }
+        .form-control:focus { outline: none; border-color: var(--gold); }
+
+        /* --- 13. FOOTER --- */
+        footer { background: #020617; color: #94A3B8; padding: 70px 0 30px; border-top: 3px solid var(--gold); }
+        .footer-grid { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; }
+        .footer-col h4 { color: var(--white); margin-bottom: 20px; font-size: 1.1rem; }
+        .footer-col ul li { margin-bottom: 12px; font-size: 0.95rem; }
+        .footer-col a { color: #94A3B8; }
+        .footer-col a:hover { color: var(--gold); }
+        .copyright { margin-top: 50px; padding-top: 20px; border-top: 1px solid #1E293B; text-align: center; font-size: 0.85rem; }
+
+        /* --- RESPONSIVE MEDIA QUERIES --- */
+        @media (max-width: 992px) {
+            .hero-grid { grid-template-columns: 1fr; text-align: center; }
+            .hero-content h1 { font-size: 2.8rem; }
+            .hero-btns { justify-content: center; }
+            .hero-image { display: none; } /* Hide complex image on tablet for cleaner look */
+            .benefits-grid, .process-steps { grid-template-columns: 1fr; gap: 40px; }
+            .process-steps::before { display: none; }
+            .contact-layout { grid-template-columns: 1fr; gap: 40px; }
+            
+            /* Mobile Nav Logic */
+            .mobile-toggle { display: block; }
+            .nav-links {
+                display: none; position: absolute; top: 100%; left: 0; width: 100%;
+                background: var(--white); flex-direction: column; padding: 20px;
+                border-bottom: 1px solid #ddd;
+            }
+            .nav-links.active { display: flex; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
+        }
+
+        @media (max-width: 600px) {
+            .hero-content h1 { font-size: 2.2rem; }
+            .counter-grid { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrap">
+            <a href="#" class="logo">
+                <i data-lucide="shield-check" color="#D4AF37" size="28"></i>
+                A.S.K <span>CREDIT</span>
+            </a>
+            
+            <i data-lucide="menu" class="mobile-toggle" onclick="toggleMenu()"></i>
+            
+            <nav class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#process">Our Process</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact" class="btn btn-gold" style="padding: 10px 20px; margin-left: 10px;">Get Quote</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero" id="about">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <div class="tag">Singapore's #1 Choice</div>
+                <h1>Recover Debt.<br>Restore <span>Cash Flow.</span></h1>
+                <p>We combine legal expertise with firm negotiation to recover what is rightfully yours. No hidden fees. No reputational damage.</p>
+                <div class="hero-btns">
+                    <a href="#contact" class="btn btn-gold">Start Recovery</a>
+                    <a href="#process" class="btn btn-outline">How It Works</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1556761175-5973dc0f32e7?ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80" alt="Meeting">
+            </div>
+        </div>
+    </section>
+
+    <section class="trust-strip">
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <div class="review-pill"><i data-lucide="star" class="stars" size="14"></i> "Recovered $50k in 2 weeks" - John Tan</div>
+                <div class="review-pill"><i data-lucide="star" class="stars" size="14"></i> "Highly Professional" - SME Corp</div>
+                <div class="review-pill"><i data-lucide="star" class="stars" size="14"></i> "Best in Singapore" - Sarah L.</div>
+                <div class="review-pill"><i data-lucide="star" class="stars" size="14"></i> "Recovered $50k in 2 weeks" - John Tan</div>
+                <div class="review-pill"><i data-lucide="star" class="stars" size="14"></i> "Highly Professional" - SME Corp</div>
+                <div class="review-pill"><i data-lucide="star" class="stars" size="14"></i> "Best in Singapore" - Sarah L.</div>
+            </div>
+        </div>
+        <div class="container counter-grid">
+            <div class="counter-item">
+                <h3 data-target="92">0%</h3>
+                <p>Success Rate</p>
+            </div>
+            <div class="counter-item">
+                <h3 data-target="50">0M+</h3>
+                <p>Recovered (SGD)</p>
+            </div>
+            <div class="counter-item">
+                <h3 data-target="500">0+</h3>
+                <p>Happy Clients</p>
+            </div>
+            <div class="counter-item">
+                <h3 data-target="24">0hr</h3>
+                <p>Response Time</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding services" id="services">
+        <div class="container">
+            <div class="section-header">
+                <div class="tag">What We Do</div>
+                <h2 class="title">Recovery Solutions</h2>
+                <p class="subtitle">Tailored strategies for every type of debt situation.</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="icon-circle"><i data-lucide="building-2"></i></div>
+                    <h3>Corporate Debt</h3>
+                    <p>Recover unpaid B2B invoices and contracts. We preserve your business relationships while ensuring you get paid.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-circle"><i data-lucide="users"></i></div>
+                    <h3>Personal Debt</h3>
+                    <p>Handling sensitive personal loans between friends/family. We act as the firm, neutral third party.</p>
+                </div>
+                <div class="service-card">
+                    <div class="icon-circle"><i data-lucide="globe"></i></div>
+                    <h3>Global Tracing</h3>
+                    <p>Debtor left the country? Our global network allows us to trace and recover assets across borders.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding why-us">
+        <div class="container">
+            <div class="section-header">
+                <div class="tag">Why Us</div>
+                <h2 class="title">The A.S.K Difference</h2>
+                <p class="subtitle">We don't get paid unless you do.</p>
+            </div>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <i data-lucide="shield-check" size="40"></i>
+                    <h4>Fully Licensed</h4>
+                    <p>100% compliant with Singapore laws and CCAS code of conduct.</p>
+                </div>
+                <div class="benefit-card">
+                    <i data-lucide="target" size="40"></i>
+                    <h4>No Win, No Fee</h4>
+                    <p>Zero upfront risk. We only charge a commission upon successful recovery.</p>
+                </div>
+                <div class="benefit-card">
+                    <i data-lucide="zap" size="40"></i>
+                    <h4>Fast Action</h4>
+                    <p>Case activation within 24 hours. We don't waste time.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding process" id="process">
+        <div class="container">
+            <div class="section-header">
+                <div class="tag" style="background: rgba(255,255,255,0.1); color: var(--gold);">The Process</div>
+                <h2 class="title">How It Works</h2>
+                <p class="subtitle">A simple 3-step journey to getting your money back.</p>
+            </div>
+            
+            <div class="process-steps">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h4>Submit Case</h4>
+                    <p>Send us your invoices or IOUs. We analyze the viability within 24 hours.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h4>We Recover</h4>
+                    <p>We trace, contact, and negotiate with the debtor using professional tactics.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h4>You Get Paid</h4>
+                    <p>Funds are collected and transferred directly to your bank account.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding cases" id="cases">
+        <div class="container">
+            <div class="section-header">
+                <div class="tag">Success Stories</div>
+                <h2 class="title">Recent Cases</h2>
+                <p class="subtitle">Click to see how we helped others.</p>
+            </div>
+            
+            <div class="cases-grid">
+                <div class="case-card" onclick="openModal('Construction Firm', 'Recovered $120k in unpaid invoices from a stalled project. The debtor was uncontactable for 6 months, but our tracing team found them in 48 hours.')">
+                    <div class="case-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Construction"></div>
+                    <div class="case-info">
+                        <h4>Construction Firm</h4>
+                        <div class="result">$120,000 Recovered</div>
+                    </div>
+                </div>
+                <div class="case-card" onclick="openModal('Personal Loan', 'Client lent $50k to a friend who vanished. We mediated a repayment plan that recovered 100% of the principal over 6 months.')">
+                    <div class="case-img"><img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Personal"></div>
+                    <div class="case-info">
+                        <h4>Personal Loan</h4>
+                        <div class="result">$50,000 Recovered</div>
+                    </div>
+                </div>
+                <div class="case-card" onclick="openModal('Wholesale Supplier', 'Recovered a massive corporate debt involving cross-border logistics. Full settlement achieved without legal litigation.')">
+                    <div class="case-img"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" alt="Logistics"></div>
+                    <div class="case-info">
+                        <h4>Wholesale Supplier</h4>
+                        <div class="result">$250,000 Recovered</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding faq" id="faq">
+        <div class="container faq-container">
+            <div class="section-header">
+                <div class="tag">FAQ</div>
+                <h2 class="title">Common Questions</h2>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-head">Is this process legal? <i data-lucide="plus"></i></div>
+                <div class="faq-body">Yes. We are a fully licensed debt collection agency operating strictly within the laws of Singapore.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-head">What are your fees? <i data-lucide="plus"></i></div>
+                <div class="faq-body">We operate on a "No Collection, No Fee" basis. Our commission rates vary based on the debt amount and age.</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-head">What documents do I need? <i data-lucide="plus"></i></div>
+                <div class="faq-body">We typically need proof of debt (Invoices, IOUs, Contracts) and any contact details of the debtor.</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding contact" id="contact">
+        <div class="container contact-layout">
+            <div>
+                <div class="tag" style="background: rgba(255,255,255,0.1); color: var(--gold);">Contact Us</div>
+                <h2 class="title" style="color: white;">Let's Get Your Money Back.</h2>
+                <p class="subtitle">Fill out the form for a free, confidential consultation.</p>
+                <div style="margin-top: 40px;">
+                    <div class="contact-info-item">
+                        <i data-lucide="map-pin"></i>
+                        <div>
+                            <h5 style="color:white; margin-bottom:5px;">Visit Us</h5>
+                            <p style="color:#94A3B8; font-size:0.9rem;">123 Robinson Road, Singapore</p>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <i data-lucide="phone"></i>
+                        <div>
+                            <h5 style="color:white; margin-bottom:5px;">Call Us</h5>
+                            <p style="color:#94A3B8; font-size:0.9rem;">+65 6789 1234</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <form>
+                    <div class="form-group">
+                        <label>Your Name</label>
+                        <input type="text" class="form-control" placeholder="John Doe">
+                    </div>
+                    <div class="form-group">
+                        <label>Contact Number</label>
+                        <input type="tel" class="form-control" placeholder="+65 9123 4567">
+                    </div>
+                    <div class="form-group">
+                        <label>Estimated Debt Amount ($)</label>
+                        <input type="number" class="form-control" placeholder="5000">
+                    </div>
+                    <div class="form-group">
+                        <label>Case Details</label>
+                        <textarea class="form-control" rows="4" style="resize:none;"></textarea>
+                    </div>
+                    <button class="btn btn-gold" style="width:100%;">Submit Inquiry</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="margin-bottom:20px; color:white;">
+                    <i data-lucide="shield-check" color="#D4AF37"></i> A.S.K <span>CREDIT</span>
+                </a>
+                <p style="font-size:0.9rem; line-height:1.6;">The premier choice for debt recovery solutions in Singapore. Ethical, effective, and results-driven.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#cases">Case Studies</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li>+65 6789 1234</li>
+                    <li>info@askcredit.com.sg</li>
+                </ul>
+            </div>
+        </div>
+        <div class="container copyright">
+            &copy; 2025 A.S.K Credit Collection Pte Ltd. All Rights Reserved.
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal-box">
+            <i data-lucide="x" class="close-btn" onclick="closeModal()"></i>
+            <h3 id="modalTitle" style="margin-bottom:15px; font-size:1.8rem;"></h3>
+            <p id="modalDesc" style="color:var(--text-light); line-height:1.6; margin-bottom:25px;"></p>
+            <a href="#contact" class="btn btn-gold" onclick="closeModal()" style="width:100%;">Get Similar Results</a>
+        </div>
+    </div>
+
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+
+        // FAQ Logic
+        document.querySelectorAll('.faq-head').forEach(item => {
+            item.addEventListener('click', () => {
+                const parent = item.parentElement;
+                parent.classList.toggle('active');
+            });
+        });
+
+        // Modal Logic
+        const modal = document.getElementById('modalOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDesc = document.getElementById('modalDesc');
+
+        function openModal(title, desc) {
+            modalTitle.innerText = title;
+            modalDesc.innerText = desc;
+            modal.style.display = 'flex';
+        }
+
+        function closeModal() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(e) {
+            if (e.target == modal) closeModal();
+        }
+
+        // Counter Logic
+        const counters = document.querySelectorAll('.counter-item h3');
+        let hasAnimated = false;
+
+        window.addEventListener('scroll', () => {
+            const section = document.querySelector('.trust-strip');
+            const position = section.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+
+            if (position < screenPosition && !hasAnimated) {
+                counters.forEach(counter => {
+                    const target = +counter.getAttribute('data-target');
+                    const suffix = counter.innerText.replace(/[0-9]/g, '');
+                    const inc = target / 100;
+                    let count = 0;
+
+                    const updateCount = () => {
+                        count += inc;
+                        if (count < target) {
+                            counter.innerText = Math.ceil(count) + suffix;
+                            setTimeout(updateCount, 20);
+                        } else {
+                            counter.innerText = target + suffix;
+                        }
+                    };
+                    updateCount();
+                });
+                hasAnimated = true;
+            }
+        });
+    </script>
+</body>
+</html>
