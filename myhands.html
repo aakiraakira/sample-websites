@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Hands My Skills | Sports Therapy & Bone Setting</title>
+    
+    <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            /* Palette: Professional Dark Teal/Slate & Energetic Gold */
+            --primary: #0f172a;      /* Deep Slate */
+            --secondary: #334155;    /* Lighter Slate */
+            --accent: #d97706;       /* Sports Gold */
+            --accent-hover: #b45309;
+            --bg-light: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #e2e8f0;
+            --white: #ffffff;
+            --border-color: #cbd5e1;
+            
+            /* Typography mapping */
+            --font-head: 'Satoshi', sans-serif;
+            --font-sub: 'Poppins', sans-serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-body);
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-head);
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-family: var(--font-sub);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- BUTTONS --- */
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background-color: var(--accent);
+            color: var(--white);
+            font-family: var(--font-sub);
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: transparent;
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .btn-full-width {
+            width: 100%;
+            text-align: center;
+        }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 5%;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-head);
+            font-size: 1.5rem;
+            color: var(--white);
+            font-weight: 900;
+        }
+        .logo span { color: var(--accent); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            font-family: var(--font-sub);
+            font-size: 0.95rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--accent); }
+
+        .mobile-toggle {
+            display: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 100vh;
+            /* Updated Image with heavier gradient for "low opacity" look */
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.75)),
+                        url('https://images.squarespace-cdn.com/content/v1/5fa04d91adeccc059452846f/1616529775322-10E9KM7UJV224K8TP0JY/FHYSIO+Sports+Massage+Therapy') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 1rem;
+            margin-top: 0;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: var(--white);
+            animation: fadeIn Up 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* --- SERVICES --- */
+        .section-padding { padding: 6rem 5%; }
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            padding: 2.5rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            border-bottom: 4px solid transparent;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--accent);
+        }
+
+        .icon-box {
+            width: 60px;
+            height: 60px;
+            background: rgba(217, 119, 6, 0.1);
+            color: var(--accent);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card h3 { margin-bottom: 1rem; color: var(--primary); }
+        .service-card p { color: var(--secondary); font-size: 0.95rem; margin-bottom: 1.5rem; }
+
+        .service-cta {
+            margin-top: auto;
+            color: var(--accent);
+            font-weight: 700;
+            font-family: var(--font-sub);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: gap 0.3s ease;
+        }
+        
+        .service-cta:hover { gap: 0.8rem; }
+
+        /* --- WHY CHOOSE US --- */
+        .why-choose {
+            background-color: var(--primary);
+            color: var(--white);
+        }
+
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .why-content h2 { font-size: 2.5rem; margin-bottom: 1.5rem; color: var(--white); }
+        
+        .feature-list { display: grid; gap: 2rem; margin-top: 2rem; }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .feature-item i {
+            color: var(--accent);
+            font-size: 1.2rem;
+            margin-top: 5px;
+        }
+
+        .why-image img {
+            border-radius: 16px;
+            box-shadow: -20px 20px 0 rgba(217, 119, 6, 0.2);
+        }
+
+        /* --- REVIEW MARQUEE --- */
+        .reviews-section {
+            overflow: hidden;
+            background: var(--bg-light);
+            padding: 5rem 0;
+        }
+
+        .marquee-container {
+            display: flex;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .marquee-content {
+            display: flex;
+            gap: 2rem;
+            animation: scroll 30s linear infinite;
+            padding-left: 2rem;
+        }
+
+        .review-card {
+            min-width: 350px;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+
+        .stars { color: #fbbf24; margin-bottom: 0.5rem; }
+        .review-text { font-style: italic; color: var(--secondary); margin-bottom: 1rem; }
+        .reviewer { font-weight: 600; font-family: var(--font-sub); }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* --- FAQ --- */
+        .faq-container { max-width: 800px; margin: 0 auto; }
+
+        .faq-item {
+            background: var(--white);
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            width: 100%;
+            text-align: left;
+            border: none;
+            background: none;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-sub);
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 1rem;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            padding: 0 1.5rem;
+        }
+
+        .faq-answer p { padding-bottom: 1.5rem; color: var(--secondary); }
+        .faq-icon { transition: transform 0.3s ease; }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        .faq-item.active .faq-answer { max-height: 200px; }
+
+
+        /* --- CONTACT FORM SECTION --- */
+        .contact-section {
+            background: var(--white);
+            padding: 6rem 5%;
+        }
+
+        .contact-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--bg-light);
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: var(--font-sub);
+            font-weight: 500;
+            color: var(--primary);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--primary);
+            color: var(--text-light);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-bottom: 3rem;
+        }
+
+        .footer-col h4 { color: var(--white); margin-bottom: 1.5rem; font-size: 1.2rem; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul li a:hover { color: var(--accent); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        /* --- FLOATING WHATSAPP --- */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .whatsapp-float:hover { transform: scale(1.1); }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: -100%;
+                background: var(--primary);
+                width: 100%;
+                flex-direction: column;
+                padding: 2rem;
+                text-align: center;
+                transition: 0.3s;
+                align-items: center;
+            }
+            
+            .nav-links.active { right: 0; }
+            .mobile-toggle { display: block; }
+            
+            .why-grid { grid-template-columns: 1fr; }
+            .why-image { order: -1; } /* Image on top mobile */
+            
+            .contact-container { padding: 2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <div class="logo">MyHands<span>MySkills</span></div>
+            <ul class="nav-links">
+                <li><a href="#hero">Home</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#why-choose">Why Us</a></li>
+                <li><a href="#reviews">Reviews</a></li>
+                <li><a href="#faq">FAQ</a></li>
+                <li><a href="#contact" class="btn" style="padding: 8px 20px;">Book Now</a></li>
+            </ul>
+            <div class="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+        </nav>
+    </header>
+
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <span class="subtitle">Professional Sports Therapy</span>
+            <h1>Restore Mobility.<br>Unleash Performance.</h1>
+            <p>Specialized sports massage, HVLA bone setting, and Active Release Techniques (ART) to get you back in the game.</p>
+            <a href="#contact" class="btn">Book an Appointment</a>
+        </div>
+    </section>
+
+    <section id="services" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <span class="subtitle">Our Expertise</span>
+                <h2>What We Do</h2>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div>
+                        <div class="icon-box"><i class="fas fa-running"></i></div>
+                        <h3>Sports Body Massage</h3>
+                        <p>Deep tissue manipulation to reduce muscle fatigue, improve circulation, and accelerate recovery after intense physical activity.</p>
+                    </div>
+                    <a href="#contact" class="service-cta">Book This Service <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div>
+                        <div class="icon-box"><i class="fas fa-bone"></i></div>
+                        <h3>Bone Setting (HVLA)</h3>
+                        <p>High-Velocity Low-Amplitude thrusts to restore joint mobility and align the skeletal structure for optimal movement.</p>
+                    </div>
+                    <a href="#contact" class="service-cta">Book This Service <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="service-card">
+                    <div>
+                        <div class="icon-box"><i class="fas fa-hand-holding-medical"></i></div>
+                        <h3>Active Release (ART)</h3>
+                        <p>A soft tissue system that treats problems with muscles, tendons, ligaments, fascia and nerves using precise tension.</p>
+                    </div>
+                    <a href="#contact" class="service-cta">Book This Service <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="why-choose" class="section-padding why-choose">
+        <div class="container">
+            <div class="why-grid">
+                <div class="why-content">
+                    <span class="subtitle">Why Choose Us</span>
+                    <h2>Hands That Heal,<br>Skills That Deliver.</h2>
+                    <div class="feature-list">
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Certified Specialists</h4>
+                                <p class="text-light" style="opacity: 0.8;">Qualified practitioners in sports science and traditional bone setting.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Personalized Recovery Plans</h4>
+                                <p class="text-light" style="opacity: 0.8;">We don't just treat symptoms; we assess your body mechanics.</p>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <h4>Hybrid Techniques</h4>
+                                <p class="text-light" style="opacity: 0.8;">Combining Eastern bone setting with Western sports medicine.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="why-image">
+                    <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=1000&auto=format&fit=crop" alt="Therapy Session">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="reviews" class="reviews-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Client Stories</h2>
+            </div>
+        </div>
+        <div class="marquee-container">
+            <div class="marquee-content">
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"My shoulder mobility increased instantly after the ART session. Highly recommended for powerlifters."</p>
+                    <p class="reviewer">- Jason T.</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"The bone setting was intense but the relief was immediate. No more lower back pain."</p>
+                    <p class="reviewer">- Sarah L.</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Professional, clean studio and they actually explain what they are doing to your body."</p>
+                    <p class="reviewer">- Mike R.</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"Best sports massage in town. Fixed my tight calves before the marathon."</p>
+                    <p class="reviewer">- Emily W.</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"My shoulder mobility increased instantly after the ART session. Highly recommended for powerlifters."</p>
+                    <p class="reviewer">- Jason T.</p>
+                </div>
+                <div class="review-card">
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <p class="review-text">"The bone setting was intense but the relief was immediate. No more lower back pain."</p>
+                    <p class="reviewer">- Sarah L.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="section-padding">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <button class="faq-question">
+                        What should I wear to the session?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Please wear loose, comfortable clothing. For lower body treatments, shorts are preferred. For upper body, a sports bra (for women) or tank top allows us to access the muscles effectively.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        Is the Bone Setting (HVLA) painful?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>You may feel a quick pressure or hear a 'pop', which is gas releasing from the joint. It is generally not painful, but can be startling. We always warm up the area first.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">
+                        How is this different from a spa massage?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </button>
+                    <div class="faq-answer">
+                        <p>Our focus is therapeutic and functional correction rather than relaxation. We target deep tissue, trigger points, and joint alignment to fix specific pain points and improve mobility.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="section-header">
+                <span class="subtitle">Get In Touch</span>
+                <h2>Ready to Recover?</h2>
+            </div>
+            <div class="contact-container">
+                <form>
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" class="form-control" placeholder="Enter your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="e.g. +65 9123 4567">
+                    </div>
+                    <div class="form-group">
+                        <label for="service">Interested Service</label>
+                        <select id="service" class="form-control">
+                            <option value="massage">Sports Body Massage</option>
+                            <option value="bonesetting">Bone Setting (HVLA)</option>
+                            <option value="art">Active Release (ART)</option>
+                            <option value="consult">General Consultation</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" class="form-control" placeholder="Tell us about your injury or pain points..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-full-width">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo">MyHands<span>MySkills</span></div>
+                <p style="margin-top: 1rem; opacity: 0.7;">Restoring movement through professional sports therapy and traditional bone setting techniques.</p>
+            </div>
+            <div class="footer-col">
+                <h4>Services</h4>
+                <ul>
+                    <li><a href="#">Sports Massage</a></li>
+                    <li><a href="#">Bone Setting</a></li>
+                    <li><a href="#">Active Release</a></li>
+                    <li><a href="#">Assessment</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +65 1234 5678</li>
+                    <li><i class="fas fa-envelope"></i> hello@myhandsmyskills.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Orchard Road, Singapore</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 My Hands My Skills. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/6512345678" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileToggle = document.querySelector('.mobile-toggle');
+        const navLinks = document.querySelector('.nav-links');
+
+        mobileToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            mobileToggle.querySelector('i').classList.toggle('fa-bars');
+            mobileToggle.querySelector('i').classList.toggle('fa-times');
+        });
+
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                mobileToggle.querySelector('i').classList.add('fa-bars');
+                mobileToggle.querySelector('i').classList.remove('fa-times');
+            });
+        });
+
+        // FAQ Accordion
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all others
+                document.querySelectorAll('.faq-item').forEach(i => {
+                    i.classList.remove('active');
+                });
+
+                // Toggle current
+                if (!isActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Simple Form Handler (Prevents refresh for demo)
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const btn = this.querySelector('button');
+            const originalText = btn.innerText;
+            
+            btn.innerText = 'Sent!';
+            btn.style.backgroundColor = '#25d366'; // Green
+            btn.style.borderColor = '#25d366';
+            
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.backgroundColor = '';
+                btn.style.borderColor = '';
+                this.reset();
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
