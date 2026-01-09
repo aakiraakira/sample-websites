@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Miranex Capital | Building Malaysia's Future</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-red: #c41e3a; /* Similar to Sunway Red */
+            --dark-red: #8a1529;
+            --text-dark: #1f2937;
+            --text-gray: #6b7280;
+            --bg-light: #f9fafb;
+            --white: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-color: var(--white);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            height: 80px;
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--primary-red);
+            font-family: 'Playfair Display', serif;
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-red);
+        }
+
+        .contact-btn {
+            background: var(--primary-red);
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 50px;
+        }
+        
+        .contact-btn:hover {
+            background: var(--dark-red);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            height: 90vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: url('https://images.unsplash.com/photo-1449247613801-ab06418e2861?q=80&w=2071&auto=format&fit=crop') center/cover no-repeat;
+            color: white;
+            text-align: center;
+        }
+
+        /* The Sunway "Fade" overlay at bottom of hero */
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 150px;
+            background: linear-gradient(to top, white, transparent);
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 20px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        /* --- BUSINESS TABS (The Core Feature) --- */
+        .business-section {
+            padding: 80px 0;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--primary-red);
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+        }
+
+        /* Tab Navigation */
+        .tabs-wrapper {
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 40px;
+            overflow-x: auto; /* Scrollable on mobile */
+            white-space: nowrap;
+            padding: 0 20px;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        .tabs-wrapper::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            display: inline-block;
+            padding: 15px 25px;
+            background: none;
+            border: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #888;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: var(--transition);
+        }
+
+        .tab-btn:hover { color: var(--primary-red); }
+
+        .tab-btn.active {
+            color: var(--primary-red);
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--primary-red);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            padding: 0 20px;
+            min-height: 500px;
+        }
+
+        .business-panel {
+            display: none;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 60px;
+            align-items: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .business-panel.active {
+            display: grid;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .biz-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--text-dark);
+        }
+
+        .biz-text p {
+            font-size: 1.1rem;
+            color: var(--text-gray);
+            margin-bottom: 30px;
+        }
+
+        .cta-link {
+            display: inline-flex;
+            align-items: center;
+            color: var(--primary-red);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: 0.2s;
+        }
+        .cta-link i { margin-left: 8px; font-size: 0.8rem; }
+        .cta-link:hover { transform: translateX(5px); }
+
+        .biz-image {
+            height: 500px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        .biz-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+        .business-panel:hover .biz-image img { transform: scale(1.05); }
+
+        /* --- SUSTAINABILITY (Cloud Effect) --- */
+        .sustainability-section {
+            position: relative;
+            padding: 120px 0;
+            margin-top: 50px;
+            background: url('https://images.unsplash.com/photo-1518531933037-9a82bf558667?q=80&w=2072&auto=format&fit=crop') center/cover fixed;
+        }
+
+        /* Top Cloud Fade */
+        .sustainability-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 150px;
+            background: linear-gradient(to bottom, white, transparent);
+        }
+
+        /* Bottom Cloud Fade */
+        .sustainability-section::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; width: 100%; height: 150px;
+            background: linear-gradient(to top, var(--bg-light), transparent);
+        }
+
+        .sus-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 60px;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .sus-content h2 {
+            font-size: 2.2rem;
+            color: var(--primary-red);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        /* --- IMPACT / STATS --- */
+        .impact-section {
+            background-color: var(--bg-light);
+            padding: 100px 0;
+        }
+
+        .impact-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .impact-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 8px; /* Clean box look */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border-bottom: 4px solid transparent;
+            transition: 0.3s;
+        }
+
+        .impact-card:hover {
+            transform: translateY(-10px);
+            border-bottom: 4px solid var(--primary-red);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .impact-number {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+        }
+        .impact-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+        }
+
+        /* --- CAREER (People) --- */
+        .career-section {
+            padding: 100px 0;
+            background: white;
+            text-align: center;
+        }
+
+        .people-image {
+            max-width: 1000px;
+            margin: 40px auto 0;
+            height: 300px;
+            background: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop') center/cover;
+            /* Using object-position to simulate people standing at bottom */
+            background-position: center 30%;
+            border-radius: 12px;
+            position: relative;
+        }
+        
+        .career-cta {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #1a1a1a;
+            color: #999;
+            padding: 80px 0 30px;
+        }
+
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr;
+            gap: 40px;
+            padding: 0 20px 60px;
+            border-bottom: 1px solid #333;
+        }
+
+        .footer-col h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+        .footer-col ul li a:hover { color: var(--primary-red); }
+
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            font-size: 0.8rem;
+        }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.5rem; }
+            
+            .business-panel {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            .biz-image { height: 250px; order: -1; } /* Image on top for mobile */
+            
+            .impact-grid { grid-template-columns: 1fr; }
+            
+            .footer-grid { grid-template-columns: 1fr; text-align: center; }
+            
+            .nav-links { display: none; } /* Simplified for this demo */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">MIRANEX CAPITAL</div>
+            <nav class="nav-links">
+                <a href="#">About Us</a>
+                <a href="#businesses">Our Business</a>
+                <a href="#sustainability">Sustainability</a>
+                <a href="#investor">Investor Relations</a>
+                <a href="#" class="contact-btn">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>BUILDING LEGACIES,<br>SHAPING FUTURES.</h1>
+            <p>Miranex Capital is Malaysia's premier integrated real estate and lifestyle conglomerate, dedicated to sustainable community building.</p>
+        </div>
+    </section>
+
+    <section class="business-section" id="businesses">
+        <div class="section-header">
+            <h2>Our Expertise</h2>
+            <p style="color:#666;">Diversified portfolio delivering sustainable value.</p>
+        </div>
+
+        <div class="tabs-wrapper">
+            <button class="tab-btn active" data-tab="housing">Housing Development</button>
+            <button class="tab-btn" data-tab="reits">REITs</button>
+            <button class="tab-btn" data-tab="construction">Construction</button>
+            <button class="tab-btn" data-tab="hospitals">Hospitals</button>
+            <button class="tab-btn" data-tab="digital">Digital</button>
+            <button class="tab-btn" data-tab="education">Education</button>
+            <button class="tab-btn" data-tab="durian">Durian Museum</button>
+            <button class="tab-btn" data-tab="leisure">Leisure</button>
+        </div>
+
+        <div class="tab-content">
+            
+            <div class="business-panel active" id="housing">
+                <div class="biz-text">
+                    <h3>Housing Development</h3>
+                    <p>Miranex Housing creates master-planned townships that integrate nature, lifestyle, and community. From luxury high-rises in KLCC to sustainable suburban townships, we build homes that last for generations.</p>
+                    <a href="#" class="cta-link">Explore Properties <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="biz-image">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?q=80&w=2070&auto=format&fit=crop" alt="Housing Development">
+                </div>
+            </div>
+
+            <div class="business-panel" id="reits">
+                <div class="biz-text">
+                    <h3>Miranex REITs</h3>
+                    <p>One of Malaysia's largest diversified Real Estate Investment Trusts. Our portfolio spans retail malls, office towers, and industrial assets, delivering consistent returns and long-term value to our stakeholders.</p>
+                    <a href="#" class="cta-link">View Portfolio <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="biz-image">
+                    <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop" alt="REITs">
+                </div>
+            </div>
+
+            <div class="business-panel" id="construction">
+                <div class="biz-text">
+                    <h3>Construction</h3>
+                    <p>Delivering engineering excellence. Our construction arm utilizes cutting-edge BIM technology and sustainable building practices to deliver complex infrastructure and architectural landmarks across Southeast Asia.</p>
+                    <a href="#" class="cta-link">Our Projects <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="biz-image">
+                    <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2031&auto=format&fit=crop" alt="Construction">
+                </div>
+            </div>
+
+            <div class="business-panel" id="hospitals">
+                <div class="biz-text">
+                    <h3>Miranex Healthcare</h3>
+                    <p>World-class medical centres providing holistic care. We combine advanced medical technology with compassionate hospitality to set new standards in Malaysian private healthcare.</p>
+                    <a href="#" class="cta-link">Find a Hospital <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="biz-image">
+                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?q=80&w=2053&auto=format&fit=crop" alt="Hospitals">
+                </div>
+            </div>
+
+            <div class="business-panel" id="digital">
+                <div class="biz-text">
+                    <h3>Miranex Digital</h3>
+                    <p>Driving the digital economy. From data centres to fintech solutions and prop-tech integration, we are investing in the infrastructure that powers the future of business.</p>
+                    <a href="#" class="cta-link">Our Tech <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="biz-image">
+                    <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Digital">
+                </div>
+            </div>
+
+            <div class="business-panel" id="education">
+                <div class="biz-text">
+                    <h3>Education Group</h3>
+                    <p>Nurturing future leaders. Our international schools and university collaborations provide holistic education, focusing on academic excellence and character development.</p>
+                    <a href="#" class="cta-link">Campus Life <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="biz-image">
+                    <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop" alt="Education">
+                </div>
+            </div>
+
+            <div class="business-panel" id="durian">
+                <div class="biz-text">
+                    <h3>The Durian Museum</h3>
+                    <p>A unique cultural landmark dedicated to the King of Fruits. Experience the history, biodiversity, and culinary mastery of Malaysia's most iconic export in an immersive, sensory environment.</p>
+                    <a href="#" class="cta-link">Visit Museum <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="biz-image">
+                    <img src="https://images.unsplash.com/photo-1596387060195-2c813d10db96?q=80&w=2000&auto=format&fit=crop" alt="Durian Museum">
+                </div>
+            </div>
+
+            <div class="business-panel" id="leisure">
+                <div class="biz-text">
+                    <h3>Leisure & Hospitality</h3>
+                    <p>Creating memorable experiences. From theme parks to luxury resorts and golf clubs, Miranex Leisure is about bringing joy and relaxation to families and tourists alike.</p>
+                    <a href="#" class="cta-link">Book a Stay <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="biz-image">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop" alt="Leisure">
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="sustainability-section" id="sustainability">
+        <div class="sus-content">
+            <h2>Advancing Sustainability Agenda</h2>
+            <p>We are committed to the United Nations Sustainable Development Goals (UNSDGs). Our mission is to build smart, sustainable cities that prioritize the well-being of our community and the planet.</p>
+            <br>
+            <a href="#" class="contact-btn">Read Our Report</a>
+        </div>
+    </section>
+
+    <section class="impact-section" id="investor">
+        <div class="section-header" style="text-align: center; margin-bottom: 60px;">
+            <h2>Making An Impact</h2>
+        </div>
+        <div class="impact-grid">
+            <div class="impact-card">
+                <div class="impact-number">RM 2.4B</div>
+                <div class="impact-label">Revenue FY2025</div>
+                <p style="margin-top:15px; font-size: 0.9rem; color:#888;">Strong growth driven by property development.</p>
+            </div>
+            <div class="impact-card">
+                <div class="impact-number">4,200+</div>
+                <div class="impact-label">Employees</div>
+                <p style="margin-top:15px; font-size: 0.9rem; color:#888;">A diverse workforce across 8 industries.</p>
+            </div>
+            <div class="impact-card">
+                <div class="impact-number">150k</div>
+                <div class="impact-label">Trees Planted</div>
+                <p style="margin-top:15px; font-size: 0.9rem; color:#888;">Commitment to green townships.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="career-section">
+        <div class="career-cta">
+            <h2 style="color: var(--primary-red); font-size: 2.5rem; margin-bottom: 15px;">BUILD YOUR CAREER WITH MIRANEX</h2>
+            <p style="color: #666; margin-bottom: 30px;">Join a dynamic team that challenges boundaries. We are looking for visionaries to help us build the future.</p>
+            <a href="#" class="contact-btn">View Opportunities <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="people-image"></div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <div class="logo" style="margin-bottom: 20px;">MIRANEX</div>
+                <p style="font-size: 0.9rem; line-height: 1.8;">
+                    Miranex Capital Headquarters<br>
+                    Menara Miranex, Jalan Tun Razak,<br>
+                    50400 Kuala Lumpur, Malaysia.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h3>Our Business</h3>
+                <ul>
+                    <li><a href="#">Property Development</a></li>
+                    <li><a href="#">Healthcare</a></li>
+                    <li><a href="#">Education</a></li>
+                    <li><a href="#">Durian Museum</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#">Investor Relations</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Newsroom</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Connect (Coming Soon)</h3>
+                <div style="font-size: 1.5rem; margin-top: 15px;">
+                    <i class="fab fa-facebook" style="margin-right: 15px; color: #555;"></i>
+                    <i class="fab fa-instagram" style="margin-right: 15px; color: #555;"></i>
+                    <i class="fab fa-linkedin" style="color: #555;"></i>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2026 Miranex Capital. All Rights Reserved. Privacy Policy.
+        </div>
+    </footer>
+
+    <script>
+        // Tab Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab-btn');
+            const contents = document.querySelectorAll('.business-panel');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    // Remove active class from all tabs
+                    tabs.forEach(t => t.classList.remove('active'));
+                    // Add active class to clicked tab
+                    tab.classList.add('active');
+
+                    // Hide all content
+                    contents.forEach(content => content.classList.remove('active'));
+                    
+                    // Show target content
+                    const targetId = tab.getAttribute('data-tab');
+                    document.getElementById(targetId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
