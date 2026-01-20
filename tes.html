@@ -14,14 +14,17 @@
     <style>
         /* --- VARS --- */
         :root {
-            --bg-color: #F8F7F4;
-            --text-dark: #2C2825;
-            --text-light: #6B645D;
-            --accent-green: #7E8961;
-            --accent-green-dark: #5A6345;
-            --border-color: rgba(0,0,0,0.08);
-            --card-bg: rgba(255, 255, 255, 0.7);
-            --glass: blur(12px) saturate(180%);
+            /* Adjusted for Glassmorphism readability */
+            --text-dark: #1a1a1a;
+            --text-light: #4a4a4a;
+            --accent-green: #5A6345; 
+            --accent-green-dark: #3e4530;
+            --border-color: rgba(255,255,255,0.3);
+            
+            /* Glass Card Styles */
+            --card-bg: rgba(255, 255, 255, 0.75);
+            --card-blur: blur(12px);
+            --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
             
             --font-head: 'Playfair Display', serif;
             --font-ui: 'Inter', sans-serif;
@@ -34,67 +37,119 @@
         * { box-sizing: border-box; }
         body {
             margin: 0; padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-dark);
             font-family: var(--font-ui);
             -webkit-font-smoothing: antialiased;
+            color: var(--text-dark);
             overflow-x: hidden;
+            background-color: #F8F7F4; /* Important: The image will fade into this color */
         }
 
-        /* --- LAYOUT GRID (The Fundamental Structural Change) --- */
+        /* --- BACKGROUND LAYER (Fixed & Adjusted Opacity) --- */
+        .tes-bg-layer {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* --- THE FIX --- */
+            /* Opacity lowered to 0.25 to make text readable */
+            opacity: 0.5; 
+            
+            /* Default to Desktop Image */
+            background-image: url('http://kishord58.sg-host.com/wp-content/uploads/2026/01/Image-website-desktop.png');
+            pointer-events: none;
+        }
+
+        /* Mobile Background Switch */
+        @media (max-width: 768px) {
+            .tes-bg-layer {
+                background-image: url('http://kishord58.sg-host.com/wp-content/uploads/2026/01/Image-website-mobile.png');
+            }
+        }
+
+        /* --- LAYOUT GRID --- */
         .tes-layout {
             display: grid;
-            grid-template-columns: 280px 1fr; /* Sidebar | Content */
+            grid-template-columns: 320px 1fr; 
             min-height: 100vh;
-            max-width: 1400px;
+            max-width: 1500px;
             margin: 0 auto;
             position: relative;
         }
 
-        /* --- SIDEBAR NAV (Sticky on Desktop) --- */
+        /* --- SIDEBAR NAV --- */
         .tes-sidebar {
             position: sticky;
             top: 0;
             height: 100vh;
             padding: 60px 40px;
-            border-right: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             justify-content: center;
             z-index: 100;
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(5px);
+            border-right: 1px solid rgba(255,255,255,0.2);
         }
 
         .tes-brand-eyebrow {
-            font-family: var(--font-mono); font-size: 0.7rem; 
+            font-family: var(--font-mono); font-size: 0.75rem; 
             letter-spacing: 2px; text-transform: uppercase;
             color: var(--accent-green); margin-bottom: 20px;
-            display: block;
+            display: block; font-weight: 700;
         }
 
         .tes-page-title {
-            font-family: var(--font-head); font-size: 2.5rem;
-            line-height: 1.1; margin: 0 0 40px 0;
+            font-family: var(--font-head); font-size: 3rem;
+            line-height: 1.1; margin: 0 0 30px 0;
             color: var(--text-dark);
         }
 
+        /* SEARCH BAR */
+        .tes-search-wrap {
+            margin-bottom: 30px;
+            position: relative;
+        }
+        .tes-search-input {
+            width: 100%;
+            padding: 12px 15px 12px 40px;
+            border-radius: 30px;
+            border: 1px solid rgba(0,0,0,0.1);
+            background: rgba(255,255,255,0.8);
+            font-family: var(--font-ui); font-size: 0.9rem;
+            color: var(--text-dark);
+            transition: all 0.3s ease;
+        }
+        .tes-search-input:focus {
+            outline: none;
+            background: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            border-color: var(--accent-green);
+        }
+        .tes-search-icon {
+            position: absolute; left: 15px; top: 50%;
+            transform: translateY(-50%);
+            width: 14px; height: 14px;
+            opacity: 0.5;
+        }
+
         .tes-nav-list {
-            display: flex; flex-direction: column; gap: 15px;
+            display: flex; flex-direction: column; gap: 10px;
         }
 
         .tes-nav-link {
-            font-family: var(--font-ui); font-size: 0.95rem; font-weight: 500;
+            font-family: var(--font-ui); font-size: 1rem; font-weight: 500;
             color: var(--text-light); text-decoration: none;
-            padding: 10px 0; border-bottom: 1px solid transparent;
+            padding: 12px 15px; border-radius: 8px;
             transition: all 0.3s ease; display: flex; align-items: center; justify-content: space-between;
         }
         
-        .tes-nav-link:hover { color: var(--accent-green); padding-left: 5px; }
+        .tes-nav-link:hover { background: rgba(255,255,255,0.5); color: var(--accent-green); }
         .tes-nav-link.active { 
-            color: var(--text-dark); font-weight: 600; 
-            border-bottom: 1px solid var(--accent-green);
-        }
-        .tes-nav-link.active::after {
-            content: '•'; color: var(--accent-green);
+            background: #fff; color: var(--text-dark); font-weight: 600; 
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
         }
 
         /* --- MAIN CONTENT AREA --- */
@@ -103,82 +158,91 @@
         }
 
         /* --- CATEGORY SECTIONS --- */
-        .tes-section { margin-bottom: 120px; scroll-margin-top: 100px; }
+        .tes-section { margin-bottom: 120px; scroll-margin-top: 40px; }
         
         .tes-sec-header {
-            margin-bottom: 40px; border-bottom: 1px solid var(--border-color);
+            margin-bottom: 40px; 
             padding-bottom: 20px; display: flex; align-items: baseline; gap: 20px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            /* Optional: Add a subtle white shadow to text just in case */
+            text-shadow: 0 1px 20px rgba(255,255,255,0.8);
         }
         .tes-sec-title {
-            font-family: var(--font-head); font-size: 2rem; margin: 0;
+            font-family: var(--font-head); font-size: 2.2rem; margin: 0;
             color: var(--text-dark); font-weight: 500;
         }
         .tes-sec-sub {
-            font-family: var(--font-mono); font-size: 0.8rem;
-            color: var(--accent-green); text-transform: uppercase;
+            font-family: var(--font-mono); font-size: 0.85rem;
+            color: var(--accent-green); text-transform: uppercase; font-weight: 700;
         }
 
-        /* --- SERVICE GRID (2 Columns) --- */
+        /* --- SERVICE GRID --- */
         .tes-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 Cards per row */
+            grid-template-columns: repeat(2, 1fr); 
             gap: 40px;
         }
 
-        /* --- CARD DESIGN --- */
+        /* --- CARD DESIGN (Glassmorphism) --- */
         .tes-card {
-            background: #fff;
-            border: 1px solid rgba(0,0,0,0.05);
-            border-radius: 12px;
+            background: var(--card-bg);
+            backdrop-filter: var(--card-blur);
+            -webkit-backdrop-filter: var(--card-blur);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            border-radius: 16px;
             overflow: hidden;
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: var(--glass-shadow);
+            transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.3s;
             display: flex; flex-direction: column;
+            opacity: 0; /* Hidden initially for GSAP */
+            transform: translateY(30px);
         }
         
         .tes-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.05);
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            background: rgba(255, 255, 255, 0.95);
         }
 
         /* Image Wrapper */
         .tes-card-img-wrap {
             width: 100%;
-            aspect-ratio: 4/3; /* Standard Photo Ratio - No awkward cropping */
+            aspect-ratio: 4/3; 
             overflow: hidden;
             position: relative;
-            background: #f0f0f0;
         }
         .tes-card-img {
             width: 100%; height: 100%; object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.8s ease;
         }
-        .tes-card:hover .tes-card-img { transform: scale(1.05); }
+        .tes-card:hover .tes-card-img { transform: scale(1.08); }
 
         .tes-tag {
             position: absolute; top: 15px; left: 15px;
-            background: rgba(255,255,255,0.9); backdrop-filter: blur(4px);
-            padding: 5px 12px; border-radius: 20px;
+            background: rgba(255,255,255,0.95);
+            padding: 6px 14px; border-radius: 30px;
             font-family: var(--font-mono); font-size: 0.7rem; font-weight: 700;
             color: var(--accent-green-dark); text-transform: uppercase;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
         /* Card Body */
-        .tes-card-body { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+        .tes-card-body { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
 
         .tes-card-header {
             display: flex; justify-content: space-between; align-items: flex-start;
             margin-bottom: 15px; gap: 10px;
         }
         .tes-card-title {
-            font-family: var(--font-head); font-size: 1.4rem; margin: 0;
+            font-family: var(--font-head); font-size: 1.5rem; margin: 0;
             line-height: 1.2; font-weight: 600;
         }
         
         /* Price Pill */
         .tes-price-pill {
-            background: var(--bg-color); border: 1px solid var(--border-color);
-            padding: 4px 10px; border-radius: 6px;
-            font-family: var(--font-mono); font-size: 0.75rem; white-space: nowrap;
+            background: rgba(255,255,255,0.5); border: 1px solid rgba(0,0,0,0.1);
+            padding: 5px 12px; border-radius: 8px;
+            font-family: var(--font-mono); font-size: 0.8rem; white-space: nowrap; font-weight: 700;
         }
 
         /* Description & Read More */
@@ -186,7 +250,7 @@
         
         .tes-desc-text.truncated {
             display: -webkit-box;
-            -webkit-line-clamp: 3; /* Limit to 3 lines */
+            -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
         }
@@ -195,15 +259,16 @@
             background: none; border: none; padding: 0; margin-top: 8px;
             font-family: var(--font-ui); font-size: 0.8rem; font-weight: 600;
             color: var(--accent-green); cursor: pointer; text-decoration: underline;
-            display: none; /* JS enables this */
+            display: none; 
         }
 
         /* Collapsible Options */
-        .tes-options { margin-top: 15px; border-top: 1px dashed var(--border-color); padding-top: 10px; }
+        .tes-options { margin-top: 15px; border-top: 1px dashed rgba(0,0,0,0.1); padding-top: 10px; }
         .tes-options summary {
             font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-light);
             cursor: pointer; text-transform: uppercase; letter-spacing: 1px;
             list-style: none; display: flex; align-items: center; justify-content: space-between;
+            font-weight: 700;
         }
         .tes-options summary::after { content: '+'; font-weight: bold; }
         .tes-options[open] summary::after { content: '-'; }
@@ -216,70 +281,100 @@
 
         /* Card Footer (Buttons) */
         .tes-card-footer {
-            margin-top: auto; padding-top: 20px;
-            display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+            margin-top: auto; padding-top: 25px;
+            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
         }
         
         .tes-btn {
             display: flex; justify-content: center; align-items: center;
-            height: 44px; border-radius: 6px; text-decoration: none;
-            font-family: var(--font-ui); font-size: 0.85rem; font-weight: 500;
+            height: 48px; border-radius: 8px; text-decoration: none;
+            font-family: var(--font-ui); font-size: 0.9rem; font-weight: 600;
             transition: all 0.2s;
         }
         .tes-btn-outline {
-            border: 1px solid #ddd; color: var(--text-dark);
+            border: 1px solid rgba(0,0,0,0.2); color: var(--text-dark);
         }
         .tes-btn-outline:hover { border-color: var(--text-dark); background: #fff; }
         
         .tes-btn-fill {
             background: var(--accent-green); color: #fff; border: 1px solid var(--accent-green);
         }
-        .tes-btn-fill:hover { background: var(--accent-green-dark); border-color: var(--accent-green-dark); }
+        .tes-btn-fill:hover { background: var(--accent-green-dark); border-color: var(--accent-green-dark); box-shadow: 0 4px 10px rgba(90, 99, 69, 0.3); }
 
-        /* --- MOBILE RESPONSIVE (Collapse Sidebar to Top Nav) --- */
+        /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 900px) {
             .tes-layout { display: block; }
             
             .tes-sidebar {
                 position: relative; height: auto; width: 100%;
                 padding: 40px 20px 20px 20px; border-right: none;
-                border-bottom: 1px solid var(--border-color);
-                text-align: center;
+                background: rgba(255, 255, 255, 0.6);
+                backdrop-filter: blur(15px);
             }
-            .tes-page-title { font-size: 2rem; margin-bottom: 20px; }
             
+            /* Sticky Search for Mobile */
+            .tes-mobile-sticky {
+                position: sticky; top: 0; z-index: 50; 
+                background: rgba(255, 255, 255, 0.9);
+                backdrop-filter: blur(15px); margin: 0 -20px; padding: 15px 20px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+                border-bottom: 1px solid rgba(0,0,0,0.05);
+            }
+            .tes-mobile-sticky .tes-nav-list { padding-bottom: 0; }
+            .tes-mobile-sticky .tes-brand-eyebrow, 
+            .tes-mobile-sticky .tes-page-title { display: none; }
+
+            .tes-page-title { font-size: 2.2rem; margin-bottom: 20px; text-align: center; }
+            .tes-brand-eyebrow { text-align: center; }
+
             /* Horizontal Scroll Nav */
             .tes-nav-list {
                 flex-direction: row; overflow-x: auto; 
-                padding-bottom: 10px; gap: 20px;
+                padding-bottom: 10px; gap: 10px;
                 -webkit-overflow-scrolling: touch;
             }
             .tes-nav-list::-webkit-scrollbar { display: none; }
-            .tes-nav-link { white-space: nowrap; padding: 5px 10px; background: #fff; border-radius: 20px; border: 1px solid #eee; }
-            .tes-nav-link.active { background: var(--accent-green); color: #fff; border-color: var(--accent-green); }
-            .tes-nav-link.active::after { display: none; }
+            .tes-nav-link { 
+                white-space: nowrap; padding: 8px 16px; 
+                background: rgba(255,255,255,0.7); 
+                border: 1px solid rgba(255,255,255,0.5); 
+                border-radius: 20px; 
+                font-size: 0.9rem;
+            }
+            .tes-nav-link.active { background: var(--accent-green); color: #fff; box-shadow: 0 4px 10px rgba(90, 99, 69, 0.4); }
 
             .tes-content { padding: 40px 20px; }
-            .tes-grid { grid-template-columns: 1fr; gap: 30px; }
-            
-            /* Sticky Header for Mobile Nav */
-            .tes-mobile-sticky {
-                position: sticky; top: 0; z-index: 50; background: rgba(248, 247, 244, 0.95);
-                backdrop-filter: blur(10px); margin: 0 -20px; padding: 15px 20px;
-                box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            }
+            .tes-grid { grid-template-columns: 1fr; gap: 25px; }
+        }
+        
+        /* No Results Message */
+        .tes-no-results {
+            grid-column: span 2;
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 12px;
+            font-family: var(--font-mono);
+            display: none;
         }
     </style>
 </head>
 <body>
 
+    <div class="tes-bg-layer"></div>
+
     <div class="tes-layout">
         
         <aside class="tes-sidebar">
-            <div>
+            <div id="tesSidebarInner">
                 <span class="tes-brand-eyebrow">The Everyday Skin</span>
                 <h1 class="tes-page-title">Everyday<br>Massages</h1>
                 
+                <div class="tes-search-wrap">
+                    <svg class="tes-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="tesSearch" class="tes-search-input" placeholder="Search treatments...">
+                </div>
+
                 <nav class="tes-nav-list" id="tesNav">
                     <a href="#cat-signature" class="tes-nav-link active">Signature Thai</a>
                     <a href="#cat-traditional" class="tes-nav-link">Traditional Thai</a>
@@ -544,6 +639,7 @@
                         </div>
                     </article>
                 </div>
+                <div class="tes-no-results">No treatments found matching your search.</div>
             </section>
 
         </main>
@@ -552,24 +648,65 @@
     <script>
     document.addEventListener("DOMContentLoaded", () => {
         
-        // --- 1. READ MORE LOGIC ---
+        // --- 1. SEARCH FUNCTIONALITY ---
+        const searchInput = document.getElementById('tesSearch');
+        const cards = document.querySelectorAll('.tes-card');
+        const noResultsMsg = document.querySelector('.tes-no-results');
+
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            let hasVisible = false;
+
+            cards.forEach(card => {
+                const title = card.querySelector('.tes-card-title').textContent.toLowerCase();
+                const desc = card.querySelector('.tes-desc-text').textContent.toLowerCase();
+                
+                if (title.includes(term) || desc.includes(term)) {
+                    card.style.display = 'flex';
+                    hasVisible = true;
+                    // Re-trigger animation if needed or simple fade
+                    gsap.to(card, { opacity: 1, y: 0, duration: 0.3 });
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+
+            // Toggle sections based on content visibility
+            document.querySelectorAll('.tes-section').forEach(sec => {
+                const visibleCards = sec.querySelectorAll('.tes-card[style="display: flex;"]');
+                // Note: display: flex is set by inline style above, empty string implies default CSS
+                const allHidden = Array.from(sec.querySelectorAll('.tes-card')).every(c => c.style.display === 'none');
+                
+                if(allHidden) {
+                    sec.style.display = 'none';
+                } else {
+                    sec.style.display = 'block';
+                }
+            });
+
+            // Show no results if everything is hidden
+            if(!hasVisible && term !== '') {
+                noResultsMsg.style.display = 'block';
+                document.getElementById('cat-addons').style.display = 'block'; // Keep wrapper visible
+                noResultsMsg.parentElement.appendChild(noResultsMsg); // Ensure it's at bottom
+            } else {
+                noResultsMsg.style.display = 'none';
+            }
+        });
+
+
+        // --- 2. READ MORE LOGIC ---
         const descriptions = document.querySelectorAll('.tes-desc-text');
         
         descriptions.forEach(desc => {
-            // Check content length or height
-            const fullText = desc.innerHTML;
-            
-            // If text is long enough to likely need truncation
-            if (desc.scrollHeight > 80) { // arbitrary height for 3-4 lines
+            if (desc.scrollHeight > 80) { 
                 desc.classList.add('truncated');
                 const btn = desc.parentElement.querySelector('.tes-read-more');
                 if(btn) {
                     btn.style.display = 'inline-block';
-                    
                     btn.addEventListener('click', (e) => {
                         e.preventDefault();
                         const isTruncated = desc.classList.contains('truncated');
-                        
                         if (isTruncated) {
                             desc.classList.remove('truncated');
                             btn.textContent = 'Read Less';
@@ -582,11 +719,26 @@
             }
         });
 
-        // --- 2. GSAP NAVIGATION & SCROLL ---
+        // --- 3. GSAP ANIMATIONS & SCROLL ---
         if (typeof gsap !== "undefined" && typeof ScrollTrigger !== "undefined") {
             gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
-            // Highlight Active Link on Scroll
+            // Animate Cards on Scroll (Entrance)
+            const allCards = gsap.utils.toArray('.tes-card');
+            allCards.forEach(card => {
+                gsap.to(card, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.6,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: card,
+                        start: "top 90%", // Start animating when card top hits 90% of viewport
+                    }
+                });
+            });
+
+            // Active Link Highlighting
             const sections = document.querySelectorAll("section");
             const navLinks = document.querySelectorAll(".tes-nav-link");
             const navContainer = document.getElementById("tesNav");
@@ -607,14 +759,10 @@
                     if(link.getAttribute("href") === "#" + id) {
                         link.classList.add("active");
                         
-                        // FIX: Mobile scroll nav logic changed to prevent page jump
                         if(window.innerWidth < 900 && navContainer) {
-                             // Calculate the center position of the link relative to the container
                             const linkLeft = link.offsetLeft;
                             const linkWidth = link.offsetWidth;
                             const containerWidth = navContainer.offsetWidth;
-                            
-                            // Center calculation
                             const scrollPos = linkLeft - (containerWidth / 2) + (linkWidth / 2);
 
                             navContainer.scrollTo({
@@ -637,14 +785,14 @@
 
             // Mobile Sticky Nav Handler
             if(window.innerWidth < 900) {
-                const nav = document.getElementById('tesNav');
                 const sidebar = document.querySelector('.tes-sidebar');
+                const sidebarInner = document.getElementById('tesSidebarInner');
                 
                 ScrollTrigger.create({
                     trigger: sidebar,
                     start: "bottom top",
-                    onEnter: () => nav.classList.add('tes-mobile-sticky'),
-                    onLeaveBack: () => nav.classList.remove('tes-mobile-sticky')
+                    onEnter: () => sidebarInner.classList.add('tes-mobile-sticky'),
+                    onLeaveBack: () => sidebarInner.classList.remove('tes-mobile-sticky')
                 });
             }
         }
