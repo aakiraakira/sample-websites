@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Everyday Massages | The Editorial Edit</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anonymous+Pro:wght@400;700&family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollToPlugin.min.js"></script>
+
+    <style>
+        /* --- VARIABLES --- */
+        :root {
+            --bg-color: #F2F0E9; /* Warm Bone */
+            --bg-secondary: #E6E4DD;
+            --text-main: #2C2C2C;
+            --text-muted: #666666;
+            --accent-color: #4A5D23; /* Deep Olive */
+            --border-color: #D1CEC5;
+            
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
+            --font-mono: 'Anonymous Pro', monospace;
+
+            --container-width: 1200px;
+            --header-height: 80px;
+        }
+
+        /* --- RESET --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* --- TYPOGRAPHY UTILS --- */
+        h1, h2, h3 { font-family: var(--font-serif); font-weight: 400; }
+        
+        .serif-italic { font-style: italic; }
+        .mono-label { 
+            font-family: var(--font-mono); 
+            text-transform: uppercase; 
+            letter-spacing: 1px; 
+            font-size: 0.75rem; 
+            color: var(--accent-color);
+        }
+
+        /* --- NAVIGATION (Sticky Top) --- */
+        .nav-wrapper {
+            position: fixed; top: 0; left: 0; width: 100%;
+            background: var(--bg-color);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 100;
+            padding: 0 5vw;
+            height: var(--header-height);
+            display: flex; align-items: center; justify-content: space-between;
+            transition: transform 0.3s ease;
+        }
+
+        .nav-logo {
+            font-family: var(--font-mono);
+            font-weight: 700;
+            font-size: 1rem;
+            letter-spacing: -0.5px;
+            color: var(--text-main);
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex; gap: 30px;
+        }
+
+        .nav-link {
+            text-decoration: none; color: var(--text-main);
+            font-family: var(--font-sans); font-size: 0.9rem;
+            position: relative; padding: 5px 0;
+        }
+        
+        .nav-link::after {
+            content: ''; position: absolute; bottom: 0; left: 0; width: 0; height: 1px;
+            background: var(--accent-color); transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after { width: 100%; }
+
+        /* SEARCH BAR (Integrated in Nav) */
+        .search-container {
+            position: relative;
+            display: flex; align-items: center;
+        }
+        .search-input {
+            background: transparent; border: none; border-bottom: 1px solid var(--text-muted);
+            font-family: var(--font-mono); font-size: 0.85rem;
+            padding: 5px 25px 5px 0; width: 200px;
+            color: var(--text-main);
+            outline: none; transition: border-color 0.3s;
+        }
+        .search-input:focus { border-color: var(--accent-color); }
+        .search-icon {
+            position: absolute; right: 0; opacity: 0.5; width: 14px; pointer-events: none;
+        }
+
+        /* --- HEADER HERO --- */
+        .hero {
+            padding: 180px 5vw 100px 5vw;
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .hero-super {
+            font-family: var(--font-mono); font-size: 0.9rem; margin-bottom: 20px;
+            display: block; color: var(--accent-color);
+        }
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 6rem);
+            line-height: 0.9;
+            margin-bottom: 30px;
+            color: var(--text-main);
+        }
+        .hero-title span { display: block; } /* For animation */
+
+        /* --- SECTIONS --- */
+        .category-section {
+            padding: 0;
+        }
+
+        .category-header {
+            padding: 80px 5vw 40px 5vw;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .cat-title { font-size: 3rem; }
+        .cat-sub { font-family: var(--font-mono); text-align: right; font-size: 0.85rem; opacity: 0.7; }
+
+        /* --- SERVICE ROW (The New "Card") --- */
+        .service-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Image Left, Content Right */
+            border-bottom: 1px solid var(--border-color);
+            min-height: 500px;
+            overflow: hidden;
+            background: var(--bg-color);
+            transition: background-color 0.3s;
+        }
+
+        .service-row:hover { background-color: #EFEDE6; }
+
+        /* Alternating Layout */
+        .service-row.alt {
+            grid-template-columns: 1fr 1fr;
+            direction: rtl; /* Flip visual order */
+        }
+        .service-row.alt .service-content { direction: ltr; } /* Reset text direction */
+
+        /* Image Area */
+        .service-img-col {
+            position: relative;
+            overflow: hidden;
+            border-right: 1px solid var(--border-color);
+        }
+        .service-row.alt .service-img-col { border-right: none; border-left: 1px solid var(--border-color); }
+
+        .service-img {
+            width: 100%; height: 110%; /* Extra height for parallax */
+            object-fit: cover;
+            display: block;
+            filter: sepia(10%) contrast(90%); /* Consistent earthy tone */
+        }
+        
+        .tag-pill {
+            position: absolute; top: 20px; left: 20px;
+            background: var(--bg-color); color: var(--text-main);
+            padding: 5px 15px; border-radius: 0; /* Square edges */
+            border: 1px solid var(--text-main);
+            font-family: var(--font-mono); font-size: 0.7rem; font-weight: bold;
+            z-index: 2;
+        }
+
+        /* Content Area */
+        .service-content {
+            padding: 60px 5vw;
+            display: flex; flex-direction: column; justify-content: center;
+        }
+
+        .service-header {
+            display: flex; justify-content: space-between; align-items: baseline;
+            margin-bottom: 30px; border-bottom: 1px solid var(--border-color); padding-bottom: 20px;
+        }
+        .service-title { font-size: 2rem; max-width: 70%; line-height: 1.1; }
+        .service-price { 
+            font-family: var(--font-mono); font-weight: 700; font-size: 1.1rem; 
+            color: var(--accent-color);
+        }
+
+        .service-desc {
+            font-size: 1rem; color: var(--text-muted); margin-bottom: 30px; max-width: 500px;
+        }
+        .service-desc-full { display: none; margin-top: 10px; }
+        
+        .read-more-btn {
+            background: none; border: none; 
+            font-family: var(--font-mono); text-decoration: underline; 
+            cursor: pointer; color: var(--text-main); margin-bottom: 20px;
+            padding: 0; text-align: left;
+        }
+
+        /* Technical List */
+        .specs-list {
+            list-style: none; margin-bottom: 40px;
+        }
+        .specs-list li {
+            display: flex; align-items: center; gap: 10px;
+            font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        .specs-list li::before { content: '•'; color: var(--accent-color); }
+
+        /* Actions */
+        .action-group { display: flex; gap: 20px; margin-top: auto; }
+        
+        .btn {
+            padding: 15px 30px;
+            text-decoration: none;
+            font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+        .btn-primary {
+            background: var(--accent-color); color: #fff;
+            border: 1px solid var(--accent-color);
+        }
+        .btn-primary:hover { background: transparent; color: var(--accent-color); }
+        
+        .btn-secondary {
+            background: transparent; color: var(--text-main);
+            border: 1px solid var(--text-main);
+        }
+        .btn-secondary:hover { background: var(--text-main); color: #fff; }
+
+
+        /* --- ADD-ONS GRID (Apothecary Drawer Style) --- */
+        .addons-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .addon-item {
+            padding: 40px;
+            border-right: 1px solid var(--border-color);
+            border-top: 1px solid var(--border-color);
+            transition: background 0.3s;
+            display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 250px;
+        }
+        .addon-item:last-child { border-right: none; }
+        .addon-item:hover { background: #fff; }
+        
+        .addon-price { display: block; margin-bottom: 15px; }
+        .addon-title { font-size: 1.5rem; margin-bottom: 15px; font-style: italic; }
+        .addon-desc { font-size: 0.85rem; color: var(--text-muted); }
+
+        .no-results {
+            padding: 100px; text-align: center; font-family: var(--font-mono);
+            font-size: 1.2rem; border-top: 1px solid var(--border-color);
+            display: none;
+        }
+
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            :root { --header-height: 60px; }
+            
+            .nav-links { display: none; } /* Hide links on mobile for simplicity */
+            
+            .service-row, .service-row.alt {
+                grid-template-columns: 1fr;
+                direction: ltr;
+                min-height: auto;
+            }
+            
+            .service-img-col {
+                height: 300px;
+                border-right: none; border-bottom: 1px solid var(--border-color);
+            }
+            .service-img { height: 100%; } /* Disable parallax height on mobile */
+
+            .addons-grid { grid-template-columns: 1fr; }
+            .addon-item { border-right: none; min-height: auto; }
+            
+            .hero-title { font-size: 3.5rem; }
+            .cat-header { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .cat-sub { text-align: left; }
+            
+            .action-group { flex-direction: column; }
+            .btn { text-align: center; }
+            
+            .search-input { width: 140px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="nav-wrapper">
+        <a href="#" class="nav-logo">THE EVERYDAY SKIN.</a>
+        
+        <div class="nav-links">
+            <a href="#cat-signature" class="nav-link">Signature</a>
+            <a href="#cat-traditional" class="nav-link">Traditional</a>
+            <a href="#cat-therapeutic" class="nav-link">Relief</a>
+            <a href="#cat-addons" class="nav-link">Add-Ons</a>
+        </div>
+
+        <div class="search-container">
+            <input type="text" id="serviceSearch" class="search-input" placeholder="Search treatment...">
+            <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <span class="hero-super mono-label">Massage Menu</span>
+        <h1 class="hero-title">
+            <span class="serif-italic">Restore</span>
+            <span>& Renew</span>
+        </h1>
+        <p style="max-width: 400px; margin: 0 auto; color: var(--text-muted);">
+            Curated treatments blending traditional Thai wisdom with modern recovery techniques.
+        </p>
+    </header>
+
+    <main id="mainContent">
+
+        <section id="cat-signature" class="category-section">
+            <div class="category-header">
+                <h2 class="cat-title"><span class="serif-italic">Signature</span> Thai</h2>
+                <div class="cat-sub">
+                    <span class="mono-label">Category 01</span><br>
+                    Aromatherapy & Herbal
+                </div>
+            </div>
+
+            <article class="service-row searchable-item">
+                <div class="service-img-col">
+                    <span class="tag-pill">MOST POPULAR</span>
+                    <img src="https://kishord58.sg-host.com/wp-content/uploads/2026/01/theeverydayskin-243.jpg" class="service-img" alt="Signature Thai" data-speed="1.1">
+                </div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-title">Signature Thai Body Massage</h3>
+                        <span class="service-price">$48 - $128</span>
+                    </div>
+                    <div class="service-desc">
+                        Our most requested therapy. A seamless blend of traditional Thai pressure points and flowing aromatherapy movements.
+                        <span class="service-desc-full">
+                            Uses locally sourced Thai oils (lightweight, non-greasy) or warming herbal balms. Pressure is firm yet nurturing, ideal for circulation and deep relaxation.
+                        </span>
+                    </div>
+                    <button class="read-more-btn">Read full details +</button>
+
+                    <ul class="specs-list">
+                        <li>Choice of Aroma Oil (Siam / Relaxing / Awakening)</li>
+                        <li>Alternative: Thai Herbal Balm</li>
+                        <li>Light to Firm Pressure</li>
+                    </ul>
+                    <div class="action-group">
+                        <a href="https://www.fresha.com/book-now/the-everyday-skin-and-massage-ac7a9nxk/all-offer?share=true&pId=2710539" class="btn btn-primary">Book Appointment</a>
+                        <a href="https://wa.me/6589549277" class="btn btn-secondary">Enquire</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="service-row alt searchable-item">
+                <div class="service-img-col">
+                    <img src="https://kishord58.sg-host.com/wp-content/uploads/2026/01/theeverydayskin-247.jpg" class="service-img" alt="4-in-1" data-speed="1.1">
+                </div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-title">Signature (4-in-1) Body Massage</h3>
+                        <span class="service-price">$48 - $128</span>
+                    </div>
+                    <div class="service-desc">
+                        Specific relief for the modern desk worker. Concentrating solely on the head, neck, shoulders, and back.
+                        <span class="service-desc-full">
+                            Perfect for relieving tension headaches and upper body stiffness. customized with your choice of our signature oils or herbal balms.
+                        </span>
+                    </div>
+                    <button class="read-more-btn">Read full details +</button>
+
+                    <ul class="specs-list">
+                        <li>Focus: Head, Neck, Shoulders, Back</li>
+                        <li>Aromatherapy Integration</li>
+                    </ul>
+                    <div class="action-group">
+                        <a href="https://www.fresha.com/book-now/the-everyday-skin-and-massage-ac7a9nxk/all-offer?share=true&pId=2710539" class="btn btn-primary">Book Appointment</a>
+                        <a href="https://wa.me/6589549277" class="btn btn-secondary">Enquire</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="cat-traditional" class="category-section">
+            <div class="category-header">
+                <h2 class="cat-title"><span class="serif-italic">Traditional</span> Thai</h2>
+                <div class="cat-sub">
+                    <span class="mono-label">Category 02</span><br>
+                    Oil-Free / Dry Style
+                </div>
+            </div>
+
+            <article class="service-row searchable-item">
+                <div class="service-img-col">
+                    <img src="https://kishord58.sg-host.com/wp-content/uploads/2026/01/theeverydayskin-263.jpg" class="service-img" alt="Traditional Thai" data-speed="1.1">
+                </div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-title">Classic Thai Body Massage</h3>
+                        <span class="service-price">$40 - $120</span>
+                    </div>
+                    <div class="service-desc">
+                        The ancient art of healing. Rhythmic compression, assisted stretching, and deep tissue release without oil.
+                        <span class="service-desc-full">
+                             Ideal for those who prefer staying dry or have sensitivity to oils. We use unscented options if lubrication is absolutely necessary, but primarily rely on technique.
+                        </span>
+                    </div>
+                    <button class="read-more-btn">Read full details +</button>
+
+                    <ul class="specs-list">
+                        <li>Full body stretching</li>
+                        <li>Rhythmic compression</li>
+                        <li>Oil-free / Unscented</li>
+                    </ul>
+                    <div class="action-group">
+                        <a href="https://www.fresha.com/book-now/the-everyday-skin-and-massage-ac7a9nxk/all-offer?share=true&pId=2710539" class="btn btn-primary">Book Appointment</a>
+                        <a href="https://wa.me/6589549277" class="btn btn-secondary">Enquire</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="service-row alt searchable-item">
+                <div class="service-img-col">
+                    <img src="https://kishord58.sg-host.com/wp-content/uploads/2026/01/theeverydayskin-250.jpg" class="service-img" alt="4-in-1 Oil Free" data-speed="1.1">
+                </div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-title">(4-in-1) Thai Body Massage</h3>
+                        <span class="service-price">$40 - $120</span>
+                    </div>
+                    <div class="service-desc">
+                        Oil-free targeted relief for the upper body. 
+                        <span class="service-desc-full">
+                            Strict focus on head, neck, shoulders, and back using dry techniques.
+                        </span>
+                    </div>
+                    <button class="read-more-btn">Read full details +</button>
+
+                    <ul class="specs-list">
+                        <li>Focus: Upper Body</li>
+                        <li>Oil-free</li>
+                    </ul>
+                    <div class="action-group">
+                        <a href="https://www.fresha.com/book-now/the-everyday-skin-and-massage-ac7a9nxk/all-offer?share=true&pId=2710539" class="btn btn-primary">Book Appointment</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="cat-therapeutic" class="category-section">
+            <div class="category-header">
+                <h2 class="cat-title"><span class="serif-italic">Targeted</span> Relief</h2>
+                <div class="cat-sub">
+                    <span class="mono-label">Category 03</span><br>
+                    Deep Tissue & Recovery
+                </div>
+            </div>
+
+            <article class="service-row searchable-item">
+                <div class="service-img-col">
+                    <img src="https://kishord58.sg-host.com/wp-content/uploads/2026/01/theeverydayskin-217.jpg" class="service-img" alt="Deep Tissue" data-speed="1.1">
+                </div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-title">Deep Tissue Thai Massage</h3>
+                        <span class="service-price">$68 - $148</span>
+                    </div>
+                    <div class="service-desc">
+                        Designed for chronic tension. Slower, deeper pressure working into the stiffest muscle layers.
+                        <span class="service-desc-full">
+                            Includes the application of warming Thai herbal balm to soften muscle tissue before deep work begins.
+                        </span>
+                    </div>
+                    <button class="read-more-btn">Read full details +</button>
+
+                    <ul class="specs-list">
+                        <li>Includes Warming Balm</li>
+                        <li>Slow, penetrating pressure</li>
+                    </ul>
+                    <div class="action-group">
+                        <a href="https://www.fresha.com/book-now/the-everyday-skin-and-massage-ac7a9nxk/all-offer?share=true&pId=2710539" class="btn btn-primary">Book Appointment</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="service-row alt searchable-item">
+                <div class="service-img-col">
+                    <img src="https://kishord58.sg-host.com/wp-content/uploads/2026/01/2.jpg" class="service-img" alt="Sports Therapy" data-speed="1.1">
+                </div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-title">Sports Therapy Massage</h3>
+                        <span class="service-price">$78 - $158</span>
+                    </div>
+                    <div class="service-desc">
+                        Active recovery using technology and tradition. Deep Thai techniques combined with Infrared (IR) therapy.
+                        <span class="service-desc-full">
+                            Red light therapy aids in cellular repair while the massage flushes lactic acid and improves range of motion.
+                        </span>
+                    </div>
+                    <button class="read-more-btn">Read full details +</button>
+
+                    <ul class="specs-list">
+                        <li>Infrared (IR) Therapy included</li>
+                        <li>Muscle Recovery Focus</li>
+                    </ul>
+                    <div class="action-group">
+                        <a href="https://www.fresha.com/book-now/the-everyday-skin-and-massage-ac7a9nxk/all-offer?share=true&pId=2710539" class="btn btn-primary">Book Appointment</a>
+                    </div>
+                </div>
+            </article>
+
+            <article class="service-row searchable-item">
+                <div class="service-img-col">
+                    <span class="tag-pill">COMING SOON</span>
+                    <img src="https://kishord58.sg-host.com/wp-content/uploads/2026/01/1.jpg" class="service-img" alt="Womb Care" data-speed="1.1">
+                </div>
+                <div class="service-content">
+                    <div class="service-header">
+                        <h3 class="service-title">Womb Care Therapy</h3>
+                        <span class="service-price">$98 (60m)</span>
+                    </div>
+                    <div class="service-desc">
+                        A nurturing ritual for feminine well-being. Focusing on abdominal warmth and circulation.
+                        <span class="service-desc-full">
+                            Incorporates a warming ginger mask and traditional Moxibustion to promote balance and comfort.
+                        </span>
+                    </div>
+                    <button class="read-more-btn">Read full details +</button>
+
+                    <div class="action-group">
+                        <a href="https://wa.me/6589549277" class="btn btn-secondary">Enquire Waitlist</a>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="cat-addons" class="category-section">
+            <div class="category-header">
+                <h2 class="cat-title">Enhancements</h2>
+                <div class="cat-sub">
+                    <span class="mono-label">Category 04</span><br>
+                    Add-on Rituals
+                </div>
+            </div>
+            
+            <div class="addons-grid">
+                <div class="addon-item searchable-item">
+                    <div>
+                        <span class="mono-label addon-price">$18</span>
+                        <h3 class="addon-title">Heated Warm Oil</h3>
+                        <p class="addon-desc">Soothing heated oil to relax muscles and improve circulation.</p>
+                    </div>
+                </div>
+                <div class="addon-item searchable-item">
+                    <div>
+                        <span class="mono-label addon-price">$24 (15m)</span>
+                        <h3 class="addon-title">Dry Body Brushing</h3>
+                        <p class="addon-desc">Pre-massage exfoliation ritual for detoxification.</p>
+                    </div>
+                </div>
+                <div class="addon-item searchable-item">
+                    <div>
+                        <span class="mono-label addon-price">$24 (15m)</span>
+                        <h3 class="addon-title">Thai Herbal Ball</h3>
+                        <p class="addon-desc">Warm herbal compress to relieve deep-seated tension.</p>
+                    </div>
+                </div>
+                <div class="addon-item searchable-item">
+                    <div>
+                        <span class="mono-label addon-price">$24 (15m)</span>
+                        <h3 class="addon-title">Hot Stone</h3>
+                        <p class="addon-desc">Heated smooth stones to calm the nervous system.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <div class="no-results">
+            No treatments found matching your search.
+        </div>
+
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+
+            // 1. PARALLAX IMAGES
+            // Only on desktop where we have height to play with
+            if(window.innerWidth > 900) {
+                gsap.utils.toArray(".service-img").forEach((img) => {
+                    gsap.to(img, {
+                        yPercent: 20,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: img.closest(".service-img-col"),
+                            start: "top bottom",
+                            end: "bottom top",
+                            scrub: true
+                        }
+                    });
+                });
+            }
+
+            // 2. TEXT REVEAL ANIMATIONS
+            gsap.utils.toArray(".service-content").forEach((content) => {
+                gsap.from(content.children, {
+                    y: 30,
+                    opacity: 0,
+                    duration: 0.8,
+                    stagger: 0.1,
+                    ease: "power3.out",
+                    scrollTrigger: {
+                        trigger: content,
+                        start: "top 85%"
+                    }
+                });
+            });
+
+            // 3. READ MORE TOGGLE
+            document.querySelectorAll('.read-more-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const descFull = e.target.previousElementSibling.querySelector('.service-desc-full');
+                    if(descFull.style.display === 'block') {
+                        descFull.style.display = 'none';
+                        e.target.innerText = 'Read full details +';
+                    } else {
+                        descFull.style.display = 'block';
+                        e.target.innerText = 'Hide details -';
+                    }
+                });
+            });
+
+            // 4. SMOOTH SCROLL NAV
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.getAttribute('href');
+                    gsap.to(window, {
+                        duration: 1, 
+                        scrollTo: { y: targetId, offsetY: 80 }, 
+                        ease: "power2.inOut"
+                    });
+                });
+            });
+            
+            // Active Link State
+            const sections = document.querySelectorAll(".category-section");
+            const navLinks = document.querySelectorAll(".nav-link");
+            
+            window.addEventListener('scroll', () => {
+                let current = '';
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if(scrollY >= sectionTop - 150) {
+                        current = '#' + section.getAttribute('id');
+                    }
+                });
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href') === current) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+
+
+            // 5. SEARCH FUNCTIONALITY
+            const searchInput = document.getElementById('serviceSearch');
+            const items = document.querySelectorAll('.searchable-item');
+            const noRes = document.querySelector('.no-results');
+
+            searchInput.addEventListener('input', (e) => {
+                const term = e.target.value.toLowerCase();
+                let visibleCount = 0;
+
+                items.forEach(item => {
+                    // Search in title and description
+                    const text = item.innerText.toLowerCase();
+                    if(text.includes(term)) {
+                        item.style.display = (item.classList.contains('service-row')) ? 'grid' : 'flex';
+                        
+                        // Mobile fix for grid vs flex
+                        if(window.innerWidth < 900 && item.classList.contains('service-row')) {
+                            item.style.display = 'grid'; // Grid holds structure better
+                        }
+                        
+                        visibleCount++;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Hide empty section headers if all children are hidden
+                document.querySelectorAll('.category-section').forEach(sec => {
+                    const children = sec.querySelectorAll('.searchable-item');
+                    const visibleChildren = Array.from(children).filter(c => c.style.display !== 'none');
+                    const header = sec.querySelector('.category-header');
+                    
+                    if(visibleChildren.length === 0 && term !== '') {
+                        if(header) header.style.display = 'none';
+                        sec.style.padding = '0';
+                        if(sec.id === 'cat-addons') sec.querySelector('.addons-grid').style.border = 'none';
+                    } else {
+                        if(header) header.style.display = 'flex';
+                        sec.style.padding = '';
+                        if(sec.id === 'cat-addons') sec.querySelector('.addons-grid').style.borderBottom = '1px solid var(--border-color)';
+                    }
+                });
+
+                noRes.style.display = (visibleCount === 0 && term !== '') ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
