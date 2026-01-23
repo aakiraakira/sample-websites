@@ -196,27 +196,28 @@
             padding: 10px 0;
         }
         .header-inner {
-            height: 80px;
+            height: 90px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: height var(--trans-fast);
         }
-        .header.scrolled .header-inner { height: 60px; }
+        .header.scrolled .header-inner { height: 70px; }
         
-        /* Logo Capsule Solution */
-        .logo-capsule {
-            background-color: var(--c-charcoal);
-            padding: 8px 16px;
-            border-radius: 50px;
-            display: flex;
-            align-items: center;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        /* Logo Styles - Clean */
+        .logo-link {
+            display: block;
+            text-decoration: none;
         }
         .logo-img {
-            height: 30px;
+            height: 55px; /* Adjust size as needed */
             width: auto;
-            filter: brightness(0) invert(1); /* Ensure pure white */
+            display: block;
+            object-fit: contain;
+            /* No filters, pure original image */
+        }
+        .header.scrolled .logo-img {
+            height: 45px; /* Slightly smaller on scroll */
         }
 
         /* Nav */
@@ -532,7 +533,7 @@
 
     <header class="header" id="header">
         <div class="container header-inner">
-            <a href="#" class="logo-capsule">
+            <a href="#" class="logo-link">
                 <img src="http://juliant69.sg-host.com/wp-content/uploads/2026/01/Screenshot-2026-01-23-165343.png" alt="The Richz Logo" class="logo-img">
             </a>
 
