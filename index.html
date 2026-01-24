@@ -1,712 +1,399 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privé Executive Condominium | Sunny Phua Luxury Property</title>
-    <meta name="description" content="Luxury living at Privé EC, Punggol. Exclusive listings by Sunny Phua.">
+    <title>Reputifly | Your Vision, Our Mission</title>
     
-    <!-- Tailwind CSS -->
+    <link rel="icon" type="image/png" href="https://reputifly.com/wp-content/uploads/2026/01/IMG_2123.jpg">
+    <meta property="og:image" content="https://reputifly.com/wp-content/uploads/2026/01/6271626531591360616.jpg">
+
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
+    <script src="https://unpkg.com/feather-icons"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- Animation Library (AOS) -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'luxury-gold': '#D4AF37',
-                        'luxury-gold-light': '#F3E5AB',
-                        'luxury-gold-dark': '#aa8c2c',
-                        'dark-slate': '#0F172A',
-                        'soft-cream': '#F9F9F5',
-                        'rich-brown': '#3E2723',
-                    },
-                    fontFamily: {
-                        serif: ['"Playfair Display"', 'serif'],
-                        sans: ['"Montserrat"', 'sans-serif'],
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'shimmer': 'shimmer 2s linear infinite',
-                        'spin-slow': 'spin 12s linear infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-10px)' },
-                        },
-                        shimmer: {
-                            '0%': { backgroundPosition: '-200% 0' },
-                            '100%': { backgroundPosition: '200% 0' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* Custom Styles for extra polish */
-        .hero-gradient {
-            background: linear-gradient(to bottom, rgba(15, 23, 42, 0.3), rgba(15, 23, 42, 0.95));
+        :root {
+            /* BRAND PALETTE */
+            --bg-main: #0B0A14;
+            --accent-primary: #E6397F;   /* Hot Pink */
+            --accent-secondary: #FF8A00; /* Solar Orange */
         }
-        .glass-nav {
-            background: rgba(15, 23, 42, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+
+        body {
+            background-color: var(--bg-main);
+            color: #F0F0F0;
+            font-family: 'Inter', sans-serif;
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            overflow-x: hidden;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.5);
+
+        h1, h2, h3, .brand-font { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.03em; }
+
+        /* --- UI COMPONENTS --- */
+        
+        /* 1. LIQUID GLASS CONTAINER */
+        .liquid-glass {
+            background: rgba(13, 13, 18, 0.75);
+            backdrop-filter: blur(40px) saturate(140%);
+            -webkit-backdrop-filter: blur(40px) saturate(140%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px;
+            box-shadow: 
+                0 40px 80px -12px rgba(0, 0, 0, 0.8),         
+                inset 0 1px 0 0 rgba(255, 255, 255, 0.15),    
+                inset 0 0 40px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden; 
+            transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s ease;
         }
-        .text-gradient-gold {
-            background: linear-gradient(to right, #D4AF37, #F3E5AB, #D4AF37);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+        /* Inner Sheen */
+        .liquid-glass::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.05), transparent 70%);
+            pointer-events: none; z-index: 1;
+        }
+
+        .liquid-glass:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 50px 100px -10px rgba(0, 0, 0, 0.9), inset 0 1px 0 0 rgba(255, 255, 255, 0.2);
+        }
+
+        /* 2. Buttons */
+        .liquid-glow {
+            background: radial-gradient(circle at top, rgba(255,255,255,0.4) 0%, transparent 60%),
+                        linear-gradient(90deg, #E6397F, #FF8A00);
+            box-shadow: 0 6px 20px rgba(230, 57, 127, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+            border: none; position: relative; overflow: hidden;
+            transition: all 0.3s ease; border-radius: 9999px;
+            color: white; font-weight: 700;
+        }
+        .liquid-glow:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 15px 30px rgba(255, 138, 0, 0.4); }
+
+        .btn-glass {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc; transition: all 0.3s ease; border-radius: 9999px;
+        }
+        .btn-glass:hover { background: rgba(255, 255, 255, 0.1); color: white; border-color: white; }
+
+        /* 3. Text & Decor */
+        .dynamic-gradient-text {
+            background: linear-gradient(to right, #E6397F, #FF8A00, #E6397F);
             background-size: 200% auto;
-            animation: shimmer 5s linear infinite;
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            animation: text-shimmer 4s linear infinite; font-weight: 800;
         }
-        
-        /* Stamp Effect */
-        .stamp-container {
-            position: absolute;
-            bottom: -20px;
-            left: -20px;
-            z-index: 20;
-            animation: float 5s ease-in-out infinite;
+        @keyframes text-shimmer { to { background-position: 200% center; } }
+
+        .ambient-glow {
+            position: fixed; width: 600px; height: 600px; border-radius: 50%;
+            filter: blur(100px); z-index: -1; pointer-events: none;
         }
+        .glow-top { top: -200px; left: 50%; transform: translateX(-50%); background: radial-gradient(circle, rgba(230, 57, 127, 0.15) 0%, transparent 70%); }
+        .glow-bottom { bottom: -200px; right: -100px; background: radial-gradient(circle, rgba(255, 138, 0, 0.1) 0%, transparent 70%); }
+
+        .arrow-icon { transition: transform 0.3s ease; }
+        .liquid-glass:hover .arrow-icon { transform: translateX(5px) translateY(-5px); color: var(--accent-secondary); }
         
-        /* Timeline Specifics */
-        .timeline-line {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 2px;
+        .glass-content { position: relative; z-index: 10; }
+        
+        .service-image-container {
+            width: 100%;
+            height: 200px; 
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .service-image {
+            width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, transparent, #D4AF37, transparent);
+            object-fit: cover;
+            transition: transform 0.5s ease;
         }
-        /* Mobile Timeline Adjustment */
-        @media (max-width: 768px) {
-            .timeline-line {
-                left: 30px;
-            }
-        }
-
-        /* FAQ Accordion Transition */
-        details > summary {
-            list-style: none;
-        }
-        details > summary::-webkit-details-marker {
-            display: none;
-        }
-        details[open] summary ~ * {
-            animation: slideDown 0.3s ease-in-out;
-        }
-        @keyframes slideDown {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Mobile Menu Transition */
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(100%);
-        }
-        #mobile-menu.open {
-            transform: translateX(0);
+        .liquid-glass:hover .service-image {
+            transform: scale(1.05);
         }
     </style>
 </head>
-<body class="font-sans text-gray-800 bg-soft-cream antialiased selection:bg-luxury-gold selection:text-white overflow-x-hidden">
+<body class="antialiased selection:bg-accent-primary selection:text-white pb-20">
 
-    <!-- Floating WhatsApp -->
-    <a href="https://wa.me/6591234567" target="_blank" class="fixed bottom-6 right-6 z-50 bg-[#25D366] text-white w-14 h-14 rounded-full shadow-[0_0_20px_rgba(37,211,102,0.5)] flex items-center justify-center hover:bg-[#128C7E] transition-all transform hover:scale-110 hover:rotate-12">
-        <i class="fab fa-whatsapp text-3xl"></i>
-    </a>
+    <div class="ambient-glow glow-top"></div>
+    <div class="ambient-glow glow-bottom"></div>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full z-40 transition-all duration-300 glass-nav border-b border-gray-800/50 py-4" id="navbar">
-        <div class="container mx-auto px-6 flex justify-between items-center">
-            <a href="#" class="text-white font-serif text-2xl tracking-widest uppercase relative group">
-                Sunny<span class="text-luxury-gold">Phua</span>
-                <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-luxury-gold transition-all duration-300 group-hover:w-full"></span>
-            </a>
+    <nav class="fixed top-6 left-1/2 -translate-x-1/2 w-[95%] max-w-5xl z-50">
+        <div class="liquid-glass !rounded-full px-4 md:px-6 py-3 flex items-center justify-between !bg-black/60 relative">
             
-            <!-- Desktop Menu -->
-            <div class="hidden md:flex gap-6 text-xs lg:text-sm uppercase tracking-widest text-gray-300 font-medium">
-                <a href="#testimonials" class="hover:text-luxury-gold transition-colors duration-300">Stories</a>
-                <a href="#market-analysis" class="hover:text-luxury-gold transition-colors duration-300">Analysis</a>
-                <a href="#timeline" class="hover:text-luxury-gold transition-colors duration-300">Journey</a>
-                <a href="#units" class="hover:text-luxury-gold transition-colors duration-300">Units</a>
-                <a href="#faq" class="hover:text-luxury-gold transition-colors duration-300">FAQ</a>
+            <a href="#" class="flex items-center gap-3 group relative z-10 flex-shrink-0">
+                <img src="https://reputifly.com/wp-content/uploads/2025/05/cropped-reputifly-new-e1746390492876.png" class="h-5 md:h-6 w-auto object-contain brightness-125 transition-transform group-hover:scale-105" alt="Reputifly Logo">
+            </a>
+
+            <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 items-center gap-8 text-sm font-medium text-gray-400 z-10">
+                <a href="#services" class="hover:text-white transition-colors">Services</a>
+                <a href="#portfolio" class="hover:text-white transition-colors">Portfolio</a>
+                <a href="#flex" class="hover:text-white transition-colors">Software</a>
             </div>
-            
-            <a href="#contact" class="hidden md:block px-6 py-2 border border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-dark-slate transition-all duration-300 uppercase text-xs tracking-widest font-bold">
-                Enquire Now
-            </a>
 
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-white text-2xl focus:outline-none">
-                <i class="fas fa-bars"></i>
-            </button>
+            <a href="https://wa.me/6580111965?text=Hello%20Reputifly%2C%20I'm%20interested%20in%20scaling%20my%20business" target="_blank" class="liquid-glow px-4 md:px-6 py-2 text-xs md:text-sm flex items-center gap-2 relative z-10 flex-shrink-0">
+                <i data-feather="message-circle" class="w-4 h-4"></i> <span class="hidden sm:inline">Get Started</span>
+            </a>
         </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="fixed inset-0 z-50 bg-dark-slate flex flex-col justify-center items-center space-y-8 text-white md:hidden">
-        <button id="close-menu-btn" class="absolute top-6 right-6 text-3xl text-luxury-gold">
-            <i class="fas fa-times"></i>
-        </button>
-        <a href="#testimonials" class="mobile-link text-2xl font-serif hover:text-luxury-gold transition-colors">Success Stories</a>
-        <a href="#market-analysis" class="mobile-link text-2xl font-serif hover:text-luxury-gold transition-colors">Market Analysis</a>
-        <a href="#timeline" class="mobile-link text-2xl font-serif hover:text-luxury-gold transition-colors">Buying Journey</a>
-        <a href="#units" class="mobile-link text-2xl font-serif hover:text-luxury-gold transition-colors">Availability</a>
-        <a href="#faq" class="mobile-link text-2xl font-serif hover:text-luxury-gold transition-colors">FAQ</a>
-        <a href="#contact" class="mobile-link px-8 py-3 bg-luxury-gold text-dark-slate font-bold uppercase tracking-widest">Enquire Now</a>
-    </div>
-
-    <!-- Hero Section -->
-    <header class="relative h-[100vh] min-h-[600px] flex items-center justify-center overflow-hidden">
-        <!-- Background Image -->
-        <div class="absolute inset-0 z-0">
-            <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?ixlib=rb-4.0.3&auto=format&fit=crop&w=2053&q=80" alt="Luxury Interior" class="w-full h-full object-cover animate-[pulse_10s_ease-in-out_infinite] scale-105">
-            <div class="absolute inset-0 hero-gradient"></div>
-        </div>
-
-        <div class="relative z-10 container mx-auto px-6 grid md:grid-cols-12 gap-8 items-center pt-16">
-            <!-- Text Content -->
-            <div class="md:col-span-7 text-white space-y-6 text-center md:text-left" data-aos="fade-up">
-                <div class="inline-block relative overflow-hidden group cursor-default">
-                    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent translate-x-[-100%] group-hover:animate-[shimmer_1s_infinite]"></div>
-                    <span class="px-4 py-1.5 border border-luxury-gold text-luxury-gold text-[10px] md:text-xs tracking-[0.3em] uppercase font-bold backdrop-blur-sm">
-                        Exclusive Listing
-                    </span>
-                </div>
-                
-                <h1 class="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.1] tracking-tight">
-                    Privé <br>
-                    <span class="italic font-light text-gray-300 block mt-2">Executive Living</span>
-                </h1>
-                
-                <p class="text-base md:text-lg font-light text-gray-300 max-w-lg mx-auto md:mx-0 leading-relaxed">
-                    Experience the pinnacle of luxury in District 19. A curated residence for those who demand excellence, represented by Sunny Phua.
-                </p>
-                
-                <div class="flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start">
-                    <a href="#units" class="px-8 py-4 bg-luxury-gold text-dark-slate font-bold uppercase tracking-wider hover:bg-white transition-all duration-300 text-center shadow-[0_0_15px_rgba(212,175,55,0.4)]">
-                        View Units
-                    </a>
-                    <a href="#timeline" class="px-8 py-4 bg-white/5 backdrop-blur-sm border border-white/30 text-white font-semibold uppercase tracking-wider hover:bg-white hover:text-dark-slate transition-all duration-300 text-center">
-                        Buying Process
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Agent Card with Stamp (Female Image) -->
-            <div class="hidden md:block md:col-span-5 relative" data-aos="fade-left" data-aos-delay="200">
-                <!-- Glow Effect -->
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-luxury-gold/20 rounded-full blur-[80px]"></div>
-                
-                <div class="relative max-w-xs mx-auto animate-float">
-                    <!-- Image Container -->
-                    <div class="relative rounded-sm overflow-hidden border border-white/20 shadow-2xl">
-                        <div class="absolute inset-0 bg-gradient-to-t from-dark-slate/90 via-transparent to-transparent z-10"></div>
-                        <!-- NEW FEMALE AGENT IMAGE -->
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sunny Phua" class="w-full h-auto object-cover transform transition-transform duration-700 hover:scale-105">
-                        
-                        <!-- Stamp Overlay -->
-                        <div class="stamp-container">
-                            <div class="relative w-24 h-24 bg-luxury-gold rounded-full flex items-center justify-center shadow-lg border-4 border-white/20">
-                                <div class="absolute inset-0 border border-dashed border-dark-slate/50 rounded-full animate-spin-slow"></div>
-                                <div class="text-center leading-tight">
-                                    <div class="text-[8px] font-bold uppercase tracking-widest text-dark-slate">Top 1%</div>
-                                    <div class="text-xl font-serif font-bold text-dark-slate">Award</div>
-                                    <div class="text-[8px] font-bold uppercase tracking-widest text-dark-slate">Winner</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="absolute bottom-0 left-0 w-full p-6 z-20 text-center">
-                            <p class="text-luxury-gold font-serif text-2xl italic mb-1">Sunny Phua</p>
-                            <p class="text-white/80 text-[10px] uppercase tracking-[0.2em]">Luxury Division Director</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce text-white/50 cursor-pointer" onclick="document.getElementById('testimonials').scrollIntoView({behavior: 'smooth'})">
-            <i class="fas fa-chevron-down text-xl"></i>
+    <header class="pt-40 md:pt-48 pb-20 md:pb-24 px-6 max-w-7xl mx-auto text-center relative z-10">
+        <h2 class="text-accent-primary font-bold tracking-[0.2em] uppercase text-xs md:text-sm mb-6 animate-pulse">
+            Your Vision, Our Mission
+        </h2>
+        <h1 class="text-4xl md:text-7xl font-bold tracking-tight mb-6 text-white leading-tight">
+            Scale Your <span class="dynamic-gradient-text">Digital Empire</span>
+        </h1>
+        <p class="text-base md:text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed mb-10">
+            Reputifly combines high-performance web design, strategic SEO, and the largest review network in Singapore to build your reputation.
+        </p>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4">
+            <a href="#services" class="liquid-glow px-8 py-3 w-full md:w-auto">Explore Services</a>
+            <a href="#portfolio" class="btn-glass px-8 py-3 w-full md:w-auto flex items-center justify-center gap-2">
+                View Portfolio <i data-feather="arrow-down" class="w-4 h-4"></i>
+            </a>
         </div>
     </header>
 
-    <!-- Stats Bar -->
-    <div class="bg-dark-slate text-white py-10 border-b border-gray-800">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center divide-x divide-gray-800/50">
-                <div data-aos="fade-up" data-aos-delay="0">
-                    <p class="text-2xl md:text-3xl font-serif text-luxury-gold">3 mins</p>
-                    <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-400 mt-1">To Punggol MRT</p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="100">
-                    <p class="text-2xl md:text-3xl font-serif text-luxury-gold">D19</p>
-                    <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-400 mt-1">Prime District</p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="200">
-                    <p class="text-2xl md:text-3xl font-serif text-luxury-gold">99 Yr</p>
-                    <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-400 mt-1">Leasehold</p>
-                </div>
-                <div data-aos="fade-up" data-aos-delay="300">
-                    <p class="text-2xl md:text-3xl font-serif text-luxury-gold">TOP</p>
-                    <p class="text-[10px] md:text-xs uppercase tracking-widest text-gray-400 mt-1">Ready to Move</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    <main class="max-w-7xl mx-auto px-4 md:px-6 space-y-20 md:space-y-32">
 
-    <!-- Testimonials -->
-    <section id="testimonials" class="py-20 md:py-24 bg-soft-cream relative overflow-hidden">
-        <div class="absolute top-0 right-0 w-96 h-96 bg-luxury-gold/5 rounded-full translate-x-1/3 -translate-y-1/3 blur-3xl"></div>
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <h2 class="text-3xl md:text-5xl font-serif text-dark-slate mb-4">Success Stories</h2>
-                <div class="w-20 h-1 bg-luxury-gold mx-auto"></div>
-                <p class="mt-4 text-gray-500 italic font-serif">Trusted by families, delivered by Sunny.</p>
-            </div>
-            <!-- Story 1 -->
-            <div class="glass-card rounded-xl p-8 md:p-12 mb-12 shadow-xl hover:shadow-2xl transition-all duration-500" data-aos="fade-up">
-                <div class="grid md:grid-cols-2 gap-12 items-center">
-                    <div class="order-2 md:order-1 space-y-6">
-                        <div class="flex items-center gap-2 text-luxury-gold mb-2">
-                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
-                        </div>
-                        <h3 class="text-2xl md:text-3xl font-serif text-rich-brown">Sherry & Dom</h3>
-                        <div class="relative">
-                            <i class="fas fa-quote-left absolute -top-4 -left-4 text-4xl text-luxury-gold/10"></i>
-                            <p class="text-gray-600 leading-relaxed text-base md:text-lg relative z-10">
-                                "We were looking for a home that balanced luxury with family practicality. <span class="font-bold text-dark-slate">Sunny</span> introduced us to Privé, and she made the transaction seamless. Her financial advice was spot on."
-                            </p>
-                        </div>
-                        <div class="flex items-center gap-4 pt-4 border-t border-gray-200">
-                            <div class="w-12 h-12 bg-gray-200 rounded-full overflow-hidden border border-white shadow-sm">
-                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sherry" alt="Sherry">
-                            </div>
-                            <div>
-                                <p class="font-bold text-dark-slate text-sm">Sold in 14 Days</p>
-                                <p class="text-[10px] text-gray-500 uppercase tracking-wider">Record Price</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="order-1 md:order-2 relative h-[300px] rounded-lg overflow-hidden group">
-                        <img src="https://images.unsplash.com/photo-1516455590571-18256e5bb9ff?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Happy Couple" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Market Analysis -->
-    <section id="market-analysis" class="py-24 bg-white">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-luxury-gold font-bold uppercase tracking-widest text-xs mb-2 block">Data Driven</span>
-                <h2 class="text-3xl md:text-5xl font-serif text-dark-slate">Why Buy Privé?</h2>
-                <p class="mt-4 text-gray-500 max-w-2xl mx-auto">An objective comparison proving Privé's superior value proposition.</p>
-            </div>
-            <div class="overflow-x-auto shadow-2xl rounded-xl border border-gray-200" data-aos="zoom-in">
-                <table class="w-full text-left border-collapse bg-white min-w-[800px]">
-                    <thead>
-                        <tr class="bg-dark-slate text-white uppercase text-xs tracking-widest">
-                            <th class="p-6 font-bold">Development</th>
-                            <th class="p-6 font-bold">Lease</th>
-                            <th class="p-6 font-bold">Dist to MRT</th>
-                            <th class="p-6 font-bold">Avg PSF ($)</th>
-                            <th class="p-6 font-bold">Rental Yield</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-sm text-gray-700 font-medium">
-                        <tr class="bg-luxury-gold/10 border-b border-gray-200 relative group">
-                            <td class="p-6 text-dark-slate flex items-center gap-3 font-bold text-base">
-                                <i class="fas fa-crown text-luxury-gold animate-pulse"></i> Privé (EC)
-                            </td>
-                            <td class="p-6">99 Years</td>
-                            <td class="p-6 text-green-600 font-bold">350m (Fastest)</td>
-                            <td class="p-6 font-bold text-dark-slate">$1,1xx psf</td>
-                            <td class="p-6 text-green-600 font-bold">High</td>
-                        </tr>
-                        <tr class="border-b border-gray-100 hover:bg-gray-50 transition-colors">
-                            <td class="p-6 text-gray-500">Watertown</td>
-                            <td class="p-6">99 Years</td>
-                            <td class="p-6">0m (Integrated)</td>
-                            <td class="p-6">$1,5xx psf</td>
-                            <td class="p-6">Med</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW: Marketing Timeline Journey -->
-    <section id="timeline" class="py-24 bg-dark-slate text-white relative overflow-hidden">
-        <!-- Background elements -->
-        <div class="absolute top-0 left-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="text-center mb-16 md:mb-24" data-aos="fade-up">
-                <span class="text-luxury-gold font-bold uppercase tracking-widest text-xs mb-2 block">The Process</span>
-                <h2 class="text-3xl md:text-5xl font-serif text-white">Your Journey to Ownership</h2>
-                <div class="w-24 h-0.5 bg-luxury-gold mx-auto mt-6"></div>
-            </div>
-
-            <div class="relative max-w-5xl mx-auto">
-                <!-- Vertical Line -->
-                <!-- Left aligned on mobile (32px center), Center on desktop -->
-                <div class="absolute left-8 md:left-1/2 top-0 h-full w-0.5 bg-gradient-to-b from-transparent via-luxury-gold to-transparent transform -translate-x-1/2 md:-translate-x-1/2 z-0"></div>
-
-                <!-- Step 1 -->
-                <div class="relative flex items-start md:items-center justify-between mb-16 md:mb-0 group" data-aos="fade-up">
-                    <!-- Desktop Left Text / Mobile Right Text -->
-                    <div class="order-2 md:order-1 flex-1 md:w-5/12 md:text-right pl-16 md:pl-0 md:pr-12">
-                        <h3 class="text-xl md:text-2xl font-serif text-luxury-gold">01. Financial Assessment</h3>
-                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">
-                            Comprehensive check on MSR/TDSR eligibility and household status confirmation.
-                        </p>
-                    </div>
-                    
-                    <!-- Icon (Center) -->
-                    <div class="absolute left-0 md:static md:order-2 w-16 md:w-2/12 flex justify-center z-10">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300 text-lg md:text-xl">
-                            <i class="fas fa-calculator"></i>
-                        </div>
-                    </div>
-                    
-                    <!-- Desktop Spacer -->
-                    <div class="hidden md:block order-3 md:w-5/12"></div>
-                </div>
-
-                <!-- Step 2 -->
-                <div class="relative flex items-start md:items-center justify-between mb-16 md:mb-0 group" data-aos="fade-up" data-aos-delay="100">
-                    <!-- Desktop Spacer -->
-                    <div class="hidden md:block order-1 md:w-5/12"></div>
-                    
-                    <!-- Icon (Center) -->
-                    <div class="absolute left-0 md:static md:order-2 w-16 md:w-2/12 flex justify-center z-10">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300 text-lg md:text-xl">
-                            <i class="fas fa-eye"></i>
-                        </div>
-                    </div>
-
-                     <!-- Desktop Right Text / Mobile Right Text -->
-                    <div class="order-2 md:order-3 flex-1 md:w-5/12 md:text-left pl-16 md:pl-12">
-                        <h3 class="text-xl md:text-2xl font-serif text-luxury-gold">02. Exclusive Viewing</h3>
-                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">
-                            Private tour of showflat units to experience the premium finishing firsthand.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Step 3 -->
-                 <div class="relative flex items-start md:items-center justify-between mb-16 md:mb-0 group" data-aos="fade-up" data-aos-delay="200">
-                    <div class="order-2 md:order-1 flex-1 md:w-5/12 md:text-right pl-16 md:pl-0 md:pr-12">
-                        <h3 class="text-xl md:text-2xl font-serif text-luxury-gold">03. Expression of Interest</h3>
-                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">
-                            Submission of e-Application and documents (IC, Income Proof) for balloting eligibility.
-                        </p>
-                    </div>
-                    
-                    <div class="absolute left-0 md:static md:order-2 w-16 md:w-2/12 flex justify-center z-10">
-                         <div class="w-12 h-12 md:w-16 md:h-16 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300 text-lg md:text-xl">
-                            <i class="fas fa-file-signature"></i>
-                        </div>
-                    </div>
-                    
-                    <div class="hidden md:block order-3 md:w-5/12"></div>
-                </div>
-
-                <!-- Step 4 -->
-                <div class="relative flex items-start md:items-center justify-between group" data-aos="fade-up" data-aos-delay="300">
-                    <div class="hidden md:block order-1 md:w-5/12"></div>
-                    
-                    <div class="absolute left-0 md:static md:order-2 w-16 md:w-2/12 flex justify-center z-10">
-                        <div class="w-12 h-12 md:w-16 md:h-16 bg-dark-slate border-2 border-luxury-gold rounded-full flex items-center justify-center text-luxury-gold shadow-[0_0_15px_rgba(212,175,55,0.4)] group-hover:bg-luxury-gold group-hover:text-dark-slate transition-all duration-300 text-lg md:text-xl">
-                            <i class="fas fa-key"></i>
-                        </div>
-                    </div>
-
-                    <div class="order-2 md:order-3 flex-1 md:w-5/12 md:text-left pl-16 md:pl-12">
-                        <h3 class="text-xl md:text-2xl font-serif text-luxury-gold">04. Booking & Completion</h3>
-                        <p class="text-sm text-gray-400 mt-2 leading-relaxed">
-                            Select unit, sign Option to Purchase (OTP), and proceed to Sales & Purchase completion.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Unit Distribution -->
-    <section id="units" class="py-24 bg-white border-t border-gray-100">
-        <div class="container mx-auto px-6">
-             <div class="flex flex-col md:flex-row justify-between items-end mb-12 border-b border-gray-200 pb-6" data-aos="fade-right">
-                <div>
-                    <h2 class="text-3xl md:text-5xl font-serif text-dark-slate">Unit Availability</h2>
-                    <p class="mt-2 text-gray-500">Direct Developer Sales Team | Updated Nov 2025</p>
-                </div>
-                <button class="mt-6 md:mt-0 px-8 py-3 bg-dark-slate text-white hover:bg-luxury-gold transition-colors uppercase text-xs font-bold tracking-widest rounded flex items-center gap-2 group">
-                    <i class="fas fa-download group-hover:animate-bounce"></i> Download E-Brochure
-                </button>
-            </div>
-            <!-- Unit Cards (Sample 1 included, keeping brevity) -->
-            <div class="grid lg:grid-cols-3 gap-8">
-                <div class="group bg-dark-slate text-white border border-dark-slate p-8 transform md:scale-105 shadow-2xl relative rounded-lg" data-aos="fade-up">
-                    <div class="absolute top-0 right-0 bg-luxury-gold text-dark-slate text-[10px] font-bold px-4 py-1 uppercase tracking-widest rounded-bl-lg">Best Seller</div>
-                    <h3 class="font-serif text-3xl text-white mb-2">3 Bedroom Premium</h3>
-                    <div class="text-luxury-gold text-xs font-bold uppercase tracking-wider mb-6">Family Choice</div>
-                    <ul class="text-sm text-gray-300 space-y-4 mb-8">
-                        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Size</span> <span class="font-bold text-white">1,130 - 1,250 sqft</span></li>
-                        <li class="flex justify-between border-b border-gray-700 pb-2"><span>Status</span> <span class="text-luxury-gold font-bold bg-luxury-gold/10 px-2 rounded">Available</span></li>
-                    </ul>
-                    <a href="#contact" class="block w-full py-4 text-center bg-luxury-gold text-dark-slate hover:bg-white hover:text-dark-slate transition-colors uppercase text-xs font-bold tracking-widest rounded shadow-[0_0_15px_rgba(212,175,55,0.3)]">Enquire Price</a>
-                </div>
-                <!-- More cards in previous code... -->
-                <div class="group bg-white border border-gray-200 p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 rounded-lg relative overflow-hidden" data-aos="fade-up" data-aos-delay="100">
-                    <h3 class="font-serif text-2xl text-dark-slate mb-2">4 Bedroom</h3>
-                    <div class="text-gray-400 text-xs font-bold uppercase tracking-wider mb-6">Grand Living</div>
-                    <ul class="text-sm text-gray-600 space-y-4 mb-8">
-                         <li class="flex justify-between border-b border-gray-100 pb-2"><span>Size</span> <span class="font-bold">1,350 - 1,500 sqft</span></li>
-                        <li class="flex justify-between border-b border-gray-100 pb-2"><span>Status</span> <span class="text-red-500 font-bold bg-red-50 px-2 rounded">Sold Out</span></li>
-                    </ul>
-                     <a href="#contact" class="block w-full py-3 text-center border border-dark-slate text-dark-slate group-hover:bg-dark-slate group-hover:text-white transition-colors uppercase text-xs font-bold tracking-widest rounded">Join Waitlist</a>
-                </div>
-                <div class="group bg-white border border-gray-200 p-8 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 rounded-lg relative overflow-hidden" data-aos="fade-up" data-aos-delay="200">
-                    <h3 class="font-serif text-2xl text-dark-slate mb-2">2 Bedroom</h3>
-                    <div class="text-gray-400 text-xs font-bold uppercase tracking-wider mb-6">Compact Luxury</div>
-                    <ul class="text-sm text-gray-600 space-y-4 mb-8">
-                         <li class="flex justify-between border-b border-gray-100 pb-2"><span>Size</span> <span class="font-bold">1,001 sqft</span></li>
-                        <li class="flex justify-between border-b border-gray-100 pb-2"><span>Status</span> <span class="text-orange-500 font-bold bg-orange-50 px-2 rounded">Last 2</span></li>
-                    </ul>
-                     <a href="#contact" class="block w-full py-3 text-center border border-dark-slate text-dark-slate group-hover:bg-dark-slate group-hover:text-white transition-colors uppercase text-xs font-bold tracking-widest rounded">Enquire</a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- NEW: FAQ Section -->
-    <section id="faq" class="py-24 bg-soft-cream">
-        <div class="container mx-auto px-6 max-w-4xl">
-            <div class="text-center mb-16" data-aos="fade-up">
-                <span class="text-luxury-gold font-bold uppercase tracking-widest text-xs mb-2 block">Information</span>
-                <h2 class="text-3xl md:text-5xl font-serif text-dark-slate">Frequently Asked Questions</h2>
-                <p class="mt-4 text-gray-500">Common queries regarding Executive Condominium eligibility and payment.</p>
-            </div>
-
-            <div class="space-y-4" data-aos="fade-up">
-                <!-- FAQ 1 -->
-                <details class="group bg-white rounded-lg shadow-sm open:shadow-lg transition-shadow duration-300">
-                    <summary class="flex cursor-pointer items-center justify-between p-6">
-                        <h3 class="text-lg font-serif font-medium text-dark-slate group-hover:text-luxury-gold transition-colors">Can I buy an EC if I currently own an HDB flat?</h3>
-                        <span class="ml-4 flex-shrink-0 text-luxury-gold group-open:rotate-180 transition-transform duration-300">
-                            <i class="fas fa-chevron-down"></i>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
-                        Yes, but you must dispose of your current HDB flat within 6 months of collecting the keys to your new EC unit. You must also have fulfilled the Minimum Occupation Period (MOP) of your current flat.
-                    </div>
-                </details>
-
-                <!-- FAQ 2 -->
-                <details class="group bg-white rounded-lg shadow-sm open:shadow-lg transition-shadow duration-300">
-                    <summary class="flex cursor-pointer items-center justify-between p-6">
-                        <h3 class="text-lg font-serif font-medium text-dark-slate group-hover:text-luxury-gold transition-colors">Is there a Resale Levy?</h3>
-                        <span class="ml-4 flex-shrink-0 text-luxury-gold group-open:rotate-180 transition-transform duration-300">
-                            <i class="fas fa-chevron-down"></i>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
-                        Resale levy applies to second-timer applicants who have previously bought a subsidized flat (HDB/DBSS/EC) directly from HDB/Developer, or received a CPF Housing Grant. The amount varies depending on the type of your first subsidized housing.
-                    </div>
-                </details>
-
-                <!-- FAQ 3 -->
-                <details class="group bg-white rounded-lg shadow-sm open:shadow-lg transition-shadow duration-300">
-                    <summary class="flex cursor-pointer items-center justify-between p-6">
-                        <h3 class="text-lg font-serif font-medium text-dark-slate group-hover:text-luxury-gold transition-colors">What are the payment schemes available?</h3>
-                        <span class="ml-4 flex-shrink-0 text-luxury-gold group-open:rotate-180 transition-transform duration-300">
-                            <i class="fas fa-chevron-down"></i>
-                        </span>
-                    </summary>
-                    <div class="px-6 pb-6 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
-                        You can choose between the Normal Payment Scheme (Progressive Payment) or the Deferred Payment Scheme (DPS). The DPS allows you to pay 20% downpayment now and the remaining 80% only upon TOP (Collection of keys), though the purchase price is typically 3% higher.
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="bg-rich-brown text-white py-24 relative overflow-hidden">
-        <!-- Decorative Elements -->
-        <div class="absolute top-0 right-0 w-96 h-96 bg-black/30 rounded-full blur-3xl transform translate-x-1/2 -translate-y-1/2"></div>
-        <div class="absolute bottom-0 left-0 w-64 h-64 bg-luxury-gold/10 rounded-full blur-3xl transform -translate-x-1/3 translate-y-1/3"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="space-y-10" data-aos="fade-right">
-                    <div>
-                        <h2 class="text-4xl md:text-6xl font-serif leading-tight">Let's Secure Your <br><span class="text-gradient-gold">Legacy</span></h2>
-                        <p class="text-gray-300 text-lg mt-6 leading-relaxed">
-                            Expert guidance on asset progression, financial structuring, and finding the perfect home for your family.
-                        </p>
-                    </div>
-                    
-                    <div class="space-y-6">
-                        <div class="flex items-center gap-6 p-4 rounded-lg hover:bg-white/5 transition-colors cursor-pointer">
-                            <div class="w-14 h-14 bg-luxury-gold flex items-center justify-center rounded-full text-dark-slate shadow-lg">
-                                <i class="fas fa-phone text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Call Sunny</p>
-                                <p class="text-2xl font-serif tracking-wide hover:text-luxury-gold transition-colors">+65 9123 4567</p>
-                            </div>
-                        </div>
-                        <div class="flex items-center gap-6 p-4 rounded-lg hover:bg-white/5 transition-colors cursor-pointer">
-                            <div class="w-14 h-14 bg-luxury-gold flex items-center justify-center rounded-full text-dark-slate shadow-lg">
-                                <i class="fas fa-envelope text-xl"></i>
-                            </div>
-                            <div>
-                                <p class="text-xs text-gray-400 uppercase tracking-widest mb-1">Email</p>
-                                <p class="text-2xl font-serif tracking-wide hover:text-luxury-gold transition-colors">sunny@sunnyphua.com</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Agent Profile Mini (Female) -->
-                    <div class="flex items-center gap-6 pt-8 border-t border-white/10">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sunny Phua" class="w-20 h-20 rounded-full object-cover border-2 border-luxury-gold shadow-lg">
-                        <div>
-                            <p class="font-serif text-2xl">Sunny Phua</p>
-                            <p class="text-luxury-gold text-xs uppercase tracking-widest mt-1">Senior Marketing Director</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Form -->
-                <div class="bg-white text-dark-slate p-10 rounded-2xl shadow-2xl relative overflow-hidden" data-aos="fade-left">
-                    <div class="absolute top-0 left-0 w-full h-2 bg-luxury-gold"></div>
-                    <h3 class="font-serif text-3xl mb-8 text-center">Priority Registration</h3>
-                    <form class="space-y-8">
-                        <div class="relative">
-                            <input type="text" id="name" class="peer w-full border-b-2 border-gray-200 placeholder-transparent focus:border-luxury-gold outline-none py-2 transition-colors bg-transparent" placeholder="Name">
-                            <label for="name" class="absolute left-0 -top-3.5 text-gray-500 text-xs font-bold uppercase tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-500 peer-focus:text-xs">Name</label>
-                        </div>
-                        <div class="relative">
-                            <input type="tel" id="phone" class="peer w-full border-b-2 border-gray-200 placeholder-transparent focus:border-luxury-gold outline-none py-2 transition-colors bg-transparent" placeholder="Phone">
-                            <label for="phone" class="absolute left-0 -top-3.5 text-gray-500 text-xs font-bold uppercase tracking-widest transition-all peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-400 peer-placeholder-shown:top-2 peer-focus:-top-3.5 peer-focus:text-gray-500 peer-focus:text-xs">Phone Number</label>
-                        </div>
-                        <div class="relative">
-                            <select class="w-full border-b-2 border-gray-200 focus:border-luxury-gold outline-none py-2 bg-transparent text-gray-600">
-                                <option value="" disabled selected>I am interested in...</option>
-                                <option>2 Bedroom</option>
-                                <option>3 Bedroom</option>
-                                <option>4 Bedroom</option>
-                                <option>Latest Floor Plans</option>
-                                <option>Asset Progression (Sell/Buy)</option>
-                            </select>
-                        </div>
-                        <button class="w-full bg-dark-slate text-white py-4 font-bold uppercase tracking-widest hover:bg-luxury-gold transition-all duration-300 rounded shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-                            Request Call Back
-                        </button>
-                    </form>
-                    <p class="text-center text-xs text-gray-400 mt-6">Your data is secure. No spam policy.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-black text-gray-500 py-16 text-center text-sm border-t border-gray-900">
-        <div class="container mx-auto px-6">
-            <div class="font-serif text-3xl text-white mb-8 tracking-widest">Sunny<span class="text-luxury-gold">Phua</span></div>
-            
-            <div class="flex justify-center gap-8 mb-10">
-                <a href="#" class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center hover:bg-luxury-gold hover:text-white transition-all duration-300"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center hover:bg-luxury-gold hover:text-white transition-all duration-300"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="w-10 h-10 rounded-full bg-gray-900 flex items-center justify-center hover:bg-luxury-gold hover:text-white transition-all duration-300"><i class="fab fa-linkedin-in"></i></a>
+        <section id="services">
+            <div class="text-center mb-10 md:mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Core Offerings</h2>
+                <p class="text-gray-400 text-sm md:text-base">Dominate your market with Design, Reviews & Ads.</p>
             </div>
             
-            <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto mb-12 text-xs text-gray-600 border-t border-gray-900 pt-8">
-                <div>
-                    <h5 class="text-white font-bold uppercase tracking-widest mb-4">Location</h5>
-                    <p>Huttons Asia Pte Ltd<br>3 Bishan Place<br>#05-01 CPF Bishan Building<br>Singapore 579838</p>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <a href="https://reputifly.com/web-development/" class="liquid-glass group p-6 md:p-8 flex flex-col h-full hover:border-purple-500/30">
+                    <div class="glass-content h-full flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-blue-500/10 text-purple-400 flex items-center justify-center mb-6 border border-purple-500/20 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(168,85,247,0.2)]">
+                            <i data-feather="layout" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-purple-300 transition-colors">Website Design</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                            High-converting, visually stunning websites. We blend world-class aesthetics with technical SEO foundations to turn visitors into buyers.
+                        </p>
+                        <div class="flex items-center justify-between border-t border-white/5 pt-6 mt-auto">
+                            <span class="text-sm font-bold text-white">View Details</span>
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-purple-500 group-hover:text-white transition-all">
+                                <i data-feather="arrow-up-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://reputifly.com/seo" class="liquid-glass group p-6 md:p-8 flex flex-col h-full hover:border-orange-500/30">
+                    <div class="glass-content h-full flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/20 to-red-500/10 text-orange-400 flex items-center justify-center mb-6 border border-orange-500/20 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(255,138,0,0.2)]">
+                            <i data-feather="trending-up" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-orange-300 transition-colors">SEO Mastery</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                            Dominate search results. Our data-driven strategies ensure your brand captures organic traffic and builds long-term authority.
+                        </p>
+                        <div class="flex items-center justify-between border-t border-white/5 pt-6 mt-auto">
+                            <span class="text-sm font-bold text-white">View Details</span>
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-orange-500 group-hover:text-white transition-all">
+                                <i data-feather="arrow-up-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://reputifly.com/google-ad-management/" class="liquid-glass group p-6 md:p-8 flex flex-col h-full hover:border-pink-500/30">
+                    <div class="glass-content h-full flex flex-col">
+                        <div class="w-14 h-14 rounded-2xl bg-gradient-to-br from-pink-500/20 to-rose-500/10 text-accent-primary flex items-center justify-center mb-6 border border-pink-500/20 group-hover:scale-110 transition-transform duration-300 shadow-[0_0_15px_rgba(230,57,127,0.2)]">
+                            <i data-feather="target" class="w-7 h-7"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-white mb-3 group-hover:text-pink-300 transition-colors">Ad Management</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed mb-6 flex-grow">
+                            Maximize ROAS with precision-targeted Google & Social campaigns managed by certified experts who understand your ROI.
+                        </p>
+                        <div class="flex items-center justify-between border-t border-white/5 pt-6 mt-auto">
+                            <span class="text-sm font-bold text-white">View Details</span>
+                            <div class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-accent-primary group-hover:text-white transition-all">
+                                <i data-feather="arrow-up-right" class="w-4 h-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <section id="portfolio">
+            <div class="flex items-center justify-between mb-8 md:mb-10">
+                <div class="flex items-center gap-3">
+                    <div class="h-6 md:h-8 w-1 bg-white rounded-full"></div>
+                    <h2 class="text-2xl md:text-3xl font-bold text-white">Featured Work</h2>
                 </div>
-                <div>
-                    <h5 class="text-white font-bold uppercase tracking-widest mb-4">Contact</h5>
-                    <p>+65 9123 4567<br>sunny@sunnyphua.com</p>
+                <a href="https://reputifly.com/portfolio/" class="text-xs md:text-sm text-gray-400 hover:text-white transition-colors flex items-center gap-2">
+                    View All <span class="hidden md:inline">Projects</span> <i data-feather="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <a href="https://reputifly.com/portfolio/" class="liquid-glass flex flex-col md:flex-row group transition-all duration-300">
+                <div class="w-full aspect-square md:w-1/2 relative border-b md:border-b-0 md:border-r border-white/5 overflow-hidden">
+                    <img src="https://reputifly.com/wp-content/uploads/2026/01/6271626531591360616.jpg" 
+                         class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                         alt="Featured Portfolio Work">
+                    <div class="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
                 </div>
-                <div>
-                    <h5 class="text-white font-bold uppercase tracking-widest mb-4">Legal</h5>
-                    <p><a href="#" class="hover:text-white">Privacy Policy</a><br><a href="#" class="hover:text-white">Terms of Use</a><br>CEA Reg No: R012345X</p>
+
+                <div class="glass-content w-full md:w-1/2 p-6 md:p-12 flex flex-col justify-center">
+                    <span class="text-accent-secondary font-mono text-xs uppercase tracking-widest mb-3 md:mb-4">Latest Case Studies</span>
+                    <h3 class="text-2xl md:text-4xl font-bold text-white mb-3 md:mb-4 group-hover:text-accent-primary transition-colors">Results That Speak</h3>
+                    <p class="text-gray-400 text-sm md:text-lg leading-relaxed mb-6 md:mb-8 max-w-3xl">
+                        Explore our curated collection of high-performance websites and successful marketing campaigns. We focus on design that converts and data that scales.
+                    </p>
+                    <div class="flex items-center gap-2 text-white font-bold group-hover:translate-x-2 transition-transform">
+                        Open Portfolio <i data-feather="arrow-right" class="w-5 h-5 text-accent-secondary"></i>
+                    </div>
+                </div>
+            </a>
+        </section>
+
+        <section>
+            <div class="liquid-glass p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+                
+                <div class="glass-content relative flex-shrink-0 mx-auto md:mx-0 w-32 h-32 md:w-40 md:h-40">
+                     <div class="w-full h-full rounded-full border border-white/10 overflow-hidden relative shadow-2xl">
+                        <img src="https://reputifly.com/wp-content/uploads/2026/01/cbf92a95-5fca-488b-bc8e-ccf67a433a26.jpeg" class="w-full h-full object-cover" alt="BuyReviewSG Icon">
+                    </div>
+                </div>
+
+                <div class="glass-content flex-1">
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Largest Review Provider in Singapore</h4>
+                    <p class="text-gray-400 text-sm md:text-base mb-8 leading-relaxed">
+                        We operate Singapore's most extensive reviewer network with a cumulative 
+                        <strong class="text-white border-b border-accent-secondary">6,000+ local reviewers</strong>. 
+                        <span class="font-bold text-white">BuyReviewSG</span> builds authentic trust on Google & Trustpilot where it matters most.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+                        <span class="text-xs text-gray-500 uppercase font-bold tracking-widest border border-white/10 px-4 py-2 rounded-full bg-black/30">
+                            Subsidiary of Reputifly Pte Ltd
+                        </span>
+                        <a href="https://buyreviewsg.com" target="_blank" class="btn-glass px-6 py-2 text-sm text-white hover:bg-white/10 flex items-center gap-2 w-full sm:w-auto justify-center">
+                            Visit BuyReviewSG <i data-feather="external-link" class="w-3 h-3"></i>
+                        </a>
+                    </div>
                 </div>
             </div>
-            
-            <p>&copy; 2025 Sunny Phua Luxury Property. All rights reserved.</p>
-            <p class="mt-2 text-[10px] max-w-2xl mx-auto leading-relaxed">The information contained on this website is for general information purposes only. Prices and availability are subject to change without prior notice.</p>
+        </section>
+
+        <section>
+            <div class="liquid-glass p-6 md:p-10 flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
+                
+                <div class="glass-content relative flex-shrink-0 mx-auto md:mx-0 w-32 h-32 md:w-40 md:h-40">
+                     <div class="w-full h-full rounded-full bg-white/10 border border-white/10 flex items-center justify-center shadow-2xl backdrop-blur-md p-4 overflow-hidden">
+                        <img src="https://gloosphere.com/wp-content/uploads/2025/08/GlooSphere-Logo-Transparent-01-scaled-e1754229092842-2048x426.png" 
+                             class="w-full h-auto object-contain" 
+                             alt="GlooSphere AI">
+                    </div>
+                </div>
+
+                <div class="glass-content flex-1">
+                    <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-3">
+                        <span class="text-xs font-mono text-blue-400 border border-blue-400/30 px-3 py-1 rounded-full bg-blue-400/10">AI SOFTWARE</span>
+                        <span class="text-xs font-bold text-gray-400">Trusted by 500+ Monthly Subscribers</span>
+                    </div>
+
+                    <h4 class="text-2xl md:text-3xl font-bold text-white mb-3">Review Filtering Engine</h4>
+
+                    <p class="text-gray-400 text-sm md:text-base mb-8 leading-relaxed">
+                        Protect your reputation before it's damaged. Our AI has successfully 
+                        <span class="font-bold text-white underline decoration-white decoration-2 underline-offset-4">negated over 14,000 negative reviews</span> 
+                        for businesses worldwide.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4">
+                        <a href="https://gloosphere.ai" target="_blank" class="btn-glass px-6 py-2 text-sm text-white hover:bg-white/10 flex items-center gap-2 w-full sm:w-auto justify-center">
+                            Visit GlooSphere.ai <i data-feather="external-link" class="w-3 h-3"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="flex">
+            <a href="https://reputifly.org/note" class="block liquid-glass p-6 md:p-10 group md:hover:border-accent-primary/40 transition-colors">
+                <div class="glass-content flex flex-col md:flex-row items-center justify-between gap-10 md:gap-12">
+                    
+                    <div class="flex-1 text-center md:text-left order-2 md:order-1 w-full">
+                        <div class="flex flex-wrap items-center justify-center md:justify-start gap-3 mb-5">
+                            <span class="text-xs font-mono text-accent-primary border border-accent-primary/30 px-3 py-1 rounded-full bg-accent-primary/10">AI POWERED</span>
+                            <span class="text-xs font-mono text-green-400 border border-green-500/30 px-3 py-1 rounded-full bg-green-500/10 flex items-center gap-2">
+                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> 600+ Monthly Active Users
+                            </span>
+                        </div>
+                        <h3 class="text-3xl md:text-4xl font-bold text-white mb-4">Reputifly Note</h3>
+                        <p class="text-gray-400 mb-8 text-sm md:text-lg max-w-xl mx-auto md:mx-0">
+                            Our flagship "Second Brain" technology. An AI-powered knowledge ecosystem designed to organize thoughts, generate quizzes from notes, and retain information effortlessly.
+                        </p>
+                        <span class="inline-flex items-center justify-center px-8 py-3 rounded-full bg-white text-black font-bold text-sm hover:bg-gray-200 transition-colors group-hover:scale-105 transform duration-200 w-full md:w-auto shadow-lg">
+                            Launch App <i data-feather="arrow-right" class="w-4 h-4 ml-2"></i>
+                        </span>
+                    </div>
+                    
+                    <div class="relative w-32 h-32 md:w-48 md:h-48 flex-shrink-0 order-1 md:order-2">
+                        <div class="absolute inset-0 bg-gradient-to-r from-accent-primary to-accent-secondary rounded-full blur-2xl opacity-40 animate-pulse"></div>
+                        <img src="https://reputifly.com/wp-content/uploads/2026/01/IMG_2123.jpg" 
+                             class="relative w-full h-full object-cover rounded-full border-4 border-white/10 shadow-2xl z-10" 
+                             alt="Reputifly Note Icon">
+                    </div>
+                </div>
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="mt-24 md:mt-32 border-t border-white/5 bg-black/40 pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <img src="https://reputifly.com/wp-content/uploads/2025/05/cropped-reputifly-new-e1746390492876.png" class="h-6 md:h-8 w-auto mx-auto mb-6 opacity-50 grayscale hover:grayscale-0 transition-all" alt="Reputifly">
+            <p class="text-gray-600 text-xs md:text-sm mb-8">&copy; 2026 Reputifly. All rights reserved.</p>
+            <div class="flex flex-wrap justify-center gap-6 text-xs md:text-sm text-gray-500">
+                <a href="#" class="hover:text-white transition-colors">Privacy Policy</a>
+                <a href="#" class="hover:text-white transition-colors">Terms of Service</a>
+                <a href="https://wa.me/6580111965?text=Hello%20Reputifly%2C%20I'm%20interested%20in%20your%20services" target="_blank" class="hover:text-white transition-colors">
+                    Contact via WhatsApp
+                </a>
+            </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        // Init AOS
-        AOS.init({
-            duration: 1000,
-            once: true,
-            offset: 50
-        });
-
-        // Mobile Menu Logic
-        const menuBtn = document.getElementById('mobile-menu-btn');
-        const closeBtn = document.getElementById('close-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileLinks = document.querySelectorAll('.mobile-link');
-
-        function toggleMenu() {
-            mobileMenu.classList.toggle('open');
-            document.body.classList.toggle('overflow-hidden');
-        }
-
-        menuBtn.addEventListener('click', toggleMenu);
-        closeBtn.addEventListener('click', toggleMenu);
-
-        mobileLinks.forEach(link => {
-            link.addEventListener('click', toggleMenu);
-        });
-
-        // Navbar Scroll Effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                navbar.classList.add('shadow-lg');
-                navbar.classList.replace('py-4', 'py-2');
-            } else {
-                navbar.classList.remove('shadow-lg');
-                navbar.classList.replace('py-2', 'py-4');
-            }
-        });
+        feather.replace();
     </script>
+    <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+    // Initialize Lenis for the "heavy/luxury" scroll feel
+    const lenis = new Lenis({
+        duration: 2.0, // Higher = Slower/Smoother (Default is 1.2)
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        smooth: true,
+        direction: 'vertical', 
+    });
+
+    // Animation Loop
+    function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    // Optional: Connect Three.js scroll if needed later
+    // lenis.on('scroll', (e) => { console.log(e) }) 
+</script>
 </body>
 </html>
