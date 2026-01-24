@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postnatal Healing | Premium Postnatal Care</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Configuration for Custom Colors/Fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#fdf2f8',  /* Soft Background */
+                            100: '#fce7f3',
+                            500: '#ec4899', /* Vibrant Primary */
+                            600: '#db2777', /* Hover State */
+                        },
+                        dark: '#111827',    /* Deep Black Text */
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Quicksand', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        '4xl': '2.5rem',
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Smooth Scrolling */
+        html { scroll-behavior: smooth; }
+        
+        /* Custom Scrollbar for horizontal scrolling sections */
+        .hide-scroll::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scroll {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Blob Shape for Hero Image */
+        .blob-shape {
+            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+            transition: border-radius 1s ease-in-out;
+        }
+        .blob-shape:hover {
+            border-radius: 40% 60% 70% 30% / 40% 60% 30% 70%;
+        }
+    </style>
+</head>
+<body class="font-sans text-dark bg-white antialiased">
+
+    <!-- NAVIGATION -->
+    <nav class="fixed w-full z-50 bg-white/90 backdrop-blur-md border-b border-brand-100 transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="font-serif text-2xl font-bold text-brand-500 tracking-tight">
+                        Postnatal<span class="text-dark">Healing.</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#services" class="text-dark hover:text-brand-500 font-semibold transition">Services</a>
+                    <a href="#about" class="text-dark hover:text-brand-500 font-semibold transition">About</a>
+                    <a href="#reviews" class="text-dark hover:text-brand-500 font-semibold transition">Reviews</a>
+                    <a href="#faq" class="text-dark hover:text-brand-500 font-semibold transition">FAQ</a>
+                    <a href="#book" class="bg-brand-500 hover:bg-brand-600 text-white px-6 py-2.5 rounded-full font-bold transition transform hover:scale-105 shadow-lg shadow-brand-500/30">
+                        Book Now
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="text-dark hover:text-brand-500 focus:outline-none">
+                        <i data-lucide="menu" class="w-8 h-8"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-brand-100 absolute w-full">
+            <div class="px-4 pt-2 pb-6 space-y-2 shadow-xl">
+                <a href="#services" class="block px-3 py-3 text-base font-semibold text-dark hover:bg-brand-50 rounded-xl">Services</a>
+                <a href="#about" class="block px-3 py-3 text-base font-semibold text-dark hover:bg-brand-50 rounded-xl">About</a>
+                <a href="#reviews" class="block px-3 py-3 text-base font-semibold text-dark hover:bg-brand-50 rounded-xl">Reviews</a>
+                <a href="#book" class="block w-full text-center mt-4 bg-brand-500 text-white px-4 py-3 rounded-full font-bold shadow-md">Book Appointment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-gradient-to-b from-brand-50 to-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+                
+                <!-- Text Content -->
+                <div class="text-center lg:text-left animate-fade-in-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-100 text-brand-600 font-bold text-sm mb-6">
+                        <i data-lucide="sparkles" class="w-4 h-4"></i>
+                        <span>#1 Rated Postnatal Care in Singapore</span>
+                    </div>
+                    <h1 class="font-serif text-5xl lg:text-6xl font-bold leading-tight mb-6 text-dark">
+                        Restore Your Body, <br>
+                        <span class="text-brand-500">Reclaim Your Glow.</span>
+                    </h1>
+                    <p class="text-lg text-gray-600 mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed font-medium">
+                        Experience expert postnatal massage therapy in the comfort of your home. We help mummies heal, relax, and bond better with baby.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                        <a href="#book" class="bg-brand-500 hover:bg-brand-600 text-white text-lg px-8 py-4 rounded-full font-bold transition transform hover:-translate-y-1 shadow-xl shadow-brand-500/30 flex items-center justify-center gap-2">
+                            Book Your Session <i data-lucide="calendar" class="w-5 h-5"></i>
+                        </a>
+                        <a href="#services" class="bg-white border-2 border-brand-500 text-brand-500 hover:bg-brand-50 text-lg px-8 py-4 rounded-full font-bold transition flex items-center justify-center">
+                            View Treatments
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Hero Image -->
+                <div class="relative flex justify-center lg:justify-end">
+                    <!-- Decor elements -->
+                    <div class="absolute -top-10 -right-10 w-24 h-24 bg-brand-200 rounded-full blur-2xl opacity-60 animate-pulse"></div>
+                    <div class="absolute bottom-10 -left-10 w-32 h-32 bg-yellow-200 rounded-full blur-2xl opacity-40"></div>
+
+                    <!-- Main Image with Blob Shape -->
+                    <div class="relative w-full max-w-lg animate-float">
+                        <img 
+                            src="https://images.unsplash.com/photo-1555252333-9f8e92e65df9?q=80&w=1000&auto=format&fit=crop" 
+                            alt="Mother holding baby comfortably" 
+                            class="w-full h-[500px] object-cover shadow-2xl blob-shape border-4 border-white"
+                        >
+                        <!-- Floating Badge -->
+                        <div class="absolute bottom-8 left-0 lg:-left-8 bg-white p-4 rounded-3xl shadow-xl flex items-center gap-3 animate-bounce" style="animation-duration: 3s;">
+                            <div class="bg-green-100 p-2 rounded-full text-green-600">
+                                <i data-lucide="check-circle-2" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <p class="text-xs text-gray-500 font-bold uppercase">Certified</p>
+                                <p class="text-sm font-bold text-dark">Therapists</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TRUST STRIP -->
+    <div class="bg-white py-10 border-y border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-gray-500 font-bold tracking-widest text-sm uppercase mb-6">Trusted by 500+ Happy Mummies</p>
+            <div class="flex flex-wrap justify-center items-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
+                <!-- Mock Logos -->
+                <div class="flex items-center gap-2 font-serif text-xl font-bold"><i data-lucide="award" class="text-brand-500"></i> MumChoice</div>
+                <div class="flex items-center gap-2 font-serif text-xl font-bold"><i data-lucide="heart-handshake" class="text-brand-500"></i> ParentLife</div>
+                <div class="flex items-center gap-2 font-serif text-xl font-bold"><i data-lucide="shield-check" class="text-brand-500"></i> SafeBirth</div>
+                <div class="flex items-center gap-2 font-serif text-xl font-bold"><i data-lucide="stethoscope" class="text-brand-500"></i> MedCert</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SERVICES HIGHLIGHT -->
+    <section id="services" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <span class="text-brand-500 font-bold tracking-wider uppercase text-sm">Our Expertise</span>
+                <h2 class="font-serif text-4xl md:text-5xl font-bold mt-2 text-dark">Why Mummies Choose Us</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mb-6 text-brand-500 group-hover:bg-brand-500 group-hover:text-white transition">
+                        <i data-lucide="flower-2" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3 text-dark">Postnatal Recovery</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Accelerate womb recovery, reduce water retention, and realign your body with traditional Jamu techniques.
+                    </p>
+                    <a href="#" class="text-brand-500 font-bold group-hover:underline flex items-center gap-1">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group relative border-2 border-brand-100">
+                    <div class="absolute top-4 right-4 bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full">Popular</div>
+                    <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mb-6 text-brand-500 group-hover:bg-brand-500 group-hover:text-white transition">
+                        <i data-lucide="droplets" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3 text-dark">Lactation Support</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Gentle breast massage to clear blocked ducts, improve milk flow, and relieve engorgement pain naturally.
+                    </p>
+                    <a href="#" class="text-brand-500 font-bold group-hover:underline flex items-center gap-1">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-3xl p-8 shadow-xl hover:shadow-2xl transition duration-300 transform hover:-translate-y-2 group">
+                    <div class="w-16 h-16 bg-brand-50 rounded-2xl flex items-center justify-center mb-6 text-brand-500 group-hover:bg-brand-500 group-hover:text-white transition">
+                        <i data-lucide="baby" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold mb-3 text-dark">Prenatal Relaxation</h3>
+                    <p class="text-gray-600 leading-relaxed mb-4">
+                        Safe, soothing therapy during pregnancy to relieve backaches, leg swelling, and prepare your body for birth.
+                    </p>
+                    <a href="#" class="text-brand-500 font-bold group-hover:underline flex items-center gap-1">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="py-24 bg-white overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <!-- Image Side -->
+                <div class="relative order-2 lg:order-1">
+                    <div class="absolute inset-0 bg-brand-100 rounded-full transform rotate-3 scale-105 z-0"></div>
+                    <img 
+                        src="https://femia.health/wp-content/uploads/2024/12/Pregnant-belly.jpg" 
+                        alt="Pregnant mother holding belly" 
+                        class="relative z-10 w-full h-[500px] object-cover rounded-[50%] border-8 border-white shadow-2xl"
+                    >
+                </div>
+
+                <!-- Text Side -->
+                <div class="order-1 lg:order-2">
+                    <h2 class="font-serif text-4xl lg:text-5xl font-bold mb-6 text-dark">Healing Hands, <br>Mother's Heart.</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Founded by Sarah Lim, a certified therapist and mother of two. We understand that the "fourth trimester" is fragile. Our team isn't just trained in massage; they are trained in empathy, safety, and hygiene.
+                    </p>
+                    
+                    <div class="border-l-4 border-brand-500 pl-6 my-8 bg-brand-50 py-4 pr-4 rounded-r-xl">
+                        <blockquote class="font-serif text-xl italic text-dark font-medium">
+                            "Every mummy deserves to heal. Postnatal care isn't a luxury; it's a necessity for your long-term health."
+                        </blockquote>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-6 mt-8">
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="text-brand-500 w-6 h-6"></i>
+                            <span class="font-bold text-gray-700">WSQ Certified</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="text-brand-500 w-6 h-6"></i>
+                            <span class="font-bold text-gray-700">Hospital Grade Hygiene</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="text-brand-500 w-6 h-6"></i>
+                            <span class="font-bold text-gray-700">100% Organic Oils</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="check-circle" class="text-brand-500 w-6 h-6"></i>
+                            <span class="font-bold text-gray-700">Home Visits</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PACKAGES / PRICING TEASER -->
+    <section id="pricing" class="py-24 bg-brand-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-end mb-12">
+                <div>
+                    <h2 class="font-serif text-4xl font-bold text-dark">Recovery Packages</h2>
+                    <p class="text-gray-600 mt-2">Flexible plans for every stage of motherhood.</p>
+                </div>
+                <div class="hidden md:flex gap-2">
+                    <!-- Navigation Arrows for desktop if this were a slider, just visual here -->
+                    <button class="p-2 rounded-full border border-gray-300 hover:bg-white hover:text-brand-500 transition"><i data-lucide="arrow-left"></i></button>
+                    <button class="p-2 rounded-full border border-gray-300 hover:bg-white hover:text-brand-500 transition"><i data-lucide="arrow-right"></i></button>
+                </div>
+            </div>
+
+            <!-- Scroll Container -->
+            <!-- Added pt-8 here to prevent the elevated card from being cut off -->
+            <div class="flex overflow-x-auto gap-8 pb-8 pt-8 hide-scroll snap-x">
+                
+                <!-- Package 1 -->
+                <div class="min-w-[85%] md:min-w-[350px] bg-white rounded-3xl p-8 shadow-lg snap-center flex flex-col border border-gray-100 hover:border-brand-200 transition">
+                    <div class="mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-dark">The Trial Glow</h3>
+                        <p class="text-gray-500 text-sm mt-1">Single Session (60 Mins)</p>
+                    </div>
+                    <div class="text-3xl font-bold text-brand-500 mb-6">$128 <span class="text-base font-medium text-gray-400">/ nett</span></div>
+                    <ul class="space-y-3 mb-8 flex-1">
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Full Body Massage</li>
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Womb Massage</li>
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Binder Usage</li>
+                    </ul>
+                    <button class="w-full border-2 border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white font-bold py-3 rounded-full transition">Book Trial</button>
+                </div>
+
+                <!-- Package 2 (Highlighted) -->
+                <div class="min-w-[85%] md:min-w-[350px] bg-white rounded-3xl p-8 shadow-xl snap-center flex flex-col border-2 border-brand-500 relative transform md:-translate-y-4">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand-500 text-white px-4 py-1 rounded-full text-xs font-bold uppercase tracking-wider shadow-lg">Most Popular</div>
+                    <div class="mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-dark">5-Day Restoration</h3>
+                        <p class="text-gray-500 text-sm mt-1">Complete Recovery</p>
+                    </div>
+                    <div class="text-3xl font-bold text-brand-500 mb-6">$588 <span class="text-base font-medium text-gray-400">/ package</span></div>
+                    <ul class="space-y-3 mb-8 flex-1">
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> 5 x 60min Sessions</li>
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Free Premium Binder</li>
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Lactation Check included</li>
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Transport Included</li>
+                    </ul>
+                    <button class="w-full bg-brand-500 text-white hover:bg-brand-600 font-bold py-3 rounded-full transition shadow-lg shadow-brand-500/30">Book Package</button>
+                </div>
+
+                <!-- Package 3 -->
+                <div class="min-w-[85%] md:min-w-[350px] bg-white rounded-3xl p-8 shadow-lg snap-center flex flex-col border border-gray-100 hover:border-brand-200 transition">
+                    <div class="mb-4">
+                        <h3 class="font-serif text-2xl font-bold text-dark">7-Day Premium</h3>
+                        <p class="text-gray-500 text-sm mt-1">Deep Healing & Slimming</p>
+                    </div>
+                    <div class="text-3xl font-bold text-brand-500 mb-6">$888 <span class="text-base font-medium text-gray-400">/ package</span></div>
+                    <ul class="space-y-3 mb-8 flex-1">
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> 7 x 75min Sessions</li>
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Slimming Wraps</li>
+                        <li class="flex items-center gap-2 text-gray-600"><i data-lucide="check" class="w-4 h-4 text-brand-500"></i> Hot Stone Therapy</li>
+                    </ul>
+                    <button class="w-full border-2 border-brand-500 text-brand-500 hover:bg-brand-500 hover:text-white font-bold py-3 rounded-full transition">Book Premium</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="reviews" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-serif text-4xl font-bold text-center mb-16 text-dark">Real Stories from Mummies</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="flex flex-col">
+                    <div class="bg-brand-50 p-8 rounded-t-3xl rounded-br-3xl relative mb-4">
+                        <div class="flex text-brand-500 mb-3">
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <p class="text-gray-700 font-medium italic">"I was suffering from terrible back pain after my C-section. Sarah was so gentle yet effective. I felt human again after just one session."</p>
+                    </div>
+                    <div class="flex items-center gap-4 px-2">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" class="w-12 h-12 rounded-full object-cover border-2 border-brand-100" alt="User">
+                        <div>
+                            <p class="font-bold text-dark">Jessica T.</p>
+                            <p class="text-xs text-gray-500">3 weeks postpartum</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="flex flex-col">
+                    <div class="bg-brand-50 p-8 rounded-t-3xl rounded-br-3xl relative mb-4">
+                        <div class="flex text-brand-500 mb-3">
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <p class="text-gray-700 font-medium italic">"The best investment I made for myself. The convenience of having them come to my home was a lifesaver. Highly recommend!"</p>
+                    </div>
+                    <div class="flex items-center gap-4 px-2">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" class="w-12 h-12 rounded-full object-cover border-2 border-brand-100" alt="User">
+                        <div>
+                            <p class="font-bold text-dark">Amanda L.</p>
+                            <p class="text-xs text-gray-500">1 month postpartum</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="flex flex-col">
+                    <div class="bg-brand-50 p-8 rounded-t-3xl rounded-br-3xl relative mb-4">
+                        <div class="flex text-brand-500 mb-3">
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <p class="text-gray-700 font-medium italic">"My milk supply increased significantly after the lactation massage. The therapist was so knowledgeable and kind."</p>
+                    </div>
+                    <div class="flex items-center gap-4 px-2">
+                        <img src="https://randomuser.me/api/portraits/women/32.jpg" class="w-12 h-12 rounded-full object-cover border-2 border-brand-100" alt="User">
+                        <div>
+                            <p class="font-bold text-dark">Priya R.</p>
+                            <p class="text-xs text-gray-500">2 weeks postpartum</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ ACCORDION -->
+    <section id="faq" class="py-24 bg-brand-50">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="font-serif text-4xl font-bold text-center mb-12 text-dark">Common Questions</h2>
+            
+            <div class="space-y-4">
+                <!-- Item 1 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none faq-btn">
+                        <span class="font-bold text-lg text-dark">When should I start postnatal massage?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
+                    </button>
+                    <div class="px-8 pb-0 h-0 overflow-hidden transition-all duration-300 faq-content">
+                        <p class="pb-6 text-gray-600">For natural birth, you can start as early as 5-7 days postpartum. For C-section deliveries, we recommend waiting at least 21 days or until your incision has healed.</p>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none faq-btn">
+                        <span class="font-bold text-lg text-dark">Do you bring your own equipment?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
+                    </button>
+                    <div class="px-8 pb-0 h-0 overflow-hidden transition-all duration-300 faq-content">
+                        <p class="pb-6 text-gray-600">Yes! We bring a portable massage bed, fresh towels, organic oils, and the binder. You just need to prepare a small space in your home.</p>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-md transition">
+                    <button class="w-full px-8 py-6 text-left flex justify-between items-center focus:outline-none faq-btn">
+                        <span class="font-bold text-lg text-dark">Is the massage painful?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 transition-transform duration-300"></i>
+                    </button>
+                    <div class="px-8 pb-0 h-0 overflow-hidden transition-all duration-300 faq-content">
+                        <p class="pb-6 text-gray-600">No, it should be soothing. While we do work on deep tissues to expel wind and water retention, the pressure is always adjusted to your comfort level.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="py-24 bg-white">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="bg-gradient-to-r from-brand-500 to-rose-400 rounded-3xl md:rounded-[3rem] p-12 md:p-20 text-center shadow-2xl relative overflow-hidden">
+                <!-- Decor Circles -->
+                <div class="absolute top-0 left-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="absolute bottom-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl translate-x-1/2 translate-y-1/2"></div>
+                
+                <h2 class="font-serif text-4xl md:text-5xl font-bold text-white mb-6 relative z-10">Ready to feel like yourself again?</h2>
+                <p class="text-white/90 text-lg md:text-xl mb-10 max-w-2xl mx-auto relative z-10">
+                    Slots fill up fast for the coming months. Secure your confinement recovery sessions today.
+                </p>
+                <div class="relative z-10">
+                    <a href="#book" class="inline-block bg-white text-brand-500 text-lg px-10 py-4 rounded-full font-bold transition transform hover:scale-105 shadow-xl hover:shadow-2xl">
+                        Book Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-4 gap-12 mb-12">
+                <div class="col-span-1 md:col-span-1">
+                    <a href="#" class="font-serif text-2xl font-bold text-white tracking-tight mb-4 block">
+                        Postnatal<span class="text-brand-500">Healing.</span>
+                    </a>
+                    <p class="text-gray-400 text-sm leading-relaxed">
+                        Singapore's premier home-visit postnatal massage service. Dedicated to your recovery and well-being.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-500">Services</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">Postnatal Massage</a></li>
+                        <li><a href="#" class="hover:text-white transition">Prenatal Massage</a></li>
+                        <li><a href="#" class="hover:text-white transition">Lactation Support</a></li>
+                        <li><a href="#" class="hover:text-white transition">Slimming Therapy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-500">Company</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Therapists</a></li>
+                        <li><a href="#" class="hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="hover:text-white transition">Contact</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4 text-brand-500">Contact</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li class="flex items-center gap-2"><i data-lucide="phone" class="w-4 h-4"></i> +65 9123 4567</li>
+                        <li class="flex items-center gap-2"><i data-lucide="mail" class="w-4 h-4"></i> hello@mamaglow.sg</li>
+                        <li class="flex items-center gap-2"><i data-lucide="map-pin" class="w-4 h-4"></i> Singapore</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-xs">
+                &copy; 2026 Postnatal Healing. All rights reserved. Website Design by <a href="https://reputifly.com" target="_blank" class="text-brand-500 hover:text-white transition">Reputifly</a>.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Initialize Icons
+        lucide.createIcons();
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // FAQ Accordion Logic
+        document.querySelectorAll('.faq-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('i');
+                const title = button.querySelector('span');
+                
+                // Toggle Content Height
+                if (content.style.height && content.style.height !== '0px') {
+                    content.style.height = '0px';
+                    icon.style.transform = 'rotate(0deg)';
+                    title.classList.remove('text-brand-500');
+                    title.classList.add('text-dark');
+                } else {
+                    // Close others (optional, removes "accordion" effect if removed)
+                    document.querySelectorAll('.faq-content').forEach(c => c.style.height = '0px');
+                    document.querySelectorAll('.faq-btn i').forEach(i => i.style.transform = 'rotate(0deg)');
+                    document.querySelectorAll('.faq-btn span').forEach(s => {
+                        s.classList.remove('text-brand-500');
+                        s.classList.add('text-dark');
+                    });
+
+                    content.style.height = content.scrollHeight + 'px';
+                    icon.style.transform = 'rotate(180deg)';
+                    title.classList.remove('text-dark');
+                    title.classList.add('text-brand-500');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
