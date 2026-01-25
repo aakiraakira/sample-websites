@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caroline Dawson International | Executive Coaching & Training</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- VARIABLES & RESET --- */
+        :root {
+            --primary-blue: #0f172a;       /* Slate 900 - Deep Navy */
+            --secondary-blue: #1e3a8a;     /* Royal Blue */
+            --accent-blue: #3b82f6;        /* Bright Blue */
+            --text-dark: #1e293b;
+            --text-light: #f1f5f9;
+            --text-gray: #64748b;
+            --white: #ffffff;
+            --font-main: 'Inter', sans-serif;
+            --container-width: 1200px;
+            --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            background-color: #f8fafc;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- TYPOGRAPHY --- */
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.03em;
+        }
+
+        h1 { font-size: clamp(3rem, 5vw, 4.5rem); }
+        h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
+        h3 { font-size: 1.5rem; }
+        p { color: var(--text-gray); font-size: 1.125rem; margin-bottom: 1.5rem; font-weight: 300; }
+        
+        .text-white { color: var(--white); }
+        .text-accent { color: var(--accent-blue); font-weight: 700; letter-spacing: 1px; text-transform: uppercase; font-size: 0.875rem; display: block; margin-bottom: 1rem;}
+        .text-center { text-align: center; }
+
+        /* --- UTILITIES --- */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: var(--accent-blue);
+            color: var(--white);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.6);
+            background: #2563eb;
+        }
+
+        .btn-outline {
+            border: 2px solid rgba(255,255,255,0.2);
+            color: var(--white);
+            margin-left: 1rem;
+        }
+        
+        .btn-outline:hover {
+            background: var(--white);
+            color: var(--primary-blue);
+        }
+
+        .section-padding { padding: 8rem 0; }
+
+        /* --- ANIMATIONS --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* --- HEADER --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 1rem 0;
+            transition: var(--transition);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 60px; /* Adjust based on actual logo ratio */
+            width: auto;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            color: var(--primary-blue);
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--accent-blue);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after { width: 100%; }
+
+        .nav-btn {
+            background: var(--primary-blue);
+            color: var(--white);
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+            color: var(--white);
+        }
+        .nav-btn:hover::after { display: none; }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            background-color: var(--primary-blue);
+            overflow: hidden;
+            margin-top: 80px; /* Offset for fixed header */
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Focus on face if needed, usually top center works for portraits */
+            object-position: top center; 
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            /* Heavy gradient to make text readable over the image */
+            background: linear-gradient(90deg, 
+                rgba(15, 23, 42, 0.95) 0%, 
+                rgba(15, 23, 42, 0.8) 40%, 
+                rgba(15, 23, 42, 0.2) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            max-width: 650px;
+        }
+
+        /* --- CREDENTIALS MARQUEE --- */
+        .marquee-section {
+            background: var(--white);
+            padding: 2rem 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+        
+        .marquee-title {
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-gray);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 1.5rem;
+        }
+
+        .marquee-track {
+            display: flex;
+            width: calc(200px * 14); /* Approximate width */
+            animation: scroll 30s linear infinite;
+        }
+
+        .marquee-item {
+            width: 200px;
+            padding: 0 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0.7;
+            filter: grayscale(100%);
+            transition: var(--transition);
+        }
+        
+        .marquee-item:hover { filter: grayscale(0); opacity: 1; }
+        .marquee-item img { max-height: 80px; width: auto; }
+
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(calc(-200px * 7)); } /* Scroll half width */
+        }
+
+        /* --- ABOUT SECTION --- */
+        .about-split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .image-stack {
+            position: relative;
+            height: 600px;
+        }
+
+        .image-stack img {
+            position: absolute;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        /* Large back image */
+        .img-back {
+            top: 0;
+            right: 0;
+            width: 80%;
+            height: 80%;
+            z-index: 1;
+        }
+
+        /* Small front image */
+        .img-front {
+            bottom: 0;
+            left: 0;
+            width: 60%;
+            height: 60%;
+            z-index: 2;
+            border: 8px solid #f8fafc;
+        }
+
+        .image-stack:hover .img-front {
+            transform: scale(1.05);
+            z-index: 3;
+        }
+
+        /* --- SOLUTIONS (GROW BUSINESS) --- */
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .solution-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            position: relative;
+            group: hover;
+            height: 500px; /* Tall cards */
+        }
+
+        .solution-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .solution-img-wrapper {
+            height: 100%;
+            width: 100%;
+            position: relative;
+        }
+
+        .solution-img-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(to top, rgba(15,23,42,0.9) 10%, transparent 60%);
+        }
+
+        .solution-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .solution-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .solution-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 2.5rem;
+            z-index: 2;
+            color: var(--white);
+        }
+
+        .solution-content h3 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .solution-arrow {
+            display: inline-flex;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-blue);
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            margin-top: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .solution-card:hover .solution-arrow {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* --- PROFILE HIGHLIGHT --- */
+        .profile-section {
+            background-color: var(--primary-blue);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .profile-bg-pattern {
+            position: absolute;
+            top: 0; right: 0;
+            opacity: 0.05;
+            font-size: 20rem;
+            line-height: 0;
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .profile-img-container {
+            display: flex;
+            justify-content: center;
+            position: relative;
+        }
+
+        .profile-img-container img {
+            max-height: 500px;
+            filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+        }
+
+        .profile-text p { color: rgba(255,255,255,0.7); }
+
+        /* --- CLIENTS --- */
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 3rem;
+            align-items: center;
+            justify-items: center;
+            margin-top: 3rem;
+        }
+
+        .client-logo {
+            max-width: 140px;
+            opacity: 0.6;
+            filter: grayscale(100%);
+            transition: var(--transition);
+        }
+
+        .client-logo:hover {
+            opacity: 1;
+            filter: grayscale(0);
+            transform: scale(1.1);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #020617;
+            color: var(--white);
+            padding: 5rem 0 2rem;
+            border-top: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand h2 { font-size: 2rem; letter-spacing: -1px; margin-bottom: 1rem; }
+        .footer-col h4 { margin-bottom: 1.5rem; font-size: 1.1rem; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+        .footer-col ul li a { color: var(--text-gray); font-size: 0.95rem; }
+        .footer-col ul li a:hover { color: var(--accent-blue); }
+
+        .social-links { display: flex; gap: 1rem; }
+        .social-links a {
+            width: 40px; height: 40px;
+            background: rgba(255,255,255,0.1);
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+        .social-links a:hover { background: var(--accent-blue); }
+
+        /* --- MOBILE --- */
+        @media (max-width: 992px) {
+            .hero { text-align: center; justify-content: center; }
+            .hero-overlay { background: rgba(15,23,42,0.85); }
+            .hero-content { margin: 0 auto; }
+            .about-split, .profile-grid, .footer-grid { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+            .image-stack { height: 400px; margin-bottom: 2rem; }
+            .img-back { left: 50%; transform: translateX(-50%); }
+            .img-front { left: 50%; transform: translateX(-50%); margin-bottom: -20px; }
+            .clients-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
+            .nav-links { display: none; } /* Simplified mobile handling */
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <img src="https://carolinedawson.org/assets/images/logo.png" alt="Caroline Dawson International">
+            </a>
+            <nav class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Courses</a>
+                <a href="#">Speaker In Action</a>
+                <a href="#">Testimonials</a>
+                <a href="#" class="nav-btn">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-bg">
+            <img src="https://carolinedawson.org/assets/images/slider-1.jpg" alt="Caroline Dawson">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="text-accent reveal">World-Class Corporate Training</span>
+                <h1 class="reveal reveal-delay-1">Together, We Can <br><span style="color: var(--accent-blue);">Grow Your Business.</span></h1>
+                <p class="reveal reveal-delay-2 text-white" style="opacity: 0.8; margin-top: 1.5rem;">
+                    Dr. Caroline Josephine Dawson provides executive coaching in communication, leadership, and personal development. Unlock your potential with the mindset of a champion.
+                </p>
+                <div class="reveal reveal-delay-3" style="margin-top: 2rem;">
+                    <a href="#" class="btn btn-primary">Work With Caroline <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
+                    <a href="#" class="btn btn-outline">View Courses</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="marquee-section">
+        <h4 class="marquee-title">Accredited & Certified By</h4>
+        <div class="marquee-track">
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/1.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/2.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/3.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/6.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/7.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/8.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/9.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/1.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/2.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/3.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/6.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/7.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/8.png" alt="Award"></div>
+            <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/9.png" alt="Award"></div>
+        </div>
+    </div>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="about-split">
+                <div class="image-stack reveal">
+                    <img src="https://carolinedawson.org/assets/images/about-profile-2.jpg" class="img-back" alt="Training Session">
+                    <img src="https://carolinedawson.org/assets/images/about-profile-3.jpg" class="img-front" alt="Dr Dawson Profile">
+                </div>
+                <div class="reveal reveal-delay-2">
+                    <span class="text-accent">About CDI</span>
+                    <h2>Pragmatic, Real-World <br>Training Solutions.</h2>
+                    <p>Caroline Dawson International (CDI) provides corporate training solutions in a variety of communication, leadership, management, and personal development topics.</p>
+                    <p>We use a combination of tailored activities and experiential, innovative teaching methods. Dr. Dawson’s pragmatic approach ensures that she understands and responds to the real pressures faced by adult learners.</p>
+                    <a href="#" class="btn btn-primary" style="margin-top: 1rem;">Read Full Bio</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding" style="background-color: #f1f5f9;">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="text-accent">Our Expertise</span>
+                <h2>Solutions to Scale Your Success</h2>
+                <p style="max-width: 600px; margin: 0 auto;">Comprehensive curriculums designed to tackle modern business challenges through proven methodology.</p>
+            </div>
+
+            <div class="solutions-grid">
+                <article class="solution-card reveal reveal-delay-1">
+                    <div class="solution-img-wrapper">
+                        <img src="https://carolinedawson.org/assets/images/course-3.jpg" alt="Customer Service">
+                    </div>
+                    <div class="solution-content">
+                        <h3>Customer Service</h3>
+                        <p class="text-white" style="font-size: 0.9rem; margin-bottom: 0;">Building loyalty through excellence.</p>
+                        <div class="solution-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                    <a href="#" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></a>
+                </article>
+
+                <article class="solution-card reveal reveal-delay-2">
+                    <div class="solution-img-wrapper">
+                        <img src="https://carolinedawson.org/assets/images/course-4.jpg" alt="Presentation Skills">
+                    </div>
+                    <div class="solution-content">
+                        <h3>Presentation Skills</h3>
+                        <p class="text-white" style="font-size: 0.9rem; margin-bottom: 0;">Speak to inspire and connect.</p>
+                        <div class="solution-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                    <a href="#" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></a>
+                </article>
+
+                <article class="solution-card reveal reveal-delay-3">
+                    <div class="solution-img-wrapper">
+                        <img src="https://carolinedawson.org/assets/images/course-5.jpg" alt="Communication Skills">
+                    </div>
+                    <div class="solution-content">
+                        <h3>Communication</h3>
+                        <p class="text-white" style="font-size: 0.9rem; margin-bottom: 0;">Master the art of influence.</p>
+                        <div class="solution-arrow"><i class="fas fa-arrow-right"></i></div>
+                    </div>
+                    <a href="#" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></a>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding profile-section">
+        <i class="fas fa-quote-right profile-bg-pattern"></i>
+        <div class="container">
+            <div class="profile-grid">
+                <div class="profile-text reveal">
+                    <h2 class="text-white">Dr. Caroline Josephine Dawson</h2>
+                    <h4 style="color: var(--accent-blue); margin-bottom: 2rem;">DBA (Teesside University, UK), MA (NTU Singapore)</h4>
+                    <p>Director of Caroline Dawson International, Dr. Dawson has more than 20 years of invaluable experience as an Editor of lifestyle and technical publications and 15 years teaching business management.</p>
+                    <p>By closely observing and identifying individuals with special learning needs, she has maintained that experiential, innovative teaching methods and highly interactive curriculum are key motivational factors.</p>
+                    
+                    <div style="display: flex; gap: 2rem; margin-top: 3rem;">
+                        <div>
+                            <h3 style="color: var(--accent-blue); font-size: 2.5rem; margin-bottom: 0;">20+</h3>
+                            <span style="opacity: 0.7; font-size: 0.9rem;">Years Experience</span>
+                        </div>
+                        <div>
+                            <h3 style="color: var(--accent-blue); font-size: 2.5rem; margin-bottom: 0;">100+</h3>
+                            <span style="opacity: 0.7; font-size: 0.9rem;">Companies Trained</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="profile-img-container reveal reveal-delay-2">
+                    <img src="https://carolinedawson.org/assets/images/profile.png" alt="Dr Caroline Profile">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding">
+        <div class="container">
+            <div class="text-center reveal">
+                <span class="text-accent">Trusted Partners</span>
+                <h2>Selected Companies Trained by CDI</h2>
+            </div>
+            
+            <div class="clients-grid reveal reveal-delay-1">
+                <img src="https://carolinedawson.org/assets/images/client-c-1.png" class="client-logo" alt="Client">
+                <img src="https://carolinedawson.org/assets/images/client-c-2.png" class="client-logo" alt="Client">
+                <img src="https://carolinedawson.org/assets/images/client-c-3.png" class="client-logo" alt="Client">
+                <img src="https://carolinedawson.org/assets/images/client-c-4.png" class="client-logo" alt="Client">
+                <img src="https://carolinedawson.org/assets/images/client-c-5.png" class="client-logo" alt="Client">
+                <img src="https://carolinedawson.org/assets/images/client-c-6.png" class="client-logo" alt="Client">
+                <img src="https://carolinedawson.org/assets/images/client-c-7.png" class="client-logo" alt="Client">
+                <img src="https://carolinedawson.org/assets/images/client-c-8.png" class="client-logo" alt="Client">
+                <img src="https://carolinedawson.org/assets/images/client-c-9.png" class="client-logo" alt="Client">
+                <div style="display: flex; align-items: center; justify-content: center; width: 100%;">
+                    <a href="#" style="color: var(--accent-blue); font-weight: 600; border-bottom: 2px solid var(--accent-blue);">View All Clients</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h2>CDI.</h2>
+                    <p style="opacity: 0.6; font-size: 0.9rem;">Empowering professionals with the skills to lead, communicate, and succeed in a rapidly changing world.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Our Courses</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>carol@carolinedawson.org</li>
+                        <li>+65 9383 5310</li>
+                        <li>Singapore</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Social</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/carolinejosephinedawson"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/carolinedawson1673"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/carolinedawson1626"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; color: var(--text-gray); font-size: 0.85rem;">
+                <p style="margin: 0;">&copy; 2026 Caroline Dawson International. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple Intersection Observer for scroll animations
+        document.addEventListener('DOMContentLoaded', () => {
+            const observerOptions = {
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, observerOptions);
+
+            const revealElements = document.querySelectorAll('.reveal');
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
