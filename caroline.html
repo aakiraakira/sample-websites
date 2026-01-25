@@ -8,13 +8,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         /* --- VARIABLES & RESET --- */
         :root {
-            --primary-blue: #0f172a;       /* Slate 900 - Deep Navy */
+            --primary-blue: #0f172a;       /* Slate 900 */
             --secondary-blue: #1e3a8a;     /* Royal Blue */
             --accent-blue: #3b82f6;        /* Bright Blue */
             --text-dark: #1e293b;
@@ -24,13 +23,10 @@
             --font-main: 'Inter', sans-serif;
             --container-width: 1200px;
             --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            --radius: 24px; /* GLOBAL ROUNDING for consistency */
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: var(--font-main);
@@ -42,16 +38,11 @@
 
         a { text-decoration: none; color: inherit; transition: var(--transition); }
         ul { list-style: none; }
-        img { max-width: 100%; display: block; }
+        img { max-width: 100%; display: block; height: auto; }
 
         /* --- TYPOGRAPHY --- */
-        h1, h2, h3, h4 {
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.03em;
-        }
-
-        h1 { font-size: clamp(3rem, 5vw, 4.5rem); }
+        h1, h2, h3, h4 { font-weight: 800; line-height: 1.1; letter-spacing: -0.02em; }
+        h1 { font-size: clamp(2.5rem, 5vw, 4.2rem); }
         h2 { font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 1rem; }
         h3 { font-size: 1.5rem; }
         p { color: var(--text-gray); font-size: 1.125rem; margin-bottom: 1.5rem; font-weight: 300; }
@@ -61,385 +52,148 @@
         .text-center { text-align: center; }
 
         /* --- UTILITIES --- */
-        .container {
-            max-width: var(--container-width);
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
+        .container { max-width: var(--container-width); margin: 0 auto; padding: 0 1.5rem; }
 
         .btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 1rem 2.5rem;
-            font-weight: 600;
-            border-radius: 50px;
-            transition: var(--transition);
-            cursor: pointer;
-            letter-spacing: -0.01em;
+            display: inline-flex; align-items: center; padding: 1rem 2.5rem;
+            font-weight: 600; border-radius: var(--radius);
+            transition: var(--transition); cursor: pointer; letter-spacing: -0.01em;
+            font-size: 0.95rem;
         }
 
         .btn-primary {
-            background: var(--accent-blue);
-            color: var(--white);
+            background: var(--accent-blue); color: var(--white);
             box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 30px -5px rgba(59, 130, 246, 0.6);
-            background: #2563eb;
-        }
+        .btn-primary:hover { transform: translateY(-3px); background: #2563eb; }
 
         .btn-outline {
-            border: 2px solid rgba(255,255,255,0.2);
-            color: var(--white);
-            margin-left: 1rem;
+            border: 2px solid rgba(255,255,255,0.2); color: var(--white); margin-left: 1rem;
         }
         
-        .btn-outline:hover {
-            background: var(--white);
-            color: var(--primary-blue);
-        }
+        .btn-outline:hover { background: var(--white); color: var(--primary-blue); border-color: var(--white); }
 
-        .section-padding { padding: 8rem 0; }
-
-        /* --- ANIMATIONS --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s ease-out;
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .reveal-delay-1 { transition-delay: 0.1s; }
-        .reveal-delay-2 { transition-delay: 0.2s; }
-        .reveal-delay-3 { transition-delay: 0.3s; }
+        .section-padding { padding: 6rem 0; }
 
         /* --- HEADER --- */
         header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            padding: 1rem 0;
-            transition: var(--transition);
+            position: fixed; top: 0; width: 100%;
+            background: rgba(255, 255, 255, 0.98); backdrop-filter: blur(10px);
+            z-index: 1000; box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            padding: 0.8rem 0; transition: var(--transition);
         }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+        .logo img { height: 50px; width: auto; }
 
-        .logo img {
-            height: 60px; /* Adjust based on actual logo ratio */
-            width: auto;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2.5rem;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-weight: 500;
-            color: var(--primary-blue);
-            font-size: 0.95rem;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent-blue);
-            transition: var(--transition);
-        }
-
-        .nav-links a:hover::after { width: 100%; }
+        .nav-links { display: flex; gap: 2rem; align-items: center; }
+        .nav-links a { font-weight: 500; color: var(--primary-blue); font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--accent-blue); }
 
         .nav-btn {
-            background: var(--primary-blue);
-            color: var(--white);
-            padding: 0.75rem 1.5rem;
-            border-radius: 6px;
+            background: var(--primary-blue); color: var(--white);
+            padding: 0.6rem 1.25rem; border-radius: var(--radius);
         }
-        
-        .nav-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
-            color: var(--white);
-        }
-        .nav-btn:hover::after { display: none; }
+        .nav-btn:hover { transform: translateY(-2px); color: var(--white); }
+
+        .mobile-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-blue); }
 
         /* --- HERO SECTION --- */
         .hero {
-            position: relative;
-            height: 100vh;
-            min-height: 700px;
-            display: flex;
-            align-items: center;
-            color: var(--white);
-            background-color: var(--primary-blue);
-            overflow: hidden;
-            margin-top: 80px; /* Offset for fixed header */
+            position: relative; min-height: 100vh; display: flex; align-items: center;
+            background-color: var(--primary-blue); overflow: hidden; padding-top: 100px;
         }
 
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
+        .hero .container {
+            display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 2rem;
+            align-items: center; position: relative; z-index: 2;
+        }
+
+        /* Background Gradient Accent */
+        .hero::after {
+            content: ''; position: absolute; top: -10%; right: -10%;
+            width: 50vw; height: 50vw;
+            background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+            border-radius: 50%; pointer-events: none;
+        }
+
+        .hero-content { color: var(--white); z-index: 5; }
+
+        .hero-img-wrapper {
+            position: relative; display: flex; justify-content: flex-end; align-items: flex-end;
             height: 100%;
-            z-index: 1;
         }
 
-        .hero-bg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            /* Focus on face if needed, usually top center works for portraits */
-            object-position: top center; 
+        .hero-img-wrapper img {
+            max-height: 85vh; width: auto; 
+            filter: drop-shadow(0 0 30px rgba(0,0,0,0.5));
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
 
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 2;
-            /* Heavy gradient to make text readable over the image */
-            background: linear-gradient(90deg, 
-                rgba(15, 23, 42, 0.95) 0%, 
-                rgba(15, 23, 42, 0.8) 40%, 
-                rgba(15, 23, 42, 0.2) 100%);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 3;
-            max-width: 650px;
-        }
-
-        /* --- CREDENTIALS MARQUEE --- */
-        .marquee-section {
-            background: var(--white);
-            padding: 2rem 0;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            overflow: hidden;
-        }
-        
-        .marquee-title {
-            text-align: center;
-            font-size: 0.75rem;
-            color: var(--text-gray);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 1.5rem;
-        }
-
-        .marquee-track {
-            display: flex;
-            width: calc(200px * 14); /* Approximate width */
-            animation: scroll 30s linear infinite;
-        }
-
-        .marquee-item {
-            width: 200px;
-            padding: 0 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0.7;
-            filter: grayscale(100%);
-            transition: var(--transition);
-        }
-        
+        /* --- MARQUEE --- */
+        .marquee-section { background: var(--white); padding: 2rem 0; border-bottom: 1px solid rgba(0,0,0,0.05); }
+        .marquee-track { display: flex; width: fit-content; animation: scroll 40s linear infinite; }
+        .marquee-item { flex: 0 0 auto; width: 200px; padding: 0 2rem; opacity: 0.6; filter: grayscale(100%); transition: var(--transition); }
         .marquee-item:hover { filter: grayscale(0); opacity: 1; }
-        .marquee-item img { max-height: 80px; width: auto; }
+        @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        @keyframes scroll {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(calc(-200px * 7)); } /* Scroll half width */
-        }
+        /* --- ABOUT --- */
+        .about-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+        .image-stack { position: relative; height: 500px; width: 100%; }
+        .image-stack img { position: absolute; border-radius: var(--radius); box-shadow: 0 20px 40px rgba(0,0,0,0.15); object-fit: cover; }
+        .img-back { top: 0; right: 0; width: 85%; height: 85%; z-index: 1; }
+        .img-front { bottom: 0; left: 0; width: 55%; height: 55%; z-index: 2; border: 8px solid #f8fafc; }
 
-        /* --- ABOUT SECTION --- */
-        .about-split {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 6rem;
-            align-items: center;
-        }
-
-        .image-stack {
-            position: relative;
-            height: 600px;
-        }
-
-        .image-stack img {
-            position: absolute;
-            border-radius: 12px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-            object-fit: cover;
-            transition: var(--transition);
-        }
-
-        /* Large back image */
-        .img-back {
-            top: 0;
-            right: 0;
-            width: 80%;
-            height: 80%;
-            z-index: 1;
-        }
-
-        /* Small front image */
-        .img-front {
-            bottom: 0;
-            left: 0;
-            width: 60%;
-            height: 60%;
-            z-index: 2;
-            border: 8px solid #f8fafc;
-        }
-
-        .image-stack:hover .img-front {
-            transform: scale(1.05);
-            z-index: 3;
-        }
-
-        /* --- SOLUTIONS (GROW BUSINESS) --- */
-        .solutions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 4rem;
-        }
-
+        /* --- SOLUTIONS --- */
+        .solutions-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 4rem; }
         .solution-card {
-            background: var(--white);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transition: var(--transition);
-            position: relative;
-            group: hover;
-            height: 500px; /* Tall cards */
+            background: var(--white); border-radius: var(--radius); overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: var(--transition);
+            position: relative; height: 450px;
         }
-
-        .solution-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .solution-img-wrapper {
-            height: 100%;
-            width: 100%;
-            position: relative;
-        }
-
-        .solution-img-wrapper::after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to top, rgba(15,23,42,0.9) 10%, transparent 60%);
-        }
-
-        .solution-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .solution-card:hover img {
-            transform: scale(1.1);
-        }
-
+        .solution-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); }
+        .solution-card img { width: 100%; height: 100%; object-fit: cover; }
         .solution-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            padding: 2.5rem;
-            z-index: 2;
+            position: absolute; bottom: 0; left: 0; width: 100%; padding: 2rem;
+            background: linear-gradient(to top, rgba(15,23,42,0.95) 20%, transparent 100%);
             color: var(--white);
         }
 
-        .solution-content h3 {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
+        /* --- PROFILE STATS (COUNTERS) --- */
+        .stats-container {
+            display: flex; gap: 3rem; margin-top: 3rem;
         }
+        .stat-box h3 { color: var(--accent-blue); font-size: 3rem; margin-bottom: 0; line-height: 1; }
+        .stat-box span { color: var(--text-gray); font-size: 0.9rem; font-weight: 500; }
 
-        .solution-arrow {
-            display: inline-flex;
-            width: 40px;
-            height: 40px;
-            background: var(--accent-blue);
-            border-radius: 50%;
-            align-items: center;
-            justify-content: center;
-            margin-top: 1rem;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: var(--transition);
-        }
-
-        .solution-card:hover .solution-arrow {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* --- PROFILE HIGHLIGHT --- */
-        .profile-section {
-            background-color: var(--primary-blue);
-            color: var(--white);
-            position: relative;
-            overflow: hidden;
+        /* --- FAQ SECTION --- */
+        .faq-section { background: var(--white); }
+        .faq-container { max-width: 800px; margin: 0 auto; margin-top: 3rem; }
+        
+        .faq-item {
+            background: #f8fafc; border-radius: var(--radius); margin-bottom: 1rem;
+            padding: 0; border: 1px solid transparent; transition: var(--transition);
         }
         
-        .profile-bg-pattern {
-            position: absolute;
-            top: 0; right: 0;
-            opacity: 0.05;
-            font-size: 20rem;
-            line-height: 0;
+        .faq-item.active { background: var(--white); border-color: var(--accent-blue); box-shadow: 0 10px 30px rgba(59, 130, 246, 0.1); }
+        
+        .faq-question {
+            padding: 1.5rem 2rem; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 1.1rem;
         }
-
-        .profile-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
+        
+        .faq-icon { transition: var(--transition); color: var(--accent-blue); }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        
+        .faq-answer {
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+            padding: 0 2rem; color: var(--text-gray);
         }
+        
+        .faq-item.active .faq-answer { padding-bottom: 1.5rem; }
 
-        .profile-img-container {
-            display: flex;
-            justify-content: center;
-            position: relative;
-        }
-
-        .profile-img-container img {
-            max-height: 500px;
-            filter: drop-shadow(0 0 20px rgba(0,0,0,0.5));
-            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-        }
-
-        .profile-text p { color: rgba(255,255,255,0.7); }
-
-        /* --- CLIENTS --- */
+        /* --- CLIENTS GRID --- */
         .clients-grid {
             display: grid;
             grid-template-columns: repeat(5, 1fr);
@@ -456,54 +210,74 @@
             transition: var(--transition);
         }
 
-        .client-logo:hover {
-            opacity: 1;
-            filter: grayscale(0);
-            transform: scale(1.1);
-        }
+        .client-logo:hover { opacity: 1; filter: grayscale(0); transform: scale(1.1); }
 
         /* --- FOOTER --- */
-        footer {
-            background: #020617;
-            color: var(--white);
-            padding: 5rem 0 2rem;
-            border-top: 1px solid rgba(255,255,255,0.05);
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: 4rem;
-            margin-bottom: 4rem;
-        }
-
-        .footer-brand h2 { font-size: 2rem; letter-spacing: -1px; margin-bottom: 1rem; }
-        .footer-col h4 { margin-bottom: 1.5rem; font-size: 1.1rem; }
-        .footer-col ul li { margin-bottom: 0.8rem; }
-        .footer-col ul li a { color: var(--text-gray); font-size: 0.95rem; }
-        .footer-col ul li a:hover { color: var(--accent-blue); }
-
+        footer { background: #020617; color: var(--white); padding: 5rem 0 2rem; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 2rem; margin-bottom: 3rem; }
+        
+        /* Footer logo filter to make it white if it's dark, or keep natural */
+        .footer-brand img { height: 50px; margin-bottom: 1.5rem; background: rgba(255,255,255,0.9); padding: 5px; border-radius: 8px; }
+        
         .social-links { display: flex; gap: 1rem; }
         .social-links a {
-            width: 40px; height: 40px;
-            background: rgba(255,255,255,0.1);
+            width: 40px; height: 40px; background: rgba(255,255,255,0.1);
             display: flex; align-items: center; justify-content: center;
-            border-radius: 50%;
-            transition: var(--transition);
+            border-radius: 50%; transition: var(--transition);
         }
         .social-links a:hover { background: var(--accent-blue); }
 
-        /* --- MOBILE --- */
+        .reputifly-link { color: var(--text-gray); font-size: 0.85rem; transition: var(--transition); text-decoration: none; margin-top: 0.5rem; display: inline-block;}
+        .reputifly-link:hover { color: var(--accent-blue); }
+
+        /* --- ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+
+        /* --- MOBILE RESPONSIVENESS --- */
         @media (max-width: 992px) {
-            .hero { text-align: center; justify-content: center; }
-            .hero-overlay { background: rgba(15,23,42,0.85); }
-            .hero-content { margin: 0 auto; }
-            .about-split, .profile-grid, .footer-grid { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+            h1 { font-size: 2.8rem; }
+            .mobile-toggle { display: block; }
+            
+            .nav-links {
+                position: absolute; top: 100%; left: 0; width: 100%;
+                background: var(--white); flex-direction: column;
+                padding: 2rem 1.5rem; box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+                transform: translateY(-20px); opacity: 0; pointer-events: none; transition: var(--transition);
+            }
+            .nav-links.active { transform: translateY(0); opacity: 1; pointer-events: all; }
+            .nav-btn { width: 100%; text-align: center; }
+
+            /* Hero Mobile */
+            .hero { padding-top: 100px; min-height: auto; padding-bottom: 0; }
+            .hero .container { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+            .hero-img-wrapper { justify-content: center; height: 400px; order: 2; }
+            .hero-img-wrapper img { max-height: 100%; width: auto; mask-image: linear-gradient(to bottom, black 70%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%); }
+            
+            .btn { width: 100%; justify-content: center; margin-left: 0 !important; margin-bottom: 1rem; }
+            .btn-outline { margin-left: 0; }
+
+            /* Stats Mobile Centering */
+            .stats-container { justify-content: center; text-align: center; gap: 4rem; }
+            .stat-box { display: flex; flex-direction: column; align-items: center; }
+
+            /* General Mobile */
+            .about-split, .profile-grid, .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 3rem; }
             .image-stack { height: 400px; margin-bottom: 2rem; }
             .img-back { left: 50%; transform: translateX(-50%); }
-            .img-front { left: 50%; transform: translateX(-50%); margin-bottom: -20px; }
-            .clients-grid { grid-template-columns: repeat(3, 1fr); gap: 2rem; }
-            .nav-links { display: none; } /* Simplified mobile handling */
+            .img-front { left: 50%; transform: translateX(-50%); }
+            
+            .footer-brand { display: flex; flex-direction: column; align-items: center; }
+            .social-links { justify-content: center; }
+            
+            .clients-grid { grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+        }
+        
+        @media (max-width: 480px) {
+            .clients-grid { grid-template-columns: repeat(2, 1fr); }
         }
     </style>
 </head>
@@ -512,9 +286,14 @@
     <header>
         <div class="container nav-container">
             <a href="#" class="logo">
-                <img src="https://carolinedawson.org/assets/images/logo.png" alt="Caroline Dawson International">
+                <img src="https://carolinedawson.org/assets/images/logo.png" alt="Caroline Dawson">
             </a>
-            <nav class="nav-links">
+            
+            <div class="mobile-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </div>
+
+            <nav class="nav-links" id="navMenu">
                 <a href="#">Home</a>
                 <a href="#">Courses</a>
                 <a href="#">Speaker In Action</a>
@@ -525,27 +304,38 @@
     </header>
 
     <section class="hero">
-        <div class="hero-bg">
-            <img src="https://carolinedawson.org/assets/images/slider-1.jpg" alt="Caroline Dawson">
-        </div>
-        <div class="hero-overlay"></div>
         <div class="container">
             <div class="hero-content">
                 <span class="text-accent reveal">World-Class Corporate Training</span>
                 <h1 class="reveal reveal-delay-1">Together, We Can <br><span style="color: var(--accent-blue);">Grow Your Business.</span></h1>
-                <p class="reveal reveal-delay-2 text-white" style="opacity: 0.8; margin-top: 1.5rem;">
+                <p class="reveal reveal-delay-2 text-white" style="opacity: 0.9; margin-top: 1.5rem;">
                     Dr. Caroline Josephine Dawson provides executive coaching in communication, leadership, and personal development. Unlock your potential with the mindset of a champion.
                 </p>
                 <div class="reveal reveal-delay-3" style="margin-top: 2rem;">
                     <a href="#" class="btn btn-primary">Work With Caroline <i class="fas fa-arrow-right" style="margin-left: 10px;"></i></a>
                     <a href="#" class="btn btn-outline">View Courses</a>
                 </div>
+
+                <div class="stats-container reveal reveal-delay-3">
+                    <div class="stat-box">
+                        <h3 class="counter" data-target="20">0</h3>
+                        <span class="text-white">Years Experience</span>
+                    </div>
+                    <div class="stat-box">
+                        <h3 class="counter" data-target="100">0</h3>
+                        <span class="text-white">Companies Trained</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="hero-img-wrapper reveal reveal-delay-2">
+                <img src="https://carolinedawson.org/assets/images/profile.png" alt="Dr Caroline Dawson">
             </div>
         </div>
     </section>
 
     <div class="marquee-section">
-        <h4 class="marquee-title">Accredited & Certified By</h4>
+        <h4 class="marquee-title text-center" style="margin-bottom: 1.5rem; color: var(--text-gray); font-size: 0.8rem; letter-spacing: 2px;">ACCREDITED & CERTIFIED BY</h4>
         <div class="marquee-track">
             <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/1.png" alt="Award"></div>
             <div class="marquee-item"><img src="https://carolinedawson.org/assets/images/achievement/2.png" alt="Award"></div>
@@ -592,67 +382,68 @@
 
             <div class="solutions-grid">
                 <article class="solution-card reveal reveal-delay-1">
-                    <div class="solution-img-wrapper">
-                        <img src="https://carolinedawson.org/assets/images/course-3.jpg" alt="Customer Service">
-                    </div>
+                    <img src="https://carolinedawson.org/assets/images/course-3.jpg" alt="Customer Service">
                     <div class="solution-content">
                         <h3>Customer Service</h3>
-                        <p class="text-white" style="font-size: 0.9rem; margin-bottom: 0;">Building loyalty through excellence.</p>
-                        <div class="solution-arrow"><i class="fas fa-arrow-right"></i></div>
+                        <p class="text-white" style="font-size: 0.9rem; margin: 0;">Building loyalty through excellence.</p>
                     </div>
-                    <a href="#" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></a>
                 </article>
 
                 <article class="solution-card reveal reveal-delay-2">
-                    <div class="solution-img-wrapper">
-                        <img src="https://carolinedawson.org/assets/images/course-4.jpg" alt="Presentation Skills">
-                    </div>
+                    <img src="https://carolinedawson.org/assets/images/course-4.jpg" alt="Presentation Skills">
                     <div class="solution-content">
                         <h3>Presentation Skills</h3>
-                        <p class="text-white" style="font-size: 0.9rem; margin-bottom: 0;">Speak to inspire and connect.</p>
-                        <div class="solution-arrow"><i class="fas fa-arrow-right"></i></div>
+                        <p class="text-white" style="font-size: 0.9rem; margin: 0;">Speak to inspire and connect.</p>
                     </div>
-                    <a href="#" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></a>
                 </article>
 
                 <article class="solution-card reveal reveal-delay-3">
-                    <div class="solution-img-wrapper">
-                        <img src="https://carolinedawson.org/assets/images/course-5.jpg" alt="Communication Skills">
-                    </div>
+                    <img src="https://carolinedawson.org/assets/images/course-5.jpg" alt="Communication Skills">
                     <div class="solution-content">
                         <h3>Communication</h3>
-                        <p class="text-white" style="font-size: 0.9rem; margin-bottom: 0;">Master the art of influence.</p>
-                        <div class="solution-arrow"><i class="fas fa-arrow-right"></i></div>
+                        <p class="text-white" style="font-size: 0.9rem; margin: 0;">Master the art of influence.</p>
                     </div>
-                    <a href="#" style="position: absolute; top:0; left:0; width:100%; height:100%; z-index:10;"></a>
                 </article>
             </div>
         </div>
     </section>
 
-    <section class="section-padding profile-section">
-        <i class="fas fa-quote-right profile-bg-pattern"></i>
+    <section class="section-padding faq-section">
         <div class="container">
-            <div class="profile-grid">
-                <div class="profile-text reveal">
-                    <h2 class="text-white">Dr. Caroline Josephine Dawson</h2>
-                    <h4 style="color: var(--accent-blue); margin-bottom: 2rem;">DBA (Teesside University, UK), MA (NTU Singapore)</h4>
-                    <p>Director of Caroline Dawson International, Dr. Dawson has more than 20 years of invaluable experience as an Editor of lifestyle and technical publications and 15 years teaching business management.</p>
-                    <p>By closely observing and identifying individuals with special learning needs, she has maintained that experiential, innovative teaching methods and highly interactive curriculum are key motivational factors.</p>
-                    
-                    <div style="display: flex; gap: 2rem; margin-top: 3rem;">
-                        <div>
-                            <h3 style="color: var(--accent-blue); font-size: 2.5rem; margin-bottom: 0;">20+</h3>
-                            <span style="opacity: 0.7; font-size: 0.9rem;">Years Experience</span>
-                        </div>
-                        <div>
-                            <h3 style="color: var(--accent-blue); font-size: 2.5rem; margin-bottom: 0;">100+</h3>
-                            <span style="opacity: 0.7; font-size: 0.9rem;">Companies Trained</span>
-                        </div>
+            <div class="text-center reveal">
+                <span class="text-accent">Common Queries</span>
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            
+            <div class="faq-container reveal reveal-delay-1">
+                <div class="faq-item active">
+                    <div class="faq-question">
+                        What types of training formats do you offer?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We offer face-to-face workshops, virtual training sessions (via Zoom/Teams), and hybrid models. We also provide one-on-one executive coaching for personalized development.</p>
                     </div>
                 </div>
-                <div class="profile-img-container reveal reveal-delay-2">
-                    <img src="https://carolinedawson.org/assets/images/profile.png" alt="Dr Caroline Profile">
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can the curriculum be customized?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. We specialize in tailoring our content to meet your specific industry needs, company culture, and learning objectives to ensure maximum ROI.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Who are your programs suitable for?
+                        <i class="fas fa-chevron-down faq-icon"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our programs cater to all levels, from new hires and front-line staff to senior executives and C-suite leaders looking to refine their communication strategy.</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -666,17 +457,17 @@
             </div>
             
             <div class="clients-grid reveal reveal-delay-1">
-                <img src="https://carolinedawson.org/assets/images/client-c-1.png" class="client-logo" alt="Client">
-                <img src="https://carolinedawson.org/assets/images/client-c-2.png" class="client-logo" alt="Client">
-                <img src="https://carolinedawson.org/assets/images/client-c-3.png" class="client-logo" alt="Client">
-                <img src="https://carolinedawson.org/assets/images/client-c-4.png" class="client-logo" alt="Client">
-                <img src="https://carolinedawson.org/assets/images/client-c-5.png" class="client-logo" alt="Client">
-                <img src="https://carolinedawson.org/assets/images/client-c-6.png" class="client-logo" alt="Client">
-                <img src="https://carolinedawson.org/assets/images/client-c-7.png" class="client-logo" alt="Client">
-                <img src="https://carolinedawson.org/assets/images/client-c-8.png" class="client-logo" alt="Client">
-                <img src="https://carolinedawson.org/assets/images/client-c-9.png" class="client-logo" alt="Client">
+                <img src="https://carolinedawson.org/assets/images/client-c-1.png" class="client-logo" alt="Client 1">
+                <img src="https://carolinedawson.org/assets/images/client-c-2.png" class="client-logo" alt="Client 2">
+                <img src="https://carolinedawson.org/assets/images/client-c-3.png" class="client-logo" alt="Client 3">
+                <img src="https://carolinedawson.org/assets/images/client-c-4.png" class="client-logo" alt="Client 4">
+                <img src="https://carolinedawson.org/assets/images/client-c-5.png" class="client-logo" alt="Client 5">
+                <img src="https://carolinedawson.org/assets/images/client-c-6.png" class="client-logo" alt="Client 6">
+                <img src="https://carolinedawson.org/assets/images/client-c-7.png" class="client-logo" alt="Client 7">
+                <img src="https://carolinedawson.org/assets/images/client-c-8.png" class="client-logo" alt="Client 8">
+                <img src="https://carolinedawson.org/assets/images/client-c-9.png" class="client-logo" alt="Client 9">
                 <div style="display: flex; align-items: center; justify-content: center; width: 100%;">
-                    <a href="#" style="color: var(--accent-blue); font-weight: 600; border-bottom: 2px solid var(--accent-blue);">View All Clients</a>
+                    <a href="#" style="color: var(--accent-blue); font-weight: 600; border-bottom: 2px solid var(--accent-blue);">View All</a>
                 </div>
             </div>
         </div>
@@ -686,8 +477,8 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h2>CDI.</h2>
-                    <p style="opacity: 0.6; font-size: 0.9rem;">Empowering professionals with the skills to lead, communicate, and succeed in a rapidly changing world.</p>
+                    <img src="https://carolinedawson.org/assets/images/logo.png" alt="Caroline Dawson">
+                    <p style="opacity: 0.6; font-size: 0.9rem;">Empowering professionals with the skills to lead, communicate, and succeed.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Links</h4>
@@ -695,7 +486,6 @@
                         <li><a href="#">Home</a></li>
                         <li><a href="#">Our Courses</a></li>
                         <li><a href="#">Testimonials</a></li>
-                        <li><a href="#">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -703,41 +493,90 @@
                     <ul>
                         <li>carol@carolinedawson.org</li>
                         <li>+65 9383 5310</li>
-                        <li>Singapore</li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Social</h4>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/carolinejosephinedawson"><i class="fab fa-facebook-f"></i></a>
-                        <a href="https://www.instagram.com/carolinedawson1673"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.linkedin.com/in/carolinedawson1626"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
-            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; color: var(--text-gray); font-size: 0.85rem;">
-                <p style="margin: 0;">&copy; 2026 Caroline Dawson International. All Rights Reserved.</p>
+            
+            <div style="display: flex; flex-direction: column; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem; color: var(--text-gray); font-size: 0.85rem;">
+                <p style="margin-bottom: 0.5rem;">&copy; 2026 Caroline Dawson International. All Rights Reserved.</p>
+                <a href="https://reputifly.com" target="_blank" class="reputifly-link">Website design by Reputifly</a>
             </div>
         </div>
     </footer>
 
     <script>
-        // Simple Intersection Observer for scroll animations
+        // Reveal Animation & Counters
         document.addEventListener('DOMContentLoaded', () => {
-            const observerOptions = {
-                threshold: 0.1
-            };
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('active');
+                        
+                        // Trigger counter if inside a stat-box
+                        if(entry.target.querySelector('.counter')) {
+                            const counters = entry.target.querySelectorAll('.counter');
+                            counters.forEach(counter => {
+                                const target = +counter.getAttribute('data-target');
+                                const speed = 200; 
+                                const updateCount = () => {
+                                    const count = +counter.innerText.replace('+','');
+                                    const inc = target / speed;
+                                    if(count < target) {
+                                        counter.innerText = Math.ceil(count + inc);
+                                        setTimeout(updateCount, 20);
+                                    } else {
+                                        counter.innerText = target + "+";
+                                    }
+                                };
+                                updateCount();
+                            });
+                        }
                     }
                 });
-            }, observerOptions);
+            }, { threshold: 0.1 });
 
-            const revealElements = document.querySelectorAll('.reveal');
-            revealElements.forEach(el => observer.observe(el));
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        });
+
+        // Mobile Menu Toggle
+        function toggleMenu() {
+            const nav = document.getElementById('navMenu');
+            nav.classList.toggle('active');
+        }
+
+        // FAQ Interaction
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            const question = item.querySelector('.faq-question');
+            const answer = item.querySelector('.faq-answer');
+
+            // Set initial height for active item
+            if(item.classList.contains('active')){
+                answer.style.maxHeight = answer.scrollHeight + "px";
+            }
+
+            question.addEventListener('click', () => {
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                faqItems.forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                    otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                });
+
+                // Toggle current item
+                if(!isActive) {
+                    item.classList.add('active');
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                }
+            });
         });
     </script>
 </body>
