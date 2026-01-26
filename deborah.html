@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Camela Health | Walnut Peptide Supplement</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- CSS VARIABLES --- */
+        :root {
+            /* Brand Colors extracted from brochure */
+            --primary-orange: #E65100; /* Darker orange for better contrast on white */
+            --primary-gold: #FFB300;
+            --accent-bg: #FFF3E0;      /* Very light orange for section backgrounds */
+            
+            /* Neutrals */
+            --text-main: #1A1A1A;      /* Almost black for readability */
+            --text-muted: #4A4A4A;
+            --white: #FFFFFF;
+            --border-light: #E0E0E0;
+            
+            /* UI Elements */
+            --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --shadow-hover: 0 10px 25px rgba(230, 81, 0, 0.15);
+            --radius-md: 8px;
+            --radius-lg: 16px;
+            --transition: all 0.3s ease-in-out;
+        }
+
+        /* --- RESET & BASE STYLES --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; display: block; }
+
+        /* --- UTILITY CLASSES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .text-center { text-align: center; }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 14px 32px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+            font-size: 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: var(--transition);
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-orange);
+            color: var(--white);
+            box-shadow: 0 4px 12px rgba(230, 81, 0, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: #BF360C;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(191, 54, 12, 0.4);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary-orange);
+            color: var(--primary-orange);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary-orange);
+            color: var(--white);
+        }
+
+        .section-padding { padding: 80px 0; }
+
+        /* --- SVG ICON STYLES --- */
+        .icon-box {
+            width: 64px;
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--accent-bg);
+            color: var(--primary-orange);
+            margin-bottom: 24px;
+        }
+        
+        .icon-box svg {
+            width: 32px;
+            height: 32px;
+            fill: currentColor;
+        }
+
+        /* --- HEADER --- */
+        header {
+            background: var(--white);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--primary-orange);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        /* SVG Logo Icon */
+        .logo svg {
+            width: 40px;
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-link {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--text-main);
+        }
+
+        .nav-link:hover { color: var(--primary-orange); }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            margin-top: 80px;
+            min-height: 85vh;
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFE0B2 100%);
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+        
+        .hero-text h1 span {
+            color: var(--primary-orange);
+        }
+
+        .hero-text p {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+            max-width: 90%;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+        }
+
+        .hero-image-wrapper {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-image-wrapper img {
+            border-radius: var(--radius-lg);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: transform 0.5s ease;
+            max-height: 600px;
+            margin: 0 auto;
+        }
+
+        .hero-image-wrapper:hover img {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        /* --- FEATURES SECTION --- */
+        .features {
+            background-color: var(--white);
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.25rem;
+            margin-bottom: 16px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            padding: 40px 32px;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-orange);
+            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+        }
+
+        .feature-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .feature-card p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- PRODUCT DETAILS / SCIENCE --- */
+        .details {
+            background-color: #FAFAFA;
+        }
+
+        .details-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .details-image img {
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+        }
+
+        .spec-list {
+            margin-top: 32px;
+        }
+
+        .spec-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 24px;
+        }
+
+        .spec-icon {
+            min-width: 24px;
+            color: var(--primary-orange);
+            margin-right: 16px;
+            margin-top: 4px;
+        }
+
+        .spec-text h4 {
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+
+        .spec-text p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+        }
+
+        /* --- CTA BANNER --- */
+        .cta-banner {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1511895426328-dc8714191300?q=80&w=2500&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .cta-banner h2 {
+            color: var(--white);
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .cta-banner p {
+            font-size: 1.2rem;
+            margin-bottom: 32px;
+            opacity: 0.9;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background-color: #111;
+            color: #ccc;
+            padding: 60px 0 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand h3 {
+            color: var(--white);
+            font-size: 1.5rem;
+            margin-bottom: 16px;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-orange);
+        }
+
+        .copyright {
+            border-top: 1px solid #333;
+            padding-top: 24px;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+
+        /* --- MOBILE OPTIMIZATION --- */
+        @media (max-width: 968px) {
+            .hero-text h1 { font-size: 2.5rem; }
+            .hero-content { grid-template-columns: 1fr; text-align: center; }
+            .hero-buttons { justify-content: center; }
+            .hero-image-wrapper { margin-top: 40px; }
+            .details-container { grid-template-columns: 1fr; }
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                padding: 24px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                align-items: center;
+            }
+            
+            .nav-menu.active { display: flex; }
+            
+            .hamburger { display: block; }
+            
+            .hero-text h1 { font-size: 2rem; }
+            
+            .btn { width: 100%; }
+            .hero-buttons { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <a href="#" class="logo">
+                    <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 3V21M12 3C7.5 3 3.5 6 3 10.5C2.5 15 6 18 12 21M12 3C16.5 3 20.5 6 21 10.5C21.5 15 18 18 12 21" stroke="#E65100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path d="M12 12C12 12 8 13 8 16M12 12C12 12 16 13 16 16" stroke="#E65100" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    CAMELA HEALTH
+                </a>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#benefits" class="nav-link">Benefits</a></li>
+                    <li><a href="#science" class="nav-link">Science</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+
+                <div class="hamburger" onclick="toggleMenu()">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="3" y1="12" x2="21" y2="12"></line>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <line x1="3" y1="18" x2="21" y2="18"></line>
+                    </svg>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h5>PREMIUM WALNUT PEPTIDE</h5>
+                <h1>Health for Life, <br><span>Love and Guard</span></h1>
+                <p>Derived from pure natural walnuts and scientifically formulated to enhance neurological function, regulate blood sugar, and boost immunity for the whole family.</p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">Request Proposal</a>
+                    <a href="#benefits" class="btn btn-outline">View Benefits</a>
+                </div>
+            </div>
+            <div class="hero-image-wrapper">
+                <img src="https://reputifly.com/wp-content/uploads/2026/01/WhatsApp-Image-2026-01-25-at-5.53.16-PM.jpeg" alt="Camela Walnut Peptide Supplement Box">
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="section-padding features">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2>Main Efficacy & Functions</h2>
+                <p>A comprehensive shield for your family's health, addressing key biological needs through natural extraction.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card text-center">
+                    <div class="icon-box" style="margin: 0 auto 24px;">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L3 7V12C3 17.52 7.02 21.74 12 23C16.98 21.74 21 17.52 21 12V7L12 2ZM10.59 16.6L7.54 13.55L8.96 12.13L10.59 13.76L15.04 9.31L16.46 10.74L10.59 16.6Z"/>
+                        </svg>
+                    </div>
+                    <h3>Antioxidant & Anti-aging</h3>
+                    <p>Fights free radicals to delay aging processes and maintain youthful vitality.</p>
+                </div>
+
+                <div class="feature-card text-center">
+                    <div class="icon-box" style="margin: 0 auto 24px;">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2C13.1 2 14 2.9 14 4C14 4.55 13.78 5.05 13.41 5.41C15.21 5.09 16.69 5.86 17.5 7C18.14 7.9 18.5 9 18.5 10.5C18.5 12.09 17.56 13.72 16.03 14.71C16.45 15.65 16.42 16.68 15.96 17.65C15.46 18.7 14.54 19.46 13.5 19.82V22H10.5V19.82C8.36 19.12 7.04 16.95 7.5 14.71C5.97 13.72 5 12.09 5 10.5C5 9.07 5.36 7.97 6 7.07C6.81 5.93 8.29 5.09 10.09 5.41C9.72 5.05 9.5 4.55 9.5 4C9.5 2.9 10.4 2 11.5 2H12Z"/>
+                        </svg>
+                    </div>
+                    <h3>Brain Function</h3>
+                    <p>Improves neurological function, enhances memory retention, and supports cognitive health.</p>
+                </div>
+
+                <div class="feature-card text-center">
+                    <div class="icon-box" style="margin: 0 auto 24px;">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21.35L10.55 20.03C5.4 15.36 2 12.28 2 8.5C2 5.42 4.42 3 7.5 3C9.24 3 10.91 3.81 12 5.09C13.09 3.81 14.76 3 16.5 3C19.58 3 22 5.42 22 8.5C22 12.28 18.6 15.36 13.45 20.04L12 21.35Z"/>
+                        </svg>
+                    </div>
+                    <h3>Regulates Health</h3>
+                    <p>Balances blood sugar levels and lowers cholesterol to support a healthy cardiovascular system.</p>
+                </div>
+
+                <div class="feature-card text-center">
+                    <div class="icon-box" style="margin: 0 auto 24px;">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M19 3H5C3.89 3 3 3.9 3 5V19C3 20.1 3.89 21 5 21H19C20.1 21 21 20.1 21 19V5C21 3.9 20.1 3 19 3ZM11 17H13V13H17V11H13V7H11V11H7V13H11V17Z"/>
+                        </svg>
+                    </div>
+                    <h3>Boosts Immunity</h3>
+                    <p>Strengthens natural defenses, making it the ideal health guard for the whole family.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="science" class="section-padding details">
+        <div class="container details-container">
+            <div class="details-image">
+                <img src="https://images.unsplash.com/photo-1620916297397-a4a5402a3c6c?q=80&w=800&auto=format&fit=crop" alt="Natural Ingredients">
+            </div>
+            <div class="details-content">
+                <h2>Why Choose Camela?</h2>
+                <p style="color: var(--text-muted); margin-bottom: 24px;">We combine nature's best with cutting-edge science to deliver a supplement that is safe, effective, and pure.</p>
+                
+                <div class="spec-list">
+                    <div class="spec-item">
+                        <div class="spec-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        </div>
+                        <div class="spec-text">
+                            <h4>Small Molecule Peptides</h4>
+                            <p>Engineered for rapid and easy absorption by the human body.</p>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        </div>
+                        <div class="spec-text">
+                            <h4>Pure Natural Extract</h4>
+                            <p>Sourced from high-quality walnuts with zero synthetic fillers.</p>
+                        </div>
+                    </div>
+
+                    <div class="spec-item">
+                        <div class="spec-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg>
+                        </div>
+                        <div class="spec-text">
+                            <h4>No Additives</h4>
+                            <p>Safe & reliable: No colorants, preservatives, or artificial flavors.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding cta-banner">
+        <div class="container">
+            <h2>Guard Your Family's Health</h2>
+            <p>The scientifically formulated choice for grandparents, parents, and children.</p>
+            <button class="btn btn-primary" style="background: white; color: var(--primary-orange);">Start Your Journey</button>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <h3>Camela Health</h3>
+                    <p>Dedicated to providing the highest quality walnut peptide supplements for a healthier, longer life.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home Page</a></li>
+                        <li><a href="#benefits">Health Benefits</a></li>
+                        <li><a href="#science">Product Science</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li>inquiry@camelahealth.com</li>
+                        <li>+65 1234 5678</li>
+                        <li>Singapore</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                &copy; 2026 Camela Health. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                // Close menu on click (mobile)
+                document.getElementById('navMenu').classList.remove('active');
+            });
+        });
+    </script>
+</body>
+</html>
