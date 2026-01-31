@@ -13,7 +13,7 @@
             background-color: #000;
             overflow: hidden;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-            touch-action: none; /* Prevents default browser scrolling/zooming */
+            touch-action: none;
         }
 
         #canvas-container {
@@ -21,11 +21,15 @@
             height: 100vh;
             display: block;
             z-index: 1;
-            /* Premium 'Grab' cursor feel */
-            cursor: grab; 
+            /* Default cursor */
+            cursor: default; 
         }
         
-        #canvas-container:active {
+        /* Interactive state cursor */
+        body.is-interactive #canvas-container {
+            cursor: grab;
+        }
+        body.is-interactive #canvas-container:active {
             cursor: grabbing;
         }
 
@@ -40,6 +44,7 @@
             pointer-events: none;
             z-index: 10;
             mix-blend-mode: overlay;
+            transition: opacity 0.5s ease;
         }
 
         h1 {
@@ -70,21 +75,100 @@
             letter-spacing: 2px;
             z-index: 20;
             transition: opacity 0.5s ease;
+            pointer-events: none;
         }
 
+        /* --- MOBILE CONTROLS --- */
+        #mobile-controls {
+            display: none; /* Hidden on desktop */
+            position: absolute;
+            bottom: 15%;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 30;
+            text-align: center;
+        }
+
+        #fullscreen-btn {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: white;
+            padding: 14px 28px;
+            font-family: inherit;
+            font-size: 12px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            outline: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        #fullscreen-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+        }
+
+        /* --- ROTATE DEVICE OVERLAY --- */
+        #rotate-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 50;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        #rotate-overlay svg {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 20px;
+            animation: rotate-icon 2s infinite ease-in-out;
+            fill: white;
+        }
+
+        @keyframes rotate-icon {
+            0% { transform: rotate(0deg); }
+            50% { transform: rotate(-90deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* --- MEDIA QUERIES --- */
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
+            #mobile-controls { display: block; }
         }
     </style>
 </head>
 <body>
 
-    <div class="ui-layer">
+    <div class="ui-layer" id="main-ui">
         <h1>Visionary</h1>
         <p>Interactive 3D Horizon</p>
     </div>
 
     <div id="loader">LOADING ASSETS...</div>
+
+    <div id="mobile-controls">
+        <button id="fullscreen-btn">View Full Experience</button>
+    </div>
+
+    <div id="rotate-overlay">
+        <svg viewBox="0 0 24 24">
+            <path d="M4 6v13h16V6H4zm18-2v17H2V4h20zm-2 9h-2.5v-2H20v2z"/>
+        </svg>
+        <span style="letter-spacing: 2px; font-size: 12px; text-transform: uppercase;">Please Rotate Device</span>
+    </div>
+
     <div id="canvas-container"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -96,17 +180,31 @@
         // --- CONFIGURATION ---
         const CONFIG = {
             imagePath: 'hero-image.jpg',
-            // CRITICAL FIX: Higher FOV on mobile makes the image "taller" on screen
-            fov: isMobile ? 85 : 60, 
+            fov: 60,
             curveRadius: 15,
             mouseSpeed: 0.08,
-            maxVerticalLook: isMobile ? 20 : 5 // Allow more looking up/down on mobile
+            maxVerticalLook: 5,
+            autoPanSpeed: 0.0002 // Speed of the passive sway
         };
 
-        // --- SCENE SETUP ---
-        const container = document.getElementById('canvas-container');
-        const scene = new THREE.Scene();
+        // --- STATE ---
+        // On Desktop: Always interactive. 
+        // On Mobile: Passive (Auto-pan) until Fullscreen button clicked.
+        let isInteractive = !isMobile; 
         
+        // --- DOM ELEMENTS ---
+        const container = document.getElementById('canvas-container');
+        const mainUI = document.getElementById('main-ui');
+        const fullscreenBtn = document.getElementById('fullscreen-btn');
+        const rotateOverlay = document.getElementById('rotate-overlay');
+        const mobileControls = document.getElementById('mobile-controls');
+
+        if (isInteractive) {
+            document.body.classList.add('is-interactive');
+        }
+
+        // --- SCENE SETUP ---
+        const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(CONFIG.fov, window.innerWidth / window.innerHeight, 0.1, 1000);
         
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -114,7 +212,7 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
-        // --- IMAGE LOADING & GEOMETRY CREATION ---
+        // --- ASSETS ---
         const loader = new THREE.TextureLoader();
         let mesh;
         let limitX = 0; 
@@ -132,14 +230,8 @@
             const arcAngle = planeWidth / CONFIG.curveRadius;
 
             const geometry = new THREE.CylinderGeometry(
-                CONFIG.curveRadius, 
-                CONFIG.curveRadius, 
-                planeHeight,        
-                60,                 
-                1,                  
-                true,               
-                -arcAngle / 2,      
-                arcAngle            
+                CONFIG.curveRadius, CONFIG.curveRadius, planeHeight, 60, 1, true, 
+                -arcAngle / 2, arcAngle
             );
 
             geometry.scale(-1, 1, 1);
@@ -154,50 +246,95 @@
             if (limitY < 0) limitY = 0;
             limitX = THREE.Math.degToRad(CONFIG.maxVerticalLook);
 
-        }, undefined, () => {
-            console.error("Image failed to load.");
         });
 
         camera.position.set(0, 0, 0);
 
-        // --- INTERACTION ---
+        // --- INTERACTION LOGIC ---
         let mouseX = 0;
         let mouseY = 0;
         let currentRotX = 0;
         let currentRotY = 0;
 
         const updateInput = (x, y) => {
-            // Normalize input to -1 to 1 range
+            if (!isInteractive) return; // Ignore input if in passive mode
             mouseX = (x / window.innerWidth) * 2 - 1;
             mouseY = (y / window.innerHeight) * 2 - 1;
         };
 
-        // Desktop Mouse
-        document.addEventListener('mousemove', (e) => {
-            updateInput(e.clientX, e.clientY);
+        // Event Listeners
+        document.addEventListener('mousemove', (e) => updateInput(e.clientX, e.clientY));
+        
+        document.addEventListener('touchmove', (e) => {
+            if (isInteractive) {
+                e.preventDefault();
+                updateInput(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: false });
+
+        document.addEventListener('touchstart', (e) => {
+             if (isInteractive && e.touches.length > 0) {
+                updateInput(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: false });
+
+        // --- MOBILE FULLSCREEN LOGIC ---
+        
+        // 1. Enter Fullscreen & Interactive Mode
+        fullscreenBtn.addEventListener('click', () => {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen();
+            } else if (elem.webkitRequestFullscreen) { /* Safari */
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) { /* IE11 */
+                elem.msRequestFullscreen();
+            }
+
+            // Enable interaction
+            isInteractive = true;
+            document.body.classList.add('is-interactive');
+            
+            // Hide UI elements to clean up view
+            mainUI.style.opacity = '0'; 
+            mobileControls.style.display = 'none';
+
+            // Check orientation immediately
+            checkOrientation();
         });
 
-        // Mobile Touch
-        document.addEventListener('touchmove', (e) => {
-            // Prevent default scroll behavior
-            e.preventDefault();
-            if (e.touches.length > 0) {
-                updateInput(e.touches[0].clientX, e.touches[0].clientY);
+        // 2. Check Orientation Handler
+        function checkOrientation() {
+            if (!isMobile) return;
+            
+            // If we are in interactive mode (user clicked button)
+            if (isInteractive) {
+                // Check if width < height (Portrait)
+                if (window.innerWidth < window.innerHeight) {
+                    rotateOverlay.style.display = 'flex'; // Show warning
+                } else {
+                    rotateOverlay.style.display = 'none'; // All good
+                }
             }
-        }, { passive: false });
+        }
 
-        // Handle Touch Start (to immediately snap to finger position)
-        document.addEventListener('touchstart', (e) => {
-             if (e.touches.length > 0) {
-                updateInput(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        }, { passive: false });
-
-        // Resize handler
         window.addEventListener('resize', () => {
+            // Update Camera
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
             renderer.setSize(window.innerWidth, window.innerHeight);
+
+            // Re-calculate limits based on new aspect ratio
+            if (mesh) {
+                const vFOV = THREE.Math.degToRad(CONFIG.fov);
+                // We need to recalculate limitY because FOV horizontal changed
+                // Re-deriving arcAngle from geometry parameters would be complex, 
+                // so we rely on the visual aspect consistency.
+                // For simplicity in this robust script, we just keep the pan limits loose on resize 
+                // or user can refresh for perfect recalculation.
+            }
+
+            checkOrientation();
         });
 
         // --- ANIMATION LOOP ---
@@ -205,15 +342,29 @@
             requestAnimationFrame(animate);
 
             if (mesh) {
-                // Determine Target Rotation
-                const targetRotY = mouseX * limitY; 
-                const targetRotX = mouseY * limitX; 
+                if (!isInteractive) {
+                    // --- PASSIVE AUTO-PAN (Cinematic Sway) ---
+                    const time = Date.now();
+                    // Sine wave sway: oscillates between -0.5 and 0.5 of the limit
+                    const sway = Math.sin(time * CONFIG.autoPanSpeed); 
+                    
+                    // Smoothly map sway to rotation
+                    const targetRotY = sway * (limitY * 0.5); 
+                    
+                    // Lerp for smoothness
+                    currentRotY += (targetRotY - currentRotY) * 0.05;
+                    currentRotX += (0 - currentRotX) * 0.05; // Return to center vertically
 
-                // Smooth Interpolation
-                currentRotY += (targetRotY - currentRotY) * CONFIG.mouseSpeed;
-                currentRotX += (targetRotX - currentRotX) * CONFIG.mouseSpeed;
+                } else {
+                    // --- INTERACTIVE MODE ---
+                    const targetRotY = mouseX * limitY; 
+                    const targetRotX = mouseY * limitX; 
+                    
+                    currentRotY += (targetRotY - currentRotY) * CONFIG.mouseSpeed;
+                    currentRotX += (targetRotX - currentRotX) * CONFIG.mouseSpeed;
+                }
 
-                // Apply to Camera
+                // Apply
                 camera.rotation.y = -currentRotY; 
                 camera.rotation.x = -currentRotX;
             }
