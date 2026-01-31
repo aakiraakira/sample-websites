@@ -13,6 +13,7 @@
             background-color: #000;
             overflow: hidden;
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            touch-action: none; /* Prevents default browser scrolling/zooming */
         }
 
         #canvas-container {
@@ -69,38 +70,10 @@
             letter-spacing: 2px;
             z-index: 20;
             transition: opacity 0.5s ease;
-            pointer-events: none;
-        }
-
-        /* --- MOBILE GYRO BUTTON --- */
-        #gyro-btn {
-            display: none; /* Hidden on desktop */
-            position: absolute;
-            bottom: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 30;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            padding: 12px 24px;
-            font-family: inherit;
-            font-size: 12px;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            cursor: pointer;
-            border-radius: 30px;
-            transition: all 0.3s ease;
-        }
-
-        #gyro-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            #gyro-btn { display: block; } /* Show on mobile */
         }
     </style>
 </head>
@@ -112,9 +85,6 @@
     </div>
 
     <div id="loader">LOADING ASSETS...</div>
-    
-    <button id="gyro-btn">Enable Immersive View</button>
-
     <div id="canvas-container"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -126,16 +96,12 @@
         // --- CONFIGURATION ---
         const CONFIG = {
             imagePath: 'hero-image.jpg',
-            // Increase FOV on mobile to see more "height" (zoomed out feel)
-            fov: isMobile ? 75 : 60, 
+            // CRITICAL FIX: Higher FOV on mobile makes the image "taller" on screen
+            fov: isMobile ? 85 : 60, 
             curveRadius: 15,
             mouseSpeed: 0.08,
-            maxVerticalLook: 15 // Increased slightly for mobile freedom
+            maxVerticalLook: isMobile ? 20 : 5 // Allow more looking up/down on mobile
         };
-
-        // --- STATE MANAGEMENT ---
-        let useGyro = false;
-        let gyroAlphaOffset = 0; // To recalibrate center on start
 
         // --- SCENE SETUP ---
         const container = document.getElementById('canvas-container');
@@ -148,7 +114,7 @@
         renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
         container.appendChild(renderer.domElement);
 
-        // --- IMAGE LOADING ---
+        // --- IMAGE LOADING & GEOMETRY CREATION ---
         const loader = new THREE.TextureLoader();
         let mesh;
         let limitX = 0; 
@@ -161,7 +127,6 @@
             const vFOV = THREE.Math.degToRad(CONFIG.fov);
             const visibleHeight = 2 * CONFIG.curveRadius * Math.tan(vFOV / 2);
             
-            // 1.1x height to ensure coverage
             const planeHeight = visibleHeight * 1.1; 
             const planeWidth = planeHeight * imgAspect;
             const arcAngle = planeWidth / CONFIG.curveRadius;
@@ -195,77 +160,40 @@
 
         camera.position.set(0, 0, 0);
 
-        // --- INTERACTION VARS ---
+        // --- INTERACTION ---
         let mouseX = 0;
         let mouseY = 0;
         let currentRotX = 0;
         let currentRotY = 0;
 
-        // --- MOUSE & TOUCH HANDLERS ---
         const updateInput = (x, y) => {
-            // Normalize to -1 ... 1
+            // Normalize input to -1 to 1 range
             mouseX = (x / window.innerWidth) * 2 - 1;
             mouseY = (y / window.innerHeight) * 2 - 1;
         };
 
-        // Desktop
-        document.addEventListener('mousemove', (e) => updateInput(e.clientX, e.clientY));
-
-        // Mobile Touch (Swipe fallback)
-        document.addEventListener('touchmove', (e) => {
-            if (!useGyro) { // Only use swipe if Gyro isn't active
-                updateInput(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        }, { passive: true });
-
-
-        // --- GYROSCOPE LOGIC (MAGIC WINDOW) ---
-        const gyroBtn = document.getElementById('gyro-btn');
-        
-        const enableGyro = () => {
-            useGyro = true;
-            gyroBtn.style.opacity = '0';
-            setTimeout(() => gyroBtn.style.display = 'none', 500);
-        };
-
-        gyroBtn.addEventListener('click', () => {
-            // iOS 13+ requires permission request
-            if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
-                DeviceOrientationEvent.requestPermission()
-                    .then(response => {
-                        if (response === 'granted') {
-                            window.addEventListener('deviceorientation', handleOrientation);
-                            enableGyro();
-                        } else {
-                            alert("Permission denied. Swipe to look around.");
-                        }
-                    })
-                    .catch(console.error);
-            } else {
-                // Non-iOS devices usually don't need permission
-                window.addEventListener('deviceorientation', handleOrientation);
-                enableGyro();
-            }
+        // Desktop Mouse
+        document.addEventListener('mousemove', (e) => {
+            updateInput(e.clientX, e.clientY);
         });
 
-        // Store latest gyro data
-        let deviceAlpha = 0;
-        let deviceBeta = 0;
-        let deviceGamma = 0;
-        let initialAlpha = null;
-
-        function handleOrientation(event) {
-            // Alpha: Rotation around Z axis (Compass) - mapped to Y look
-            // Beta: Front/Back tilt - mapped to X look
-            if (initialAlpha === null && event.alpha !== null) {
-                initialAlpha = event.alpha;
+        // Mobile Touch
+        document.addEventListener('touchmove', (e) => {
+            // Prevent default scroll behavior
+            e.preventDefault();
+            if (e.touches.length > 0) {
+                updateInput(e.touches[0].clientX, e.touches[0].clientY);
             }
-            deviceAlpha = event.alpha;
-            deviceBeta = event.beta;
-            deviceGamma = event.gamma;
-        }
+        }, { passive: false });
 
-        // --- RESIZE ---
+        // Handle Touch Start (to immediately snap to finger position)
+        document.addEventListener('touchstart', (e) => {
+             if (e.touches.length > 0) {
+                updateInput(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        }, { passive: false });
+
+        // Resize handler
         window.addEventListener('resize', () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -277,47 +205,15 @@
             requestAnimationFrame(animate);
 
             if (mesh) {
-                if (useGyro && deviceAlpha !== null) {
-                    // --- GYRO MODE ---
-                    // Convert Compass degrees to Radians
-                    // Note: This logic is a simplified "Look" mapping. 
-                    // For perfect VR, we'd use Quaternions, but this mimics the "Window" feel well enough for a cylinder.
-                    
-                    // Y Rotation (Left/Right)
-                    // We offset by initialAlpha so we start looking at the center
-                    let deltaAlpha = (deviceAlpha - initialAlpha); 
-                    // Normalize to keep it smooth
-                    if (deltaAlpha > 180) deltaAlpha -= 360;
-                    if (deltaAlpha < -180) deltaAlpha += 360;
+                // Determine Target Rotation
+                const targetRotY = mouseX * limitY; 
+                const targetRotX = mouseY * limitX; 
 
-                    const targetRotY = THREE.Math.degToRad(deltaAlpha);
-                    
-                    // X Rotation (Up/Down)
-                    // Beta is typically -180 to 180. 90 is upright.
-                    // We want 90 to be "0" look.
-                    let betaCorrected = deviceBeta - 90;
-                    // Clamp looking up/down
-                    if(betaCorrected < -CONFIG.maxVerticalLook) betaCorrected = -CONFIG.maxVerticalLook;
-                    if(betaCorrected > CONFIG.maxVerticalLook) betaCorrected = CONFIG.maxVerticalLook;
+                // Smooth Interpolation
+                currentRotY += (targetRotY - currentRotY) * CONFIG.mouseSpeed;
+                currentRotX += (targetRotX - currentRotX) * CONFIG.mouseSpeed;
 
-                    const targetRotX = THREE.Math.degToRad(betaCorrected);
-
-                    // Smooth Gyro
-                    currentRotY += (targetRotY - currentRotY) * 0.1;
-                    currentRotX += (targetRotX - currentRotX) * 0.1;
-
-                } else {
-                    // --- MOUSE/TOUCH MODE ---
-                    // Map mouse position (-1 to 1) to Limits
-                    const targetRotY = mouseX * limitY; 
-                    const targetRotX = mouseY * limitX; 
-                    
-                    // Smooth Interpolation
-                    currentRotY += (targetRotY - currentRotY) * CONFIG.mouseSpeed;
-                    currentRotX += (targetRotX - currentRotX) * CONFIG.mouseSpeed;
-                }
-
-                // Apply
+                // Apply to Camera
                 camera.rotation.y = -currentRotY; 
                 camera.rotation.x = -currentRotX;
             }
