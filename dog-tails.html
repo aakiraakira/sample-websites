@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dawggedytails Playschool | Premium Small Dog Care</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           1. CSS VARIABLES (FROM BRAND DNA)
+           ========================================= */
+        :root {
+            /* Colors */
+            --primary: #c7a07a;
+            --accent: #d6ac83;
+            --background: #f0f0f0;
+            --surface: #ebebeb; /* Slight contrast for cards */
+            --surface-white: #ffffff;
+            --text-main: #0b0a14;
+            --text-muted: #08070e;
+            --border: #d8d8d8;
+            --focus-ring: #dcc8b5;
+            
+            /* UI Tokens */
+            --radius: 24px;
+            --shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            --glass: blur(12px);
+            --transition: all 0.3s ease;
+            
+            /* Spacing */
+            --container-width: 1200px;
+            --section-padding: 80px 20px;
+        }
+
+        /* =========================================
+           2. RESET & BASE STYLES
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--background);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text-main);
+            line-height: 1.2;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+            border-radius: var(--radius);
+        }
+
+        /* =========================================
+           3. UTILITY COMPONENTS
+           ========================================= */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background-color: var(--primary);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            border-radius: var(--radius);
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(199, 160, 122, 0.3);
+        }
+
+        .btn:hover {
+            background-color: var(--text-main);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--text-main);
+            box-shadow: none;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+        }
+
+        .section-title p {
+            color: #555;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .badge {
+            background-color: var(--accent);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-bottom: 16px;
+        }
+
+        /* =========================================
+           4. HEADER & NAV
+           ========================================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            background: rgba(240, 240, 240, 0.7);
+            backdrop-filter: var(--glass);
+            -webkit-backdrop-filter: var(--glass);
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .mobile-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* =========================================
+           5. HERO SECTION
+           ========================================= */
+        .hero {
+            padding: 160px 0 100px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 24px;
+            color: var(--text-main);
+        }
+
+        .hero-content p {
+            font-size: 1.125rem;
+            color: #444;
+            margin-bottom: 32px;
+            max-width: 90%;
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item h4 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .stat-item span {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .hero-image {
+            position: relative;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            box-shadow: var(--shadow);
+            transform: rotate(2deg);
+            transition: var(--transition);
+        }
+
+        .hero-image:hover img {
+            transform: rotate(0deg);
+        }
+
+        /* Floating decorative elements */
+        .blob {
+            position: absolute;
+            z-index: -1;
+            filter: blur(80px);
+            opacity: 0.6;
+        }
+        .blob-1 { top: -10%; right: -10%; width: 500px; height: 500px; background: #fdecc8; border-radius: 50%; }
+        .blob-2 { bottom: 10%; left: -5%; width: 400px; height: 400px; background: #e0d4c5; border-radius: 50%; }
+
+        /* =========================================
+           6. USP SECTION (Why Choose Us)
+           ========================================= */
+        .usp-section {
+            padding: var(--section-padding);
+        }
+
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .usp-card {
+            background: var(--surface-white);
+            padding: 40px 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+
+        .usp-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .usp-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(199, 160, 122, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 24px;
+            color: var(--primary);
+            font-size: 2rem;
+        }
+
+        .usp-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+        }
+
+        .usp-card p {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* =========================================
+           7. SERVICES (Programme)
+           ========================================= */
+        .services {
+            background-color: var(--surface);
+            padding: var(--section-padding);
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .service-item {
+            background: var(--background);
+            padding: 30px;
+            border-radius: var(--radius);
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            transition: var(--transition);
+        }
+
+        .service-item:hover {
+            background: white;
+            box-shadow: var(--shadow);
+        }
+
+        .s-icon {
+            min-width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        /* =========================================
+           8. PACKAGES & PRICING
+           ========================================= */
+        .pricing {
+            padding: var(--section-padding);
+        }
+
+        /* Scrollable container for mobile friendly tables/cards */
+        .pricing-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .price-card {
+            background: var(--surface-white);
+            border-radius: var(--radius);
+            padding: 40px;
+            width: 350px;
+            box-shadow: var(--shadow);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--border);
+            transition: var(--transition);
+        }
+
+        .price-card.featured {
+            border: 2px solid var(--primary);
+            transform: scale(1.05);
+            z-index: 2;
+        }
+        
+        .price-card.featured:hover {
+             transform: scale(1.08);
+        }
+
+        .popular-tag {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text-main);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+        }
+
+        .price-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 30px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .price-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
+        .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .period {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .price-features {
+            margin-bottom: 30px;
+            flex-grow: 1;
+        }
+
+        .price-features li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            color: #444;
+        }
+
+        .price-features li i {
+            color: var(--accent);
+        }
+
+        /* Ala Carte Section within Pricing */
+        .ala-carte-container {
+            width: 100%;
+            margin-top: 60px;
+            background: white;
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+        
+        .ala-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        
+        .ala-item {
+            padding: 20px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+        }
+        .ala-item h4 { font-size: 1.1rem; margin-bottom: 5px; }
+        .ala-item span { color: var(--primary); font-weight: 700; font-size: 1.2rem; }
+
+        /* =========================================
+           9. EVENTS & GALLERY
+           ========================================= */
+        .events {
+            padding: var(--section-padding);
+            background: var(--surface);
+            text-align: center;
+        }
+        
+        .event-tags {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+        
+        .event-tag {
+            background: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            font-weight: 600;
+        }
+
+        /* =========================================
+           10. CONTACT & FOOTER
+           ========================================= */
+        .footer-section {
+            background: #1a1921; /* Darker than text-main for footer */
+            color: white;
+            padding: 80px 0 40px;
+            border-top-left-radius: 40px;
+            border-top-right-radius: 40px;
+            margin-top: 40px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 50px;
+            margin-bottom: 60px;
+        }
+
+        .footer-col h4 {
+            color: var(--primary);
+            font-size: 1.2rem;
+            margin-bottom: 24px;
+        }
+
+        .contact-list li {
+            margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-list i {
+            color: var(--accent);
+            margin-top: 5px;
+        }
+        
+        .map-frame {
+            width: 100%;
+            height: 250px;
+            background: #333;
+            border-radius: var(--radius);
+            overflow: hidden;
+            border: 0;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        /* =========================================
+           11. RESPONSIVE MEDIA QUERIES
+           ========================================= */
+        @media (max-width: 992px) {
+            .hero-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .hero-content p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .hero-image {
+                margin-top: 40px;
+            }
+            
+            .usp-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 80px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+                text-align: center;
+            }
+
+            .nav-links.active {
+                display: flex;
+            }
+
+            .mobile-toggle {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .price-card.featured {
+                transform: none;
+            }
+            
+            .price-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+
+    <header id="header">
+        <div class="container nav-container">
+            <a href="#" class="logo">
+                <i class="fa-solid fa-paw"></i> Dawggedytails
+            </a>
+            <div class="mobile-toggle" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+            <nav class="nav-links" id="navLinks">
+                <a href="#about">About</a>
+                <a href="#programme">Programme</a>
+                <a href="#pricing">Packages</a>
+                <a href="#contact">Contact</a>
+                <a href="#pricing" class="btn" style="padding: 10px 24px;">Enroll Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container hero-grid">
+            <div class="hero-content">
+                <span class="badge">Slots are limited!</span>
+                <h1>The Ultimate Playschool for Small Dogs</h1>
+                <p>We create a fun and safe space where little pups can wag their tails, make furry friends, and have a blast! Featuring a strict 1:5 staff-to-dog ratio.</p>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content:center;">
+                    <a href="#pricing" class="btn">Book a Trial ($69)</a>
+                    <a href="https://wa.me/6588397713" class="btn btn-outline">WhatsApp Us</a>
+                </div>
+                
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <h4>1:5</h4>
+                        <span>Ratio</span>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Safe</h4>
+                        <span>Space</span>
+                    </div>
+                    <div class="stat-item">
+                        <h4>Fun</h4>
+                        <span>Guaranteed</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1591160690555-5debfba289f0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Happy small dog swimming">
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="usp-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>The Dawggedytails Difference</h2>
+                <p>Our enthusiastic "pawcher" ensures your precious fur baby has the best day ever.</p>
+            </div>
+            <div class="usp-grid">
+                <div class="usp-card">
+                    <div class="usp-icon">
+                        <i class="fa-solid fa-shield-dog"></i>
+                    </div>
+                    <h3>Small Dogs Only</h3>
+                    <p>A specialized environment where little pups can socialize without the worry of larger breeds.</p>
+                </div>
+                <div class="usp-card">
+                    <div class="usp-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3>1:5 Staff Ratio</h3>
+                    <p>To keep things extra special, each staff member focuses on just five dogs at a time.</p>
+                </div>
+                <div class="usp-card">
+                    <div class="usp-icon">
+                        <i class="fa-solid fa-bone"></i>
+                    </div>
+                    <h3>Curated Fun</h3>
+                    <p>From brain games to nature walks, we ensure a balance of play and rest.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="programme" class="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Pawsome Programme</h2>
+                <p>Adventure awaits! Here is what your pup gets up to.</p>
+            </div>
+            <div class="service-grid">
+                <div class="service-item">
+                    <div class="s-icon"><i class="fa-solid fa-tree"></i></div>
+                    <div>
+                        <h3>Nature Walks</h3>
+                        <p>Exciting outdoor strolls and excursions (weather permitting).</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="s-icon"><i class="fa-solid fa-person-running"></i></div>
+                    <div>
+                        <h3>Dog Runs</h3>
+                        <p>Let loose and burn off that puppy energy in safe areas.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="s-icon"><i class="fa-solid fa-water"></i></div>
+                    <div>
+                        <h3>Swim Classes</h3>
+                        <p>Splash around and make a splash in our pool sessions.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="s-icon"><i class="fa-solid fa-dog"></i></div>
+                    <div>
+                        <h3>Socialization</h3>
+                        <p>Indoor group fun and games with fellow small pups.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="s-icon"><i class="fa-solid fa-heart-pulse"></i></div>
+                    <div>
+                        <h3>Canine Fitness</h3>
+                        <p>One-on-One personalized playtime for a healthy pup.</p>
+                    </div>
+                </div>
+                <div class="service-item">
+                    <div class="s-icon"><i class="fa-solid fa-cake-candles"></i></div>
+                    <div>
+                        <h3>Celebrations</h3>
+                        <p>We host Birthday Pawties, Graduations, and CNY events!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <div class="section-title">
+                <h2>Choose A Package</h2>
+                <p>Flexible options for every paw-rent.</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>One Time Trial</h3>
+                        <div class="amount">$69</div>
+                        <div class="period">Single Session</div>
+                    </div>
+                    <ul class="price-features">
+                        <li><i class="fa-solid fa-check"></i> Full day assessment</li>
+                        <li><i class="fa-solid fa-check"></i> Socialization test</li>
+                        <li><i class="fa-solid fa-check"></i> Report card</li>
+                    </ul>
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSc..." class="btn btn-outline" style="width:100%; text-align:center;">Book Trial</a>
+                </div>
+
+                <div class="price-card featured">
+                    <div class="popular-tag">MOST POPULAR</div>
+                    <div class="price-header">
+                        <h3>Happy Standard</h3>
+                        <div class="amount">$980</div>
+                        <div class="period">10 Classes</div>
+                    </div>
+                    <ul class="price-features">
+                        <li><i class="fa-solid fa-check"></i> $98 per class</li>
+                        <li><i class="fa-solid fa-check"></i> Valid for 3 months</li>
+                        <li><i class="fa-solid fa-check"></i> Priority booking</li>
+                        <li><i class="fa-solid fa-check"></i> Includes basic grooming</li>
+                    </ul>
+                    <a href="#" class="btn" style="width:100%; text-align:center;">Select Package</a>
+                </div>
+
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>Flexi Starter</h3>
+                        <div class="amount">$590</div>
+                        <div class="period">6 Classes</div>
+                    </div>
+                    <ul class="price-features">
+                        <li><i class="fa-solid fa-check"></i> $98.30 per class</li>
+                        <li><i class="fa-solid fa-check"></i> Perfect for beginners</li>
+                        <li><i class="fa-solid fa-check"></i> Valid for 2 months</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width:100%; text-align:center;">Get Started</a>
+                </div>
+                
+                <div class="price-card">
+                    <div class="price-header">
+                        <h3>Unlimited Wags</h3>
+                        <div class="amount">$2340</div>
+                        <div class="period">3 Months Unlimited</div>
+                    </div>
+                    <ul class="price-features">
+                        <li><i class="fa-solid fa-check"></i> Best Value</li>
+                        <li><i class="fa-solid fa-check"></i> Or $780 x 3 installments</li>
+                        <li><i class="fa-solid fa-check"></i> Unlimited fun</li>
+                    </ul>
+                    <a href="#" class="btn btn-outline" style="width:100%; text-align:center;">Go Unlimited</a>
+                </div>
+            </div>
+
+            <div class="ala-carte-container">
+                <h3 style="text-align:center; margin-bottom:30px;">Ala Carte & Add-ons</h3>
+                <div class="ala-grid">
+                    <div class="ala-item">
+                        <h4>Single Day</h4>
+                        <span>$99</span>
+                    </div>
+                    <div class="ala-item">
+                        <h4>Swim Session</h4>
+                        <span>$45</span>
+                    </div>
+                    <div class="ala-item">
+                        <h4>Day + Swim</h4>
+                        <span>$144</span>
+                    </div>
+                    <div class="ala-item">
+                        <h4>Shower</h4>
+                        <span>$40</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="events">
+        <div class="container">
+            <h2>We Love to Party!</h2>
+            <p style="margin-bottom:20px;">Saturday is for events. Book the space for your pup.</p>
+            <div class="event-tags">
+                <div class="event-tag"><i class="fa-solid fa-cake-candles" style="color:var(--accent)"></i> Birthday Pawties</div>
+                <div class="event-tag"><i class="fa-solid fa-graduation-cap" style="color:var(--accent)"></i> Graduations</div>
+                <div class="event-tag"><i class="fa-solid fa-dragon" style="color:var(--accent)"></i> CNY Celebrations</div>
+            </div>
+            <a href="mailto:dawggedytails@gmail.com" class="btn">Inquire for Events</a>
+        </div>
+    </section>
+
+    <footer id="contact" class="footer-section">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>Find Us At</h4>
+                    <p style="margin-bottom:20px;">802 French Road #02-65<br>Singapore 200802</p>
+                    
+                    <h4>Operating Hours</h4>
+                    <ul class="contact-list" style="font-size:0.9rem; color:#ccc;">
+                        <li><span>Mon - Fri:</span> 8:00 am - 5:00 pm</li>
+                        <li><span>Saturday:</span> By appointment only</li>
+                        <li><span>Sun & PH:</span> Closed</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h4>Connect With Us</h4>
+                    <ul class="contact-list">
+                        <li>
+                            <i class="fa-brands fa-whatsapp"></i>
+                            <a href="https://wa.me/6588397713">+65 8839 7713</a>
+                        </li>
+                        <li>
+                            <i class="fa-solid fa-envelope"></i>
+                            <a href="mailto:dawggedytails@gmail.com">dawggedytails@gmail.com</a>
+                        </li>
+                        <li>
+                            <i class="fa-brands fa-instagram"></i>
+                            <a href="#">@dawggedytails</a>
+                        </li>
+                    </ul>
+                    <div style="margin-top:20px;">
+                        <a href="#" class="btn btn-outline" style="border-color:white; color:white;">Register Now</a>
+                    </div>
+                </div>
+
+                <div class="footer-col">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.790587823547!2d103.8596!3d1.3094!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da19b139e73b0d%3A0x8888888888888888!2s802%20French%20Rd%2C%20Singapore%20200802!5e0!3m2!1sen!2ssg!4v1625638471234!5m2!1sen!2ssg" 
+                        class="map-frame" 
+                        allowfullscreen="" 
+                        loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2025 Dawggedytails Playschool. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. Mobile Menu Toggle
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+
+        // 2. Sticky Header Shadow on Scroll
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 3. Smooth Scroll for Anchor Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
