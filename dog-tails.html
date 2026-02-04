@@ -20,7 +20,7 @@
             --primary: #c7a07a;
             --accent: #d6ac83;
             --background: #f0f0f0;
-            --surface: #ebebeb; /* Slight contrast for cards */
+            --surface: #ebebeb; 
             --surface-white: #ffffff;
             --text-main: #0b0a14;
             --text-muted: #08070e;
@@ -241,6 +241,14 @@
             max-width: 90%;
         }
 
+        /* Updated Button Group for Alignment */
+        .hero-btn-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: flex-start; /* Left align on desktop */
+        }
+
         .hero-stats {
             display: flex;
             gap: 30px;
@@ -385,7 +393,6 @@
             padding: var(--section-padding);
         }
 
-        /* Scrollable container for mobile friendly tables/cards */
         .pricing-grid {
             display: flex;
             flex-wrap: wrap;
@@ -471,7 +478,6 @@
             color: var(--accent);
         }
 
-        /* Ala Carte Section within Pricing */
         .ala-carte-container {
             width: 100%;
             margin-top: 60px;
@@ -497,7 +503,7 @@
         .ala-item span { color: var(--primary); font-weight: 700; font-size: 1.2rem; }
 
         /* =========================================
-           9. EVENTS & GALLERY
+           9. EVENTS TEASER
            ========================================= */
         .events {
             padding: var(--section-padding);
@@ -522,15 +528,134 @@
         }
 
         /* =========================================
-           10. CONTACT & FOOTER
+           10. FAQ SECTION (NEW)
+           ========================================= */
+        .faq-section {
+            padding: var(--section-padding);
+            background: var(--surface-white);
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+            padding: 24px 0;
+            transition: var(--transition);
+        }
+        
+        .faq-item:first-child {
+            border-top: 1px solid var(--border);
+        }
+        
+        .faq-question {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-main);
+        }
+        
+        .faq-question i {
+            color: var(--accent);
+            transition: transform 0.3s ease;
+        }
+        
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+        
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        
+        .faq-item.active .faq-answer {
+            max-height: 200px; /* Approximate max height */
+            padding-top: 16px;
+        }
+
+        /* =========================================
+           11. CONTACT FORM SECTION (NEW)
+           ========================================= */
+        .contact-form-section {
+            padding: var(--section-padding);
+            background: var(--surface);
+        }
+        
+        .form-card {
+            background: white;
+            padding: 50px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group.full-width {
+            grid-column: span 2;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--text-main);
+        }
+        
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 14px 20px;
+            border: 1px solid var(--border);
+            border-radius: 12px; /* Slightly tighter radius for inputs */
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: #fafafa;
+        }
+        
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(199, 160, 122, 0.15);
+            background: white;
+        }
+        
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* =========================================
+           12. FOOTER
            ========================================= */
         .footer-section {
-            background: #1a1921; /* Darker than text-main for footer */
+            background: #1a1921;
             color: white;
             padding: 80px 0 40px;
             border-top-left-radius: 40px;
             border-top-right-radius: 40px;
-            margin-top: 40px;
+            margin-top: 0; /* Reset since it follows contact */
         }
 
         .footer-grid {
@@ -576,7 +701,7 @@
         }
 
         /* =========================================
-           11. RESPONSIVE MEDIA QUERIES
+           13. RESPONSIVE MEDIA QUERIES
            ========================================= */
         @media (max-width: 992px) {
             .hero-grid {
@@ -587,6 +712,11 @@
             .hero-content p {
                 margin-left: auto;
                 margin-right: auto;
+            }
+
+            /* Center align buttons on mobile */
+            .hero-btn-group {
+                justify-content: center;
             }
             
             .hero-stats {
@@ -639,6 +769,18 @@
             .price-card {
                 width: 100%;
             }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-group.full-width {
+                grid-column: auto;
+            }
+            
+            .form-card {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
@@ -659,7 +801,8 @@
                 <a href="#about">About</a>
                 <a href="#programme">Programme</a>
                 <a href="#pricing">Packages</a>
-                <a href="#contact">Contact</a>
+                <a href="#faq">FAQ</a>
+                <a href="#contact-form">Contact</a>
                 <a href="#pricing" class="btn" style="padding: 10px 24px;">Enroll Now</a>
             </nav>
         </div>
@@ -671,7 +814,8 @@
                 <span class="badge">Slots are limited!</span>
                 <h1>The Ultimate Playschool for Small Dogs</h1>
                 <p>We create a fun and safe space where little pups can wag their tails, make furry friends, and have a blast! Featuring a strict 1:5 staff-to-dog ratio.</p>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap; justify-content:center;">
+                
+                <div class="hero-btn-group">
                     <a href="#pricing" class="btn">Book a Trial ($69)</a>
                     <a href="https://wa.me/6588397713" class="btn btn-outline">WhatsApp Us</a>
                 </div>
@@ -886,6 +1030,71 @@
         </div>
     </section>
 
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Everything you need to know before joining the pack.</p>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">What defines a "small dog"? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">We generally accept breeds such as Poodles, Pomeranians, Maltipoos, Corgis, and similar sizes up to 10-12kg. If you are unsure, please WhatsApp us for a quick check!</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">What vaccinations are required? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">For the safety of all pups, your dog must have up-to-date core vaccinations (Distemper, Parvovirus, Hepatitis) and ideally Kennel Cough protection.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">How does the 1:5 ratio work? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">We assign one dedicated staff member to oversee a maximum of five dogs. This ensures every dog gets supervised play, rest, and immediate attention if needed.</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">Can I bring my dog's own food? <i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="faq-answer">Absolutely! If your dog has a specific diet or lunch requirement, pack it in a labeled container and we will feed them during rest time.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact-form" class="contact-form-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Get in Touch</h2>
+                <p>Have questions or ready to enroll? Send us a message.</p>
+            </div>
+            <div class="form-card">
+                <form action="#" method="POST">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label class="form-label">Owner's Name</label>
+                            <input type="text" class="form-input" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Dog's Name</label>
+                            <input type="text" class="form-input" placeholder="Pup's Name" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Email Address</label>
+                            <input type="email" class="form-input" placeholder="example@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Phone Number</label>
+                            <input type="tel" class="form-input" placeholder="+65 1234 5678" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label class="form-label">Message or Inquiry</label>
+                            <textarea class="form-textarea" placeholder="Tell us about your dog or ask a question..."></textarea>
+                        </div>
+                    </div>
+                    <div style="text-align:center; margin-top:10px;">
+                        <button type="submit" class="btn" style="width:100%;">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
     <footer id="contact" class="footer-section">
         <div class="container">
             <div class="footer-grid">
@@ -917,9 +1126,6 @@
                             <a href="#">@dawggedytails</a>
                         </li>
                     </ul>
-                    <div style="margin-top:20px;">
-                        <a href="#" class="btn btn-outline" style="border-color:white; color:white;">Register Now</a>
-                    </div>
                 </div>
 
                 <div class="footer-col">
@@ -933,7 +1139,7 @@
             </div>
             
             <div class="copyright">
-                &copy; 2025 Dawggedytails Playschool. All rights reserved.
+                © 2025 Dawggedytails Playschool. All rights reserved.
             </div>
         </div>
     </footer>
@@ -967,6 +1173,24 @@
                     });
                     // Close mobile menu if open
                     document.getElementById('navLinks').classList.remove('active');
+                }
+            });
+        });
+
+        // 4. FAQ Accordion Functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                
+                // Close all other items
+                document.querySelectorAll('.faq-item').forEach(otherItem => {
+                    otherItem.classList.remove('active');
+                });
+
+                // Toggle current item
+                if (!isActive) {
+                    item.classList.add('active');
                 }
             });
         });
