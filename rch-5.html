@@ -1063,6 +1063,27 @@
             .hero h1 {
                 font-size: 2.5rem;
             }
+
+            .tabs-nav {
+                justify-content: flex-start;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                padding-bottom: 10px;
+                -webkit-overflow-scrolling: touch;
+                /* Smooth scrolling on iOS */
+                scrollbar-width: none;
+                /* Firefox */
+            }
+
+            .tabs-nav::-webkit-scrollbar {
+                display: none;
+                /* Chrome/Safari */
+            }
+
+            .tab-btn {
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
         }
 
         /* Immersive Popup */
