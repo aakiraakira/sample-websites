@@ -368,6 +368,8 @@
         }
 
         /* Hero */
+        /* Hero */
+        /* Hero */
         .hero {
             position: relative;
             height: 100vh;
@@ -1062,19 +1064,69 @@
                 padding: 50px 24px;
             }
 
-            .hero h1 {
-                font-size: 2.5rem;
+            /* Mobile Hero: Vertical Layout */
+            .hero {
+                flex-direction: column;
+                height: auto;
+                background: #fff;
+                color: var(--c-charcoal);
+            }
+
+            .hero-bg {
+                position: relative;
+                height: 60vh;
+                min-height: 400px;
+            }
+
+            .hero-overlay {
+                display: none;
             }
 
             .hero-content {
+                background: #fff;
+                color: var(--c-charcoal);
+                padding: 60px 20px;
+                max-width: 100%;
                 text-align: center;
                 margin-left: auto;
                 margin-right: auto;
-                max-width: 100%;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                color: var(--c-charcoal);
+            }
+
+            .hero-sub,
+            .hero-desc {
+                color: var(--c-charcoal);
             }
 
             .hero-btns {
+                flex-direction: column;
+                /* Stack buttons */
+                width: 100%;
+                /* Ensure container takes full width if needed, though block is default */
                 justify-content: center;
+            }
+
+            /* Override Outline Button for White Background */
+            .hero-btns .btn-outline {
+                border-color: var(--c-charcoal);
+                color: var(--c-charcoal);
+            }
+
+            .hero-btns .btn-outline:hover {
+                background-color: var(--c-charcoal);
+                color: var(--c-white);
+            }
+
+            .hero-btns .btn,
+            .hero-btns button {
+                width: 100%;
+                /* Full width buttons */
+                justify-content: center;
+                /* Center text/icon */
             }
 
             .tabs-nav {
@@ -1343,8 +1395,7 @@
 
             <div class="hero-btns">
                 <a href="#contact" class="btn btn-primary">Book a Site Visit</a>
-                <button onclick="openImmersive()" class="btn btn-outline-dark"
-                    style="background: rgba(255,255,255,0.2); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.4); color: white;">
+                <button onclick="openImmersive()" class="btn btn-outline">
                     <span style="margin-right:8px"></span> Immersive Experience
                 </button>
             </div>
