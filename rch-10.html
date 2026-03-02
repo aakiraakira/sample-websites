@@ -1336,24 +1336,78 @@
             }
         }
 
-        /* --- Language Switcher Float --- */
-        .lang-float {
+        /* --- Language Switcher Custom UI --- */
+        .lang-float-btn {
             position: fixed;
             bottom: 30px;
             left: 30px;
+            z-index: 10001;
+            background: var(--c-charcoal);
+            color: var(--c-white);
+            padding: 12px 20px;
+            border-radius: var(--radius-pill);
+            box-shadow: var(--shadow-hover);
+            border: 1px solid var(--c-border);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: var(--trans-fast);
+            font-family: var(--f-sans);
+        }
+
+        .lang-float-btn:hover {
+            background: var(--c-gold);
+            border-color: var(--c-gold);
+        }
+
+        .lang-popup {
+            position: fixed;
+            bottom: 85px;
+            left: 30px;
             z-index: 10000;
             background: var(--c-white);
-            padding: 10px;
             border-radius: var(--radius-card);
             box-shadow: var(--shadow-hover);
             border: 1px solid var(--c-border);
-            /* Reset typical Google Translate styles */
+            padding: 10px;
             display: flex;
-            align-items: center;
-            justify-content: center;
+            flex-direction: column;
+            gap: 5px;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(10px);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        /* Hide Google Translate Top Banner and Tooltips */
+        .lang-popup.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+        }
+
+        .lang-option {
+            background: transparent;
+            border: none;
+            padding: 10px 20px;
+            text-align: left;
+            font-family: var(--f-sans);
+            font-size: 0.95rem;
+            color: var(--c-charcoal);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: var(--trans-fast);
+            font-weight: 500;
+        }
+
+        .lang-option:hover,
+        .lang-option.active {
+            background: var(--c-offwhite);
+            color: var(--c-gold);
+        }
+
+        /* Hide Google Translate Completely */
         body {
             top: 0px !important;
         }
@@ -1370,22 +1424,14 @@
             box-shadow: none !important;
         }
 
-        /* Style the select dropdown */
-        #google_translate_element select {
-            border: 1px solid var(--c-border);
-            border-radius: 6px;
-            padding: 8px 12px;
-            font-family: var(--f-sans);
-            font-size: 0.9rem;
-            color: var(--c-charcoal);
-            background: var(--c-white);
-            outline: none;
-            cursor: pointer;
-            transition: var(--trans-fast);
-        }
-
-        #google_translate_element select:hover {
-            border-color: var(--c-gold);
+        #google_translate_element {
+            opacity: 0 !important;
+            position: absolute !important;
+            pointer-events: none !important;
+            z-index: -1000 !important;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
         }
 
         /* Hide "Powered by Google Translate" */
@@ -1404,7 +1450,7 @@
 <body>
 
     <div class="announcement-bar">
-        <div class="marquee-content">
+        <div class="marquee-content" data-i18n="announcement">
             1st International Smart UniCity in East Genting Highlands • LOHAS 3-Generation Community • RM2.8B Vision •
             45°C Class 1 Hot Spring • ECRL Connected by 2026 • Live, Work, Learn, Play in Nature
         </div>
@@ -1419,14 +1465,14 @@
 
             <nav>
                 <ul class="nav-list">
-                    <li><a href="#overview" class="nav-link">Overview</a></li>
-                    <li><a href="#masterplan" class="nav-link">Masterplan</a></li>
-                    <li><a href="#location" class="nav-link">Location</a></li>
+                    <li><a href="#overview" class="nav-link" data-i18n="nav_overview">Overview</a></li>
+                    <li><a href="#masterplan" class="nav-link" data-i18n="nav_masterplan">Masterplan</a></li>
+                    <li><a href="#location" class="nav-link" data-i18n="nav_location">Location</a></li>
                 </ul>
             </nav>
 
             <div class="header-cta">
-                <a href="#contact" class="btn btn-primary">Request Brochure</a>
+                <a href="#contact" class="btn btn-primary" data-i18n="btn_brochure">Request Brochure</a>
             </div>
 
             <div class="hamburger" id="hamburger">
@@ -1438,10 +1484,10 @@
     </header>
 
     <div class="mobile-drawer" id="mobileDrawer">
-        <a href="#overview" class="nav-link mobile-link">Overview</a>
-        <a href="#masterplan" class="nav-link mobile-link">Masterplan</a>
-        <a href="#location" class="nav-link mobile-link">Location</a>
-        <a href="#contact" class="btn btn-primary">Request Brochure</a>
+        <a href="#overview" class="nav-link mobile-link" data-i18n="nav_overview">Overview</a>
+        <a href="#masterplan" class="nav-link mobile-link" data-i18n="nav_masterplan">Masterplan</a>
+        <a href="#location" class="nav-link mobile-link" data-i18n="nav_location">Location</a>
+        <a href="#contact" class="btn btn-primary" data-i18n="btn_brochure">Request Brochure</a>
     </div>
 
     <section class="hero">
@@ -1449,12 +1495,12 @@
         <div class="hero-overlay"></div>
         <div class="hero-content" id="heroContent">
             <h1>P’Maveraz</h1>
-            <h2 class="hero-sub">An International Education Hub Inspiring Sustainable Living Amid Natural Hot Spring
-                Serenity</h2>
+            <h2 class="hero-sub" data-i18n="hero_sub">An International Education Hub Inspiring Sustainable Living Amid
+                Natural Hot Spring Serenity</h2>
 
             <div class="hero-btns">
-                <a href="#contact" class="btn btn-primary">Book a Site Visit</a>
-                <button onclick="openImmersive()" class="btn btn-outline">
+                <a href="#contact" class="btn btn-primary" data-i18n="btn_book_visit">Book a Site Visit</a>
+                <button onclick="openImmersive()" class="btn btn-outline" data-i18n="btn_immersive">
                     <span style="margin-right:8px"></span> Immersive Experience
                 </button>
             </div>
@@ -1467,19 +1513,19 @@
         <div class="container stats-grid" id="statsGrid">
             <div>
                 <div class="stat-val" data-target="41">0</div>
-                <div class="stat-label">Acres Freehold</div>
+                <div class="stat-label" data-i18n="stat_acres">Acres Freehold</div>
             </div>
             <div>
                 <div class="stat-val" data-target="24">0</div>
-                <div class="stat-label">Average Temperature (°C)</div>
+                <div class="stat-label" data-i18n="stat_temp">Average Temperature (°C)</div>
             </div>
             <div>
                 <div class="stat-val" data-target="45">0</div>
-                <div class="stat-label">°C Hot Spring</div>
+                <div class="stat-label" data-i18n="stat_hotspring">°C Hot Spring</div>
             </div>
             <div>
                 <div class="stat-val" data-target="2.4">0</div>
-                <div class="stat-label">GDV (RM Billion)</div>
+                <div class="stat-label" data-i18n="stat_gdv">GDV (RM Billion)</div>
             </div>
         </div>
     </div>
@@ -1488,13 +1534,15 @@
         <div class="container">
             <div class="text-center reveal" style="max-width: 900px; margin: 0 auto;">
                 <div class="text-gold"
-                    style="font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;">A
+                    style="font-weight: 600; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 15px;"
+                    data-i18n="overview_kicker">A
                     RICHZ</div>
-                <h2 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 30px; line-height: 1.3;">Inspired
+                <h2 style="font-size: clamp(2rem, 4vw, 3rem); margin-bottom: 30px; line-height: 1.3;"
+                    data-i18n="overview_title">Inspired
                     Integrated Sanctuary for 3-Generation Coexistence Living,Working, Learning and Wellbeing.</h2>
 
                 <div style="text-align: center; font-size: 1.1rem; color: #4a4a4a; display: grid; gap: 20px;">
-                    <p>
+                    <p data-i18n="overview_desc">
                         P'Maveraz - Spring Forth Sanctuary is a transformative, GBI Platinum-certified green community
                         reimagining contemporary living through LOHAS principles. Anchored by mineral-rich hot springs
                         in a nature-rich environment, it integrates resort living, international education, wellness
@@ -1518,16 +1566,18 @@
     <section id="masterplan" class="section-padding bg-offwhite">
         <div class="container">
             <div class="text-center reveal">
-                <h2 style="margin-bottom: 10px;">P'Maveraz - The RICHZ Master Development Zones</h2>
+                <h2 style="margin-bottom: 10px;" data-i18n="masterplan_title">P'Maveraz - The RICHZ Master Development
+                    Zones</h2>
             </div>
 
             <div class="tabs-container reveal">
                 <div class="tabs-nav">
-                    <button class="tab-btn active" onclick="openTab(event, 'zone1')">Zone R</button>
-                    <button class="tab-btn" onclick="openTab(event, 'zone2')">Zone I</button>
-                    <button class="tab-btn" onclick="openTab(event, 'zone3')">Zone C</button>
-                    <button class="tab-btn" onclick="openTab(event, 'zone4')">Zone H</button>
-                    <button class="tab-btn" onclick="openTab(event, 'zone5')">Zone Z</button>
+                    <button class="tab-btn active" onclick="openTab(event, 'zone1')" data-i18n="tab_zoner">Zone
+                        R</button>
+                    <button class="tab-btn" onclick="openTab(event, 'zone2')" data-i18n="tab_zonei">Zone I</button>
+                    <button class="tab-btn" onclick="openTab(event, 'zone3')" data-i18n="tab_zonec">Zone C</button>
+                    <button class="tab-btn" onclick="openTab(event, 'zone4')" data-i18n="tab_zoneh">Zone H</button>
+                    <button class="tab-btn" onclick="openTab(event, 'zone5')" data-i18n="tab_zonez">Zone Z</button>
                 </div>
 
                 <!-- Zone R (was Zone 1) -->
@@ -1535,8 +1585,9 @@
                     <div class="zone-card">
                         <div class="zone-info">
                             <div class="zone-letter">R</div>
-                            <h3>Zone R - Residential Suites</h3>
-                            <p>Refined residences offering tranquil living amid forested landscapes,designed for
+                            <h3 data-i18n="zoner_title">Zone R - Residential Suites</h3>
+                            <p data-i18n="zoner_desc">Refined residences offering tranquil living amid forested
+                                landscapes,designed for
                                 comfort, rejuvenation and long-term wellbeing.</p>
                         </div>
                         <div class="carousel-container">
@@ -1559,8 +1610,10 @@
                     <div class="zone-card">
                         <div class="zone-info">
                             <div class="zone-letter">I</div>
-                            <h3>Zone I - College University & International Forest Boarding Schools</h3>
-                            <p>A purpose-built international education ecosystem, from nursery to Level 12,where
+                            <h3 data-i18n="zonei_title">Zone I - College University & International Forest Boarding
+                                Schools</h3>
+                            <p data-i18n="zonei_desc">A purpose-built international education ecosystem, from nursery to
+                                Level 12,where
                                 learning is immersed in nature, and sustainability is embedded into daily life.</p>
                         </div>
                         <div class="carousel-container">
@@ -1584,8 +1637,9 @@
                     <div class="zone-card">
                         <div class="zone-info">
                             <div class="zone-letter">C</div>
-                            <h3>Zone C - Curated Luxury Hot Spring Villas</h3>
-                            <p>Exclusive private villas centred around a natural hot spring, offering restorative living
+                            <h3 data-i18n="zonec_title">Zone C - Curated Luxury Hot Spring Villas</h3>
+                            <p data-i18n="zonec_desc">Exclusive private villas centred around a natural hot spring,
+                                offering restorative living
                                 experiences that blend luxury, wellness and serenity.</p>
                         </div>
                         <div class="carousel-container">
@@ -1636,8 +1690,9 @@
                     <div class="zone-card">
                         <div class="zone-info">
                             <div class="zone-letter">H</div>
-                            <h3>Zone H - Hotel & Medical Wellness Centre</h3>
-                            <p>A hospitality and healthcare destination integrating premiumaccommodation with
+                            <h3 data-i18n="zoneh_title">Zone H - Hotel & Medical Wellness Centre</h3>
+                            <p data-i18n="zoneh_desc">A hospitality and healthcare destination integrating
+                                premiumaccommodation with
                                 preventive, therapeutic and holistic medical wellness services.</p>
                         </div>
                         <div class="carousel-container">
@@ -1671,8 +1726,9 @@
                     <div class="zone-card">
                         <div class="zone-info">
                             <div class="zone-letter">Z</div>
-                            <h3>Zone Z - Zen Herbal & Fragrance Garden</h3>
-                            <p>A contemplative green sanctuary featuring herbal landscapes, fragrance gardens, camping
+                            <h3 data-i18n="zonez_title">Zone Z - Zen Herbal & Fragrance Garden</h3>
+                            <p data-i18n="zonez_desc">A contemplative green sanctuary featuring herbal landscapes,
+                                fragrance gardens, camping
                                 grounds and a gallery, celebrating biodiversity,</p>
                         </div>
                         <div class="carousel-container">
@@ -1713,7 +1769,7 @@
 
     <section id="location" class="section-padding">
         <div class="container text-center reveal">
-            <h2 style="margin-bottom: 40px;">Location</h2>
+            <h2 style="margin-bottom: 40px;" data-i18n="location_title">Location</h2>
             <div style="display: flex; flex-direction: column; gap: 40px; align-items: center;">
                 <img src="https://reputifly3.sg-host.com/wp-content/uploads/2026/03/WhatsApp-Image-2026-03-02-at-10.21.08-AM-mm8k01c234t8.webp"
                     alt="Location Map 1" style="max-width: 100%; border-radius: 12px; box-shadow: var(--shadow-soft);">
@@ -1726,8 +1782,10 @@
     <!-- Highlight Statement -->
     <section class="section-padding bg-dark text-center">
         <div class="container reveal">
-            <h2 class="text-gold" style="font-size: 2.5rem; margin-bottom: 20px;">P'Maveraz</h2>
-            <p style="font-size: 1.5rem; max-width: 900px; margin: 0 auto; line-height: 1.4;">
+            <h2 class="text-gold" style="font-size: 2.5rem; margin-bottom: 20px;" data-i18n="highlight_title">P'Maveraz
+            </h2>
+            <p style="font-size: 1.5rem; max-width: 900px; margin: 0 auto; line-height: 1.4;"
+                data-i18n="highlight_desc">
                 The Green Community Development That Fosters Vitality, Emergence And Sustainable Living, Where Life Is
                 Inspired To Spring Forth In Harmony With Nature.
             </p>
@@ -1739,16 +1797,18 @@
     <section class="section-padding bg-offwhite">
         <div class="container reveal">
             <div class="dev-profile">
-                <h5 style="text-transform: uppercase; color: #888; letter-spacing: 1px; margin-bottom: 10px;">The
+                <h5 style="text-transform: uppercase; color: #888; letter-spacing: 1px; margin-bottom: 10px;"
+                    data-i18n="dev_kicker">The
                     Developer</h5>
-                <h3>DSA Development Sdn Bhd</h3>
-                <p style="margin-bottom: 20px;">Led by Mr. Ghee Peng Lam, Founder & Managing Director.</p>
+                <h3 data-i18n="dev_title">DSA Development Sdn Bhd</h3>
+                <p style="margin-bottom: 20px;" data-i18n="dev_led_by">Led by Mr. Ghee Peng Lam, Founder & Managing
+                    Director.</p>
 
-                <p style="color: #555; margin-bottom: 10px;">
+                <p style="color: #555; margin-bottom: 10px;" data-i18n="dev_desc1">
                     With over 40 years of experience, including key roles in the <strong>Genting Group property
                         division</strong> (1980s) involving the Awana Golf & Country Club and casino extension.
                 </p>
-                <p style="color: #555; font-size: 0.9rem;">
+                <p style="color: #555; font-size: 0.9rem;" data-i18n="dev_desc2">
                     <strong>Track Record:</strong> Wisma Zelan (KL), Bandar Utama Sunway Luxury Bungalows, Taman Raub
                     Jaya 5, and townships in Bukit Desa Semantan.
                 </p>
@@ -1769,58 +1829,62 @@
 
     <section class="section-padding bg-offwhite">
         <div class="container" style="max-width: 800px;">
-            <h2 class="text-center" style="margin-bottom: 40px;">Frequently Asked Questions</h2>
+            <h2 class="text-center" style="margin-bottom: 40px;" data-i18n="faq_title">Frequently Asked Questions</h2>
 
             <div class="accordion-item">
                 <button class="accordion-header" onclick="toggleAccordion(this)">
-                    What is the LOHAS concept?
+                    <span data-i18n="faq_q1">What is the LOHAS concept?</span>
                     <span class="icon-plus">+</span>
                 </button>
                 <div class="accordion-body">
-                    <p>LOHAS stands for "Lifestyles of Health and Sustainability." The Richz is designed for a
+                    <p data-i18n="faq_a1">LOHAS stands for "Lifestyles of Health and Sustainability." The Richz is
+                        designed for a
                         3-generation community to live, work, learn, and play in a nature-centric environment.</p>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <button class="accordion-header" onclick="toggleAccordion(this)">
-                    What is the tenure and land size?
+                    <span data-i18n="faq_q2">What is the tenure and land size?</span>
                     <span class="icon-plus">+</span>
                 </button>
                 <div class="accordion-body">
-                    <p>The Richz sits on 41 acres of freehold land in East Genting Highlands.</p>
+                    <p data-i18n="faq_a2">The Richz sits on 41 acres of freehold land in East Genting Highlands.</p>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <button class="accordion-header" onclick="toggleAccordion(this)">
-                    How far is the development from KL?
+                    <span data-i18n="faq_q3">How far is the development from KL?</span>
                     <span class="icon-plus">+</span>
                 </button>
                 <div class="accordion-body">
-                    <p>It is approximately 45 minutes from Kuala Lumpur City Center and 25 minutes from the Gombak Toll.
+                    <p data-i18n="faq_a3">It is approximately 45 minutes from Kuala Lumpur City Center and 25 minutes
+                        from the Gombak Toll.
                     </p>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <button class="accordion-header" onclick="toggleAccordion(this)">
-                    Tell me about the Hot Spring.
+                    <span data-i18n="faq_q4">Tell me about the Hot Spring.</span>
                     <span class="icon-plus">+</span>
                 </button>
                 <div class="accordion-body">
-                    <p>We possess natural hot spring aquifers measured at 45°C, tested as Class 1 category, which are
+                    <p data-i18n="faq_a4">We possess natural hot spring aquifers measured at 45°C, tested as Class 1
+                        category, which are
                         integrated into our hotels and wellness villas.</p>
                 </div>
             </div>
 
             <div class="accordion-item">
                 <button class="accordion-header" onclick="toggleAccordion(this)">
-                    When is the ECRL completion?
+                    <span data-i18n="faq_q5">When is the ECRL completion?</span>
                     <span class="icon-plus">+</span>
                 </button>
                 <div class="accordion-body">
-                    <p>The ECRL station, located ~2km away, is expected to be completed by the end of 2026.</p>
+                    <p data-i18n="faq_a5">The ECRL station, located ~2km away, is expected to be completed by the end of
+                        2026.</p>
                 </div>
             </div>
         </div>
@@ -1847,8 +1911,9 @@
         <div class="container">
             <div class="form-box reveal">
                 <div class="text-center" style="margin-bottom: 30px;">
-                    <h3>Make an Enquiry</h3>
-                    <p style="font-size: 0.9rem; color: #666;">Please fill out the form below.</p>
+                    <h3 data-i18n="contact_title">Make an Enquiry</h3>
+                    <p style="font-size: 0.9rem; color: #666;" data-i18n="contact_desc">Please fill out the form below.
+                    </p>
                 </div>
 
                 <div id="successMessage" class="success-msg">
@@ -1918,22 +1983,23 @@
                     <img src="https://reputifly.com/wp-content/uploads/2026/01/Screenshot_2026-01-29_202549-removebg-preview.png"
                         alt="The Richz Logo"
                         style="width: 140px; border-radius: 12px; margin-bottom: 20px; background-color: white; padding: 10px;">
-                    <p style="opacity: 0.5; font-size: 0.8rem;">Developed by DSA Development Sdn Bhd.</p>
+                    <p style="opacity: 0.5; font-size: 0.8rem;" data-i18n="footer_dev_by">Developed by DSA Development
+                        Sdn Bhd.</p>
                 </div>
                 <div>
-                    <h4>Navigation</h4>
+                    <h4 data-i18n="footer_nav">Navigation</h4>
                     <ul>
-                        <li><a href="#overview">Overview</a></li>
-                        <li><a href="#masterplan">Masterplan</a></li>
-                        <li><a href="#location">Location</a></li>
+                        <li><a href="#overview" data-i18n="nav_overview">Overview</a></li>
+                        <li><a href="#masterplan" data-i18n="nav_masterplan">Masterplan</a></li>
+                        <li><a href="#location" data-i18n="nav_location">Location</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4>Connect</h4>
+                    <h4 data-i18n="footer_connect">Connect</h4>
                     <ul>
-                        <li><a href="#contact">Contact Us</a></li>
-                        <li><a href="#contact">Brochure Request</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#contact" data-i18n="footer_contact">Contact Us</a></li>
+                        <li><a href="#contact" data-i18n="btn_brochure">Brochure Request</a></li>
+                        <li><a href="#" data-i18n="footer_privacy">Privacy Policy</a></li>
                     </ul>
                 </div>
             </div>
@@ -2357,19 +2423,172 @@
 
     </script>
 
-    <!-- Language Switcher Float -->
-    <div id="google_translate_element" class="lang-float"></div>
+    <!-- Custom Language Switcher UI -->
+    <button class="lang-float-btn" onclick="toggleLangPopup()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="2" y1="12" x2="22" y2="12"></line>
+            <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+        </svg>
+        Language
+    </button>
+
+    <div class="lang-popup" id="langPopup">
+        <button class="lang-option" onclick="changeLanguage('en', this)">English</button>
+        <button class="lang-option" onclick="changeLanguage('ms', this)">Bahasa Melayu</button>
+        <button class="lang-option" onclick="changeLanguage('zh-CN', this)">中文 (Simplified)</button>
+        <button class="lang-option" onclick="changeLanguage('zh-TW', this)">中文 (Traditional)</button>
+    </div>
+
+    <!-- Custom Language Switcher JS Boilerplate -->
     <script type="text/javascript">
-        function googleTranslateElementInit() {
-            new google.translate.TranslateElement({
-                pageLanguage: 'en',
-                includedLanguages: 'en,ms,zh-CN,zh-TW',
-                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
-            }, 'google_translate_element');
+        const translations = {
+            "announcement": {
+                "en": "1st International Smart UniCity in East Genting Highlands • LOHAS 3-Generation Community • RM2.8B Vision • 45°C Class 1 Hot Spring • ECRL Connected by 2026 • Live, Work, Learn, Play in Nature",
+                "ms": "UniCity Pintar Antarabangsa Pertama di Timur Tanah Tinggi Genting • Komuniti LOHAS 3-Generasi • Visi RM2.8 Bilion • Kolam Air Panas Kelas 1 45°C • Dihubungkan dengan ECRL menjelang 2026 • Tinggal, Bekerja, Belajar, Bermain dalam Alam Semula Jadi",
+                "zh-CN": "云顶高原东部的首个国际智能大学城 • 乐活(LOHAS)三代社区 • 28亿令吉宏伟愿景 • 45°C 1级天然温泉 • 2026年连接东海岸铁路(ECRL) • 在大自然中生活、工作、学习和娱乐",
+                "zh-TW": "雲頂高原東部的首個國際智能大學城 • 樂活(LOHAS)三代社區 • 28億令吉宏偉願景 • 45°C 1級天然溫泉 • 2026年連接東海岸鐵路(ECRL) • 在大自然中生活、工作、學習和娛樂"
+            },
+            "nav_overview": { "en": "Overview", "ms": "Gambaran Keseluruhan", "zh-CN": "概述", "zh-TW": "概述" },
+            "nav_masterplan": { "en": "Masterplan", "ms": "Pelan Induk", "zh-CN": "总体规划", "zh-TW": "總體規劃" },
+            "nav_location": { "en": "Location", "ms": "Lokasi", "zh-CN": "地点", "zh-TW": "地點" },
+            "btn_brochure": { "en": "Request Brochure", "ms": "Mohon Risalah", "zh-CN": "索取宣传册", "zh-TW": "索取宣傳冊" },
+
+            "hero_title": { "en": "P’Maveraz", "ms": "P’Maveraz", "zh-CN": "P’Maveraz", "zh-TW": "P’Maveraz" },
+            "hero_sub": {
+                "en": "An International Education Hub Inspiring Sustainable Living Amid Natural Hot Spring Serenity",
+                "ms": "Hab Pendidikan Antarabangsa yang Mengilhamkan Kehidupan Lestari Di Tengah Ketenangan Kolam Air Panas Semula Jadi",
+                "zh-CN": "一个激发可持续生活理念的国际教育枢纽，坐落于天然温泉的宁静之中",
+                "zh-TW": "一個激發永續生活理念的國際教育樞紐，坐落於天然溫泉的寧靜之中"
+            },
+            "btn_book_visit": { "en": "Book a Site Visit", "ms": "Tempah Lawatan Tapak", "zh-CN": "预约实地考察", "zh-TW": "預約實地考察" },
+            "btn_immersive": { "en": "Immersive Experience", "ms": "Pengalaman Mengasyikkan", "zh-CN": "沉浸式体验", "zh-TW": "沉浸式體驗" },
+
+            "stat_acres": { "en": "Acres Freehold", "ms": "Ekar Pegangan Bebas", "zh-CN": "英亩永久产权", "zh-TW": "英畝永久產權" },
+            "stat_temp": { "en": "Average Temperature (°C)", "ms": "Suhu Purata (°C)", "zh-CN": "平均温度 (°C)", "zh-TW": "平均溫度 (°C)" },
+            "stat_hotspring": { "en": "°C Hot Spring", "ms": "°C Kolam Air Panas", "zh-CN": "°C 天然温泉", "zh-TW": "°C 天然溫泉" },
+            "stat_gdv": { "en": "GDV (RM Billion)", "ms": "GDV (Bilion RM)", "zh-CN": "发展总值 (十亿令吉)", "zh-TW": "發展總值 (十億令吉)" },
+
+            "overview_kicker": { "en": "A RICHZ", "ms": "SEBUAH RICHZ", "zh-CN": "一个 RICHZ", "zh-TW": "一個 RICHZ" },
+            "overview_title": {
+                "en": "Inspired Integrated Sanctuary for 3-Generation Coexistence Living, Working, Learning and Wellbeing.",
+                "ms": "Tempat Perlindungan Bersepadu Terinspirasi untuk Kehidupan Berdampingan 3-Generasi, Bekerja, Belajar dan Kesejahteraan.",
+                "zh-CN": "为三代人共存、生活、工作、学习和福祉带来启发的综合庇护所。",
+                "zh-TW": "為三代人共存、生活、工作、學習和福祉帶來啟發的綜合庇護所。"
+            },
+            "overview_desc": {
+                "en": "P'Maveraz - Spring Forth Sanctuary is a transformative, GBI Platinum-certified green community reimagining contemporary living through LOHAS principles. Anchored by mineral-rich hot springs in a nature-rich environment, it integrates resort living, international education, wellness hospitality, and ecological stewardship across five thoughtfully curated zones of holistic growth.",
+                "ms": "P'Maveraz - Spring Forth Sanctuary ialah sebuah komuniti hijau transformatif yang diperakui GBI Platinum, membayangkan semula kehidupan kontemporari melalui prinsip LOHAS. Berlabuh pada kolam air panas yang kaya dengan mineral dalam persekitaran semula jadi, ia menyepadukan kehidupan resort, pendidikan antarabangsa, hospitaliti kesejahteraan, dan penjagaan ekologi di merentasi lima zon perincian holistik.",
+                "zh-CN": "P'Maveraz - Spring Forth Sanctuary 是一个获得 GBI 白金认证的变革性绿色社区，通过 LOHAS 原则重新构想当代生活。以大自然中富含矿物质的温泉为依托，它在五个精心策划的全面发展区域内，融合了度假村生活、国际教育、医疗保健和生态管理。",
+                "zh-TW": "P'Maveraz - Spring Forth Sanctuary 是一個獲得 GBI 白金認證的變革性綠色社區，透過 LOHAS 原則重新構想當代生活。以大自然中富含礦物質的溫泉為依託，它在五個精心策劃的全面開發區域內，融合了度假村生活、國際教育、醫療保健和生態管理。"
+            },
+
+            "masterplan_title": { "en": "P'Maveraz - The RICHZ Master Development Zones", "ms": "P'Maveraz - Zon Pembangunan Utama RICHZ", "zh-CN": "P'Maveraz - RICHZ 主要发展区", "zh-TW": "P'Maveraz - RICHZ 主要發展區" },
+            "tab_zoner": { "en": "Zone R", "ms": "Zon R", "zh-CN": "R区", "zh-TW": "R區" },
+            "tab_zonei": { "en": "Zone I", "ms": "Zon I", "zh-CN": "I区", "zh-TW": "I區" },
+            "tab_zonec": { "en": "Zone C", "ms": "Zon C", "zh-CN": "C区", "zh-TW": "C區" },
+            "tab_zoneh": { "en": "Zone H", "ms": "Zon H", "zh-CN": "H区", "zh-TW": "H區" },
+            "tab_zonez": { "en": "Zone Z", "ms": "Zon Z", "zh-CN": "Z区", "zh-TW": "Z區" },
+
+            "zoner_title": { "en": "Zone R - Residential Suites", "ms": "Zon R - Suite Kediaman", "zh-CN": "R区 - 住宅套房", "zh-TW": "R區 - 住宅套房" },
+            "zoner_desc": { "en": "Refined residences offering tranquil living amid forested landscapes,designed for comfort, rejuvenation and long-term wellbeing.", "ms": "Kediaman mewah yang menawarkan kehidupan tenang di tengah-tengah landskap berhutan, direka untuk keselesaan, peremajaan dan kesejahteraan jangka panjang.", "zh-CN": "精致的住宅提供森林景观中的宁静生活，专为舒适、恢复活力和长期健康而设计。", "zh-TW": "精緻的住宅提供森林景觀中的寧靜生活，專為舒適、恢復活力和長期健康而設計。" },
+
+            "zonei_title": { "en": "Zone I - College University & International Forest Boarding Schools", "ms": "Zon I - Kolej Universiti & Sekolah Berasrama Hutan Antarabangsa", "zh-CN": "I区 - 大学学院及国际森林寄宿学校", "zh-TW": "I區 - 大學院校及國際森林寄宿學校" },
+            "zonei_desc": { "en": "A purpose-built international education ecosystem, from nursery to Level 12,where learning is immersed in nature, and sustainability is embedded into daily life.", "ms": "Sebuah ekosistem pendidikan antarabangsa yang dibina khas, dari tadika hingga Tahap 12, di mana pembelajaran tenggelam dalam alam semula jadi, dan kelestarian tertanam dalam kehidupan seharian.", "zh-CN": "一个专门建立的国际教育生态系统，涵盖从幼儿园到12年级，让学习融入自然，并将可持续性融入日常生活。", "zh-TW": "一個專門建立的國際教育生態系統，涵蓋從幼稚園到12年級，讓學習融入自然，並將永續性融入日常生活。" },
+
+            "zonec_title": { "en": "Zone C - Curated Luxury Hot Spring Villas", "ms": "Zon C - Vila Kolam Air Panas Mewah Kurasi", "zh-CN": "C区 - 特选豪华温泉别墅", "zh-TW": "C區 - 特選豪華溫泉別墅" },
+            "zonec_desc": { "en": "Exclusive private villas centred around a natural hot spring, offering restorative living experiences that blend luxury, wellness and serenity.", "ms": "Vila peribadi eksklusif berpusat di sekitar kolam air panas semula jadi, menawarkan pengalaman hidup pemulihan yang menggabungkan kemewahan, kesejahteraan dan ketenangan.", "zh-CN": "围绕天然温泉而建的专属私人别墅，提供融合奢华、健康和宁静的恢复性生活体验。", "zh-TW": "圍繞天然溫泉而建的專屬私人別墅，提供融合奢華、健康和寧靜的恢復性生活體驗。" },
+
+            "zoneh_title": { "en": "Zone H - Hotel & Medical Wellness Centre", "ms": "Zon H - Hotel & Pusat Kesejahteraan Perubatan", "zh-CN": "H区 - 酒店及医疗健康中心", "zh-TW": "H區 - 酒店及醫療健康中心" },
+            "zoneh_desc": { "en": "A hospitality and healthcare destination integrating premiumaccommodation with preventive, therapeutic and holistic medical wellness services.", "ms": "Sebuah destinasi hospitaliti dan penjagaan kesihatan yang menyepadukan penginapan premium dengan perkhidmatan perubatan pencegahan, terapeutik dan holistik.", "zh-CN": "一个融合高端住宿与预防性、治疗性和整体医疗保健服务的酒店与医疗目的地。", "zh-TW": "一個融合高端住宿與預防性、治療性和整體醫療保健服務的飯店與醫療目的地。" },
+
+            "zonez_title": { "en": "Zone Z - Zen Herbal & Fragrance Garden", "ms": "Zon Z - Taman Herba & Haruman Zen", "zh-CN": "Z区 - 禅意草本及芳香花园", "zh-TW": "Z區 - 禪意草本及芳香花園" },
+            "zonez_desc": { "en": "A contemplative green sanctuary featuring herbal landscapes, fragrance gardens, camping grounds and a gallery, celebrating biodiversity.", "ms": "Sebuah tempat perlindungan hijau yang merenungkan yang menampilkan landskap herba, taman wangian, tapak perkhemahan dan leri, merayakan biodiversiti.", "zh-CN": "一个沉思的绿色圣地，拥有草本景观、芳香花园、露营地和画廊，歌颂生物多样性。", "zh-TW": "一個沉思的綠色聖地，擁有草本景觀、芳香花園、露營地和畫廊，歌頌生物多樣性。" },
+
+            "location_title": { "en": "Location", "ms": "Lokasi", "zh-CN": "地点", "zh-TW": "地點" },
+            "highlight_title": { "en": "P'Maveraz", "ms": "P'Maveraz", "zh-CN": "P'Maveraz", "zh-TW": "P'Maveraz" },
+            "highlight_desc": {
+                "en": "The Green Community Development That Fosters Vitality, Emergence And Sustainable Living, Where Life Is Inspired To Spring Forth In Harmony With Nature.",
+                "ms": "Pembangunan Komuniti Hijau Yang Memupuk Tenaga, Kemunculan Dan Kehidupan Lestari, Di Mana Kehidupan Diilhamkan Untuk Tumbuh Harmoni Bersama Alam Semula Jadi.",
+                "zh-CN": "促进活力、涌现与可持续生活的绿色社区发展，生活在此受到启发，与自然和谐共生。",
+                "zh-TW": "促進活力、湧現與永續生活的綠色社區發展，生活在此受到啟發，與自然和諧共生。"
+            },
+
+            "dev_kicker": { "en": "The Developer", "ms": "Pemaju", "zh-CN": "开发商", "zh-TW": "開發商" },
+            "dev_title": { "en": "DSA Development Sdn Bhd", "ms": "DSA Development Sdn Bhd", "zh-CN": "DSA Development Sdn Bhd", "zh-TW": "DSA Development Sdn Bhd" },
+            "dev_led_by": { "en": "Led by Mr. Ghee Peng Lam, Founder & Managing Director.", "ms": "Diketuai oleh En. Ghee Peng Lam, Pengasas & Pengarah Urusan.", "zh-CN": "由创始人兼董事总经理 Ghee Peng Lam 先生领导。", "zh-TW": "由創始人兼董事總經理 Ghee Peng Lam 先生領導。" },
+            "dev_desc1": { "en": "With over 40 years of experience, including key roles in the Genting Group property division (1980s) involving the Awana Golf & Country Club and casino extension.", "ms": "Dengan lebih 40 tahun pengalaman, termasuk peranan utama dalam bahagian hartanah Kumpulan Genting (1980-an) yang melibatkan Awana Golf & Country Club dan penyambungan kasino.", "zh-CN": "凭借超过 40 年的经验，包括在云顶集团房地产部门（1980 年代）中担任要职，涉及 Awana 高尔夫乡村俱乐部和赌场扩建项目。", "zh-TW": "憑藉超過 40 年的經驗，包括在雲頂集團房地產部門（1980 年代）中擔任要職，涉及 Awana 高爾夫鄉村俱樂部和賭場擴建計畫。" },
+            "dev_desc2": { "en": "Track Record: Wisma Zelan (KL), Bandar Utama Sunway Luxury Bungalows, Taman Raub Jaya 5, and townships in Bukit Desa Semantan.", "ms": "Rekod Prestasi: Wisma Zelan (KL), Banglo Mewah Bandar Utama Sunway, Taman Raub Jaya 5, dan perbandaran di Bukit Desa Semantan.", "zh-CN": "业绩记录：Wisma Zelan（吉隆坡）、Bandar Utama Sunway 豪华洋房、Taman Raub Jaya 5，以及 Bukit Desa Semantan 的城镇项目。", "zh-TW": "業績記錄：Wisma Zelan（吉隆坡）、Bandar Utama Sunway 豪華洋房、Taman Raub Jaya 5，以及 Bukit Desa Semantan 的城鎮計畫。" },
+
+            "faq_title": { "en": "Frequently Asked Questions", "ms": "Soalan Lazim", "zh-CN": "常见问题", "zh-TW": "常見問題" },
+            "faq_q1": { "en": "What is the LOHAS concept?", "ms": "Apakah konsep LOHAS?", "zh-CN": "什么是 LOHAS 理念？", "zh-TW": "什麼是 LOHAS 理念？" },
+            "faq_a1": { "en": "LOHAS stands for 'Lifestyles of Health and Sustainability.' The Richz is designed for a 3-generation community to live, work, learn, and play in a nature-centric environment.", "ms": "LOHAS bermaksud 'Gaya Hidup Kesihatan dan Kelestarian.' The Richz direka untuk komuniti 3-generasi untuk tinggal, bekerja, belajar dan bermain dalam persekitaran yang berpusatkan alam semula jadi.", "zh-CN": "LOHAS 代表“健康与可持续的生活方式”。The Richz 专为三代社区设计，让人们在以自然为中心的环境中生活、工作、学习和娱乐。", "zh-TW": "LOHAS 代表「健康與永續的生活方式」。The Richz 專為三代社區設計，讓人們在以自然為中心的環境中生活、工作、學習和娛樂。" },
+            "faq_q2": { "en": "What is the tenure and land size?", "ms": "Apakah tempoh pegangan dan saiz tanah?", "zh-CN": "土地产权期限和面积是多少？", "zh-TW": "土地產權期限和面積是多少？" },
+            "faq_a2": { "en": "The Richz sits on 41 acres of freehold land in East Genting Highlands.", "ms": "The Richz berkeluasan 41 ekar tanah pegangan bebas di Timur Tanah Tinggi Genting.", "zh-CN": "The Richz 占地 41 英亩，位于云顶高原东部，拥有永久产权。", "zh-TW": "The Richz 佔地 41 英畝，位於雲頂高原東部，擁有永久產權。" },
+            "faq_q3": { "en": "How far is the development from KL?", "ms": "Berapa jauhkah pembangunan dari KL?", "zh-CN": "该开发项目距离吉隆坡有多远？", "zh-TW": "該開發計畫距離吉隆坡有多遠？" },
+            "faq_a3": { "en": "It is approximately 45 minutes from Kuala Lumpur City Center and 25 minutes from the Gombak Toll.", "ms": "Ia terletak sekitar 45 minit berpandu dari Pusat Bandaraya Kuala Lumpur dan 25 minit dari Tol Gombak.", "zh-CN": "距离吉隆坡市中心约 45 分钟车程，距离 Gombak 收费站约 25 分钟车程。", "zh-TW": "距離吉隆坡市中心約 45 分鐘車程，距離 Gombak 收費站約 25 分鐘車程。" },
+            "faq_q4": { "en": "Tell me about the Hot Spring.", "ms": "Beritahu saya mengenai Kolam Air Panas.", "zh-CN": "请告诉我有关温泉的信息。", "zh-TW": "請告訴我有關溫泉的資訊。" },
+            "faq_a4": { "en": "We possess natural hot spring aquifers measured at 45°C, tested as Class 1 category, which are integrated into our hotels and wellness villas.", "ms": "Kami memiliki akuifer kolam air panas semula jadi pada suhu 45°C, diuji sebagai kategori Kelas 1, yang disepadukan ke dalam hotel dan bilik villa penjagaan kesihatan kami.", "zh-CN": "我们拥有经测试为 1 类类别的 45°C 天然温泉地下水层，并已融入到我们的酒店和健康别墅中。", "zh-TW": "我們擁有經測試為 1 類類別的 45°C 天然溫泉地下水層，並已融入到我們的飯店和健康別墅中。" },
+            "faq_q5": { "en": "When is the ECRL completion?", "ms": "Bilakah ECRL dijangka siap?", "zh-CN": "东海岸铁路 (ECRL) 何时完工？", "zh-TW": "東海岸鐵路 (ECRL) 何時完工？" },
+            "faq_a5": { "en": "The ECRL station, located ~2km away, is expected to be completed by the end of 2026.", "ms": "Stesen ECRL, yang terletak ~2km jauhnya, dijangka siap pada akhir tahun 2026.", "zh-CN": "ECRL 车站距离约 2 公里，预计将于 2026 年底完工。", "zh-TW": "ECRL 車站距離約 2 公里，預計將於 2026 年底完工。" },
+
+            "contact_title": { "en": "Make an Enquiry", "ms": "Buat Pertanyaan", "zh-CN": "在线咨询", "zh-TW": "線上諮詢" },
+            "contact_desc": { "en": "Please fill out the form below.", "ms": "Sila isikan borang di bawah.", "zh-CN": "请填写下方的表格。", "zh-TW": "請填寫下方的表格。" },
+
+            "footer_dev_by": { "en": "Developed by DSA Development Sdn Bhd.", "ms": "Dibangunkan oleh DSA Development Sdn Bhd.", "zh-CN": "由 DSA Development Sdn Bhd 开发。", "zh-TW": "由 DSA Development Sdn Bhd 開發。" },
+            "footer_nav": { "en": "Navigation", "ms": "Navigasi", "zh-CN": "导航", "zh-TW": "導航" },
+            "footer_connect": { "en": "Connect", "ms": "Hubungi Kami", "zh-CN": "联系方式", "zh-TW": "聯絡方式" },
+            "footer_contact": { "en": "Contact Us", "ms": "Hubungi Kami", "zh-CN": "联系我们", "zh-TW": "聯絡我們" },
+            "footer_privacy": { "en": "Privacy Policy", "ms": "Dasar Privasi", "zh-CN": "隐私政策", "zh-TW": "隱私政策" }
+        };
+
+        function toggleLangPopup() {
+            document.getElementById('langPopup').classList.toggle('active');
         }
+
+        function changeLanguage(langCode, btnElement) {
+            // Update active state in UI
+            document.querySelectorAll('.lang-option').forEach(btn => btn.classList.remove('active'));
+            if (btnElement) btnElement.classList.add('active');
+
+            // Close popup
+            document.getElementById('langPopup').classList.remove('active');
+
+            // Save in localStorage instead of cookies for robust local file handling
+            localStorage.setItem('userLang', langCode);
+            applyTranslations(langCode);
+        }
+
+        function applyTranslations(langCode) {
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[key] && translations[key][langCode]) {
+                    el.innerText = translations[key][langCode];
+                }
+            });
+            document.documentElement.lang = langCode;
+        }
+
+        // Close popup when clicking outside
+        document.addEventListener('click', function (event) {
+            const popup = document.getElementById('langPopup');
+            const btn = document.querySelector('.lang-float-btn');
+            if (popup && btn && !popup.contains(event.target) && !btn.contains(event.target)) {
+                popup.classList.remove('active');
+            }
+        });
+
+        // Initialize language on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('userLang') || 'en';
+            const btn = document.querySelector(`.lang-option[onclick*="'${savedLang}'"]`);
+            if (btn) btn.classList.add('active');
+            applyTranslations(savedLang);
+        });
+
     </script>
-    <script type="text/javascript"
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 
 </html>
